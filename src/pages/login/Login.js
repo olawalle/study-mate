@@ -5,10 +5,16 @@ import "./Login.scss";
 import facebook from "../../assets/images/facebook.svg";
 import google from "../../assets/images/google.svg";
 import twitter from "../../assets/images/twitter.svg";
-import { Link } from "react-router-dom";
+import logo from "../../assets/images/logo.png";
+import { Link, withRouter } from "react-router-dom";
 
-export default function Login() {
+export default withRouter(function Login(props) {
   const context = useContext(userContext);
+
+  const login = () => {
+    props.history.push("/dashboard");
+  };
+
   return (
     <div className="login">
       <div className="left-side">
@@ -19,7 +25,9 @@ export default function Login() {
       </div>
 
       <div className="right-side">
-        <div className="logo">logo</div>
+        <div className="logo">
+          <img src={logo} alt="" style={{ width: 170 }} />
+        </div>
 
         <p className="welcome mt50">Good to see you again!</p>
 
@@ -45,7 +53,9 @@ export default function Login() {
 
           <span className="forgot blue--text">Forgot password?</span>
 
-          <button className="main-btn mt30">Log in</button>
+          <button className="main-btn mt30" onClick={login}>
+            Log in
+          </button>
 
           <span className="no-acct">
             <Link to="/signup">
@@ -61,4 +71,4 @@ export default function Login() {
       </div>
     </div>
   );
-}
+});

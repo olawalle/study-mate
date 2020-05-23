@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Learn.scss";
 
 import Badges from "../../../../components/badges/Badges";
@@ -8,6 +8,9 @@ import Quiz from "../../../../components/quiz/Quiz";
 import Courses from "../../../../components/courses/Courses";
 
 export default function Learn(props) {
+  useEffect(() => {
+    props.onOpenModal();
+  }, []);
   return (
     <div className="learn">
       <div className="wide-side">

@@ -4,9 +4,13 @@ import "./Nav.scss";
 import userIcon from "../../assets/images/user.svg";
 import logo from "../../assets/images/logo.png";
 import caret from "../../assets/images/down-arrow.svg";
+import { withRouter } from "react-router-dom";
 
-export default function Nav() {
+export default withRouter(function Nav(props) {
   const [open, setopen] = useState(false);
+  const logout = () => {
+    props.history.push("/login");
+  };
   return (
     <div className="nav">
       <span className="logo">
@@ -34,10 +38,10 @@ export default function Nav() {
         style={{ display: open ? "block" : "none" }}
       >
         <ul>
-          <li className="bb">Profile</li>
-          <li>Logout</li>
+          <li className="bb">Edit profile</li>
+          <li onClick={logout}>Logout</li>
         </ul>
       </div>
     </div>
   );
-}
+});

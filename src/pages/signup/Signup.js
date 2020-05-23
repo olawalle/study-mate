@@ -6,19 +6,24 @@ import facebook from "../../assets/images/facebook.svg";
 import google from "../../assets/images/google.svg";
 import twitter from "../../assets/images/twitter.svg";
 import eye from "../../assets/images/eye.svg";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 import flex from "../../assets/images/flex1.png";
 import flex2 from "../../assets/images/Slide-Image-2.png";
 import flex3 from "../../assets/images/Slide-Image-3.png";
+import logo from "../../assets/images/logo.png";
 
-export default function Signup() {
+export default withRouter(function Signup(props) {
   // const context = useContext(userContext);
 
   const [viewPwrd, setViewPwrd] = useState(false);
   const pwrdType = viewPwrd ? "text" : "password";
+
+  const signup = () => {
+    props.history.push("/dashboard");
+  };
 
   return (
     <div className="signup">
@@ -63,7 +68,9 @@ export default function Signup() {
       </div>
 
       <div className="right-side">
-        <div className="logo">logo</div>
+        <div className="logo">
+          <img src={logo} alt="" style={{ width: 170 }} />
+        </div>
 
         <p className="welcome mt50">Sign up to Studymate</p>
 
@@ -107,7 +114,9 @@ export default function Signup() {
 
           <span className="forgot blue--text">Forgot password?</span>
 
-          <button className="main-btn mt30">Log in</button>
+          <button className="main-btn mt30" onClick={signup}>
+            Create account
+          </button>
 
           <span className="no-acct">
             <Link to="/login">
@@ -118,4 +127,4 @@ export default function Signup() {
       </div>
     </div>
   );
-}
+});

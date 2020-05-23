@@ -24,7 +24,6 @@ export default function Courses(props) {
       return 0;
     });
 
-  console.log(sortesubjects);
   return (
     <div className="courses">
       <div className="flex-grid-thirds">
@@ -32,6 +31,7 @@ export default function Courses(props) {
         {sortesubjects.map((course) => {
           return (
             <div
+              key={course.name}
               className={`course ${
                 course.width === 3
                   ? "wide"
