@@ -1,0 +1,170 @@
+@import "./margins_padding.sass";
+
+@font-face {
+  font-family: helvetica;
+  src: url("./assets/fonts/Helvetica.ttc");
+}
+
+// global styles
+* {
+  box-sizing: border-box;
+  font-family: helvetica;
+}
+
+.inp-wrap {
+  position: relative;
+  .eye {
+    position: absolute;
+    right: 20px;
+    top: 47px;
+    width: 20px;
+    cursor: pointer;
+  }
+}
+
+//makeshift table
+
+.fixed-table {
+  .tr {
+    width: 100%;
+    font-size: 14px;
+    padding: 15px 0;
+    color: #474747;
+    &.thead {
+      font-weight: 600;
+      border-bottom: 1px solid #c2c2c2;
+    }
+    div {
+      display: inline-block;
+      width: 15%;
+    }
+    .activity {
+      width: 35%;
+    }
+    .points {
+      width: 20%;
+    }
+  }
+  .tbody {
+    height: 230px;
+    overflow: auto;
+  }
+}
+
+// helpers
+.f-right {
+  float: right;
+}
+
+.f-left {
+  float: left;
+}
+a {
+  color: #000;
+  text-decoration: none;
+}
+// texts
+.blue--text {
+  color: #0097f5;
+}
+
+// backgrounds
+.bg_1 {
+  background: #ff0000;
+}
+.bg_2 {
+  background: #002984;
+}
+.bg_3 {
+  background: #a7cc7c;
+}
+.bg_4 {
+  background: #ffa700;
+}
+.bg_5 {
+  background: #00ceff;
+}
+.bg_6 {
+  background: #409fe3;
+}
+.bg_7 {
+  background: #0036af;
+}
+.bg_8 {
+  background: #3c7700;
+}
+.bg_9 {
+  background: #0036af;
+}
+.bg_10 {
+  background: #c69393;
+}
+.bg_11 {
+  background: #8b3e27;
+}
+.bg_12 {
+  background: #ff4500;
+}
+.bg_13 {
+  background: #1f3c43;
+}
+.bg_14 {
+  background: #910707;
+}
+.bg_15 {
+  background: #848eff;
+}
+.bg_16 {
+  background: #73519b;
+}
+.bg_white {
+  background-color: #fff;
+}
+
+// buttons
+button {
+  border: 0;
+  font-size: 16px;
+  cursor: pointer;
+  &:focus {
+    outline: none;
+  }
+}
+.main-btn {
+  background: #002984;
+  color: #fff;
+}
+.blue-btn {
+  background: #fff;
+  border: 1px solid #10a3ff;
+  color: #10a3ff;
+}
+.fb-btn {
+  background: #1976d2;
+  color: #fff;
+}
+
+.tw-btn {
+  background: #03a9f4;
+  color: #fff;
+}
+
+.gg-btn {
+  background: #fff;
+  color: #000;
+  border: 0.30000001192092896px solid #d8d8d8;
+}
+
+// overrides
+
+.carousel .slide {
+  background-color: transparent !important;
+}
+
+.css-1okebmr-indicatorSeparator {
+  display: none !important;
+}
+
+.css-yk16xz-control {
+  border: 1px solid #eee !important;
+}

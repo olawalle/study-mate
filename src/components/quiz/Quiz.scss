@@ -1,0 +1,33 @@
+.quiz {
+  padding: 20px 30px;
+  .quiz-heading {
+    font-size: 18px;
+  }
+  .sub-heading {
+    font-size: 12px;
+  }
+  .blue-btn {
+    padding: 10px 20px;
+  }
+  .patterns {
+    float: right;
+    position: relative;
+    .dots {
+      height: 50px;
+      position: absolute;
+      right: 173px;
+      top: -21px;
+    }
+    .pattern2 {
+      height: 50px;
+      position: absolute;
+      top: -60px;
+      right: 16px;
+    }
+    .pattern1 {
+      height: 50px;
+      position: absolute;
+      right: 42px;
+    }
+  }
+}

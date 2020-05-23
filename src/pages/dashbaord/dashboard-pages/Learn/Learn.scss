@@ -1,0 +1,54 @@
+.learn {
+  .heading {
+    width: 100%;
+    font-size: 16px;
+    font-weight: 600;
+    border-bottom: 1px solid #eee;
+    padding: 20px 30px;
+    margin: 0;
+    background-color: #fff;
+    span {
+      font-size: 12px;
+      color: #c2c2c2;
+      font-weight: 300;
+    }
+  }
+  .wide-side {
+    float: left;
+    width: 70%;
+    .lessons-wrap {
+      background-color: #fff;
+      padding-bottom: 20px;
+      .sub-heading {
+        font-size: 14px;
+        margin-top: 0;
+        color: #aaaaaa;
+        padding: 30px;
+        button {
+          padding: 12px 20px;
+          margin-top: -10px;
+        }
+      }
+      .lessons {
+        // height: 200px;
+        // overflow: auto;
+        .lesson {
+          font-size: 14px;
+          padding: 3px 30px;
+          cursor: pointer;
+          color: #232325;
+          &:hover {
+            background-color: #fafafa;
+          }
+        }
+      }
+    }
+    .quizzes {
+      background-color: #fff;
+    }
+  }
+  .narrow-side {
+    float: right;
+    width: calc(30% - 30px);
+  }
+}

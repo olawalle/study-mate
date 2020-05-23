@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import UserContextProvider from "./store/UserContext";
+import "./App.scss";
 
-function App() {
+// pages
+import Signup from "./pages/signup/Signup.js";
+import Login from "./pages/login/Login.js";
+import Dashboard from "./pages/dashbaord/Dashboard";
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <UserContextProvider>
+          {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+          <Switch>
+            <Route path="/login">
+              <Login />
+            </Route>
+            <Route path="/signup">
+              <Signup />
+            </Route>
+            <Route path="/dashboard/">
+              <Dashboard />
+            </Route>
+          </Switch>
+        </UserContextProvider>
+      </div>
+    </Router>
   );
 }
-
-export default App;
