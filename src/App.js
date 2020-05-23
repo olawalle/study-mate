@@ -1,5 +1,11 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  HashRouter,
+} from "react-router-dom";
 import UserContextProvider from "./store/UserContext";
 import "./App.scss";
 
@@ -10,7 +16,7 @@ import Dashboard from "./pages/dashbaord/Dashboard";
 
 export default function App() {
   return (
-    <Router>
+    <HashRouter>
       <div className="App">
         <UserContextProvider>
           {/* A <Switch> looks through its children <Route>s and
@@ -28,6 +34,6 @@ export default function App() {
           </Switch>
         </UserContextProvider>
       </div>
-    </Router>
+    </HashRouter>
   );
 }
