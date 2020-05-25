@@ -5,7 +5,7 @@ import "./Login.scss";
 import facebook from "../../assets/images/facebook.svg";
 import google from "../../assets/images/google.svg";
 import twitter from "../../assets/images/twitter.svg";
-import logo from "../../assets/images/logo.png";
+import logo from "../../assets/images/logo.svg";
 import { Link, withRouter } from "react-router-dom";
 
 export default withRouter(function Login(props) {
@@ -18,16 +18,18 @@ export default withRouter(function Login(props) {
   return (
     <div className="login">
       <div className="left-side">
-        <p className="heading">Your dependable learning buddy</p>
+        <img
+          src={logo}
+          alt=""
+          style={{ width: 170, position: "absolute", top: 50, left: 50 }}
+        />
 
         <div className="student"></div>
         <div className="teacher"></div>
       </div>
 
       <div className="right-side">
-        <div className="logo">
-          <img src={logo} alt="" style={{ width: 170 }} />
-        </div>
+        <div className="logo"></div>
 
         <p className="welcome mt50">Good to see you again!</p>
 

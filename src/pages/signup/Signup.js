@@ -13,7 +13,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import flex from "../../assets/images/flex1.png";
 import flex2 from "../../assets/images/Slide-Image-2.png";
 import flex3 from "../../assets/images/Slide-Image-3.png";
-import logo from "../../assets/images/logo.png";
+import logo from "../../assets/images/logo.svg";
 
 export default withRouter(function Signup(props) {
   // const context = useContext(userContext);
@@ -28,6 +28,11 @@ export default withRouter(function Signup(props) {
   return (
     <div className="signup">
       <div className="left-side">
+        <img
+          src={logo}
+          alt=""
+          style={{ width: 170, position: "absolute", top: 50, left: 50 }}
+        />
         <Carousel
           showArrows={false}
           showThumbs={false}
@@ -68,9 +73,7 @@ export default withRouter(function Signup(props) {
       </div>
 
       <div className="right-side">
-        <div className="logo">
-          <img src={logo} alt="" style={{ width: 170 }} />
-        </div>
+        <div className="logo"></div>
 
         <p className="welcome mt50">Sign up to Studymate</p>
 

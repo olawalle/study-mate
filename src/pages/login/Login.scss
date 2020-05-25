@@ -7,6 +7,7 @@
     float: left;
     background-image: url("../../assets/images/Login\ Background.svg");
     background-position-y: -8px;
+    background-position-y: 0px;
     background-size: cover;
     background-repeat: no-repeat;
     height: 100vh;
@@ -24,7 +25,7 @@
       overflow: hidden;
       position: absolute;
       right: 100px;
-      top: 300px;
+      top: 200px;
       background-size: cover;
       background-repeat: no-repeat;
       background-image: url("../../assets/images/student.png");
@@ -35,7 +36,7 @@
       overflow: hidden;
       position: absolute;
       right: 400px;
-      top: 380px;
+      top: 280px;
       background-size: cover;
       background-repeat: no-repeat;
       background-position-x: -100px;
