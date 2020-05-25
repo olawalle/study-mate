@@ -33,18 +33,20 @@
     }
   }
 }
+// .learn {
 .react-responsive-modal-modal {
   padding: 0 !important;
-  width: 900px !important;
+  width: 1000px !important;
+  max-width: 100% !important;
   .banner {
     height: 200px;
     width: 100%;
-    background-color: #10a3ff;
     color: #fff;
     text-align: center;
     padding: 80px;
-    background-position-x: -40px;
-    background-size: cover;
+    background-position-x: 0px;
+    background-size: 101%;
+    background-repeat: no-repeat;
     .main-text {
       font-size: 22px;
       font-weight: 600;
@@ -109,7 +111,79 @@
       top: -10px;
     }
   }
+
+  .quiz-modal {
+    .left {
+      width: 50%;
+      height: 700px;
+      float: left;
+      background-image: url("../../assets/images/Test\ Introduction.svg");
+      background-size: cover;
+      background-size: cover;
+      background-position-x: -140px;
+    }
+    .right {
+      width: 50%;
+      float: left;
+      padding: 100px 50px;
+      .header {
+        font-size: 30px;
+        font-weight: 600;
+      }
+      .desc {
+        font-size: 14px;
+        line-height: 18px;
+      }
+      .duration {
+        font-size: 30px;
+        font-weight: 600;
+        .span {
+          display: block;
+        }
+      }
+      .scores {
+        h4 {
+          font-size: 12px;
+        }
+        h2 {
+          font-size: 20px;
+          font-weight: 600;
+        }
+      }
+      .btm {
+        border-top: 1px solid #eee;
+        text-align: center;
+        height: 100px;
+        width: 50%;
+        padding: 30px 0;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        button {
+          padding: 10px !important;
+          width: 28%;
+          margin: 0 5px;
+          img {
+            height: 15px;
+          }
+        }
+        .share {
+          position: absolute;
+          top: -25px;
+          width: 100%;
+          span {
+            background-color: #fff;
+            padding: 5px 10px;
+          }
+        }
+      }
+      button {
+        padding: 15px 30px;
+      }
+    }
+  }
 }
+// }
 .react-responsive-modal-closeButton {
   top: -35px !important;
   right: -42px !important;

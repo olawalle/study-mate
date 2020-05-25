@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -15,6 +15,13 @@ import Login from "./pages/login/Login.js";
 import Dashboard from "./pages/dashbaord/Dashboard";
 
 export default function App() {
+  useEffect(() => {
+    // preload images to reduce weird image load lag after components mount
+    // const imagesToBePreloaded = [projectImage1, projectImage2, projectImage3];
+    // imagesToBePreloaded.forEach((image) => {
+    //   new Image().src = image;
+    // });
+  }, []);
   return (
     <HashRouter>
       <div className="App">

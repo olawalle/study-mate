@@ -32,15 +32,6 @@
       .lessons {
         // height: 200px;
         // overflow: auto;
-        .lesson {
-          font-size: 14px;
-          padding: 3px 30px;
-          cursor: pointer;
-          color: #232325;
-          &:hover {
-            background-color: #fafafa;
-          }
-        }
       }
     }
     .quizzes {
@@ -51,4 +42,9 @@
     float: right;
     width: calc(30% - 30px);
   }
+}
+
+.learnModal {
+  width: 80% !important;
+  max-width: 1000px;
 }

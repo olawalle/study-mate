@@ -1,0 +1,98 @@
+.quiz-quuestion {
+  position: relative;
+  .upper {
+    padding: 30px 40px;
+    height: 600px;
+    position: relative;
+    .instruction {
+      color: rgba(45, 47, 57, 0.76);
+      font-size: 16px;
+    }
+    .progress-bar {
+      height: 10px;
+      background: #f8f8f8;
+      width: 100%;
+      border-radius: 40px;
+      .indicator {
+        width: 30%;
+        height: 10px;
+        background: #10a3ff;
+        border-radius: 40px;
+      }
+    }
+    .content {
+      width: 60%;
+      display: inline-block;
+      .question {
+        font-size: 20px;
+        line-height: 28px;
+        font-weight: 600;
+        padding-bottom: 30px;
+        border-bottom: 1px solid #eee;
+        padding-right: 20%;
+      }
+      .answer {
+        height: 50px;
+        cursor: pointer;
+        &:hover {
+          background-color: #f1f1f1;
+        }
+        .label {
+          display: inline-block;
+          width: 25px;
+          height: 25px;
+          border-radius: 50%;
+          color: #000;
+          border: 1px solid #eee;
+          border-radius: 50%;
+          font-size: 12px;
+          text-align: center;
+          padding-top: 4px;
+        }
+        .caveat {
+          margin: 0;
+          position: relative;
+          top: -29px;
+          font-size: 10px;
+          color: #e0e0e0 !important;
+          left: 74px;
+        }
+        p {
+          display: inline-block;
+          font-size: 16px;
+          margin-left: 50px;
+          margin-bottom: 30px;
+        }
+      }
+      .correct {
+        color: #14ac00 !important;
+        .label {
+          background-color: #14ac00 !important;
+          color: #fff;
+        }
+      }
+    }
+    .passage {
+      width: 40%;
+      display: inline-block;
+      padding: 20px 40px;
+      position: absolute;
+      top: 120px;
+      line-height: 24px;
+      height: 350px;
+      overflow: auto;
+    }
+  }
+  .footer {
+    position: absolute;
+    bottom: 0;
+    border-top: 1px solid #eee;
+    padding: 30px 50px;
+    height: 100px;
+    width: 100%;
+    button {
+      float: right;
+      padding: 12px 30px;
+    }
+  }
+}

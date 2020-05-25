@@ -3,6 +3,10 @@ import "./Nav.scss";
 
 import userIcon from "../../assets/images/user.svg";
 import logo from "../../assets/images/logo.png";
+
+import edit from "../../assets/images/Edit-profile.svg";
+import logoutIcon from "../../assets/images/logout.svg";
+
 import caret from "../../assets/images/down-arrow.svg";
 import { withRouter } from "react-router-dom";
 
@@ -38,8 +42,12 @@ export default withRouter(function Nav(props) {
         style={{ display: open ? "block" : "none" }}
       >
         <ul>
-          <li className="bb">Edit profile</li>
-          <li onClick={logout}>Logout</li>
+          <li className="bb">
+            Edit profile <img src={edit} className="f-right m15" alt="" />{" "}
+          </li>
+          <li onClick={logout}>
+            Logout <img src={logoutIcon} className="f-right m15" alt="" />{" "}
+          </li>
         </ul>
       </div>
     </div>

@@ -138,6 +138,11 @@ button {
   background: #fff;
   border: 1px solid #10a3ff;
   color: #10a3ff;
+  &:hover {
+    background: #03a9f4;
+    color: #fff;
+    border: 1px solid #fff;
+  }
 }
 .fb-btn {
   background: #1976d2;
@@ -167,4 +172,18 @@ button {
 
 .css-yk16xz-control {
   border: 1px solid #eee !important;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #0097f5;
+  border-radius: 10px;
 }

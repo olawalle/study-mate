@@ -22,17 +22,20 @@ export default function Courses(props) {
       if (a.width < b.width) return -1;
       if (a.width > b.width) return 1;
       return 0;
+    })
+    .filter((s, i) => {
+      return i <= 6 || i > 12;
     });
 
   return (
     <div className="courses">
       <div className="flex-grid-thirds">
         <p className="title mt30">Courses</p>
-        {sortesubjects.map((course) => {
+        {sortesubjects.map((course, i) => {
           return (
             <div
               key={course.name}
-              className={`course ${
+              className={`bg_${i + 1} course ${
                 course.width === 3
                   ? "wide"
                   : course.width === 2
@@ -44,7 +47,7 @@ export default function Courses(props) {
             </div>
           );
         })}
-        <button onClick={props.onOpenModal} className="tw-btn">
+        <button onClick={props.onOpenModal} className="mt15 tw-btn">
           Add more Courses +
         </button>
       </div>

@@ -39,6 +39,7 @@
     ul {
       margin: 0;
       padding: 0;
+      position: relative;
       li {
         list-style: none;
         height: 50px;
@@ -47,6 +48,10 @@
         cursor: pointer;
         &:hover {
           background-color: #eee;
+        }
+        img {
+          position: absolute;
+          right: 0px;
         }
       }
       .bb {

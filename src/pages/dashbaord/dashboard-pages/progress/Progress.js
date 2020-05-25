@@ -4,7 +4,7 @@ import Select from "react-select";
 import "./Progress.scss";
 import Statistics from "../../../../components/statistics/Statistics";
 
-import play from "../../../../assets/images/play-button.svg";
+import play from "../../../../assets/images/play.svg";
 import Badges from "../../../../components/badges/Badges";
 export default function Progress() {
   const options = [
@@ -58,7 +58,7 @@ export default function Progress() {
               <div className="tr">
                 <div className="td activity">
                   {" "}
-                  <img src={play} width="10" className="mr5" alt="" />{" "}
+                  <img src={play} width="15" className="mr5" alt="" />{" "}
                   Mathematics quiz 1
                 </div>
                 <div className="td">05/05/2020</div>
@@ -69,7 +69,7 @@ export default function Progress() {
               <div className="tr">
                 <div className="td activity">
                   {" "}
-                  <img src={play} width="10" className="mr5" alt="" />{" "}
+                  <img src={play} width="15" className="mr5" alt="" />{" "}
                   Mathematics quiz 1
                 </div>
                 <div className="td">05/05/2020</div>
@@ -80,7 +80,7 @@ export default function Progress() {
               <div className="tr">
                 <div className="td activity">
                   {" "}
-                  <img src={play} width="10" className="mr5" alt="" />{" "}
+                  <img src={play} width="15" className="mr5" alt="" />{" "}
                   Mathematics quiz 1
                 </div>
                 <div className="td">05/05/2020</div>
@@ -91,7 +91,7 @@ export default function Progress() {
               <div className="tr">
                 <div className="td activity">
                   {" "}
-                  <img src={play} width="10" className="mr5" alt="" />{" "}
+                  <img src={play} width="15" className="mr5" alt="" />{" "}
                   Mathematics quiz 1
                 </div>
                 <div className="td">05/05/2020</div>
@@ -102,7 +102,7 @@ export default function Progress() {
               <div className="tr">
                 <div className="td activity">
                   {" "}
-                  <img src={play} width="10" className="mr5" alt="" />{" "}
+                  <img src={play} width="15" className="mr5" alt="" />{" "}
                   Mathematics quiz 1
                 </div>
                 <div className="td">05/05/2020</div>
@@ -113,7 +113,7 @@ export default function Progress() {
               <div className="tr">
                 <div className="td activity">
                   {" "}
-                  <img src={play} width="10" className="mr5" alt="" />{" "}
+                  <img src={play} width="15" className="mr5" alt="" />{" "}
                   Mathematics quiz 1
                 </div>
                 <div className="td">05/05/2020</div>

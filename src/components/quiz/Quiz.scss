@@ -1,5 +1,6 @@
 .quiz {
   padding: 20px 30px;
+  margin-bottom: 20px;
   .quiz-heading {
     font-size: 18px;
   }
@@ -16,18 +17,12 @@
       height: 50px;
       position: absolute;
       right: 173px;
-      top: -21px;
-    }
-    .pattern2 {
-      height: 50px;
-      position: absolute;
-      top: -60px;
-      right: 16px;
     }
     .pattern1 {
-      height: 50px;
+      height: 100px;
       position: absolute;
       right: 42px;
+      top: -20px;
     }
   }
 }
