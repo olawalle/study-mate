@@ -47,40 +47,45 @@
         padding-top: 7px;
       }
     }
-
-    ul {
-      padding-left: 0;
-      li {
-        border-bottom: 1px solid #eeeeee;
-        padding: 12px 0px 12px 0;
-        list-style: none;
-        font-size: 13px;
-        cursor: pointer;
-        a {
-          color: #aaaaaa;
-          svg {
-            fill: #aaaaaa;
-            margin-right: 15px;
-          }
-        }
-        .icon {
-          margin-right: 30px;
-        }
-        &.active {
-          a {
-            color: #0097f5;
-            svg {
-              fill: #0097f5 !important;
-            }
-          }
-        }
-      }
-    }
   }
   .students {
     width: 75%;
     margin-top: 30px;
     position: absolute;
     bottom: 40px;
+  }
+}
+
+.links-list {
+  padding-left: 0;
+  li {
+    border-bottom: 1px solid #eeeeee;
+    padding: 12px 0px 12px 0;
+    list-style: none;
+    font-size: 13px;
+    cursor: pointer;
+    a {
+      color: #aaaaaa;
+      svg {
+        fill: #aaaaaa;
+        margin-right: 15px;
+      }
+    }
+    .icon {
+      margin-right: 30px;
+    }
+    &.active {
+      a {
+        color: #0097f5;
+        svg {
+          fill: #0097f5 !important;
+        }
+      }
+    }
+    @media (max-width: 767px) {
+      &:last-child {
+        border-bottom: 0;
+      }
+    }
   }
 }

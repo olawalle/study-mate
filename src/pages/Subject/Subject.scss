@@ -46,6 +46,7 @@
       white-space: nowrap;
       overflow: hidden;
       height: 80px;
+      border-right: 1px solid #eee;
       .progresses {
         overflow-x: auto;
         overflow-y: hidden;
@@ -126,6 +127,44 @@
         .lessons {
           // height: 200px;
           // overflow: auto;
+        }
+      }
+      .pack {
+        height: 500px;
+        margin-top: 100px;
+        .half {
+          width: 50%;
+          float: left;
+          height: 100%;
+          padding: 30px;
+          background-color: #fff;
+          p {
+            font-size: 20px;
+            font-weight: 600;
+            margin-top: 70px;
+          }
+          .desc {
+            font-size: 14px;
+            font-weight: 18px;
+            line-height: 20px;
+          }
+          .duration {
+            font-size: 24px;
+            line-height: 28px;
+            font-weight: 600;
+            margin: 20px 0 40px;
+            span {
+              display: block;
+            }
+          }
+          button {
+            padding: 12px 20px;
+          }
+        }
+        .bg {
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-image: url("../../assets/images/Advanced\ test.svg");
         }
       }
     }

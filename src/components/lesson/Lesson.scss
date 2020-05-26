@@ -12,4 +12,12 @@
   .react-responsive-modal-modal {
     width: 80% !important;
   }
+
+  @media (max-width: 767px) {
+    .lesson {
+      p {
+        margin: 7px 0;
+      }
+    }
+  }
 }

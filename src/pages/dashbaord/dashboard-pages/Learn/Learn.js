@@ -6,18 +6,20 @@ import Badges from "../../../../components/badges/Badges";
 import play from "../../../../assets/images/play.svg";
 import banner1 from "../../../../assets/images/banner1.svg";
 import banner2 from "../../../../assets/images/Subjects.svg";
+import students from "../../../../assets/images/students.png";
 import Quiz from "../../../../components/quiz/Quiz";
 import Courses from "../../../../components/courses/Courses";
 import Lesson from "../../../../components/lesson/Lesson";
 import Modal from "react-responsive-modal";
 import { withRouter } from "react-router-dom";
+import Links from "../../../../components/sidebar/Links";
 
 export default withRouter(function Learn({ subjects, history }) {
   const [open, setopen] = useState(false);
   const [step, setStep] = useState(1);
 
   useEffect(() => {
-    onOpenModal();
+    // onOpenModal();
   }, []);
 
   const onOpenModal = () => {
@@ -38,8 +40,11 @@ export default withRouter(function Learn({ subjects, history }) {
 
   return (
     <div className="learn">
+      <div className="links-wrap">
+        <Links />
+      </div>
       <div className="wide-side">
-        <p className="heading">Learning Statistics</p>
+        <p className="heading">Mathematics</p>
         <div className="lessons-wrap">
           <p className="sub-heading">
             Section A
@@ -70,11 +75,15 @@ export default withRouter(function Learn({ subjects, history }) {
         </div>
       </div>
       <div className="narrow-side">
-        <Badges />
+        <div className="badge-wrap">
+          <Badges />
+        </div>
 
         <div className="courses">
           <Courses onOpenModal={onOpenModal} className="mt20" />
         </div>
+
+        <img src={students} className="students" alt="" />
 
         <Modal open={open} onClose={onCloseModal} center>
           <div

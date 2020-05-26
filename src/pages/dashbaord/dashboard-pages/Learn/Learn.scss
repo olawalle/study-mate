@@ -45,6 +45,36 @@
   .narrow-side {
     float: right;
     width: calc(30% - 30px);
+    .badge-wrap {
+      width: 100%;
+    }
+    .students {
+      display: none;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .wide-side {
+      width: 100%;
+      display: block;
+      .lessons-wrap {
+        .lessons {
+          height: auto;
+        }
+      }
+    }
+    .narrow-side {
+      padding: 20px;
+      width: 100%;
+      .badge-wrap {
+        display: none;
+      }
+      .students {
+        display: block;
+        width: 90%;
+        margin: 30px auto;
+      }
+    }
   }
 }
 

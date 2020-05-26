@@ -82,7 +82,7 @@ export default function Quiz() {
                   <h4>Learning point</h4>
                   <h2>80% (400 Points)</h2>
                 </div>
-                <button className="blue-btn mt15" onClick={onCloseModal}>
+                <button className="tw-btn mt15" onClick={onCloseModal}>
                   Done
                 </button>
 

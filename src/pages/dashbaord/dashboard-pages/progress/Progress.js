@@ -6,6 +6,7 @@ import Statistics from "../../../../components/statistics/Statistics";
 
 import play from "../../../../assets/images/play.svg";
 import Badges from "../../../../components/badges/Badges";
+import Links from "../../../../components/sidebar/Links";
 export default function Progress() {
   const options = [
     { value: "chocolate", label: "Chocolate" },
@@ -20,6 +21,9 @@ export default function Progress() {
 
   return (
     <div className="progress">
+      <div className="links-wrap">
+        <Links />
+      </div>
       <div className="wide-side">
         <p className="heading">Learning Statistics</p>
         <div className="stats">
@@ -126,7 +130,9 @@ export default function Progress() {
         </div>
       </div>
       <div className="narrow-side">
-        <Badges />
+        <div className="badge-wrap">
+          <Badges />
+        </div>
         <div className="bg_white mt30">
           <p className="heading">
             Overall Statistics <span className="f-right">Subjects</span>

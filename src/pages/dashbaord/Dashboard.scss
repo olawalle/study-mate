@@ -1,6 +1,9 @@
 .dashboard {
   background: #fafafa;
   height: 100vh;
+  .links-wrap {
+    display: none;
+  }
   .side {
     width: 20%;
     float: left;
@@ -30,6 +33,121 @@
     }
     .main-content {
       padding: 40px;
+    }
+  }
+  @media (max-width: 767px) {
+    .links-wrap {
+      display: block;
+      width: 100%;
+      background-color: #fff;
+      padding: 0 20px;
+      margin-bottom: 25px;
+    }
+    .side {
+      width: 0;
+      display: none;
+    }
+    .contents {
+      width: 100%;
+      .banner {
+        height: 200px;
+        text-align: center;
+        p {
+          display: none;
+        }
+        .user {
+          width: 75px;
+          height: 75px;
+          background-color: #10a3ff;
+          border-radius: 50%;
+          margin: 0 auto;
+          text-align: center;
+          line-height: 100px;
+          position: relative;
+          .usericon {
+            height: 70%;
+            margin: 12px auto;
+          }
+          .edit {
+            position: absolute;
+            right: -5px;
+            top: -5px;
+            background-color: #fff;
+            text-align: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0px 3px 6px #00000029;
+            img {
+              height: 10px;
+              position: relative;
+              top: -22px;
+              height: 15px !important;
+            }
+          }
+        }
+
+        .user-details {
+          font-size: 15px;
+          font-weight: 600;
+          text-align: center;
+          margin-bottom: 0px;
+          margin-top: 5px;
+          display: block !important;
+          color: #fff;
+          position: unset;
+          span {
+            display: block;
+            font-size: 12px;
+            font-weight: 300;
+            padding-top: 4px;
+          }
+        }
+
+        .medals {
+          text-align: center;
+          margin-top: 0px;
+          .medal {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin: 10px;
+            text-align: center;
+            img {
+              height: 10px;
+              position: relative;
+              top: 2px;
+            }
+            span {
+              display: block;
+              position: relative;
+              top: 8px;
+              font-size: 12px;
+              color: #fff;
+            }
+          }
+          .b1 {
+            background: #e6e6e6;
+          }
+          .b2 {
+            background: #a172fd;
+          }
+          .b3 {
+            background: #d45fc1;
+          }
+          .b4 {
+            background: #3a93d3;
+          }
+          .b5 {
+            background: #b90b10;
+          }
+        }
+      }
+      .main-content {
+        padding: 0px;
+      }
     }
   }
 }
@@ -63,6 +181,7 @@
     background-color: #fafafa;
     height: 400px;
     overflow: auto;
+    text-align: center;
     .class {
       width: 220px;
       height: 50px;
@@ -76,16 +195,20 @@
       }
     }
     .subject {
-      padding: 15px 30px;
+      padding: 15px 50px;
       margin: 0 15px 15px 0;
       border-radius: 5px;
       border: 0;
       color: #fff;
+      position: relative;
       input {
         margin-right: 5px;
         border: 0;
         border: 1px solid #fff;
         background-color: transparent;
+        position: absolute;
+        left: 18px;
+        top: 12px;
       }
     }
     .coming {
@@ -165,6 +288,8 @@
           margin: 0 5px;
           img {
             height: 15px;
+            position: relative;
+            top: 2px;
           }
         }
         .share {

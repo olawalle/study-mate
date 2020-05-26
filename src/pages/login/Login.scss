@@ -60,10 +60,10 @@
       padding-bottom: 40px;
       button {
         width: 31%;
-        height: 45px;
-        font-size: 14px;
+        height: 36px;
+        font-size: 12px !important;
         img {
-          height: 23px;
+          height: 18px;
           position: relative;
           top: 2px;
         }
@@ -96,7 +96,7 @@
       }
       input {
         background: #f8f8f8;
-        height: 60px;
+        height: 50px;
         border: 0;
         width: 100%;
         padding: 0 20px;
@@ -115,7 +115,7 @@
         top: -5px;
       }
       .main-btn {
-        height: 60px;
+        height: 50px;
         width: 100%;
         font-weight: 600;
       }
@@ -131,6 +131,7 @@
       font-size: 12px;
       max-width: 250px;
       line-height: 16px;
+      margin-top: 150px;
     }
   }
 }

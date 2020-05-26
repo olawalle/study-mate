@@ -12,13 +12,15 @@ import { withRouter } from "react-router-dom";
 
 export default withRouter(function Nav(props) {
   const [open, setopen] = useState(false);
+  const [show_nav, setshow_nav] = useState(false);
+
   const logout = () => {
     props.history.push("/login");
   };
   return (
     <div className="nav">
       <span className="logo">
-        <img src={logo} height="44" style={{ marginTop: 17 }} alt="" />
+        <img src={logo} className="logo" alt="" />
       </span>
       <span className="user f-right" onClick={() => setopen(!open)}>
         <div className="avatar">
@@ -49,6 +51,24 @@ export default withRouter(function Nav(props) {
             Logout <img src={logoutIcon} className="f-right m15" alt="" />{" "}
           </li>
         </ul>
+      </div>
+
+      <div
+        id="nav-icon1"
+        onClick={() => setshow_nav(!show_nav)}
+        className={show_nav ? "open" : ""}
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <div className={`mobilenav ${show_nav ? "open" : ""}`}>
+        <input type="text" placeholder="What do you want learn?" />
+
+        <p>Courses</p>
+        <p>Edit Profile</p>
+        <p>Logout</p>
       </div>
     </div>
   );

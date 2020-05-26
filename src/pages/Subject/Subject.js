@@ -5,6 +5,7 @@ import Nav from "../../components/nav/Nav";
 import Lesson from "../../components/lesson/Lesson";
 import Quiz from "../../components/quiz/Quiz";
 import students from "../../assets/images/students.png";
+import backArrow from "../../assets/images/back.svg";
 import { withRouter } from "react-router-dom";
 // import students from "../../assets/images/students.png";
 
@@ -16,7 +17,17 @@ export default withRouter(function Subject({ history }) {
     <div className="subject">
       <Nav />
       <div className="banner">
-        <span onClick={back}>Mathematics</span>
+        <span>
+          <img
+            src={backArrow}
+            height="25"
+            className="mr10"
+            alt=""
+            onClick={back}
+            style={{ position: "relative", top: 5, cursor: "pointer" }}
+          />
+          Mathematics
+        </span>
       </div>
       <div className="sub-banner">
         <div className="small">
@@ -89,6 +100,22 @@ export default withRouter(function Subject({ history }) {
           </div>
 
           <Quiz />
+
+          <div className="pack">
+            <div className="half">
+              <p>Advance your learning</p>
+              <div className="desc">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem
+                ipsum dolor sit amet consectetur adipisicing elit.
+              </div>
+              <div className="duration">
+                <span>12 Study packs</span>
+                <span>9 - 12 minutes</span>
+              </div>
+              <button className="tw-btn">Lets get started</button>
+            </div>
+            <div className="half bg"></div>
+          </div>
         </div>
       </div>
     </div>

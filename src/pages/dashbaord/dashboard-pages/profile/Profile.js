@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import "./Profile.scss";
 import Switch from "react-switch";
+import Links from "../../../../components/sidebar/Links";
 
 export default function Profile() {
   const [checked, setchecked] = useState(true);
   const handleChange = () => {};
   return (
     <div className="profile">
+      <div className="links-wrap">
+        <Links />
+      </div>
       <div className="wide">
         <p className="heading">Edit Profile</p>
         <div className="form">

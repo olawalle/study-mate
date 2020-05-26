@@ -16,7 +16,7 @@
   .eye {
     position: absolute;
     right: 20px;
-    top: 47px;
+    top: 40px;
     width: 20px;
     cursor: pointer;
   }
@@ -124,7 +124,7 @@ a {
 // buttons
 button {
   border: 0;
-  font-size: 16px !important;
+  font-size: 12px !important;
   cursor: pointer;
   &:focus {
     outline: none;
@@ -174,16 +174,30 @@ button {
   border: 1px solid #eee !important;
 }
 
-::-webkit-scrollbar {
-  width: 8px;
-}
+// ::-webkit-scrollbar {
+//   width: 8px;
+// }
 
-::-webkit-scrollbar-track {
-  background-color: #f1f1f1;
-}
+// ::-webkit-scrollbar-track {
+//   background-color: #f1f1f1;
+// }
 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #0097f5;
-  border-radius: 10px;
+// /* Handle */
+// ::-webkit-scrollbar-thumb {
+//   background: #0097f5;
+//   border-radius: 10px;
+// }
+
+@media (max-width: 767px) {
+  .fixed-table {
+    width: 100%;
+    overflow: auto;
+    .tbody,
+    .thead {
+      width: 200% !important;
+    }
+    .tbody {
+      height: auto;
+    }
+  }
 }
