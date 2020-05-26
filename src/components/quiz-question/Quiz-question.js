@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Quiz-question.scss";
+import ProgressBar from "../progress-bar/ProgressBar";
 
 export default function QuizQuestion(props) {
   const [passage, setpassage] = useState(false);
@@ -8,14 +9,15 @@ export default function QuizQuestion(props) {
       <div className="upper">
         <div>
           <p className="instruction">Answer question 1 to 5 with the passage</p>
-          <div className="progress-bar">
-            <div className="indicator"></div>
-          </div>
+          <ProgressBar />
         </div>
         <div className="content">
           <p className="question">
             Musa has a choice of buying a shirt and a bag. What is the
-            opportunity cost of buying a book?
+            opportunity cost of buying a book Musa has a choice of buying a
+            shirt and a bag. What is the opportunity cost of buying a book Musa
+            has a choice of buying a shirt and a bag. What is the opportunity
+            cost of buying a book?
           </p>
 
           <div className="answer correct">

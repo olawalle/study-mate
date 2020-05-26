@@ -1,0 +1,136 @@
+.subject {
+  .banner {
+    height: 130px;
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 0 150px;
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+    color: #fff;
+    background-image: url("../../assets/images/Banner.svg");
+    position: relative;
+    span {
+      position: absolute;
+      bottom: 30px;
+    }
+  }
+  .sub-banner {
+    height: 75px;
+    line-height: 75px;
+    background: #ffffff;
+    box-shadow: 0px 3px 6px #0000000d;
+    padding: 0 150px;
+    overflow: hidden;
+    position: relative;
+    z-index: 100;
+    .small {
+      width: 33%;
+      float: left;
+      border-right: 1px solid #eee;
+      span {
+        font-size: 14px;
+        position: relative;
+        top: -10px;
+      }
+      p {
+        position: relative;
+        top: -85px;
+        font-size: 22px;
+      }
+    }
+    .wide {
+      width: 66%;
+      float: left;
+      white-space: nowrap;
+      overflow: hidden;
+      height: 80px;
+      .progresses {
+        overflow-x: auto;
+        overflow-y: hidden;
+        height: 92px;
+      }
+      .progress-wrap {
+        width: 550px;
+        display: inline-block;
+        padding: 25px 30px;
+        span {
+          color: rgb(53, 53, 53);
+          font-size: 12px;
+          top: -25px;
+          position: relative;
+        }
+      }
+    }
+  }
+  .heading {
+    width: 100%;
+    font-size: 14px;
+    font-weight: 600;
+    border-bottom: 1px solid #eee;
+    padding: 20px 30px;
+    margin: 0;
+    background-color: #fff;
+    span {
+      font-size: 10px;
+      color: #c2c2c2;
+      font-weight: 300;
+    }
+  }
+  .contents {
+    padding: 30px 150px;
+    background-color: #fafafa;
+    min-height: 500px;
+    overflow: auto;
+    .small {
+      width: 33%;
+      float: left;
+      padding-right: 70px;
+      .header {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+      .level {
+        padding: 20px 0;
+        font-size: 14px;
+        border-bottom: 1px solid #eee;
+      }
+      img {
+        width: 65%;
+        float: right;
+        margin-top: 40px;
+      }
+    }
+    .wide {
+      width: 66%;
+      float: left;
+      height: calc(100vh - (115px + 130px + 75px));
+      overflow: auto;
+      .lessons-wrap {
+        background-color: #fff;
+        padding-bottom: 20px;
+        .lessons {
+        }
+        .sub-heading {
+          font-size: 14px;
+          margin-top: 0;
+          color: #aaaaaa;
+          padding: 30px;
+          button {
+            padding: 12px 20px;
+            margin-top: -10px;
+          }
+        }
+        .lessons {
+          // height: 200px;
+          // overflow: auto;
+        }
+      }
+    }
+    .quiz {
+      background-color: #fff;
+    }
+  }
+}

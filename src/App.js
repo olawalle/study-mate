@@ -13,6 +13,7 @@ import "./App.scss";
 import Signup from "./pages/signup/Signup.js";
 import Login from "./pages/login/Login.js";
 import Dashboard from "./pages/dashbaord/Dashboard";
+import Subject from "./pages/Subject/Subject";
 
 export default function App() {
   useEffect(() => {
@@ -37,6 +38,9 @@ export default function App() {
             </Route>
             <Route path="/dashboard/">
               <Dashboard />
+            </Route>
+            <Route path="/subject/:subject">
+              <Subject />
             </Route>
           </Switch>
         </UserContextProvider>

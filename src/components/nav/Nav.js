@@ -18,7 +18,7 @@ export default withRouter(function Nav(props) {
   return (
     <div className="nav">
       <span className="logo">
-        <img src={logo} height="50" style={{ marginTop: 15 }} alt="" />
+        <img src={logo} height="44" style={{ marginTop: 17 }} alt="" />
       </span>
       <span className="user f-right" onClick={() => setopen(!open)}>
         <div className="avatar">
@@ -28,7 +28,7 @@ export default withRouter(function Nav(props) {
         <img
           src={caret}
           style={{
-            width: 12,
+            width: 10,
             marginLeft: 12,
             transform: open ? `rotate(180deg)` : "",
           }}

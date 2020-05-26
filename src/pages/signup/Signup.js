@@ -31,7 +31,7 @@ export default withRouter(function Signup(props) {
         <img
           src={logo}
           alt=""
-          style={{ width: 170, position: "absolute", top: 50, left: 50 }}
+          style={{ width: 170, position: "absolute", top: 60, left: 100 }}
         />
         <Carousel
           showArrows={false}

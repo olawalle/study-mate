@@ -6,7 +6,7 @@
     .stats {
       padding: 30px;
       .sub-heading {
-        font-size: 14px;
+        font-size: 12px;
         margin-top: 0;
       }
       .filters {
@@ -16,15 +16,15 @@
           margin-right: 20px;
         }
         .css-1pahdxg-control {
-          height: 60px !important;
-          min-height: 60px !important;
+          height: 42px !important;
+          min-height: 42px !important;
           width: 100%;
           border-radius: 0;
         }
         .css-yk16xz-control {
           border: 1px solid #eee;
-          height: 60px !important;
-          min-height: 60px !important;
+          height: 42px !important;
+          min-height: 42px !important;
           background: #fff;
           width: 100%;
           border-radius: 0;
@@ -32,7 +32,7 @@
         button {
           float: right;
           width: 23%;
-          height: 60px;
+          height: 40px;
         }
       }
     }
@@ -43,13 +43,13 @@
   }
   .heading {
     width: 100%;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
     border-bottom: 1px solid #eee;
     padding: 20px;
     margin: 0;
     span {
-      font-size: 12px;
+      font-size: 10px;
       color: #c2c2c2;
       font-weight: 300;
     }

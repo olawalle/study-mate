@@ -10,8 +10,9 @@ import Quiz from "../../../../components/quiz/Quiz";
 import Courses from "../../../../components/courses/Courses";
 import Lesson from "../../../../components/lesson/Lesson";
 import Modal from "react-responsive-modal";
+import { withRouter } from "react-router-dom";
 
-export default function Learn({ subjects }) {
+export default withRouter(function Learn({ subjects, history }) {
   const [open, setopen] = useState(false);
   const [step, setStep] = useState(1);
 
@@ -31,13 +32,20 @@ export default function Learn({ subjects }) {
     setStep(step + 1);
   };
 
+  const toSubject = () => {
+    history.push("/subject/mathematics");
+  };
+
   return (
     <div className="learn">
       <div className="wide-side">
         <p className="heading">Learning Statistics</p>
         <div className="lessons-wrap">
           <p className="sub-heading">
-            Section A<button className="tw-btn f-right">Start learning</button>
+            Section A
+            <button className="tw-btn f-right" onClick={toSubject}>
+              Start learning
+            </button>
           </p>
 
           <div className="lessons mt10">
@@ -138,4 +146,4 @@ export default function Learn({ subjects }) {
       </div>
     </div>
   );
-}
+});

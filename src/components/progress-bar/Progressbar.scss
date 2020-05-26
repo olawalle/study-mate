@@ -1,0 +1,12 @@
+.progress-bar {
+  height: 10px;
+  background: #f8f8f8;
+  width: 100%;
+  border-radius: 40px;
+  .indicator {
+    width: 30%;
+    height: 10px;
+    background: #10a3ff;
+    border-radius: 40px;
+  }
+}

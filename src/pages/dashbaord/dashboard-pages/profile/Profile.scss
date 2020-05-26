@@ -1,0 +1,77 @@
+.profile {
+  padding: 0 30px;
+  .heading {
+    width: 100%;
+    font-size: 14px;
+    font-weight: 600;
+    border-bottom: 1px solid #eee;
+    padding: 20px 30px;
+    margin: 0;
+    background-color: #fff;
+  }
+  .wide {
+    float: left;
+    width: 70%;
+    background-color: #fff;
+    .form {
+      margin-bottom: 80px;
+      padding: 30px;
+      .label {
+        color: #000;
+        font-size: 14px;
+      }
+      input {
+        background: #f8f8f8;
+        height: 50px;
+        border: 0;
+        width: 100%;
+        padding: 0 20px;
+        margin-top: 5px;
+        margin-bottom: 25px;
+        font-size: 16px;
+        &:focus {
+          outline: none;
+          border: 1px solid #eee;
+        }
+      }
+      .forgot {
+        float: right;
+        font-size: 12px;
+        position: relative;
+        top: -5px;
+      }
+      .main-btn {
+        height: 60px;
+        width: 100%;
+        font-weight: 600;
+      }
+      .no-acct a {
+        font-size: 12px;
+        position: relative;
+        top: 10px;
+        cursor: pointer;
+      }
+    }
+  }
+  .small {
+    float: right;
+    width: calc(30% - 30px);
+    .switches {
+      background-color: #fff;
+      padding: 25px;
+      p {
+        font-size: 12px;
+        margin-bottom: 30px;
+        width: 100%;
+        span {
+          float: right;
+        }
+      }
+      button {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px;
+      }
+    }
+  }
+}
