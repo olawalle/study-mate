@@ -15,9 +15,10 @@ import flex2 from "../../assets/images/Slide-Image-2.png";
 import flex3 from "../../assets/images/Slide-Image-3.png";
 import logo from "../../assets/images/logo.svg";
 import logo2 from "../../assets/images/logo.png";
+import { userContext } from "../../store/UserContext";
 
 export default withRouter(function Signup(props) {
-  // const context = useContext(userContext);
+  const context = useContext(userContext);
 
   const [viewPwrd, setViewPwrd] = useState(false);
   const pwrdType = viewPwrd ? "text" : "password";
