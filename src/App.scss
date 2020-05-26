@@ -121,6 +121,10 @@ a {
   background-color: #fff;
 }
 
+input:focus {
+  outline: none;
+}
+
 // buttons
 button {
   border: 0;

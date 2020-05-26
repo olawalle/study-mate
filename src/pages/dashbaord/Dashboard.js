@@ -39,7 +39,7 @@ const Dashboard = (props) => {
         <div className="banner">
           <p>Your study mate</p>
 
-          <div className="user">
+          <div className="user_">
             <img src={userIcon} className="usericon" alt="" />
             <div className="edit">
               <img
@@ -49,11 +49,11 @@ const Dashboard = (props) => {
               />
             </div>
           </div>
-          <p className="user-details">
+          <p className="user-details_">
             Chisom Blessing
             <span>Junior secondary</span>
           </p>
-          <div className="medals">
+          <div className="medals_">
             <div className="medal b1">
               <img src={coins} alt="" />
               <span>5</span>

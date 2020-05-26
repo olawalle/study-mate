@@ -1,6 +1,11 @@
 .dashboard {
   background: #fafafa;
   height: 100vh;
+  .user_,
+  .user-details_,
+  .medals_ {
+    display: none;
+  }
   .links-wrap {
     display: none;
   }
@@ -33,121 +38,6 @@
     }
     .main-content {
       padding: 40px;
-    }
-  }
-  @media (max-width: 767px) {
-    .links-wrap {
-      display: block;
-      width: 100%;
-      background-color: #fff;
-      padding: 0 20px;
-      margin-bottom: 25px;
-    }
-    .side {
-      width: 0;
-      display: none;
-    }
-    .contents {
-      width: 100%;
-      .banner {
-        height: 200px;
-        text-align: center;
-        p {
-          display: none;
-        }
-        .user {
-          width: 75px;
-          height: 75px;
-          background-color: #10a3ff;
-          border-radius: 50%;
-          margin: 0 auto;
-          text-align: center;
-          line-height: 100px;
-          position: relative;
-          .usericon {
-            height: 70%;
-            margin: 12px auto;
-          }
-          .edit {
-            position: absolute;
-            right: -5px;
-            top: -5px;
-            background-color: #fff;
-            text-align: center;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            overflow: hidden;
-            box-shadow: 0px 3px 6px #00000029;
-            img {
-              height: 10px;
-              position: relative;
-              top: -22px;
-              height: 15px !important;
-            }
-          }
-        }
-
-        .user-details {
-          font-size: 15px;
-          font-weight: 600;
-          text-align: center;
-          margin-bottom: 0px;
-          margin-top: 5px;
-          display: block !important;
-          color: #fff;
-          position: unset;
-          span {
-            display: block;
-            font-size: 12px;
-            font-weight: 300;
-            padding-top: 4px;
-          }
-        }
-
-        .medals {
-          text-align: center;
-          margin-top: 0px;
-          .medal {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            margin: 10px;
-            text-align: center;
-            img {
-              height: 10px;
-              position: relative;
-              top: 2px;
-            }
-            span {
-              display: block;
-              position: relative;
-              top: 8px;
-              font-size: 12px;
-              color: #fff;
-            }
-          }
-          .b1 {
-            background: #e6e6e6;
-          }
-          .b2 {
-            background: #a172fd;
-          }
-          .b3 {
-            background: #d45fc1;
-          }
-          .b4 {
-            background: #3a93d3;
-          }
-          .b5 {
-            background: #b90b10;
-          }
-        }
-      }
-      .main-content {
-        padding: 0px;
-      }
     }
   }
 }
@@ -314,5 +204,174 @@
   right: -42px !important;
   svg {
     fill: #fff;
+  }
+}
+
+@media (max-width: 767px) {
+  .links-wrap {
+    display: block !important;
+    width: 100%;
+    background-color: #fff;
+    padding: 0 20px;
+    margin-bottom: 25px;
+  }
+  .side {
+    width: 0;
+    display: none;
+  }
+  .contents {
+    width: 100% !important;
+    .banner {
+      height: 200px !important;
+      text-align: center;
+      p {
+        display: none;
+      }
+      .user_ {
+        width: 75px;
+        height: 75px;
+        background-color: #10a3ff;
+        border-radius: 50%;
+        margin: 0 auto;
+        text-align: center;
+        line-height: 100px;
+        position: relative;
+        display: block !important;
+        .usericon {
+          height: 70%;
+          margin: 12px auto;
+        }
+        .edit {
+          position: absolute;
+          right: -5px;
+          top: -5px;
+          background-color: #fff;
+          text-align: center;
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          overflow: hidden;
+          box-shadow: 0px 3px 6px #00000029;
+          img {
+            height: 10px;
+            position: relative;
+            top: -22px;
+            height: 15px !important;
+          }
+        }
+      }
+
+      .user-details_ {
+        font-size: 15px !important;
+        font-weight: 600;
+        text-align: center;
+        margin-bottom: 0px !important;
+        margin-top: 5px;
+        display: block !important;
+        color: #fff;
+        position: unset !important;
+        span {
+          display: block;
+          font-size: 12px !important;
+          font-weight: 300;
+          padding-top: 4px;
+        }
+      }
+
+      .medals_ {
+        text-align: center;
+        margin-top: 0px;
+        display: block !important;
+        .medal {
+          display: inline-block;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          margin: 10px;
+          text-align: center;
+          img {
+            height: 10px;
+            position: relative;
+            top: 2px;
+          }
+          span {
+            display: block;
+            position: relative;
+            top: 8px;
+            font-size: 12px;
+            color: #fff;
+          }
+        }
+        .b1 {
+          background: #e6e6e6;
+        }
+        .b2 {
+          background: #a172fd;
+        }
+        .b3 {
+          background: #d45fc1;
+        }
+        .b4 {
+          background: #3a93d3;
+        }
+        .b5 {
+          background: #b90b10;
+        }
+      }
+    }
+    .main-content {
+      padding: 0px !important;
+    }
+  }
+  .react-responsive-modal-modal {
+    .quiz-modal {
+      .left {
+        display: none;
+      }
+      .right {
+        width: 100%;
+        padding: 30px;
+      }
+    }
+    .quiz-quuestion {
+      .upper {
+        padding: 20px;
+        overflow: auto;
+        .content {
+          width: 100%;
+          overflow-x: hidden;
+          overflow-y: auto;
+          .answer {
+            p {
+              margin-left: 25px;
+            }
+          }
+          .question {
+            font-size: 15px;
+            line-height: 21px;
+          }
+        }
+        .passage {
+          display: block;
+          width: 100%;
+          padding: 20px;
+          height: auto;
+          padding-bottom: 120px;
+          background: #f0f0f0;
+          border: 1px solid #b9b9b9;
+          margin-top: 20px;
+        }
+      }
+      .footer {
+        width: 100%;
+        background: #fff;
+        padding: 20px;
+        height: 80px;
+        font-size: 12px;
+        button {
+          padding: 12px;
+        }
+      }
+    }
   }
 }
