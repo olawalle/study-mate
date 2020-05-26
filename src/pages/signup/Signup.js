@@ -14,6 +14,7 @@ import flex from "../../assets/images/flex1.png";
 import flex2 from "../../assets/images/Slide-Image-2.png";
 import flex3 from "../../assets/images/Slide-Image-3.png";
 import logo from "../../assets/images/logo.svg";
+import logo2 from "../../assets/images/logo.png";
 
 export default withRouter(function Signup(props) {
   // const context = useContext(userContext);
@@ -73,7 +74,9 @@ export default withRouter(function Signup(props) {
       </div>
 
       <div className="right-side">
-        <div className="logo"></div>
+        <div className="mobileLogo">
+          <img src={logo2} alt="" />
+        </div>
 
         <p className="welcome mt50">Sign up to Studymate</p>
 

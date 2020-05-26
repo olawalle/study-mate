@@ -6,6 +6,7 @@ import facebook from "../../assets/images/facebook.svg";
 import google from "../../assets/images/google.svg";
 import twitter from "../../assets/images/twitter.svg";
 import logo from "../../assets/images/logo.svg";
+import logo2 from "../../assets/images/logo.png";
 import { Link, withRouter } from "react-router-dom";
 
 export default withRouter(function Login(props) {
@@ -29,7 +30,9 @@ export default withRouter(function Login(props) {
       </div>
 
       <div className="right-side">
-        <div className="logo"></div>
+        <div className="mobileLogo">
+          <img src={logo2} alt="" />
+        </div>
 
         <p className="welcome mt50">Good to see you again!</p>
 

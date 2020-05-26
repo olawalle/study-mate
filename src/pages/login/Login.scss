@@ -49,6 +49,9 @@
     padding: 70px 100px;
     overflow: auto;
     height: 100vh;
+    .mobileLogo {
+      display: none;
+    }
     .welcome {
       font-size: 30px;
       text-align: left;
@@ -132,6 +135,45 @@
       max-width: 250px;
       line-height: 16px;
       margin-top: 150px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .left-side {
+      display: none;
+    }
+    .right-side {
+      width: 100%;
+      padding: 160px 20px 20px;
+      position: relative;
+      .mobileLogo {
+        display: block;
+        position: absolute;
+        top: 30px;
+        left: 20px;
+        img {
+          height: 30px;
+          display: inline-block;
+        }
+      }
+      .welcome {
+        font-size: 20px;
+      }
+      .buttons {
+        padding-bottom: 40px;
+        button {
+          img {
+            height: 13px;
+            position: relative;
+            top: 0px;
+          }
+        }
+      }
+      .form {
+        input {
+          margin-bottom: 15px;
+        }
+      }
     }
   }
 }
