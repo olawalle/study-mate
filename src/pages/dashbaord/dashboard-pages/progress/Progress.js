@@ -60,66 +60,42 @@ export default function Progress() {
             </div>
             <div className="tbody">
               <div className="tr">
-                <div className="td activity">
-                  {" "}
-                  <img src={play} width="15" className="mr5" alt="" />{" "}
-                  Mathematics quiz 1
-                </div>
+                <div className="td activity"> Mathematics quiz 1</div>
                 <div className="td">05/05/2020</div>
                 <div className="td">Level 1</div>
                 <div className="td points">1000</div>
                 <div className="td">12/21</div>
               </div>
               <div className="tr">
-                <div className="td activity">
-                  {" "}
-                  <img src={play} width="15" className="mr5" alt="" />{" "}
-                  Mathematics quiz 1
-                </div>
+                <div className="td activity"> Mathematics quiz 1</div>
                 <div className="td">05/05/2020</div>
                 <div className="td">Level 1</div>
                 <div className="td points">1000</div>
                 <div className="td">12/21</div>
               </div>
               <div className="tr">
-                <div className="td activity">
-                  {" "}
-                  <img src={play} width="15" className="mr5" alt="" />{" "}
-                  Mathematics quiz 1
-                </div>
+                <div className="td activity"> Mathematics quiz 1</div>
                 <div className="td">05/05/2020</div>
                 <div className="td">Level 1</div>
                 <div className="td points">1000</div>
                 <div className="td">12/21</div>
               </div>
               <div className="tr">
-                <div className="td activity">
-                  {" "}
-                  <img src={play} width="15" className="mr5" alt="" />{" "}
-                  Mathematics quiz 1
-                </div>
+                <div className="td activity"> Mathematics quiz 1</div>
                 <div className="td">05/05/2020</div>
                 <div className="td">Level 1</div>
                 <div className="td points">1000</div>
                 <div className="td">12/21</div>
               </div>
               <div className="tr">
-                <div className="td activity">
-                  {" "}
-                  <img src={play} width="15" className="mr5" alt="" />{" "}
-                  Mathematics quiz 1
-                </div>
+                <div className="td activity"> Mathematics quiz 1</div>
                 <div className="td">05/05/2020</div>
                 <div className="td">Level 1</div>
                 <div className="td points">1000</div>
                 <div className="td">12/21</div>
               </div>
               <div className="tr">
-                <div className="td activity">
-                  {" "}
-                  <img src={play} width="15" className="mr5" alt="" />{" "}
-                  Mathematics quiz 1
-                </div>
+                <div className="td activity"> Mathematics quiz 1</div>
                 <div className="td">05/05/2020</div>
                 <div className="td">Level 1</div>
                 <div className="td points">1000</div>

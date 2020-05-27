@@ -17,12 +17,17 @@ export default withRouter(function Nav(props) {
   const logout = () => {
     props.history.push("/login");
   };
+
+  const toProfile = () => {
+    props.history.push("/dashboard/profile");
+  };
+
   return (
     <div className="nav">
       <span className="logo">
         <img src={logo} className="logo" alt="" />
       </span>
-      <span className="user f-right" onClick={() => setopen(!open)}>
+      <span className="user f-right">
         <div className="avatar">
           <img src={userIcon} height="30" alt="" />
         </div>
@@ -36,22 +41,17 @@ export default withRouter(function Nav(props) {
           }}
           alt=""
         />
+        <div className="dropdown">
+          <ul>
+            <li className="bb" onClick={toProfile}>
+              Edit profile <img src={edit} className="f-right m15" alt="" />{" "}
+            </li>
+            <li onClick={logout}>
+              Logout <img src={logoutIcon} className="f-right m15" alt="" />{" "}
+            </li>
+          </ul>
+        </div>
       </span>
-
-      <div
-        className="dropdown"
-        onClick={() => setopen(!open)}
-        style={{ display: open ? "block" : "none" }}
-      >
-        <ul>
-          <li className="bb">
-            Edit profile <img src={edit} className="f-right m15" alt="" />{" "}
-          </li>
-          <li onClick={logout}>
-            Logout <img src={logoutIcon} className="f-right m15" alt="" />{" "}
-          </li>
-        </ul>
-      </div>
 
       <div
         id="nav-icon1"

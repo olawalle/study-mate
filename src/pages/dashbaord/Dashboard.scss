@@ -207,7 +207,7 @@
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px), (min-width: 768px) and (max-width: 1024px) {
   .links-wrap {
     display: block !important;
     width: 100%;
@@ -373,5 +373,11 @@
         }
       }
     }
+  }
+}
+
+@media (max-width: 1024px) {
+  .quiz-quuestion .upper .passage {
+    position: relative !important;
   }
 }

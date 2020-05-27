@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import "./Sidebar.scss";
 import students from "../../assets/images/students.png";
-import { useRouteMatch, Link } from "react-router-dom";
+import { useRouteMatch, Link, withRouter } from "react-router-dom";
 
 import userIcon from "../../assets/images/user.svg";
 import editIcon from "../../assets/images/edit.svg";
 
 import Links from "./Links";
 
-export default function Sidebar() {
+export default withRouter(function Sidebar({ history }) {
+  const toProfile = () => {
+    history.push("/dashboard/profile");
+  };
   return (
     <div className="sidebar">
       <div className="upper">
@@ -18,7 +21,7 @@ export default function Sidebar() {
             style={{ height: "100%", margin: " 12px auto" }}
             alt=""
           />
-          <div className="edit">
+          <div className="edit" onClick={toProfile}>
             <img
               src={editIcon}
               style={{ height: "20px", margin: "10px auto" }}
@@ -36,4 +39,4 @@ export default function Sidebar() {
       <img src={students} alt="" className="students" />
     </div>
   );
-}
+});

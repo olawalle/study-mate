@@ -3,7 +3,7 @@
   height: 100vh;
   overflow: hidden;
   .left-side {
-    width: 55%;
+    width: 57%;
     float: left;
     background-image: url("../../assets/images/Login\ Background.svg");
     background-position-y: -8px;
@@ -24,36 +24,48 @@
       width: 350px;
       overflow: hidden;
       position: absolute;
-      right: 100px;
+      right: 180px;
       top: 200px;
       background-size: cover;
       background-repeat: no-repeat;
       background-image: url("../../assets/images/student.png");
     }
     .teacher {
-      height: 250px;
-      width: 220px;
+      height: 270px;
+      width: 240px;
       overflow: hidden;
       position: absolute;
-      right: 400px;
-      top: 280px;
+      left: 180px;
+      top: 260px;
       background-size: cover;
       background-repeat: no-repeat;
       background-position-x: -100px;
       background-image: url("../../assets/images/teacher.png");
     }
+    .right-dot {
+      position: absolute;
+      top: 207px;
+      right: 120px;
+      width: 100px;
+    }
+    .left-dot {
+      position: absolute;
+      top: 477px;
+      left: 120px;
+      width: 100px;
+    }
   }
   .right-side {
-    width: 45%;
+    width: 43%;
     float: left;
-    padding: 70px 100px;
+    padding: 110px 80px;
     overflow: auto;
     height: 100vh;
     .mobileLogo {
       display: none;
     }
     .welcome {
-      font-size: 30px;
+      font-size: 24px;
       text-align: left;
       color: #000000;
       font-weight: 600;
@@ -63,10 +75,11 @@
       padding-bottom: 40px;
       button {
         width: 31%;
-        height: 36px;
+        height: 33px;
+        line-height: 35px;
         font-size: 12px !important;
         img {
-          height: 18px;
+          height: 15px;
           position: relative;
           top: 2px;
         }
@@ -93,9 +106,9 @@
       padding-top: 30px;
       margin-bottom: 80px;
       .label {
-        font-weight: 600px;
+        font-weight: 600;
         color: #000;
-        font-size: 14px;
+        font-size: 12px;
       }
       input {
         background: #f8f8f8;
@@ -138,7 +151,7 @@
     }
   }
 
-  @media (max-width: 767px) {
+  @media (max-width: 768px), (min-width: 768px) and (max-width: 1024px) {
     .left-side {
       display: none;
     }

@@ -7,6 +7,7 @@ import google from "../../assets/images/google.svg";
 import twitter from "../../assets/images/twitter.svg";
 import logo from "../../assets/images/logo.svg";
 import logo2 from "../../assets/images/logo.png";
+import dots from "../../assets/images/Dots.svg";
 import { Link, withRouter } from "react-router-dom";
 
 export default withRouter(function Login(props) {
@@ -25,6 +26,8 @@ export default withRouter(function Login(props) {
           style={{ width: 170, position: "absolute", top: 50, left: 50 }}
         />
 
+        <img src={dots} className="left-dot" alt="" />
+        <img src={dots} className="right-dot" alt="" />
         <div className="student"></div>
         <div className="teacher"></div>
       </div>

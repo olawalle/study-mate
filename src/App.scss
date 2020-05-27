@@ -11,6 +11,21 @@
   font-family: helvetica;
 }
 
+.my-node-enter {
+  opacity: 0;
+}
+.my-node-enter-active {
+  opacity: 1;
+  transition: opacity 200ms;
+}
+.my-node-exit {
+  opacity: 1;
+}
+.my-node-exit-active {
+  opacity: 0;
+  transition: opacity 200ms;
+}
+
 .inp-wrap {
   position: relative;
   .eye {
@@ -192,7 +207,7 @@ button {
 //   border-radius: 10px;
 // }
 
-@media (max-width: 767px) {
+@media (max-width: 768px), (min-width: 768px) and (max-width: 1024px) {
   .fixed-table {
     width: 100%;
     overflow: auto;

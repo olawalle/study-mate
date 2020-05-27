@@ -80,7 +80,7 @@ export default function Profile() {
           </p>
 
           <button className="tw-btn">Contact support</button>
-          <button className="tw-btn">Provacy</button>
+          <button className="tw-btn">Privacy</button>
         </div>
       </div>
     </div>

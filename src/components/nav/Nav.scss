@@ -37,11 +37,12 @@
   }
   .dropdown {
     float: right;
-    width: 200px;
+    width: 170px;
     position: absolute;
-    top: 74px;
+    top: 72px;
     right: 60px;
     background-color: #fff;
+    display: none;
     border-radius: 3px;
     box-shadow: 0px 3px 6px #00000010;
     ul {
@@ -61,6 +62,7 @@
         img {
           position: absolute;
           right: 0px;
+          width: 18px;
         }
       }
       .bb {
@@ -68,11 +70,16 @@
       }
     }
   }
+
+  .user:hover .dropdown {
+    display: block !important;
+  }
+
   .mobilenav {
     display: none;
   }
 
-  @media (max-width: 767px) {
+  @media (max-width: 768px), (min-width: 768px) and (max-width: 1024px) {
     padding: 0 20px;
     height: 65px;
     .dropdown,

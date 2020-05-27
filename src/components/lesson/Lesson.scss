@@ -13,7 +13,7 @@
     width: 80% !important;
   }
 
-  @media (max-width: 767px) {
+  @media (max-width: 768px), (min-width: 768px) and (max-width: 1024px) {
     .lesson {
       p {
         margin: 7px 0;
