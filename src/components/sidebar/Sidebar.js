@@ -10,7 +10,7 @@ import Links from "./Links";
 
 export default withRouter(function Sidebar({ history }) {
   const toProfile = () => {
-    history.push("/dashboard/profile");
+    history.push("/dashboard/edit-profile");
   };
   return (
     <div className="sidebar">
@@ -21,7 +21,7 @@ export default withRouter(function Sidebar({ history }) {
             style={{ height: "100%", margin: " 12px auto" }}
             alt=""
           />
-          <div className="edit" onClick={toProfile}>
+          <div className="edit_" onClick={toProfile}>
             <img
               src={editIcon}
               style={{ height: "20px", margin: "10px auto" }}

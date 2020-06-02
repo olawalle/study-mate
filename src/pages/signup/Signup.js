@@ -2,9 +2,6 @@ import React, { useContext, useState } from "react";
 // import { userContext } from "../../store/UserContext";
 import "./Signup.scss";
 
-import facebook from "../../assets/images/facebook.svg";
-import google from "../../assets/images/google.svg";
-import twitter from "../../assets/images/twitter.svg";
 import eye from "../../assets/images/eye.svg";
 import { Link, withRouter } from "react-router-dom";
 import { Carousel } from "react-responsive-carousel";
@@ -82,15 +79,9 @@ export default withRouter(function Signup(props) {
         <p className="welcome mt50">Sign up to Studymate</p>
 
         <div className="buttons">
-          <button className="fb-btn">
-            <img src={facebook} alt="" /> <span>Facebook</span>
-          </button>
-          <button className="tw-btn">
-            <img src={twitter} alt="" /> <span>Twitter</span>
-          </button>
-          <button className="gg-btn">
-            <img src={google} alt="" /> <span>Google</span>
-          </button>
+          <button className="fb"></button>
+          <button className="tw"></button>
+          <button className="gg"></button>
         </div>
         <p className="or">
           <span>or</span>
@@ -118,8 +109,6 @@ export default withRouter(function Signup(props) {
               className="eye"
             />
           </div>
-
-          <span className="forgot blue--text">Forgot password?</span>
 
           <button className="main-btn mt30" onClick={signup}>
             Create account

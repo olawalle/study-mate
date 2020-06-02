@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "./Profile.scss";
 import Switch from "react-switch";
 import Links from "../../../../components/sidebar/Links";
+import Leaderboard from "../../../../components/leaderboard/Leaderboard";
+import Badges from "../../../../components/badges/Badges";
 
 export default function Profile() {
   const [checked, setchecked] = useState(true);
@@ -12,76 +14,15 @@ export default function Profile() {
         <Links />
       </div>
       <div className="wide">
-        <p className="heading">Edit Profile</p>
-        <div className="form">
-          <span className="label">First Name</span>
-          <input type="text" />
+        <p className="heading">My Profile</p>
+        <div className="form"></div>
 
-          <span className="label">Surname</span>
-          <input type="text" />
-
-          <span className="label">Email address</span>
-          <input type="text" />
-
-          <span className="label">Password</span>
-          <input type="text" />
+        <div className="badgess">
+          <Badges />
         </div>
       </div>
       <div className="small">
-        <p className="heading">Learning Statistics</p>
-        <div className="switches">
-          <p>
-            Sound effects{" "}
-            <span>
-              <Switch
-                checked={checked}
-                onChange={handleChange}
-                onColor="#86d3ff"
-                onHandleColor="#2693e6"
-                uncheckedIcon={false}
-                checkedIcon={false}
-                height={25}
-                width={50}
-                className="react-switch"
-              />
-            </span>
-          </p>
-          <p>
-            Sound effects{" "}
-            <span>
-              <Switch
-                checked={checked}
-                onChange={handleChange}
-                onColor="#86d3ff"
-                onHandleColor="#2693e6"
-                uncheckedIcon={false}
-                checkedIcon={false}
-                height={25}
-                width={50}
-                className="react-switch"
-              />
-            </span>
-          </p>
-          <p>
-            Sound effects{" "}
-            <span>
-              <Switch
-                checked={checked}
-                onChange={handleChange}
-                onColor="#86d3ff"
-                onHandleColor="#2693e6"
-                uncheckedIcon={false}
-                checkedIcon={false}
-                height={25}
-                width={50}
-                className="react-switch"
-              />
-            </span>
-          </p>
-
-          <button className="tw-btn">Contact support</button>
-          <button className="tw-btn">Privacy</button>
-        </div>
+        <Leaderboard />
       </div>
     </div>
   );

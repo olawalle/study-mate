@@ -6,6 +6,7 @@ import facebook from "../../assets/images/facebook.svg";
 import google from "../../assets/images/google.svg";
 import twitter from "../../assets/images/twitter.svg";
 import quizPic from "../../assets/images/Quiz-character.svg";
+import close from "../../assets/images/close.svg";
 import Modal from "react-responsive-modal";
 import QuizQuestion from "../quiz-question/Quiz-question";
 
@@ -13,6 +14,31 @@ export default function Quiz() {
   const [open, setopen] = useState(false);
   const [started, setStarted] = useState(false);
   const [finishedTest, setfinishedTest] = useState(false);
+  const [modes, setModes] = useState([
+    { text: "Learning Approach", selected: false },
+    { text: "Time Mode", selected: false },
+    { text: "Free Form Mode", selected: false },
+  ]);
+
+  const selectMode = (i) => {
+    setModes(
+      modes.map((m, j) => {
+        return i === j
+          ? {
+              ...m,
+              selected: true,
+            }
+          : {
+              ...m,
+              selected: false,
+            };
+      })
+    );
+  };
+
+  const selectedQuizMode = modes.find((m) => m.selected)
+    ? modes.find((m) => m.selected).text
+    : "";
 
   const onOpenModal = () => {
     setopen(true);
@@ -28,6 +54,10 @@ export default function Quiz() {
     console.log("submitted");
     setfinishedTest(!finishedTest);
     setStarted(false);
+  };
+
+  const startQuiz = () => {
+    selectedQuizMode ? setStarted(true) : console.log("select a mode");
   };
 
   return (
@@ -46,26 +76,103 @@ export default function Quiz() {
         <img src={quizPic} className="pattern1" alt="" />
       </div>
 
-      <Modal open={open} onClose={onCloseModal} center showCloseIcon={false}>
+      <Modal
+        open={open}
+        onClose={onCloseModal}
+        styles={{ modal: { width: "98%" } }}
+        center
+        showCloseIcon={false}
+        closeOnOverlayClick={false}
+      >
         {!started ? (
           <div className="quiz-modal">
-            <div className="left">.</div>
+            <div className={`left ${finishedTest ? "left2" : "left1"}`}>.</div>
             {!finishedTest ? (
               <div className="right">
-                <p className="header">All set for the unit test?</p>
-                <p className="desc">
+                <p className="header">
+                  Please select a test approach
+                  <span className="close">
+                    <img
+                      src={close}
+                      alt=""
+                      onClick={onCloseModal}
+                      style={{
+                        width: "20px",
+                        float: "right",
+                        marginTop: "-90px",
+                        cursor: "pointer",
+                      }}
+                    />
+                  </span>
+                </p>
+                <p className="desc" style={{ lineHeight: "24px" }}>
                   Donec dapibus mauris id odio ornare tempus. Duis sit amet
                   accumsan justo, quis tempor ligula. Donec dapibus mauris id
                   odio ornare tempus.
                 </p>
-                <p className="duration">
-                  <span>10 Questions </span> <br />
-                  <span>9 - 12 minutes</span>
-                </p>
-                <button
-                  className="blue-btn mt15"
-                  onClick={() => setStarted(true)}
-                >
+                <div>
+                  <div className="radios">
+                    {modes.map((mode, i) => {
+                      return (
+                        <span key={mode.text} onClick={() => selectMode(i)}>
+                          <input
+                            type="radio"
+                            name=""
+                            id=""
+                            onChange={() => selectMode(i)}
+                            checked={mode.selected}
+                          />{" "}
+                          {mode.text}
+                          {mode.selected && i === 0 && (
+                            <div className="blue--text">
+                              This gives the option to view explanation for each
+                              question
+                            </div>
+                          )}
+                          {mode.selected && i === 1 && (
+                            <div className="blue--text">
+                              <p>
+                                This simulates exam environment with timing.You
+                                can generate your result and review questions
+                                afterwards
+                              </p>
+                              <div>
+                                <span
+                                  style={{
+                                    position: "relative",
+                                    top: "-26px",
+                                    color: "#000",
+                                  }}
+                                >
+                                  Set time
+                                </span>
+                              </div>
+                              <div>
+                                <input type="text" />
+                                <span>Hrs</span>
+                              </div>
+                              <div>
+                                <input type="text" />
+                                <span>Mins</span>
+                              </div>
+                            </div>
+                          )}
+                          {mode.selected && i === 2 && (
+                            <div className="blue--text">
+                              This simulates exam environment without timing
+                            </div>
+                          )}
+                        </span>
+                      );
+                    })}
+                  </div>
+                </div>
+                {/* <p className="duration">
+                  <span style={{ lineHeight: "50px" }}>10 Questions </span>{" "}
+                  <br />
+                  <span style={{ lineHeight: "50px" }}>9 - 12 minutes</span>
+                </p> */}
+                <button className="tw-btn mt15" onClick={startQuiz}>
                   Lets get started
                 </button>
               </div>
@@ -104,7 +211,11 @@ export default function Quiz() {
             )}
           </div>
         ) : (
-          <QuizQuestion completeTest={completeTest} />
+          <QuizQuestion
+            selectedQuizMode={selectedQuizMode}
+            onClose={onCloseModal}
+            completeTest={completeTest}
+          />
         )}
       </Modal>
     </div>

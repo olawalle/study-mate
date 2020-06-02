@@ -1,11 +1,17 @@
 .lesson-wrap {
   .lesson {
     font-size: 14px;
-    padding: 3px 30px;
+    padding: 1px 30px;
     cursor: pointer;
     color: #232325;
     &:hover {
       background-color: #fafafa;
+    }
+    p {
+      span {
+        position: relative;
+        top: -6px;
+      }
     }
   }
 

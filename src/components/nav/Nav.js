@@ -8,6 +8,7 @@ import edit from "../../assets/images/Edit-profile.svg";
 import logoutIcon from "../../assets/images/logout.svg";
 
 import caret from "../../assets/images/down-arrow.svg";
+import search from "../../assets/images/search.svg";
 import { withRouter } from "react-router-dom";
 
 export default withRouter(function Nav(props) {
@@ -27,6 +28,7 @@ export default withRouter(function Nav(props) {
       <span className="logo">
         <img src={logo} className="logo" alt="" />
       </span>
+
       <span className="user f-right">
         <div className="avatar">
           <img src={userIcon} height="30" alt="" />
@@ -51,6 +53,11 @@ export default withRouter(function Nav(props) {
             </li>
           </ul>
         </div>
+      </span>
+
+      <span className="inp">
+        <img src={search} alt="" />
+        <input type="text" placeholder="What do you want learn?" />
       </span>
 
       <div

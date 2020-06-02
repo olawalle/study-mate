@@ -12,6 +12,7 @@ import Nav from "../../components/nav/Nav";
 import Learn from "./dashboard-pages/Learn/Learn";
 import Profile from "./dashboard-pages/profile/Profile";
 import Progress from "./dashboard-pages/progress/Progress";
+import EditProfile from "./dashboard-pages/edit-profile/Edit";
 
 import userIcon from "../../assets/images/user.svg";
 import editIcon from "../../assets/images/edit.svg";
@@ -29,68 +30,71 @@ const Dashboard = (props) => {
   console.log(subjects);
 
   return (
-    <div className="dashboard">
-      <Nav />
-      <div className="side">
-        <Sidebar />
-      </div>
+    <>
+      {/* <div className="loader-wrap">lol</div> */}
+      <div className="dashboard">
+        <Nav />
+        <div className="side">
+          <Sidebar />
+        </div>
 
-      <div className="contents">
-        <div className="banner">
-          <p>Your study mate</p>
+        <div className="contents">
+          <div className="banner">
+            <p>Your dependable learning buddy</p>
 
-          <div className="user_">
-            <img src={userIcon} className="usericon" alt="" />
-            <div className="edit">
-              <img
-                src={editIcon}
-                style={{ height: "20px", margin: "10px auto" }}
-                alt=""
-              />
+            <div className="user_">
+              <img src={userIcon} className="usericon" alt="" />
+              <div className="edit">
+                <img
+                  src={editIcon}
+                  style={{ height: "20px", margin: "10px auto" }}
+                  alt=""
+                />
+              </div>
+            </div>
+            <p className="user-details_">
+              Chisom Blessing
+              <span>Junior secondary</span>
+            </p>
+            <div className="medals_">
+              <div className="medal b1">
+                <img src={coins} alt="" />
+                <span>5</span>
+              </div>
+              <div className="medal b2">
+                <img src={trophy} alt="" />
+                <span>7</span>
+              </div>
+              <div className="medal b3">
+                <img src={Medal} alt="" />
+                <span>12</span>
+              </div>
+              <div className="medal b4">
+                <img src={Badge1} alt="" />
+                <span>10</span>
+              </div>
+              <div className="medal b5">
+                <img src={Badge2} alt="" />
+                <span>0</span>
+              </div>
             </div>
           </div>
-          <p className="user-details_">
-            Chisom Blessing
-            <span>Junior secondary</span>
-          </p>
-          <div className="medals_">
-            <div className="medal b1">
-              <img src={coins} alt="" />
-              <span>5</span>
-            </div>
-            <div className="medal b2">
-              <img src={trophy} alt="" />
-              <span>7</span>
-            </div>
-            <div className="medal b3">
-              <img src={Medal} alt="" />
-              <span>12</span>
-            </div>
-            <div className="medal b4">
-              <img src={Badge1} alt="" />
-              <span>10</span>
-            </div>
-            <div className="medal b5">
-              <img src={Badge2} alt="" />
-              <span>0</span>
-            </div>
+          <div className="main-content">
+            <Switch>
+              <Route path={`${match.path}profile`}>
+                <Profile />
+              </Route>
+              <Route path={`${match.path}progress`}>
+                <Progress />
+              </Route>
+              <Route path={match.path}>
+                <Learn subjects={subjects} />
+              </Route>
+            </Switch>
           </div>
         </div>
-        <div className="main-content">
-          <Switch>
-            <Route path={`${match.path}profile`}>
-              <Profile />
-            </Route>
-            <Route path={`${match.path}progress`}>
-              <Progress />
-            </Route>
-            <Route path={match.path}>
-              <Learn subjects={subjects} />
-            </Route>
-          </Switch>
-        </div>
       </div>
-    </div>
+    </>
   );
 };
 

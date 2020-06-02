@@ -2,9 +2,6 @@ import React, { useEffect, useContext } from "react";
 import { userContext } from "../../store/UserContext";
 import "./Login.scss";
 
-import facebook from "../../assets/images/facebook.svg";
-import google from "../../assets/images/google.svg";
-import twitter from "../../assets/images/twitter.svg";
 import logo from "../../assets/images/logo.svg";
 import logo2 from "../../assets/images/logo.png";
 import dots from "../../assets/images/Dots.svg";
@@ -40,15 +37,9 @@ export default withRouter(function Login(props) {
         <p className="welcome mt50">Good to see you again!</p>
 
         <div className="buttons">
-          <button className="fb-btn">
-            <img src={facebook} alt="" /> <span>Facebook</span>
-          </button>
-          <button className="tw-btn">
-            <img src={twitter} alt="" /> <span>Twitter</span>
-          </button>
-          <button className="gg-btn">
-            <img src={google} alt="" /> <span>Google</span>
-          </button>
+          <button className="fb"></button>
+          <button className="tw"></button>
+          <button className="gg"></button>
         </div>
         <p className="or">
           <span>or</span>

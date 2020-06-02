@@ -3,6 +3,7 @@
   margin-bottom: 20px;
   .quiz-heading {
     font-size: 18px;
+    margin-top: 0px;
   }
   .sub-heading {
     font-size: 12px;
@@ -16,13 +17,14 @@
     .dots {
       height: 50px;
       position: absolute;
-      right: 173px;
+      right: 153px;
+      top: -10px;
     }
     .pattern1 {
       height: 100px;
       position: absolute;
       right: 42px;
-      top: -20px;
+      top: -50px;
     }
   }
 

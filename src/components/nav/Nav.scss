@@ -35,6 +35,28 @@
       }
     }
   }
+  .inp {
+    float: right;
+    margin-right: 40px;
+    position: relative;
+    input {
+      background: #fafafa;
+      height: 40px;
+      border: 0;
+      padding-left: 40px;
+      width: 250px;
+      &::placeholder {
+        color: #2d2f393d;
+      }
+    }
+    img {
+      position: absolute;
+      left: 10px;
+      top: 30px;
+      width: 15px;
+    }
+  }
+
   .dropdown {
     float: right;
     width: 170px;
@@ -83,7 +105,8 @@
     padding: 0 20px;
     height: 65px;
     .dropdown,
-    .user {
+    .user,
+    .inp {
       display: none;
     }
 

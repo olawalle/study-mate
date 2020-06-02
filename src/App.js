@@ -44,6 +44,7 @@ import bg1 from "./assets/images/Signup Background.svg";
 import bg2 from "./assets/images/Login Background.svg";
 import student from "./assets/images/student.png";
 import teacher from "./assets/images/teacher.png";
+import EditProfile from "./pages/dashbaord/dashboard-pages/edit-profile/Edit";
 
 export default function App() {
   useEffect(() => {
@@ -101,6 +102,9 @@ export default function App() {
             </Route>
             <Route path="/subject/:subject">
               <Subject />
+            </Route>
+            <Route path={`/edit-profile`}>
+              <EditProfile />
             </Route>
           </Switch>
         </UserContextProvider>

@@ -1,4 +1,7 @@
 .learn {
+  height: calc(100vh - 295px);
+  overflow-y: hidden;
+  padding: 0 20px;
   .heading {
     width: 100%;
     font-size: 14px;
@@ -18,16 +21,18 @@
     width: 70%;
     .lessons-wrap {
       background-color: #fff;
-      padding-bottom: 20px;
+      padding-bottom: 0px;
       .lessons {
-        height: 200px;
-        overflow: auto;
+        height: 195px;
+        overflow: hidden;
+        margin-top: 0;
       }
       .sub-heading {
         font-size: 14px;
         margin-top: 0;
         color: #aaaaaa;
         padding: 30px;
+        margin-bottom: 0;
         button {
           padding: 12px 20px;
           margin-top: -10px;

@@ -1,5 +1,28 @@
-.profile {
+.edit {
   padding: 0px;
+  background-color: #fafafa;
+  height: 100vh;
+  overflow: hidden;
+  .banner {
+    height: 130px;
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 0 160px;
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+    color: #fff;
+    background-image: url("../../../../assets/images/dash.svg");
+    position: relative;
+    span {
+      position: absolute;
+      bottom: 30px;
+    }
+  }
+  .contents {
+    padding: 40px 160px;
+  }
   .heading {
     width: 100%;
     font-size: 14px;
@@ -11,12 +34,29 @@
   }
   .wide {
     float: left;
-    width: 66%;
+    width: 70%;
+    background-color: #fff;
     .form {
       margin-bottom: 80px;
-      padding: 20px;
-      background-color: #fff;
-      min-height: 200px;
+      padding: 30px;
+      .inp-wrap {
+        width: 100%;
+        position: relative;
+        img {
+          position: absolute;
+          top: 22px;
+          right: 20px;
+          cursor: pointer;
+          height: 15px;
+        }
+        span {
+          font-size: 10px;
+          color: #fa0000;
+          position: absolute;
+          top: 22px;
+          right: 20px;
+        }
+      }
       .label {
         color: #000;
         font-size: 14px;
@@ -52,16 +92,14 @@
         top: 10px;
         cursor: pointer;
       }
-    }
-    .badgess {
-      width: 300px;
-      margin: 0;
-      background-color: #fafafa;
+      button {
+        padding: 0 30px;
+      }
     }
   }
   .small {
     float: right;
-    width: calc(33% - 30px);
+    width: calc(30% - 30px);
     .switches {
       background-color: #fff;
       padding: 25px;

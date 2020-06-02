@@ -27,9 +27,17 @@
       color: #fff !important;
       padding: 15px;
       margin-bottom: 7px;
+      position: relative;
       &:hover {
         font-weight: 600;
         cursor: pointer;
+      }
+      .new {
+        position: absolute;
+        top: 19%;
+        right: -15px;
+        width: 25px;
+        z-index: 10;
       }
     }
     .small {

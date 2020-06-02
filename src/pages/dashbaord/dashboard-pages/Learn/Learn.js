@@ -53,24 +53,16 @@ export default withRouter(function Learn({ subjects, history }) {
             </button>
           </p>
 
-          <div className="lessons mt10">
-            <Lesson />
-            <Lesson />
-            <Lesson />
-            <Lesson />
-            <Lesson />
+          <div className="lessons">
+            <Lesson disableClick={true} />
+            <Lesson disableClick={true} />
+            <Lesson disableClick={true} />
+            <Lesson disableClick={true} />
+            <Lesson disableClick={true} />
           </div>
         </div>
 
         <div className="quizzes mt30">
-          <Quiz />
-          <Quiz />
-          <Quiz />
-          <Quiz />
-          <Quiz />
-          <Quiz />
-          <Quiz />
-          <Quiz />
           <Quiz />
         </div>
       </div>

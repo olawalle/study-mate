@@ -59,7 +59,7 @@
     width: 43%;
     float: left;
     padding: 110px 80px;
-    overflow: auto;
+    overflow: hidden;
     height: 100vh;
     .mobileLogo {
       display: none;
@@ -78,8 +78,11 @@
         height: 33px;
         line-height: 35px;
         font-size: 12px !important;
+        overflow: hidden;
+        text-align: center;
+        background-color: #fff;
         img {
-          height: 15px;
+          height: 40px;
           position: relative;
           top: 2px;
         }
@@ -89,9 +92,25 @@
           left: 4px;
           font-weight: 600;
         }
-        &.tw-btn {
+        &.tw {
           margin: 0 3%;
         }
+      }
+      .fb {
+        background-size: cover;
+        background-position: center;
+        background-image: url("../../assets/images/fb.svg");
+      }
+      .tw {
+        background-size: cover;
+        background-position: center;
+        background-image: url("../../assets/images/tw.svg");
+      }
+      .gg {
+        border: 0.30000001192092896px solid #d8d8d8;
+        background-size: cover;
+        background-position: center;
+        background-image: url("../../assets/images/gg.svg");
       }
     }
     .or {
@@ -147,7 +166,7 @@
       font-size: 12px;
       max-width: 250px;
       line-height: 16px;
-      margin-top: 150px;
+      margin-top: 100px;
     }
   }
 

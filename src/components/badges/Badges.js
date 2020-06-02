@@ -1,35 +1,41 @@
 import React from "react";
 import "./Badges.scss";
 
+import b1 from "../../assets/images/b1.svg";
+import b2 from "../../assets/images/b2.svg";
+import b3 from "../../assets/images/b3.svg";
+import b4 from "../../assets/images/b4.svg";
+import b5 from "../../assets/images/b5.svg";
 import coins from "../../assets/images/coins.svg";
-import trophy from "../../assets/images/Trophy.svg";
-import Badge1 from "../../assets/images/Badge1.svg";
-import Badge2 from "../../assets/images/Badge2.svg";
-import Medal from "../../assets/images/Medal.svg";
 
 export default function Badges() {
   return (
     <div className="badges">
-      <p className="heading">Badge count</p>
+      <p className="heading">
+        Badge count
+        <span className="coins">
+          <img src={coins} alt="" /> coins
+        </span>
+      </p>
       <div className="medals">
-        <div className="medal b1">
-          <img src={coins} alt="" />
+        <div className="medal">
+          <img src={b1} alt="" />
           <span>5</span>
         </div>
-        <div className="medal b2">
-          <img src={trophy} alt="" />
+        <div className="medal">
+          <img src={b2} alt="" />
           <span>7</span>
         </div>
-        <div className="medal b3">
-          <img src={Medal} alt="" />
+        <div className="medal">
+          <img src={b3} alt="" />
           <span>12</span>
         </div>
-        <div className="medal b4">
-          <img src={Badge1} alt="" />
+        <div className="medal">
+          <img src={b4} alt="" />
           <span>10</span>
         </div>
-        <div className="medal b5">
-          <img src={Badge2} alt="" />
+        <div className="medal">
+          <img src={b5} alt="" />
           <span>0</span>
         </div>
       </div>

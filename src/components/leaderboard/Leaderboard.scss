@@ -1,0 +1,82 @@
+.leaderboard {
+  padding: 0;
+  background-color: #fff;
+  .heading {
+    width: 100%;
+    font-size: 14px;
+    font-weight: 600;
+    border-bottom: 1px solid #eee;
+    padding: 20px;
+    margin: 0 0 20px 0;
+    span {
+      font-size: 12px;
+      color: #c2c2c2;
+      font-weight: 300;
+    }
+  }
+  .people {
+    padding: 10px 20px;
+    .first {
+      background: #f2a304;
+      color: #fff;
+    }
+    .second {
+      background: #32c5ff;
+      color: #fff;
+    }
+    .third {
+      background: #002984;
+      color: #fff;
+    }
+    .others {
+      background: #ffffff;
+      border: 0.5px solid #979797;
+      color: #000000;
+    }
+    .mine {
+      background: #f62d1e;
+      color: #fff;
+      transform: scale(1.06);
+    }
+
+    .person {
+      padding: 15px;
+      border-radius: 7px;
+      font-size: 14px;
+      margin-bottom: 12px;
+      position: relative;
+      img {
+        height: 30px;
+        margin-right: 10px;
+      }
+      .position {
+        padding: 15px;
+        text-align: center;
+        font-size: 14px;
+        font-weight: 600;
+        position: relative;
+        top: -9px;
+      }
+      .photo {
+        border-radius: 50%;
+      }
+
+      .name {
+        position: relative;
+        top: -9px;
+      }
+
+      .points {
+        float: right;
+        position: relative;
+        top: 5px;
+      }
+      .best {
+        position: absolute;
+        top: -10px;
+        right: -50px;
+        width: 80px;
+      }
+    }
+  }
+}

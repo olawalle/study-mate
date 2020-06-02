@@ -27,10 +27,10 @@
       .main-text {
         font-size: 38px;
         font-weight: 600;
-        line-height: 38px;
+        line-height: 48px;
         animation: fade-in;
         animation-duration: 1s;
-        margin-top: 60px;
+        margin-top: 10px;
       }
       .smalls {
         font-size: 18px;
@@ -38,7 +38,7 @@
       }
       img {
         position: absolute;
-        bottom: -100px;
+        bottom: -55px;
         left: 0;
         width: 100%;
       }
@@ -48,7 +48,7 @@
     width: 55%;
     float: left;
     padding: 70px 170px;
-    overflow: auto;
+    overflow: hidden;
     height: 100vh;
     .mobileLogo {
       display: none;
@@ -67,6 +67,7 @@
         height: 33px;
         line-height: 35px;
         font-size: 12px !important;
+        background-color: #fff;
         img {
           height: 15px;
           position: relative;
@@ -78,10 +79,26 @@
           left: 4px;
           font-weight: 600;
         }
-        &.tw-btn {
+        &.tw {
           margin: 0 3%;
         }
       }
+    }
+    .fb {
+      background-size: cover;
+      background-position: center;
+      background-image: url("../../assets/images/fb.svg");
+    }
+    .tw {
+      background-size: cover;
+      background-position: center;
+      background-image: url("../../assets/images/tw.svg");
+    }
+    .gg {
+      border: 0.30000001192092896px solid #d8d8d8;
+      background-size: cover;
+      background-position: center;
+      background-image: url("../../assets/images/gg.svg");
     }
     .or {
       margin-top: -10px;
