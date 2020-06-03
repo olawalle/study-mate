@@ -63,7 +63,7 @@ export default withRouter(function Lesson({ disableClick, history }) {
         showCloseIcon={false}
         styles={{ modal: { width: "96%" } }}
       >
-        <div style={{ width: "100%", height: "650px", position: "relative" }}>
+        <div style={{ width: "100%", height: "90vh", position: "relative" }}>
           <div
             style={{
               position: "absolute",
@@ -153,7 +153,7 @@ export default withRouter(function Lesson({ disableClick, history }) {
               style={{
                 padding: 0,
                 overflow: "auto",
-                height: "calc(650px - 125px)",
+                height: "calc(90vh - 125px)",
               }}
             >
               {videos.map((video, i) => {
@@ -203,7 +203,7 @@ export default withRouter(function Lesson({ disableClick, history }) {
               allow="autoplay; encrypted-media"
               allowFullScreen
               title="video"
-              style={{ width: "100%", height: 570 }}
+              style={{ width: "100%", height: "calc(90vh - 90px)" }}
             />
             <div
               className="info"

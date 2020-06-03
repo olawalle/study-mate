@@ -10,7 +10,7 @@ import Links from "./Links";
 
 export default withRouter(function Sidebar({ history }) {
   const toProfile = () => {
-    history.push("/dashboard/edit-profile");
+    history.push("/edit-profile");
   };
   return (
     <div className="sidebar">
