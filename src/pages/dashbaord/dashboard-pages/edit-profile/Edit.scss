@@ -121,6 +121,16 @@
 
   @media (max-width: 768px), (min-width: 768px) and (max-width: 1024px) {
     padding: 0;
+    height: auto;
+    overflow: auto;
+    .banner {
+      font-size: 14px;
+      padding: 20px;
+      background-position-x: 83%;
+    }
+    .contents {
+      padding: 20px;
+    }
     .wide {
       width: 100%;
       display: block;

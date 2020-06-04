@@ -45,6 +45,7 @@ import bg2 from "./assets/images/Login Background.svg";
 import student from "./assets/images/student.png";
 import teacher from "./assets/images/teacher.png";
 import EditProfile from "./pages/dashbaord/dashboard-pages/edit-profile/Edit";
+import Studypack from "./pages/Studypack/Studypack";
 
 export default function App() {
   useEffect(() => {
@@ -102,6 +103,9 @@ export default function App() {
             </Route>
             <Route path="/subject/:subject">
               <Subject />
+            </Route>
+            <Route path="/studypack/:subject">
+              <Studypack />
             </Route>
             <Route path={`/edit-profile`}>
               <EditProfile />

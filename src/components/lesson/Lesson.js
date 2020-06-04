@@ -63,49 +63,17 @@ export default withRouter(function Lesson({ disableClick, history }) {
         showCloseIcon={false}
         styles={{ modal: { width: "96%" } }}
       >
-        <div style={{ width: "100%", height: "90vh", position: "relative" }}>
-          <div
-            style={{
-              position: "absolute",
-              bottom: 110,
-              right: 40,
-              overflow: "hidden",
-              width: 300,
-              height: 130,
-              zIndex: 123232,
-              background: "#fff",
-              padding: "15px 25px",
-              borderRadius: 10,
-            }}
-          >
+        <div className="video-modal">
+          <div className="streak">
             <img src={streak} alt="" />
-            <div
-              style={{
-                display: "inline-block",
-                width: "60%",
-                paddingLeft: 20,
-                position: "relative",
-                top: "-10px",
-              }}
-            >
-              <p style={{ fontSize: 14, fontWeight: 600, margin: 0 }}>
-                Great Listener
-              </p>
+            <div className="streak-text">
+              <p className="top">Great Listener</p>
               <p style={{ fontSize: 12 }}>
                 You have watched 30 minutes of video in a single topic
               </p>
             </div>
           </div>
-          <div
-            style={{
-              display: "inline-block",
-              width: "30%",
-              borderRight: "1px solid #eee",
-              height: "100%",
-              position: "absolute",
-              top: 0,
-            }}
-          >
+          <div className="videos">
             <div
               style={{ fontWeight: 600, fontSize: 16, padding: "20px 40px" }}
             >
@@ -187,16 +155,7 @@ export default withRouter(function Lesson({ disableClick, history }) {
               })}
             </ul>
           </div>
-          <div
-            style={{
-              width: "70%",
-              height: "100%",
-              display: "inline-block",
-              position: "absolute",
-              top: 0,
-              right: 0,
-            }}
-          >
+          <div className="frame">
             <iframe
               src="https://www.youtube.com/embed/E7wJTI-1dvQ"
               frameBorder="0"
@@ -210,7 +169,7 @@ export default withRouter(function Lesson({ disableClick, history }) {
               style={{ padding: 20, width: "100%", height: 80 }}
             >
               <span
-                className="blue--text mt10"
+                className="blue--text mt10 video-name"
                 style={{ fontWeight: 600, position: "relative", top: "5px" }}
               >
                 Brief history of Mathematics

@@ -52,23 +52,7 @@ export default function QuizQuestion(props) {
           <p className="instruction">
             Answer question 1 to 5 with the passage
             {selectedQuizMode === "Time Mode" && (
-              <span
-                className=""
-                style={{
-                  width: "20px",
-                  position: "absolute",
-                  right: "50px",
-                  top: "-30px",
-                  minWidth: "210px",
-                  cursor: "pointer",
-                  fontSize: "36px",
-                  backgroundColor: "#F8F8F8",
-                  textAlign: "center",
-                  padding: "5px",
-                }}
-              >
-                1: 30: 25
-              </span>
+              <span className="time">1: 30: 25</span>
             )}
             <span className="close">
               <img

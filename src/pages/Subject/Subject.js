@@ -13,6 +13,11 @@ export default withRouter(function Subject({ history }) {
   const back = () => {
     history.push("/dashboard/");
   };
+
+  const gotoPacks = () => {
+    history.push("/studypack/mathematics");
+  };
+
   return (
     <div className="subject">
       <Nav />
@@ -112,7 +117,9 @@ export default withRouter(function Subject({ history }) {
                 <span>12 Study packs</span>
                 <span>9 - 12 minutes</span>
               </div>
-              <button className="tw-btn">Lets get started</button>
+              <button onClick={gotoPacks} className="tw-btn">
+                Lets get started
+              </button>
             </div>
             <div className="half bg"></div>
           </div>
