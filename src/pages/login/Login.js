@@ -1,73 +1,117 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { userContext } from "../../store/UserContext";
 import "./Login.scss";
 
 import logo from "../../assets/images/logo.svg";
 import logo2 from "../../assets/images/logo.png";
 import dots from "../../assets/images/Dots.svg";
+import eye from "../../assets/images/eye.svg";
 import { Link, withRouter } from "react-router-dom";
+
+import authServices from "../../services/authServices";
+import Loader from "../../components/loader/Loader";
 
 export default withRouter(function Login(props) {
   const context = useContext(userContext);
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
+  const [viewPwrd, setViewPwrd] = useState(false);
+
+  const { updateLoader, updateUser, updateLoggedInStatus, loading } = context;
+  const pwrdType = viewPwrd ? "text" : "password";
 
   const login = () => {
-    props.history.push("/dashboard");
+    let data = {
+      email,
+      password,
+    };
+    updateLoader(true);
+    authServices
+      .login(data)
+      .then((res) => {
+        console.log(res);
+        let user = res.data;
+        updateUser(user);
+        updateLoggedInStatus(true);
+        updateLoader(false);
+        authServices.getCurrentUser();
+        props.history.push("/dashboard");
+      })
+      .catch((err) => {
+        console.log({ err });
+        updateLoader(false);
+      });
   };
 
   return (
-    <div className="login">
-      <div className="left-side">
-        <img
-          src={logo}
-          alt=""
-          style={{ width: 170, position: "absolute", top: 50, left: 50 }}
-        />
+    <>
+      {loading && <Loader />}
+      <div className="login">
+        <div className="left-side">
+          <img
+            src={logo}
+            alt=""
+            style={{ width: 170, position: "absolute", top: 50, left: 50 }}
+          />
 
-        <img src={dots} className="left-dot" alt="" />
-        <img src={dots} className="right-dot" alt="" />
-        <div className="student"></div>
-        <div className="teacher"></div>
+          <img src={dots} className="left-dot" alt="" />
+          <img src={dots} className="right-dot" alt="" />
+          <div className="student"></div>
+          <div className="teacher"></div>
+        </div>
+
+        <div className="right-side">
+          <div className="mobileLogo">
+            <img src={logo2} alt="" />
+          </div>
+
+          <p className="welcome mt50">Good to see you again!</p>
+
+          <div className="buttons">
+            <button className="fb"></button>
+            <button className="tw"></button>
+            <button className="gg"></button>
+          </div>
+          <p className="or">
+            <span>or</span>
+          </p>
+          <div className="form">
+            <span className="label">Email address</span>
+            <input type="text" onChange={(e) => setemail(e.target.value)} />
+
+            <div className="inp-wrap">
+              <span className="label">Password</span>
+              <input
+                type={pwrdType}
+                onChange={(e) => setpassword(e.target.value)}
+              />
+              <img
+                src={eye}
+                onClick={() => setViewPwrd(!viewPwrd)}
+                alt=""
+                className="eye"
+              />
+            </div>
+
+            <span className="forgot blue--text">Forgot password?</span>
+
+            <button className="main-btn mt30" onClick={login}>
+              Log in
+            </button>
+
+            <span className="no-acct">
+              <Link to="/signup">
+                Don’t have a Studymate account?{" "}
+                <span className="blue--text">Create an Account</span>
+              </Link>
+            </span>
+          </div>
+
+          <p className="cc">
+            @2020 All Rights Reserved. Studymate Powered by InfoMall Nigeria
+          </p>
+        </div>
       </div>
-
-      <div className="right-side">
-        <div className="mobileLogo">
-          <img src={logo2} alt="" />
-        </div>
-
-        <p className="welcome mt50">Good to see you again!</p>
-
-        <div className="buttons">
-          <button className="fb"></button>
-          <button className="tw"></button>
-          <button className="gg"></button>
-        </div>
-        <p className="or">
-          <span>or</span>
-        </p>
-        <div className="form">
-          <span className="label">Email address</span>
-          <input type="text" />
-          <span className="label">Password</span>
-          <input type="text" />
-
-          <span className="forgot blue--text">Forgot password?</span>
-
-          <button className="main-btn mt30" onClick={login}>
-            Log in
-          </button>
-
-          <span className="no-acct">
-            <Link to="/signup">
-              Don’t have a Studymate account?{" "}
-              <span className="blue--text">Create an Account</span>
-            </Link>
-          </span>
-        </div>
-
-        <p className="cc">
-          @2020 All Rights Reserved. Studymate Powered by InfoMall Nigeria
-        </p>
-      </div>
-    </div>
+    </>
   );
 });

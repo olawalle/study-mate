@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./Edit.scss";
 
 import Switch from "react-switch";
@@ -7,10 +7,25 @@ import edit from "../../../../assets/images/edit.svg";
 import Nav from "../../../../components/nav/Nav";
 import backArrow from "../../../../assets/images/back.svg";
 import { withRouter } from "react-router-dom";
+import { userContext } from "../../../../store/UserContext";
 
 export default withRouter(function EditProfile({ history }) {
+  const context = useContext(userContext);
+  const [fullname, setfullname] = useState("");
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
+
+  const { user } = context;
+
+  useEffect(() => {
+    console.log(user);
+    setfullname(`${user.firstName} ${user.surName}`);
+    setemail(user.email);
+  }, []);
   const [checked, setchecked] = useState(true);
+
   const handleChange = () => {};
+
   const back = () => {
     history.push("/dashboard/");
   };
@@ -36,7 +51,11 @@ export default withRouter(function EditProfile({ history }) {
           <div className="form">
             <span className="label">Full Name</span>
             <div className="inp-wrap">
-              <input type="text" />
+              <input
+                type="text"
+                defaultValue={fullname}
+                onChange={(e) => setfullname(e.target.value)}
+              />
               <img src={edit} alt="" />
             </div>
 
@@ -48,7 +67,11 @@ export default withRouter(function EditProfile({ history }) {
 
             <span className="label">Email address</span>
             <div className="inp-wrap">
-              <input type="text" />
+              <input
+                type="text"
+                defaultValue={email}
+                onChange={(e) => setemail(e.target.value)}
+              />
               <span>verify email</span>
             </div>
 

@@ -12,7 +12,6 @@ import Nav from "../../components/nav/Nav";
 import Learn from "./dashboard-pages/Learn/Learn";
 import Profile from "./dashboard-pages/profile/Profile";
 import Progress from "./dashboard-pages/progress/Progress";
-import EditProfile from "./dashboard-pages/edit-profile/Edit";
 
 import userIcon from "../../assets/images/user.svg";
 import editIcon from "../../assets/images/edit.svg";
@@ -21,17 +20,17 @@ import trophy from "../../assets/images/Trophy.svg";
 import Badge1 from "../../assets/images/Badge1.svg";
 import Badge2 from "../../assets/images/Badge2.svg";
 import Medal from "../../assets/images/Medal.svg";
+import Loader from "../../components/loader/Loader";
 
 const Dashboard = (props) => {
   let match = useRouteMatch();
   const context = useContext(userContext);
 
-  let { subjects } = context;
-  console.log(subjects);
+  let { subjects, loading } = context;
 
   return (
     <>
-      {/* <div className="loader-wrap">lol</div> */}
+      {loading && <Loader />}
       <div className="dashboard">
         <Nav />
         <div className="side">

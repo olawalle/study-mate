@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./Nav.scss";
 
 import userIcon from "../../assets/images/user.svg";
@@ -10,13 +10,20 @@ import logoutIcon from "../../assets/images/logout.svg";
 import caret from "../../assets/images/down-arrow.svg";
 import search from "../../assets/images/search.svg";
 import { withRouter } from "react-router-dom";
+import { userContext } from "../../store/UserContext";
 
 export default withRouter(function Nav(props) {
+  const context = useContext(userContext);
+  const fullname = `${context.user.firstName} ${context.user.surName}`;
+
   const [open, setopen] = useState(false);
   const [show_nav, setshow_nav] = useState(false);
 
   const logout = () => {
-    props.history.push("/login");
+    context.logout();
+    setTimeout(() => {
+      props.history.push("/login");
+    }, 200);
   };
 
   const toProfile = () => {
@@ -33,7 +40,7 @@ export default withRouter(function Nav(props) {
         <div className="avatar">
           <img src={userIcon} height="30" alt="" />
         </div>
-        Chisom Blessing
+        {fullname}
         <img
           src={caret}
           style={{
