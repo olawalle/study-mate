@@ -40,16 +40,8 @@ let getUserCourses = (token) => {
   return axios({
     method: "get",
     // url: urls.userCourseUrl,
-    url: urls.learnCourseUrl,
+    url: urls.userLearnCourseUrl,
     headers: token ? { Authorization: `Bearer ${token}` } : headers(),
-  });
-};
-
-let updateUserData = (data, id) => {
-  return axios({
-    method: "patch",
-    url: urls.userUrl + "/" + id,
-    data,
   });
 };
 
@@ -61,10 +53,19 @@ let updateUserCourses = (data) => {
   });
 };
 
-let getAllCourses = () => {
+let getAllCourses = (token) => {
   return axios({
     method: "get",
-    url: urls.courseUrl,
+    url: urls.learnCourseUrl,
+    headers: token ? { Authorization: `Bearer ${token}` } : headers(),
+  });
+};
+
+let updateUserData = (data, id) => {
+  return axios({
+    method: "patch",
+    url: urls.userUrl + "/" + id,
+    data,
     headers: headers(),
   });
 };

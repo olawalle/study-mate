@@ -246,6 +246,22 @@
     width: 100%;
     height: 90vh;
     position: relative;
+    .videos {
+      display: inline-block;
+      width: 30%;
+      border-right: 1px solid #eee;
+      height: 100%;
+      position: absolute;
+      top: 0;
+    }
+    .frame {
+      width: 70%;
+      height: 100%;
+      display: inline-block;
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
     .streak {
       position: absolute;
       bottom: 110px;
@@ -457,9 +473,25 @@
       }
     }
     .video-modal {
+      .videos {
+        display: inline-block;
+        width: 0% !important;
+        border-right: 1px solid #eee;
+        height: 100%;
+        position: absolute;
+        top: 0;
+      }
+      .frame {
+        width: 100% !important;
+        height: 100%;
+        display: inline-block;
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
       .streak {
         right: 10px;
-        width: 230px;
+        width: 200px !important;
         padding: 12px;
         img {
           width: 40px;
@@ -468,22 +500,6 @@
           font-size: 14px;
           font-weight: 600;
           margin: 20px 0 0;
-        }
-        .videos {
-          display: inline-block;
-          width: 30%;
-          border-right: 1px solid #eee;
-          height: 100%;
-          position: absolute;
-          top: 0;
-        }
-        .frame {
-          width: 70%;
-          height: 100%;
-          display: inline-block;
-          position: absolute;
-          top: 0;
-          right: 0;
         }
       }
     }

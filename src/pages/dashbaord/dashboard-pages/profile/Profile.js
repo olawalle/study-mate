@@ -5,12 +5,17 @@ import Links from "../../../../components/sidebar/Links";
 import Leaderboard from "../../../../components/leaderboard/Leaderboard";
 import Badges from "../../../../components/badges/Badges";
 import { userContext } from "../../../../store/UserContext";
+import { withRouter } from "react-router-dom";
 
-export default function Profile() {
+export default withRouter(function Profile({ history }) {
   const context = useContext(userContext);
   const { user } = context;
   console.log(user);
   const [checked, setchecked] = useState(true);
+
+  const toEdit = () => {
+    history.push("/edit-profile");
+  };
   return (
     <div className="profile">
       <div className="links-wrap">
@@ -36,7 +41,9 @@ export default function Profile() {
             <p>{}</p>
           </div>
           <div className="half">
-            <button className="blue-btn">Edit my profile</button>
+            <button onClick={toEdit} className="blue-btn">
+              Edit my profile
+            </button>
           </div>
           <div className="half"></div>
         </div>
@@ -50,4 +57,4 @@ export default function Profile() {
       </div>
     </div>
   );
-}
+});

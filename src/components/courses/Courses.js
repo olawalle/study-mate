@@ -13,6 +13,7 @@ export default function Courses(props) {
     selectedSubject,
     saveSelectedSubject,
   } = context;
+  console.log(userCourses);
   let sortesubjects = userCourses
     .map((subject, i) => {
       return {
@@ -36,7 +37,7 @@ export default function Courses(props) {
     console.log(course);
     updateLoader(true);
     authServices
-      .getSubjectQuiz(course.id)
+      .getSubjectQuiz(course.learnCourseId)
       .then((res) => {
         saveSelectedSubject(res.data);
         updateLoader(false);
@@ -47,7 +48,7 @@ export default function Courses(props) {
       });
 
     authServices
-      .getSubjectVideos(course.id)
+      .getSubjectVideos(course.learnCourseId)
       .then((res) => {
         console.log(res);
       })
@@ -69,6 +70,7 @@ export default function Courses(props) {
             <div
               key={course.name}
               onClick={() => selectCourse(course)}
+              style={{ textTransform: "capitalize" }}
               className={`bg_${i + 1} course ${
                 course.width === 3
                   ? "wide"

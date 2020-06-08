@@ -27,7 +27,7 @@ export default withRouter(function Nav(props) {
   };
 
   const toProfile = () => {
-    props.history.push("/dashboard/profile");
+    props.history.push("/edit-profile");
   };
 
   return (

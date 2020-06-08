@@ -66,11 +66,11 @@ export default withRouter(function Learn({ history }) {
             updateUserCourses(res.data);
           })
           .catch((err) => {
-            console.log(err);
+            console.log({ err });
           });
       })
       .catch((err) => {
-        console.log(err);
+        console.log({ err });
       });
   };
 
@@ -80,9 +80,7 @@ export default withRouter(function Learn({ history }) {
       {
         value: level === 1 ? "junior" : "senior",
         op: "add",
-        path: "level",
-        operationType: 0,
-        from: "",
+        path: "/level",
       },
     ];
 

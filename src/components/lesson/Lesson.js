@@ -56,7 +56,6 @@ export default withRouter(function Lesson({ disableClick, history }) {
       </div>
 
       <Modal
-        className="video-modal"
         open={open}
         onClose={() => setopen(!open)}
         center

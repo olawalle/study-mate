@@ -55,7 +55,19 @@ export default class UserContextProvider extends Component {
   };
 
   updateUserCourses = (userCourses) => {
-    this.setState({ userCourses });
+    let subjectObj = this.state.subjects.reduce((pay, subj) => {
+      pay[subj.id] = subj;
+      return pay;
+    }, {});
+    console.log({ subjectObj });
+    this.setState({
+      userCourses: userCourses.map((course) => {
+        return {
+          ...course,
+          name: subjectObj[course.learnCourseId].name,
+        };
+      }),
+    });
   };
 
   updateSubjects = (subjects) => {

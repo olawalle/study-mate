@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Subject.scss";
 import ProgressBar from "../../components/progress-bar/ProgressBar";
 import Nav from "../../components/nav/Nav";
@@ -7,9 +7,13 @@ import Quiz from "../../components/quiz/Quiz";
 import students from "../../assets/images/students.png";
 import backArrow from "../../assets/images/back.svg";
 import { withRouter } from "react-router-dom";
+import { userContext } from "../../store/UserContext";
 // import students from "../../assets/images/students.png";
 
 export default withRouter(function Subject({ history }) {
+  const context = useContext(userContext);
+  const { selectedSubject } = context;
+  console.log(selectedSubject);
   const back = () => {
     history.push("/dashboard/");
   };
@@ -22,7 +26,7 @@ export default withRouter(function Subject({ history }) {
     <div className="subject">
       <Nav />
       <div className="banner">
-        <span>
+        <span style={{ textTransform: "capitalize" }}>
           <img
             src={backArrow}
             height="25"
@@ -31,7 +35,7 @@ export default withRouter(function Subject({ history }) {
             onClick={back}
             style={{ position: "relative", top: 5, cursor: "pointer" }}
           />
-          Mathematics
+          {selectedSubject.name}
         </span>
       </div>
       <div className="sub-banner">
@@ -77,8 +81,11 @@ export default withRouter(function Subject({ history }) {
               <Lesson />
             </div>
           </div>
-
-          <Quiz />
+          {selectedSubject &&
+            selectedSubject.quizzes &&
+            selectedSubject.quizzes.length && (
+              <Quiz quiz={selectedSubject.quizzes} />
+            )}
 
           <p className="heading">Intermediate</p>
           <div className="lessons-wrap mb30">
@@ -90,8 +97,11 @@ export default withRouter(function Subject({ history }) {
               <Lesson />
             </div>
           </div>
-
-          <Quiz />
+          {selectedSubject &&
+            selectedSubject.quizzes &&
+            selectedSubject.quizzes.length && (
+              <Quiz quiz={selectedSubject.quizzes} />
+            )}
 
           <p className="heading">Advanced</p>
           <div className="lessons-wrap mb30">
@@ -103,8 +113,11 @@ export default withRouter(function Subject({ history }) {
               <Lesson />
             </div>
           </div>
-
-          <Quiz />
+          {selectedSubject &&
+            selectedSubject.quizzes &&
+            selectedSubject.quizzes.length && (
+              <Quiz quiz={selectedSubject.quizzes} />
+            )}
 
           <div className="pack">
             <div className="half">
