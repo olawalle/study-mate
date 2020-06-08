@@ -45,7 +45,7 @@ export default function QuizQuestion(props) {
           };
           setremains(data);
         } else {
-          submit();
+          if (selectedQuizMode === "Time Mode") submit();
         }
         return dur;
       });
