@@ -42,10 +42,10 @@ export default withRouter(function Login(props) {
         updateLoggedInStatus(true);
         authServices.getCurrentUser(user.token);
         authServices
-          .getUserCourses(user.token)
+          .getUserCourses(user.token, user.id)
           .then((res) => {
-            console.log("usercourses", res.data);
-            updateUserCourses(res.data);
+            console.log("usercourses", res.data.userLearnCourses);
+            updateUserCourses(res.data.userLearnCourses);
             updateLoader(false);
             setTimeout(() => {
               props.history.push("/dashboard");

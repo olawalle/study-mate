@@ -59,14 +59,17 @@ export default class UserContextProvider extends Component {
       pay[subj.id] = subj;
       return pay;
     }, {});
-    console.log({ subjectObj });
+    let fullCourses = userCourses.map((course) => {
+      return {
+        ...course,
+        name: subjectObj[course.learnCourseId]
+          ? subjectObj[course.learnCourseId].name
+          : "",
+      };
+    });
+    console.log({ subjectObj, fullCourses });
     this.setState({
-      userCourses: userCourses.map((course) => {
-        return {
-          ...course,
-          name: subjectObj[course.learnCourseId].name,
-        };
-      }),
+      userCourses: fullCourses,
     });
   };
 
@@ -90,6 +93,8 @@ export default class UserContextProvider extends Component {
         level: 2,
       },
     });
+    localStorage.clear();
+    sessionStorage.clear();
   };
 
   render() {

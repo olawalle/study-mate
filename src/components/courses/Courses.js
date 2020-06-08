@@ -13,7 +13,6 @@ export default function Courses(props) {
     selectedSubject,
     saveSelectedSubject,
   } = context;
-  console.log(userCourses);
   let sortesubjects = userCourses
     .map((subject, i) => {
       return {
@@ -68,10 +67,10 @@ export default function Courses(props) {
         {sortesubjects.map((course, i) => {
           return (
             <div
-              key={course.name}
+              key={course.name + i}
               onClick={() => selectCourse(course)}
               style={{ textTransform: "capitalize" }}
-              className={`bg_${i + 1} course ${
+              className={`bg_${(i % 17) + 2} course ${
                 course.width === 3
                   ? "wide"
                   : course.width === 2
@@ -79,7 +78,7 @@ export default function Courses(props) {
                   : "small"
               }`}
             >
-              {course.name}{" "}
+              {course.learnCourse.name}{" "}
               {course.new && <img src={neww} className="new" alt="" />}
             </div>
           );

@@ -36,11 +36,14 @@ let getCurrentUser = (token) => {
     });
 };
 
-let getUserCourses = (token) => {
+let getUserCourses = (token, id) => {
   return axios({
     method: "get",
     // url: urls.userCourseUrl,
-    url: urls.userLearnCourseUrl,
+    url: urls.getUserLearnCourseUrl,
+    params: {
+      id,
+    },
     headers: token ? { Authorization: `Bearer ${token}` } : headers(),
   });
 };
