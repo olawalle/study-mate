@@ -17,7 +17,13 @@ export default withRouter(function Login(props) {
   const [password, setpassword] = useState("");
   const [viewPwrd, setViewPwrd] = useState(false);
 
-  const { updateLoader, updateUser, updateLoggedInStatus, loading } = context;
+  const {
+    updateLoader,
+    updateUser,
+    updateLoggedInStatus,
+    updateUserCourses,
+    loading,
+  } = context;
   const pwrdType = viewPwrd ? "text" : "password";
 
   const login = () => {
@@ -31,10 +37,29 @@ export default withRouter(function Login(props) {
       .then((res) => {
         console.log(res);
         let user = res.data;
+        localStorage.setItem("studymate-token", user.token);
         updateUser(user);
         updateLoggedInStatus(true);
         updateLoader(false);
-        authServices.getCurrentUser();
+        authServices.getCurrentUser(user.token);
+        authServices
+          .getUserCourses(user.token)
+          .then((res) => {
+            console.log("usercourses", res.data);
+            updateUserCourses(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+
+        authServices
+          .getUserAward()
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log({ err });
+          });
         props.history.push("/dashboard");
       })
       .catch((err) => {

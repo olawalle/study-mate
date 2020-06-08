@@ -58,13 +58,17 @@
 }
 
 .links-list {
-  padding-left: 0;
+  padding: 0 20px;
   li {
-    padding: 15px 30px;
+    padding: 15px 20px;
     list-style: none;
     font-size: 14px;
     cursor: pointer;
     color: #aaaaaa;
+    span {
+      position: relative;
+      top: -2px;
+    }
     svg {
       fill: #aaaaaa;
       margin-right: 15px;
@@ -75,6 +79,7 @@
     &.active {
       color: #fff;
       background-color: #0097f5;
+      border-radius: 10px;
       svg {
         fill: #fff !important;
       }

@@ -4,9 +4,9 @@
   width: 100%;
   border-radius: 40px;
   .indicator {
-    width: 30%;
     height: 10px;
     background: #10a3ff;
     border-radius: 40px;
+    transition: linear all 0.3s;
   }
 }

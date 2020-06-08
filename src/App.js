@@ -46,10 +46,12 @@ import student from "./assets/images/student.png";
 import teacher from "./assets/images/teacher.png";
 import EditProfile from "./pages/dashbaord/dashboard-pages/edit-profile/Edit";
 import Studypack from "./pages/Studypack/Studypack";
+import authServices from "./services/authServices";
 
 export default function App() {
   useEffect(() => {
     // preload images to reduce weird image load lag after components mount
+
     const imagesToBePreloaded = [
       play,
       Learn,

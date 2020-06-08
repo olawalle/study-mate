@@ -13,6 +13,7 @@ export default withRouter(function EditProfile({ history }) {
   const context = useContext(userContext);
   const [fullname, setfullname] = useState("");
   const [email, setemail] = useState("");
+  const [phone, setphone] = useState("");
   const [password, setpassword] = useState("");
 
   const { user } = context;
@@ -21,6 +22,7 @@ export default withRouter(function EditProfile({ history }) {
     console.log(user);
     setfullname(`${user.firstName} ${user.surName}`);
     setemail(user.email);
+    setphone(user.phoneNumber);
   }, []);
   const [checked, setchecked] = useState(true);
 
@@ -49,8 +51,8 @@ export default withRouter(function EditProfile({ history }) {
         <div className="wide">
           <p className="heading">Edit Profile</p>
           <div className="form">
-            <span className="label">Full Name</span>
-            <div className="inp-wrap">
+            <div className="inp-wrap ">
+              <span className="label">Full Name</span>
               <input
                 type="text"
                 defaultValue={fullname}
@@ -59,24 +61,47 @@ export default withRouter(function EditProfile({ history }) {
               <img src={edit} alt="" />
             </div>
 
-            <span className="label">Create Username</span>
-            <div className="inp-wrap">
+            <div className="inp-wrap left">
+              <span className="label">Create Username</span>
               <input type="text" />
               <img src={edit} alt="" />
             </div>
 
-            <span className="label">Email address</span>
-            <div className="inp-wrap">
+            <div className="inp-wrap right">
+              <span className="label">Phone no</span>
+              <input
+                type="text"
+                defaultValue={phone}
+                onChange={(e) => setphone(e.target.value)}
+              />
+              <img src={edit} alt="" />
+            </div>
+
+            <div className="inp-wrap left">
+              <span className="label">Email address</span>
               <input
                 type="text"
                 defaultValue={email}
                 onChange={(e) => setemail(e.target.value)}
               />
-              <span>verify email</span>
+              <span className="alert">verify email</span>
             </div>
 
-            <span className="label">Password</span>
-            <input type="text" />
+            <div className="inp-wrap right">
+              <span className="label">Location</span>
+              <input type="text" />
+              <img src={edit} alt="" />
+            </div>
+
+            <div className="inp-wrap left">
+              <span className="label">Date of birth</span>
+              <input type="text" />
+            </div>
+
+            <div className="inp-wrap right">
+              <span className="label">Password</span>
+              <input type="text" />
+            </div>
 
             <button className="tw-btn">Save changes</button>
           </div>

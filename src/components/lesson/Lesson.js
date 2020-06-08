@@ -128,6 +128,7 @@ export default withRouter(function Lesson({ disableClick, history }) {
                 return (
                   <li
                     onClick={() => selectVideo(i)}
+                    key={video.text}
                     style={{
                       padding: "15px 40px",
                       cursor: "pointer",

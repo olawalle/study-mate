@@ -1,44 +1,64 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { userContext } from "../../store/UserContext";
 
 import "./Courses.scss";
 import neww from "../../assets/images/New.svg";
+import authServices from "../../services/authServices";
 
 export default function Courses(props) {
   const context = useContext(userContext);
-  const { subjects } = context;
-  let sortesubjects = subjects
+  const {
+    userCourses,
+    updateLoader,
+    selectedSubject,
+    saveSelectedSubject,
+  } = context;
+  let sortesubjects = userCourses
     .map((subject, i) => {
-      return i % 5
-        ? {
-            ...subject,
-            width:
-              subject.name.length <= 7
-                ? 1
-                : subject.name.length > 7 && subject.name.length <= 13
-                ? 2
-                : 3,
-            new: true,
-          }
-        : {
-            ...subject,
-            width:
-              subject.name.length <= 7
-                ? 1
-                : subject.name.length > 7 && subject.name.length <= 13
-                ? 2
-                : 3,
-            new: false,
-          };
+      return {
+        ...subject,
+        width: 2,
+        // subject.name.length <= 7
+        //   ? 1
+        //   : subject.name.length > 7 && subject.name.length <= 13
+        //   ? 2
+        //   : 3,
+        new: false,
+      };
     })
     .sort((a, b) => {
       if (a.width < b.width) return -1;
       if (a.width > b.width) return 1;
       return 0;
-    })
-    .filter((s, i) => {
-      return i <= 6 || i > 12;
     });
+
+  const selectCourse = (course) => {
+    console.log(course);
+    updateLoader(true);
+    authServices
+      .getSubjectQuiz(course.id)
+      .then((res) => {
+        saveSelectedSubject(res.data);
+        updateLoader(false);
+      })
+      .catch((err) => {
+        console.log({ err });
+        updateLoader(false);
+      });
+
+    authServices
+      .getSubjectVideos(course.id)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log({ err });
+      });
+  };
+
+  useEffect(() => {
+    selectCourse(sortesubjects[0]);
+  }, []);
 
   return (
     <div className="courses">
@@ -48,6 +68,7 @@ export default function Courses(props) {
           return (
             <div
               key={course.name}
+              onClick={() => selectCourse(course)}
               className={`bg_${i + 1} course ${
                 course.width === 3
                   ? "wide"

@@ -42,20 +42,29 @@
       .inp-wrap {
         width: 100%;
         position: relative;
+        display: inline-block;
         img {
           position: absolute;
-          top: 22px;
+          top: 42px;
           right: 20px;
           cursor: pointer;
           height: 15px;
         }
-        span {
+        .alert {
           font-size: 10px;
           color: #fa0000;
           position: absolute;
-          top: 22px;
+          top: 42px;
           right: 20px;
         }
+      }
+      .left {
+        width: 49%;
+        float: left;
+      }
+      .right {
+        width: 49%;
+        float: right;
       }
       .label {
         color: #000;
@@ -95,6 +104,9 @@
       button {
         padding: 0 30px;
       }
+    }
+    button {
+      border-radius: 10px;
     }
   }
   .small {

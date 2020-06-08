@@ -17,22 +17,9 @@ export default class UserContextProvider extends Component {
       surName: "",
       level: 2,
     },
-    subjects: [
-      { name: "English", selected: false },
-      { name: "Mathematics", selected: false },
-      { name: "Biology", selected: false },
-      { name: "Chemistry", selected: false },
-      { name: "Geography", selected: false },
-      { name: "Literature", selected: false },
-      { name: "Physics", selected: false },
-      { name: "Agric. sci", selected: false },
-      { name: "Computer Sci.", selected: false },
-      { name: "Creative and cultural art", selected: false },
-      { name: "Basic Science", selected: false },
-      { name: "Commerce", selected: false },
-      { name: "Economics", selected: false },
-      { name: "Further Maths", selected: false },
-    ],
+    selectedSubject: {},
+    subjects: [],
+    userCourses: [],
     token: "",
   };
 
@@ -41,16 +28,19 @@ export default class UserContextProvider extends Component {
     console.log(state);
     this.setState(state);
     let token = this.state.user.token || "";
-    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    axios.defaults.headers.common["Authorization"] = `${token}`;
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log("state updated");
     if (this.state !== prevState) {
       // Whatever storage mechanism you end up deciding to use.
+      localStorage.setItem("parentValueKey", JSON.stringify(this.state));
+    } else {
       localStorage.setItem("parentValueKey", JSON.stringify(prevState));
     }
   }
+
+  saveSelectedSubject = (selectedSubject) => this.setState({ selectedSubject });
 
   updateLoader = (loading) => {
     this.setState({ loading });
@@ -62,6 +52,14 @@ export default class UserContextProvider extends Component {
 
   updateUser = (user) => {
     this.setState({ user });
+  };
+
+  updateUserCourses = (userCourses) => {
+    this.setState({ userCourses });
+  };
+
+  updateSubjects = (subjects) => {
+    this.setState({ subjects });
   };
 
   logout = () => {
@@ -83,7 +81,15 @@ export default class UserContextProvider extends Component {
   };
 
   render() {
-    const { updateUser, updateLoader, updateLoggedInStatus, logout } = this;
+    const {
+      updateUser,
+      updateLoader,
+      updateLoggedInStatus,
+      logout,
+      updateSubjects,
+      saveSelectedSubject,
+      updateUserCourses,
+    } = this;
     return (
       <userContext.Provider
         value={{
@@ -92,6 +98,9 @@ export default class UserContextProvider extends Component {
           updateUser,
           updateLoggedInStatus,
           logout,
+          updateSubjects,
+          updateUserCourses,
+          saveSelectedSubject,
         }}
       >
         {this.props.children}

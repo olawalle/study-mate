@@ -31,7 +31,7 @@ export default withRouter(function Links({ history }) {
             key={link.text}
           >
             <img src={link.icon} className="mr20" alt="" />
-            {link.text}
+            <span>{link.text}</span>
 
             <svg
               version="1.1"

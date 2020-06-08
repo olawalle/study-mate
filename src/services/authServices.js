@@ -1,6 +1,11 @@
 import axios from "axios";
 import * as urls from "./urls";
 
+let headers = () => {
+  let userToken = localStorage.getItem("studymate-token");
+  return { Authorization: `Bearer ${userToken}` } || {};
+};
+
 let signup = (data) => {
   return axios({
     method: "post",
@@ -17,10 +22,11 @@ let login = (data) => {
   });
 };
 
-let getCurrentUser = () => {
+let getCurrentUser = (token) => {
   axios({
     method: "get",
-    url: urls.currentUserUrl,
+    url: urls.userUrl,
+    headers: { Authorization: `Bearer ${token}` },
   })
     .then((res) => {
       console.log(res);
@@ -30,8 +36,88 @@ let getCurrentUser = () => {
     });
 };
 
+let getUserCourses = (token) => {
+  return axios({
+    method: "get",
+    // url: urls.userCourseUrl,
+    url: urls.learnCourseUrl,
+    headers: token ? { Authorization: `Bearer ${token}` } : headers(),
+  });
+};
+
+let updateUserData = (data, id) => {
+  return axios({
+    method: "patch",
+    url: urls.userUrl + "/" + id,
+    data,
+  });
+};
+
+let updateUserCourses = (data) => {
+  return axios({
+    method: "post",
+    url: urls.userLearnCourseUrl,
+    data,
+  });
+};
+
+let getAllCourses = () => {
+  return axios({
+    method: "get",
+    url: urls.courseUrl,
+    headers: headers(),
+  });
+};
+
+let getAwards = () => {
+  return axios({
+    method: "get",
+    url: urls.awardsUrl,
+    headers: headers(),
+  });
+};
+
+let getSubjectQuiz = (id) => {
+  return axios({
+    method: "get",
+    url: urls.learnCourseUrl + "/" + id,
+  });
+};
+
+let getSubjectVideos = (id) => {
+  return axios({
+    method: "get",
+    url: urls.videosUrl + "/" + id,
+  });
+};
+
+let getUserAward = () => {
+  return axios({
+    method: "get",
+    url: urls.userAwardsUrl,
+    headers: headers(),
+  });
+};
+
+let getLeaderboard = (userID, quizID) => {
+  return axios({
+    method: "get",
+    url: urls.userAwardsUrl + "/leader/" + userID + "?id=" + quizID,
+    headers: headers(),
+  });
+};
+
 export default {
   signup,
   login,
+  updateUserData,
   getCurrentUser,
+  getUserCourses,
+  updateUserCourses,
+  getAllCourses,
+  getAwards,
+  getSubjectQuiz,
+  getSubjectVideos,
+  getUserAward,
+  getLeaderboard,
 };

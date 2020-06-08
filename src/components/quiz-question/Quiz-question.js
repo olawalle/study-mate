@@ -1,22 +1,77 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Quiz-question.scss";
 import ProgressBar from "../progress-bar/ProgressBar";
 import close from "../../assets/images/close.svg";
 import caret from "../../assets/images/down-arrow.svg";
 
 export default function QuizQuestion(props) {
+  let hr = props.time ? parseFloat(props.time.hour) * 60 : 0;
+  let min = parseFloat(props.time.minutes);
+  let duration_ = (hr + min) * 60;
+
   const [passage, setpassage] = useState(false);
   const [feedback, setFeedback] = useState(false);
-  const { selectedQuizMode } = props;
+  const [answered, setanswered] = useState(false);
+  const [currentQuestion, setcurrentQuestion] = useState(0);
+  const [duration, setduration] = useState(duration_);
+  const [answers, setanswers] = useState([]);
+  const [remains, setremains] = useState({ hr: 0, min: 0, sec: 0 });
+  const { selectedQuizMode, questions } = props;
+  let activeQuestion = questions[currentQuestion];
 
-  const [options, setoptions] = useState([
-    { option: "A", text: "this is the first option", picked: false },
-    { option: "B", text: "this is the second option", picked: false },
-    { option: "C", text: "this is the third option", picked: false },
-    { option: "D", text: "this is the forth option", picked: false },
-  ]);
+  const [options, setoptions] = useState([]);
+
+  React.useEffect(() => {
+    console.log(selectedQuizMode);
+    getOptions(0);
+    const timer = window.setInterval(() => {
+      setduration((prevTime) => {
+        let dur = prevTime - 1;
+        if (prevTime > 0) {
+          let hoursRemaining = dur > 3600 ? Math.floor(dur / 3600) : 0;
+          let minutesRemaining = Math.floor(dur / 60 - 60 * hoursRemaining);
+          let secondsRemaining =
+            dur - (hoursRemaining * 3600 + minutesRemaining * 60);
+          let data = {
+            hr: hoursRemaining,
+            min:
+              minutesRemaining >= 10
+                ? minutesRemaining
+                : `0${minutesRemaining}`,
+            sec:
+              secondsRemaining >= 10
+                ? secondsRemaining
+                : `0${secondsRemaining}`,
+          };
+          setremains(data);
+        } else {
+          submit();
+        }
+        return dur;
+      });
+    }, 1000);
+    return () => {
+      window.clearInterval(timer);
+    };
+  }, []);
+
+  const nextQuestion = () => {
+    let no = currentQuestion + 1;
+    setcurrentQuestion(no);
+    getOptions(no);
+    setanswered(false);
+  };
+
+  const prevQuestion = () => {
+    let no = currentQuestion - 1;
+    setcurrentQuestion(no);
+    getOptions(no);
+    setanswered(false);
+  };
 
   const pickAnswer = (i) => {
+    setanswered(true);
+    let prevAnswers = [...answers];
     setoptions(
       options.map((option, j) => {
         return i === j
@@ -30,6 +85,8 @@ export default function QuizQuestion(props) {
             };
       })
     );
+    prevAnswers[currentQuestion] = options[i].id;
+    setanswers(prevAnswers);
   };
 
   const openPassage = () => {
@@ -42,6 +99,30 @@ export default function QuizQuestion(props) {
     setFeedback(!feedback);
   };
 
+  const getOptions = (no) => {
+    let options = questions[no].options.map((option, i) => {
+      return {
+        ...option,
+        text: option.content,
+        picked: false,
+        option: i === 0 ? "A" : i === 1 ? "B" : i === 2 ? "C" : "D",
+      };
+    });
+    setoptions(options);
+  };
+
+  const submit = () => {
+    let defaultAnswers = questions.map((q) => q.answerId);
+    let score = 0;
+
+    answers.forEach((ans, i) => {
+      if (ans === defaultAnswers[i]) score += 1;
+    });
+    let count = questions.length;
+    let percent = (score * 100) / count;
+    props.completeTest({ score, percent, count });
+  };
+
   const pickedClassName =
     selectedQuizMode === "Learning Approach" ? "correct_" : "correct";
 
@@ -49,10 +130,12 @@ export default function QuizQuestion(props) {
     <div className="quiz-quuestion">
       <div className="upper">
         <div style={{ position: "relative" }}>
-          <p className="instruction">
-            Answer question 1 to 5 with the passage
+          <div className="instruction">
+            Answer question 1 to 5 with the passage{" "}
             {selectedQuizMode === "Time Mode" && (
-              <span className="time">1: 30: 25</span>
+              <span className="time">
+                {remains.hr}: {remains.min}: {remains.sec}
+              </span>
             )}
             <span className="close">
               <img
@@ -67,29 +150,28 @@ export default function QuizQuestion(props) {
                 }}
               />
             </span>
-          </p>
-          <ProgressBar />
+          </div>
+          <ProgressBar width={currentQuestion / (questions.length - 1)} />
         </div>
         <div className="content">
-          <p className="question">
-            Musa has a choice of buying a shirt and a bag. What is the
-            opportunity cost of buying a book Musa has a choice of buying a
-            shirt and a bag. What is the opportunity cost of buying a book Musa
-            has a choice of buying a shirt and a bag. What is the opportunity
-            cost of buying a book?
-          </p>
+          <p className="question">{activeQuestion.question}</p>
 
           {options.map((option, i) => {
             return (
               <div
+                key={option.text}
                 className={`answer ${option.picked ? pickedClassName : ""}`}
                 onClick={() => pickAnswer(i)}
               >
                 <span className="label">{option.option}</span>
-                <p>{option.text}</p>
-                {selectedQuizMode !== "Learning Approach" && (
-                  <h4 className="caveat">correct answer</h4>
-                )}
+                <p>
+                  {option.text} - {option.id} - {activeQuestion.answerId}
+                </p>
+                {selectedQuizMode !== "Learning Approach" &&
+                  answered &&
+                  option.id === activeQuestion.answerId && (
+                    <h4 className="caveat">correct answer</h4>
+                  )}
               </div>
             );
           })}
@@ -98,49 +180,7 @@ export default function QuizQuestion(props) {
             <em>Feedback</em>
           </p>
         </div>
-        {passage && (
-          <div className="passage">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quasi
-            sapiente dolore mollitia harum. Laboriosam nobis eaque recusandae
-            tempore porro quibusdam rerum saepe nihil, doloribus culpa corrupti
-            fugiat quia labore nostrum? Lorem ipsum dolor sit amet consectetur,
-            adipisicing elit. Quasi sapiente dolore mollitia harum. Laboriosam
-            nobis eaque recusandae tempore porro quibusdam rerum saepe nihil,
-            doloribus culpa corrupti fugiat quia labore nostrum? Lorem ipsum
-            dolor sit amet consectetur, adipisicing elit. Quasi sapiente dolore
-            mollitia harum. Laboriosam nobis eaque recusandae tempore porro
-            quibusdam rerum saepe nihil, doloribus culpa corrupti fugiat quia
-            labore nostrum? Lorem ipsum dolor sit amet consectetur, adipisicing
-            elit. Quasi sapiente dolore mollitia harum. Laboriosam nobis eaque
-            recusandae tempore porro quibusdam rerum saepe nihil, doloribus
-            culpa corrupti fugiat quia labore nostrum? Lorem ipsum dolor sit
-            amet consectetur, adipisicing elit. Quasi sapiente dolore mollitia
-            harum. Laboriosam nobis eaque recusandae tempore porro quibusdam
-            rerum saepe nihil, doloribus culpa corrupti fugiat quia labore
-            nostrum? Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-            Quasi sapiente dolore mollitia harum. Laboriosam nobis eaque
-            recusandae tempore porro quibusdam rerum saepe nihil, doloribus
-            culpa corrupti fugiat quia labore nostrum? Lorem ipsum dolor sit
-            amet consectetur, adipisicing elit. Quasi sapiente dolore mollitia
-            harum. Laboriosam nobis eaque recusandae tempore porro quibusdam
-            rerum saepe nihil, doloribus culpa corrupti fugiat quia labore
-            nostrum? Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-            Quasi sapiente dolore mollitia harum. Laboriosam nobis eaque
-            recusandae tempore porro quibusdam rerum saepe nihil, doloribus
-            culpa corrupti fugiat quia labore nostrum? Lorem ipsum dolor sit
-            amet consectetur, adipisicing elit. Quasi sapiente dolore mollitia
-            harum. Laboriosam nobis eaque recusandae tempore porro quibusdam
-            rerum saepe nihil, doloribus culpa corrupti fugiat quia labore
-            nostrum? Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-            Quasi sapiente dolore mollitia harum. Laboriosam nobis eaque
-            recusandae tempore porro quibusdam rerum saepe nihil, doloribus
-            culpa corrupti fugiat quia labore nostrum? Lorem ipsum dolor sit
-            amet consectetur, adipisicing elit. Quasi sapiente dolore mollitia
-            harum. Laboriosam nobis eaque recusandae tempore porro quibusdam
-            rerum saepe nihil, doloribus culpa corrupti fugiat quia labore
-            nostrum?
-          </div>
-        )}
+        {passage && <div className="passage">{activeQuestion.passage}</div>}
         {feedback && (
           <div className="passage formm">
             <p className="top">Report a mistake in this question</p>
@@ -180,38 +220,46 @@ export default function QuizQuestion(props) {
       </div>
       <div className="footer">
         <b>
-          <img
-            src={caret}
-            width="12"
-            alt=""
-            style={{
-              transform: "rotate(90deg)",
-              marginRight: "10px",
-              cursor: "pointer",
-            }}
-          />
-          4 of 10
-          <img
-            src={caret}
-            width="12"
-            alt=""
-            style={{
-              transform: "rotate(-90deg)",
-              marginLeft: "10px",
-              cursor: "pointer",
-            }}
-          />
+          {currentQuestion > 0 && (
+            <img
+              src={caret}
+              width="12"
+              alt=""
+              style={{
+                transform: "rotate(90deg)",
+                marginRight: "10px",
+                cursor: "pointer",
+              }}
+              onClick={prevQuestion}
+            />
+          )}
+          {currentQuestion + 1} of {questions.length}
+          {currentQuestion < questions.length - 1 && (
+            <img
+              src={caret}
+              width="12"
+              alt=""
+              style={{
+                transform: "rotate(-90deg)",
+                marginLeft: "10px",
+                cursor: "pointer",
+              }}
+              onClick={nextQuestion}
+            />
+          )}
         </b>
         <button
           className="tw-btn"
-          onClick={() => props.completeTest()}
+          onClick={() => submit()}
           style={{ marginLeft: 20 }}
         >
           SUBMIT
         </button>
-        <button className="blue-btn" onClick={() => openPassage()}>
-          {passage ? "Close passage" : "Open passage"}
-        </button>
+        {activeQuestion.hasPassage && (
+          <button className="blue-btn" onClick={() => openPassage()}>
+            {passage ? "Close passage" : "Open passage"}
+          </button>
+        )}
       </div>
     </div>
   );

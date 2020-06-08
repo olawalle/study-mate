@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./Dashboard.scss";
 
 import "react-responsive-modal/styles.css";
@@ -21,12 +21,32 @@ import Badge1 from "../../assets/images/Badge1.svg";
 import Badge2 from "../../assets/images/Badge2.svg";
 import Medal from "../../assets/images/Medal.svg";
 import Loader from "../../components/loader/Loader";
+import authServices from "../../services/authServices";
 
 const Dashboard = (props) => {
   let match = useRouteMatch();
   const context = useContext(userContext);
+  const { updateSubjects } = context;
 
-  let { subjects, loading } = context;
+  let { loading } = context;
+
+  useEffect(() => {
+    authServices
+      .getAllCourses()
+      .then((res) => {
+        console.log(res);
+        let subjects = res.data.map((d) => {
+          return {
+            ...d,
+            selected: false,
+          };
+        });
+        updateSubjects(subjects);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <>
@@ -87,7 +107,7 @@ const Dashboard = (props) => {
                 <Progress />
               </Route>
               <Route path={match.path}>
-                <Learn subjects={subjects} />
+                <Learn />
               </Route>
             </Switch>
           </div>

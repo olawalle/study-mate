@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./Learn.scss";
 
 import Badges from "../../../../components/badges/Badges";
@@ -13,13 +13,26 @@ import Lesson from "../../../../components/lesson/Lesson";
 import Modal from "react-responsive-modal";
 import { withRouter } from "react-router-dom";
 import Links from "../../../../components/sidebar/Links";
+import { userContext } from "../../../../store/UserContext";
+import authServices from "../../../../services/authServices";
 
-export default withRouter(function Learn({ subjects, history }) {
+export default withRouter(function Learn({ history }) {
+  const context = useContext(userContext);
+  const {
+    userCourses,
+    subjects,
+    user,
+    updateUserCourses,
+    selectedSubject,
+  } = context;
   const [open, setopen] = useState(false);
+  const [level, setlevel] = useState(null);
   const [step, setStep] = useState(1);
 
   useEffect(() => {
     // onOpenModal();
+    console.log(userCourses);
+    !userCourses.length && setopen(true);
   }, []);
 
   const onOpenModal = () => {
@@ -35,7 +48,56 @@ export default withRouter(function Learn({ subjects, history }) {
   };
 
   const toSubject = () => {
-    history.push("/subject/mathematics");
+    history.push(`/subject/${selectedSubject.id}`);
+  };
+
+  const selectCourse = (course) => {
+    authServices
+      .updateUserCourses({
+        userId: user.id,
+        learnCourseId: course.id,
+      })
+      .then((res) => {
+        console.log(res);
+        authServices
+          .getUserCourses()
+          .then((res) => {
+            console.log(res);
+            updateUserCourses(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const updateLevel = (level) => {
+    setlevel(level);
+    let data = [
+      {
+        value: level === 1 ? "junior" : "senior",
+        op: "add",
+        path: "level",
+        operationType: 0,
+        from: "",
+      },
+    ];
+
+    authServices
+      .updateUserData(data, user.id)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log({ err });
+      });
+  };
+
+  const logg = () => {
+    console.log(selectedSubject);
   };
 
   return (
@@ -44,7 +106,9 @@ export default withRouter(function Learn({ subjects, history }) {
         <Links />
       </div>
       <div className="wide-side">
-        <p className="heading">Mathematics</p>
+        <p className="heading" onClick={logg}>
+          {selectedSubject.name}
+        </p>
         <div className="lessons-wrap">
           <p className="sub-heading">
             Section A
@@ -63,7 +127,9 @@ export default withRouter(function Learn({ subjects, history }) {
         </div>
 
         <div className="quizzes mt30">
-          <Quiz />
+          {selectedSubject.quizzes.length && (
+            <Quiz quiz={selectedSubject.quizzes} />
+          )}
         </div>
       </div>
       <div className="narrow-side">
@@ -77,7 +143,12 @@ export default withRouter(function Learn({ subjects, history }) {
 
         <img src={students} className="students" alt="" />
 
-        <Modal open={open} onClose={onCloseModal} center>
+        <Modal
+          open={open}
+          onClose={onCloseModal}
+          center
+          styles={{ modal: { width: "60%" } }}
+        >
           <div
             className="banner"
             style={{
@@ -98,13 +169,25 @@ export default withRouter(function Learn({ subjects, history }) {
             <div className="modal-data">
               <p className="blue--text">Secondary / High school</p>
 
-              <button className="class bg_1">
-                <input type="checkbox" name="" id="" />
+              <button className="class bg_1" onClick={() => updateLevel(1)}>
+                <input
+                  type="checkbox"
+                  name=""
+                  id=""
+                  onChange={() => updateLevel(1)}
+                  checked={level === 1}
+                />
                 Junior Secondary
               </button>
 
-              <button className="class bg_2">
-                <input type="checkbox" name="" id="" />
+              <button className="class bg_2" onClick={() => updateLevel(2)}>
+                <input
+                  type="checkbox"
+                  name=""
+                  id=""
+                  onChange={() => updateLevel(1)}
+                  checked={level === 2}
+                />
                 Senior Secondary
               </button>
 
@@ -120,6 +203,7 @@ export default withRouter(function Learn({ subjects, history }) {
                 return (
                   <button
                     className={`subject bg_${i + 1}`}
+                    onClick={() => selectCourse(subject)}
                     key={`subject-${subject.name}`}
                   >
                     <input type="checkbox" name="" id="" />

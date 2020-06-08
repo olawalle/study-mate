@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Quiz.scss";
 
 import dots from "../../assets/images/Dots.svg";
@@ -10,15 +10,23 @@ import close from "../../assets/images/close.svg";
 import Modal from "react-responsive-modal";
 import QuizQuestion from "../quiz-question/Quiz-question";
 
-export default function Quiz() {
+export default function Quiz(props) {
   const [open, setopen] = useState(false);
   const [started, setStarted] = useState(false);
   const [finishedTest, setfinishedTest] = useState(false);
+  const [scores, setScore] = useState({ score: 0, percent: 0, count: 0 });
+  const [hour, setHr] = useState(0);
+  const [minutes, setMin] = useState(0);
+
   const [modes, setModes] = useState([
     { text: "Learning Approach", selected: false },
     { text: "Time Mode", selected: false },
     { text: "Free Form Mode", selected: false },
   ]);
+
+  useEffect(() => {
+    console.log(props);
+  }, []);
 
   const selectMode = (i) => {
     setModes(
@@ -50,19 +58,25 @@ export default function Quiz() {
     setStarted(false);
   };
 
-  const completeTest = () => {
-    console.log("submitted");
+  const completeTest = (score) => {
     setfinishedTest(!finishedTest);
     setStarted(false);
+    setScore(score);
   };
 
   const startQuiz = () => {
     selectedQuizMode ? setStarted(true) : console.log("select a mode");
   };
 
+  const logg = () => {
+    console.log(props);
+  };
+
   return (
     <div className="quiz">
-      <p className="quiz-heading">Quiz 1</p>
+      <p className="quiz-heading" onClick={logg}>
+        Quiz 1
+      </p>
       <p className="sub-heading">
         Level up on the above skills and collect up to 400 Mastery points
       </p>
@@ -148,11 +162,17 @@ export default function Quiz() {
                                 </span>
                               </div>
                               <div>
-                                <input type="text" />
+                                <input
+                                  type="text"
+                                  onChange={(e) => setHr(e.target.value)}
+                                />
                                 <span>Hrs</span>
                               </div>
                               <div>
-                                <input type="text" />
+                                <input
+                                  type="text"
+                                  onChange={(e) => setMin(e.target.value)}
+                                />
                                 <span>Mins</span>
                               </div>
                             </div>
@@ -183,7 +203,9 @@ export default function Quiz() {
                 </p>
                 <div className="scores">
                   <h4>Your score:</h4>
-                  <h2>4% (3/10 correct)</h2>
+                  <h2>
+                    {scores.percent}% ({scores.score}/{scores.count} correct)
+                  </h2>
                 </div>
                 <div className="scores">
                   <h4>Learning point</h4>
@@ -215,6 +237,8 @@ export default function Quiz() {
             selectedQuizMode={selectedQuizMode}
             onClose={onCloseModal}
             completeTest={completeTest}
+            questions={props.quiz}
+            time={{ hour, minutes }}
           />
         )}
       </Modal>
