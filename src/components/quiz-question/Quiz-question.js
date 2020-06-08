@@ -21,7 +21,7 @@ export default function QuizQuestion(props) {
 
   const [options, setoptions] = useState([]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     console.log(selectedQuizMode);
     getOptions(0);
     const timer = window.setInterval(() => {
@@ -120,6 +120,7 @@ export default function QuizQuestion(props) {
     });
     let count = questions.length;
     let percent = (score * 100) / count;
+    setcurrentQuestion(0);
     props.completeTest({ score, percent, count });
   };
 

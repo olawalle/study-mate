@@ -57,7 +57,7 @@ export default function Courses(props) {
   };
 
   useEffect(() => {
-    selectCourse(sortesubjects[0]);
+    sortesubjects.length && selectCourse(sortesubjects[0]);
   }, []);
 
   return (

@@ -127,9 +127,11 @@ export default withRouter(function Learn({ history }) {
         </div>
 
         <div className="quizzes mt30">
-          {selectedSubject.quizzes.length && (
-            <Quiz quiz={selectedSubject.quizzes} />
-          )}
+          {selectedSubject &&
+            selectedSubject.quizzes &&
+            selectedSubject.quizzes.length && (
+              <Quiz quiz={selectedSubject.quizzes} />
+            )}
         </div>
       </div>
       <div className="narrow-side">

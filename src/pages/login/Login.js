@@ -40,13 +40,16 @@ export default withRouter(function Login(props) {
         localStorage.setItem("studymate-token", user.token);
         updateUser(user);
         updateLoggedInStatus(true);
-        updateLoader(false);
         authServices.getCurrentUser(user.token);
         authServices
           .getUserCourses(user.token)
           .then((res) => {
             console.log("usercourses", res.data);
             updateUserCourses(res.data);
+            updateLoader(false);
+            setTimeout(() => {
+              props.history.push("/dashboard");
+            }, 500);
           })
           .catch((err) => {
             console.log(err);
@@ -60,7 +63,6 @@ export default withRouter(function Login(props) {
           .catch((err) => {
             console.log({ err });
           });
-        props.history.push("/dashboard");
       })
       .catch((err) => {
         console.log({ err });
