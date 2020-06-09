@@ -62,7 +62,7 @@ export default withRouter(function Learn({ history }) {
           .getUserCourses(null, user.id)
           .then((res) => {
             console.log(res);
-            updateUserCourses(res.data);
+            updateUserCourses(res.data.userLearnCourses);
           })
           .catch((err) => {
             console.log({ err });
