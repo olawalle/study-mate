@@ -5,6 +5,7 @@ import "./Signup.scss";
 import eye from "../../assets/images/eye.svg";
 import { Link, withRouter } from "react-router-dom";
 import { Carousel } from "react-responsive-carousel";
+import { motion } from "framer-motion";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 import flex from "../../assets/images/flex1.png";
@@ -28,7 +29,13 @@ export default withRouter(function Signup(props) {
 
   const pwrdType = viewPwrd ? "text" : "password";
 
-  const { updateLoader, updateUser, updateLoggedInStatus, loading } = context;
+  const {
+    updateLoader,
+    updateUser,
+    updateLoggedInStatus,
+    loading,
+    pageTransitions,
+  } = context;
   const signup = () => {
     let data = {
       surName,
@@ -60,7 +67,13 @@ export default withRouter(function Signup(props) {
   return (
     <>
       {loading && <Loader />}
-      <div className="signup">
+      <motion.div
+        className="signup"
+        initial={{ opacity: 0, x: "5vw" }}
+        animate={{ opacity: 1, x: "0vw" }}
+        exit={{ opacity: 0, x: 0 }}
+        transition={{ duration: 0.6 }}
+      >
         <div className="left-side">
           <img
             src={logo}
@@ -154,7 +167,20 @@ export default withRouter(function Signup(props) {
               />
             </div>
 
-            <button className="main-btn mt30" onClick={signup}>
+            <span className="no-acct">
+              <Link to="/login">
+                Creating an account means you are ok with our{" "}
+                <span className="blue--text">
+                  Terms of service,Provacy policy
+                </span>{" "}
+                and{" "}
+                <span className="blue--text">
+                  default Notification settings
+                </span>
+              </Link>
+            </span>
+
+            <button className="main-btn mt20" onClick={signup}>
               Create account
             </button>
 
@@ -165,7 +191,7 @@ export default withRouter(function Signup(props) {
             </span>
           </div>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 });

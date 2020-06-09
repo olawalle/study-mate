@@ -1,6 +1,6 @@
 // contral file to hold all endpoint urls
-export const baseUrl =
-  "https://cors-appp.herokuapp.com/http://infomall-001-site1.etempurl.com/api/";
+export const appUrl = "http://infomall-001-site1.etempurl.com/";
+export const baseUrl = `https://cors-appp.herokuapp.com/${appUrl}api/`;
 export const registerUrl = `${baseUrl}Account/register`;
 export const authUrl = `${baseUrl}Account/login`;
 export const userUrl = `${baseUrl}Account/user`;

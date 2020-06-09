@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Select from "react-select";
+import { motion } from "framer-motion";
 
 import "./Progress.scss";
 import Statistics from "../../../../components/statistics/Statistics";
@@ -7,7 +8,19 @@ import Statistics from "../../../../components/statistics/Statistics";
 import play from "../../../../assets/images/play.svg";
 import Badges from "../../../../components/badges/Badges";
 import Links from "../../../../components/sidebar/Links";
+import Days from "../../../../components/days/Days";
+import { userContext } from "../../../../store/UserContext";
+
 export default function Progress() {
+  const context = useContext(userContext);
+  const { userCourses } = context;
+  const courses_ = userCourses.map((c) => {
+    return {
+      ...c,
+      label: c.name,
+      value: c.name,
+    };
+  });
   const options = [
     { value: "chocolate", label: "Chocolate" },
     { value: "strawberry", label: "Strawberry" },
@@ -19,8 +32,16 @@ export default function Progress() {
     setselectedOption(selectedOption);
   };
 
+  const handleChangeCourse = (e) => console.log(e);
+
   return (
-    <div className="progress">
+    <motion.div
+      className="progress"
+      initial={{ opacity: 0, x: "-5vw" }}
+      animate={{ opacity: 1, x: "0vw" }}
+      exit={{ opacity: 0, x: 0 }}
+      transition={{ duration: 0.6 }}
+    >
       <div className="links-wrap">
         <Links />
       </div>
@@ -33,7 +54,7 @@ export default function Progress() {
           <div className="filters">
             <div className="selects">
               <Select
-                placeholder="Filter date"
+                placeholder="Last 7 days"
                 value={selectedOption}
                 onChange={handleChange}
                 options={options}
@@ -41,10 +62,11 @@ export default function Progress() {
             </div>
             <div className="selects">
               <Select
-                placeholder="Filter date"
+                placeholder="Activities"
                 value={selectedOption}
                 onChange={handleChange}
                 options={options}
+                styles={{ width: 120, marginTop: "-10px" }}
               />
             </div>
             <button className="tw-btn">Search</button>
@@ -106,16 +128,33 @@ export default function Progress() {
         </div>
       </div>
       <div className="narrow-side">
-        <div className="badge-wrap">
-          <Badges />
-        </div>
-        <div className="bg_white mt30">
+        <div className="bg_white">
           <p className="heading">
-            Overall Statistics <span className="f-right">Subjects</span>
+            Overall Statistics
+            <span className="f-right">
+              <select
+                style={{
+                  width: "100px",
+                  height: "30px",
+                  border: "1px solid #eee",
+                  marginTop: "-10px",
+                }}
+              >
+                {courses_.map((course) => (
+                  <option key={course.name} value={course.name}>
+                    {course.name}
+                  </option>
+                ))}
+              </select>
+            </span>
           </p>
           <Statistics />
         </div>
+        <div className="bg_white mt30">
+          <p className="heading">Days learnt</p>
+          <Days />
+        </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

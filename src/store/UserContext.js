@@ -20,7 +20,19 @@ export default class UserContextProvider extends Component {
     selectedSubject: {},
     subjects: [],
     userCourses: [],
+    awards: [],
+    userAwards: [],
     token: "",
+    pageTransitions: {
+      in: {
+        opacity: 1,
+        x: 0,
+      },
+      in: {
+        opacity: 0,
+        x: "-100vw",
+      },
+    },
   };
 
   componentWillMount() {
@@ -73,6 +85,10 @@ export default class UserContextProvider extends Component {
     });
   };
 
+  updateAwards = (awards) => this.setState({ awards });
+
+  updateUserAwards = (userAwards) => this.setState({ userAwards });
+
   updateSubjects = (subjects) => {
     this.setState({ subjects });
   };
@@ -106,6 +122,8 @@ export default class UserContextProvider extends Component {
       updateSubjects,
       saveSelectedSubject,
       updateUserCourses,
+      updateAwards,
+      updateUserAwards,
     } = this;
     return (
       <userContext.Provider
@@ -118,6 +136,8 @@ export default class UserContextProvider extends Component {
           updateSubjects,
           updateUserCourses,
           saveSelectedSubject,
+          updateAwards,
+          updateUserAwards,
         }}
       >
         {this.props.children}

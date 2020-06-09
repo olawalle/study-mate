@@ -45,19 +45,12 @@ export default function Courses(props) {
         console.log({ err });
         updateLoader(false);
       });
-
-    authServices
-      .getSubjectVideos(course.learnCourseId)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log({ err });
-      });
   };
 
   useEffect(() => {
-    sortesubjects.length && selectCourse(sortesubjects[0]);
+    sortesubjects.length &&
+      !selectedSubject.name &&
+      selectCourse(sortesubjects[0]);
   }, []);
 
   return (

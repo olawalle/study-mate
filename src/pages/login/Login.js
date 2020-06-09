@@ -7,6 +7,7 @@ import logo2 from "../../assets/images/logo.png";
 import dots from "../../assets/images/Dots.svg";
 import eye from "../../assets/images/eye.svg";
 import { Link, withRouter } from "react-router-dom";
+import { motion } from "framer-motion";
 
 import authServices from "../../services/authServices";
 import Loader from "../../components/loader/Loader";
@@ -22,9 +23,41 @@ export default withRouter(function Login(props) {
     updateUser,
     updateLoggedInStatus,
     updateUserCourses,
+    updateAwards,
+    updateSubjects,
     loading,
+    awards,
+    pageTransitions,
   } = context;
+
   const pwrdType = viewPwrd ? "text" : "password";
+
+  useEffect(() => {
+    authServices
+      .getAwards()
+      .then((res) => {
+        console.log(res);
+        updateAwards(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    authServices
+      .getAllCourses()
+      .then((res) => {
+        let subjects = res.data.map((d) => {
+          return {
+            ...d,
+            selected: false,
+          };
+        });
+        updateSubjects(subjects);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const login = () => {
     let data = {
@@ -56,7 +89,16 @@ export default withRouter(function Login(props) {
           });
 
         authServices
-          .getUserAward()
+          .getUserAward(user.id)
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log({ err });
+          });
+
+        authServices
+          .getLeaderboard(user.id, awards[0].id)
           .then((res) => {
             console.log(res);
           })
@@ -73,7 +115,13 @@ export default withRouter(function Login(props) {
   return (
     <>
       {loading && <Loader />}
-      <div className="login">
+      <motion.div
+        className="login"
+        initial={{ opacity: 0, x: "-5vw" }}
+        animate={{ opacity: 1, x: "0vw" }}
+        exit={{ opacity: 0, x: 0 }}
+        transition={{ duration: 0.6 }}
+      >
         <div className="left-side">
           <img
             src={logo}
@@ -138,7 +186,7 @@ export default withRouter(function Login(props) {
             @2020 All Rights Reserved. Studymate Powered by InfoMall Nigeria
           </p>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 });

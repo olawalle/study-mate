@@ -13,7 +13,7 @@
     float: left;
     width: 66%;
     .form {
-      margin-bottom: 80px;
+      margin-bottom: 40px;
       padding: 20px;
       background-color: #fff;
       min-height: 200px;
@@ -22,7 +22,7 @@
         width: 50%;
         display: inline-block;
         span {
-          font-size: 12px;
+          font-size: 10px;
           font-weight: 600;
         }
         p {
@@ -33,14 +33,139 @@
       }
       .blue-btn {
         padding: 0 30px;
-        border-radius: 10px;
+        border-radius: 6px;
         float: left;
       }
     }
     .badgess {
-      width: 300px;
+      width: 50%;
       margin: 0;
+      display: inline-block;
       background-color: #fafafa;
+      height: 150px;
+      position: relative;
+      top: -35px;
+    }
+    .subs {
+      display: inline-block;
+      padding: 12px 30px;
+      height: 160px;
+      width: 40%;
+      margin-left: 9%;
+      background-color: #ecf7ff;
+      .img {
+        width: 30%;
+        float: left;
+        img {
+          width: 135px;
+          position: relative;
+          top: -40px;
+          left: -70px;
+        }
+      }
+      .sub-text {
+        width: 70%;
+        float: right;
+        position: relative;
+        left: -0px;
+        span {
+          font-size: 24px;
+          font-weight: 500;
+          position: relative;
+          line-height: 24px;
+          top: 5px;
+        }
+        p {
+          font-size: 12px;
+          color: #5a5a5a;
+          font-weight: 300;
+          margin-top: 15px;
+        }
+      }
+    }
+  }
+  .achs {
+    background-color: #fafafa !important;
+    height: calc(100vh - (180px + 75px));
+    overflow: auto;
+    .arc-contents {
+      padding: 0px 60px;
+      .trophies {
+        border-bottom: 1px solid #eee;
+        display: flex;
+        flex-flow: wrap;
+        .trophy {
+          // display: inline-block;
+          width: 20%;
+          text-align: center;
+          padding-top: 20px;
+          cursor: pointer;
+          img {
+            width: 50px;
+          }
+          p {
+            margin-top: 5px;
+            font-size: 12px;
+          }
+          &.left {
+            text-align: left !important;
+          }
+          &.right {
+            text-align: right !important;
+          }
+          &.inactive {
+            opacity: 0.5;
+          }
+          &:hover {
+            opacity: 1;
+          }
+        }
+      }
+      .tro-desc {
+        font-size: 12px;
+        line-height: 22px;
+        font-weight: 200;
+      }
+      .possibles {
+        font-size: 16px;
+        margin-top: 45px;
+        font-weight: 600;
+      }
+
+      .streaks {
+        display: flex;
+        flex-flow: wrap;
+        justify-content: space-between;
+        margin-bottom: 50px;
+        .streak {
+          border: 1px solid #eee;
+          overflow: hidden;
+          width: 48.5%;
+          height: 130px;
+          z-index: 12323;
+          background: #fff;
+          padding: 15px 20px;
+          border-radius: 10px;
+          margin-bottom: 20px;
+          .ing {
+            width: 25%;
+            display: inline-block;
+            img {
+              height: 85px;
+            }
+          }
+          .streak-text {
+            display: inline-block;
+            width: 75%;
+            padding-left: 30px;
+            position: relative;
+            top: -10px;
+            .top {
+              font-weight: 600;
+            }
+          }
+        }
+      }
     }
   }
   .small {

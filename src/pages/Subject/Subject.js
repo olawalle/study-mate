@@ -5,6 +5,7 @@ import Nav from "../../components/nav/Nav";
 import Lesson from "../../components/lesson/Lesson";
 import Quiz from "../../components/quiz/Quiz";
 import students from "../../assets/images/students.png";
+import dots from "../../assets/images/Dots.svg";
 import backArrow from "../../assets/images/back.svg";
 import { withRouter } from "react-router-dom";
 import { userContext } from "../../store/UserContext";
@@ -69,32 +70,38 @@ export default withRouter(function Subject({ history }) {
           <div className="level">Advanced</div>
 
           <img src={students} alt="" />
+          <img
+            src={dots}
+            alt=""
+            style={{
+              width: 60,
+              float: "left",
+              position: "relative",
+              top: -120,
+            }}
+          />
         </div>
         <div className="wide">
           <p className="heading">Beginner</p>
           <div className="lessons-wrap mb30">
             <div className="lessons">
-              <Lesson />
-              <Lesson />
-              <Lesson />
-              <Lesson />
-              <Lesson />
+              {selectedSubject.videos.map((video) => (
+                <Lesson video={video} disableClick={false} />
+              ))}
             </div>
           </div>
           {selectedSubject &&
-            selectedSubject.quizzes &&
-            selectedSubject.quizzes.length && (
-              <Quiz quiz={selectedSubject.quizzes} />
-            )}
+          selectedSubject.quizzes &&
+          selectedSubject.quizzes.length ? (
+            <Quiz quiz={selectedSubject.quizzes} />
+          ) : null}
 
           <p className="heading">Intermediate</p>
           <div className="lessons-wrap mb30">
             <div className="lessons">
-              <Lesson />
-              <Lesson />
-              <Lesson />
-              <Lesson />
-              <Lesson />
+              {selectedSubject.videos.map((video) => (
+                <Lesson video={video} disableClick={false} />
+              ))}
             </div>
           </div>
           {selectedSubject &&
@@ -106,11 +113,9 @@ export default withRouter(function Subject({ history }) {
           <p className="heading">Advanced</p>
           <div className="lessons-wrap mb30">
             <div className="lessons">
-              <Lesson />
-              <Lesson />
-              <Lesson />
-              <Lesson />
-              <Lesson />
+              {selectedSubject.videos.map((video) => (
+                <Lesson video={video} disableClick={false} />
+              ))}
             </div>
           </div>
           {selectedSubject &&

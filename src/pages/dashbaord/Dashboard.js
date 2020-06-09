@@ -4,6 +4,7 @@ import "./Dashboard.scss";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
 import { userContext } from "../../store/UserContext";
+import { motion } from "framer-motion";
 
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 
@@ -30,23 +31,7 @@ const Dashboard = (props) => {
 
   let { loading } = context;
 
-  useEffect(() => {
-    authServices
-      .getAllCourses()
-      .then((res) => {
-        console.log(res);
-        let subjects = res.data.map((d) => {
-          return {
-            ...d,
-            selected: false,
-          };
-        });
-        updateSubjects(subjects);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <>

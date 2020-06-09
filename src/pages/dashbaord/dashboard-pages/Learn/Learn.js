@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import "./Learn.scss";
 
 import Badges from "../../../../components/badges/Badges";
+import { motion } from "framer-motion";
 
 import play from "../../../../assets/images/play.svg";
 import banner1 from "../../../../assets/images/banner1.svg";
@@ -26,12 +27,11 @@ export default withRouter(function Learn({ history }) {
     selectedSubject,
   } = context;
   const [open, setopen] = useState(false);
+  const [verified, setverified] = useState(true);
   const [level, setlevel] = useState(null);
   const [step, setStep] = useState(1);
 
   useEffect(() => {
-    // onOpenModal();
-    console.log(userCourses);
     !userCourses.length && setopen(true);
   }, []);
 
@@ -44,7 +44,7 @@ export default withRouter(function Learn({ history }) {
   };
 
   const jumpStep = () => {
-    setStep(step + 1);
+    step < 2 ? setStep(step + 1) : setopen(false);
   };
 
   const toSubject = () => {
@@ -99,39 +99,62 @@ export default withRouter(function Learn({ history }) {
   };
 
   return (
-    <div className="learn">
+    <motion.div
+      className="learn"
+      initial={{ opacity: 0, x: "-5vw" }}
+      animate={{ opacity: 1, x: "0vw" }}
+      exit={{ opacity: 0, x: 0 }}
+      transition={{ duration: 0.6 }}
+    >
       <div className="links-wrap">
         <Links />
       </div>
-      <div className="wide-side">
-        <p className="heading" onClick={logg}>
-          {selectedSubject.name}
-        </p>
-        <div className="lessons-wrap">
-          <p className="sub-heading">
-            Section A
-            <button className="tw-btn f-right" onClick={toSubject}>
-              Start learning
-            </button>
-          </p>
 
-          <div className="lessons">
-            <Lesson disableClick={true} />
-            <Lesson disableClick={true} />
-            <Lesson disableClick={true} />
-            <Lesson disableClick={true} />
-            <Lesson disableClick={true} />
+      {!verified && (
+        <div className="verify">
+          Please edit your profile to complete your registeration
+          <button>EDIT PROFILE</button>
+        </div>
+      )}
+      {userCourses.length ? (
+        <div className="wide-side">
+          <p className="heading">{selectedSubject.name}</p>
+          <div className="lessons-wrap">
+            <p className="sub-heading">
+              Section A
+              <button className="tw-btn f-right" onClick={toSubject}>
+                Start learning
+              </button>
+            </p>
+
+            <div className="lessons">
+              {selectedSubject.videos.map((video) => (
+                <Lesson video={video} disableClick={true} />
+              ))}
+            </div>
+          </div>
+
+          <div className="quizzes mt30">
+            {selectedSubject &&
+            selectedSubject.quizzes &&
+            selectedSubject.quizzes.length ? (
+              <Quiz quiz={selectedSubject.quizzes} />
+            ) : null}
           </div>
         </div>
-
-        <div className="quizzes mt30">
-          {selectedSubject &&
-            selectedSubject.quizzes &&
-            selectedSubject.quizzes.length && (
-              <Quiz quiz={selectedSubject.quizzes} />
-            )}
+      ) : (
+        <div
+          className="wide-side"
+          style={{
+            background: "#fff",
+            height: 400,
+            textAlign: "center",
+            paddingTop: 130,
+          }}
+        >
+          <p className="blue--text">Select a course to start learning</p>
         </div>
-      </div>
+      )}
       <div className="narrow-side">
         <div className="badge-wrap">
           <Badges />
@@ -229,6 +252,6 @@ export default withRouter(function Learn({ history }) {
           </div>
         </Modal>
       </div>
-    </div>
+    </motion.div>
   );
 });

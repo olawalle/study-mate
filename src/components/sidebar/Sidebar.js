@@ -14,7 +14,7 @@ export default withRouter(function Sidebar({ history }) {
   const fullname = `${context.user.firstName} ${context.user.surName}`;
 
   const toProfile = () => {
-    history.push("/edit-profile");
+    // history.push("/edit-profile");
   };
   return (
     <div className="sidebar">

@@ -1,30 +1,40 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./Lesson.scss";
 
 import play from "../../assets/images/play.svg";
+import close from "../../assets/images/close.svg";
 import Modal from "react-responsive-modal";
 import { withRouter } from "react-router-dom";
 
 import icn from "../../assets/images/dashboard.svg";
-import listener from "../../assets/images/Listener.svg";
+import listener from "../../assets/images/Nice-listener.svg";
 import streak from "../../assets/images/streak.svg";
+import { appUrl } from "../../services/urls";
+import { userContext } from "../../store/UserContext";
 
-export default withRouter(function Lesson({ disableClick, history }) {
+export default withRouter(function Lesson({ disableClick, history, video }) {
+  const context = useContext(userContext);
+  const { selectedSubject } = context;
+  const duration = selectedSubject.videos.reduce(
+    (sum, vid) => (sum += vid.duration),
+    0
+  );
+  const timeFrame = `${Math.floor(duration / 60)}hrs ${duration % 60}mins`;
+  useEffect(() => {
+    setVideos(
+      selectedSubject.videos.map((vid) => {
+        return {
+          ...vid,
+          text: vid.name,
+          selected: vid.id === video.id,
+        };
+      })
+    );
+  }, []);
   const [open, setopen] = useState(false);
-  const [videos, setVideos] = useState([
-    { text: "Making picture graphs and line plots", selected: true },
-    { text: "Making picture graphs and line plots", selected: false },
-    { text: "Making picture graphs and line plots", selected: false },
-    { text: "Making picture graphs and line plots", selected: false },
-    { text: "Making picture graphs and line plots", selected: false },
-    { text: "Making picture graphs and line plots", selected: false },
-    { text: "Making picture graphs and line plots", selected: false },
-    { text: "Making picture graphs and line plots", selected: false },
-    { text: "Making picture graphs and line plots", selected: false },
-    { text: "Making picture graphs and line plots", selected: false },
-    { text: "Making picture graphs and line plots", selected: false },
-    { text: "Making picture graphs and line plots", selected: false },
-  ]);
+  const [showStreak, setshowStreak] = useState(false);
+  const [url, seturl] = useState("");
+  const [videos, setVideos] = useState([]);
 
   const selectVideo = (i) => {
     setVideos(
@@ -42,16 +52,21 @@ export default withRouter(function Lesson({ disableClick, history }) {
     );
   };
 
-  const openModal = () => {
-    disableClick ? history.push("/subject/mathematics") : setopen(!open);
+  const openModal = (url) => {
+    if (disableClick) {
+      history.push("/subject/mathematics");
+    } else {
+      setopen(!open);
+      seturl(url);
+    }
   };
 
   return (
     <div className="lesson-wrap">
-      <div className="lesson" onClick={openModal}>
+      <div className="lesson" onClick={() => openModal(video.url)}>
         <p>
           <img src={play} width="25" className="mr15 mt5" alt="" />
-          <span>Mathematics quiz 1</span>
+          <span>{video.name}</span>
         </p>
       </div>
 
@@ -61,17 +76,20 @@ export default withRouter(function Lesson({ disableClick, history }) {
         center
         showCloseIcon={false}
         styles={{ modal: { width: "96%" } }}
+        closeOnOverlayClick={false}
       >
         <div className="video-modal">
-          <div className="streak">
-            <img src={streak} alt="" />
-            <div className="streak-text">
-              <p className="top">Great Listener</p>
-              <p style={{ fontSize: 12 }}>
-                You have watched 30 minutes of video in a single topic
-              </p>
+          {showStreak && (
+            <div className="streak">
+              <img src={streak} alt="" />
+              <div className="streak-text">
+                <p className="top">Great Listener</p>
+                <p style={{ fontSize: 12 }}>
+                  You have watched 30 minutes of video in a single topic
+                </p>
+              </div>
             </div>
-          </div>
+          )}
           <div className="videos">
             <div
               style={{ fontWeight: 600, fontSize: 16, padding: "20px 40px" }}
@@ -90,7 +108,7 @@ export default withRouter(function Lesson({ disableClick, history }) {
                   fontSize: 12,
                 }}
               >
-                <img src={icn} width="12" alt="" /> 100 videos
+                <img src={icn} width="12" alt="" /> {videos.length} videos
               </div>
               <div
                 className="tag"
@@ -112,7 +130,7 @@ export default withRouter(function Lesson({ disableClick, history }) {
                   fontSize: 12,
                 }}
               >
-                <img src={icn} width="12" alt="" /> 1hr 30mins
+                <img src={icn} width="12" alt="" /> {timeFrame}
               </div>
             </div>
 
@@ -156,14 +174,34 @@ export default withRouter(function Lesson({ disableClick, history }) {
             </ul>
           </div>
           <div className="frame">
-            <iframe
-              src="https://www.youtube.com/embed/E7wJTI-1dvQ"
-              frameBorder="0"
-              allow="autoplay; encrypted-media"
-              allowFullScreen
-              title="video"
+            <span className="close">
+              <img
+                src={close}
+                alt=""
+                onClick={() => setopen(false)}
+                style={{
+                  width: "20px",
+                  float: "right",
+                  marginTop: "15px",
+                  marginRight: 20,
+                  cursor: "pointer",
+                }}
+              />
+            </span>
+            <video
               style={{ width: "100%", height: "calc(90vh - 90px)" }}
-            />
+              controls
+              autoPlay={true}
+            >
+              <source
+                src={`${appUrl}${url}`}
+                type="video/mp4"
+                frameBorder="0"
+                allow="autoplay; encrypted-media"
+                allowFullScreen
+                title="video"
+              ></source>
+            </video>
             <div
               className="info"
               style={{ padding: 20, width: "100%", height: 80 }}

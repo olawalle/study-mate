@@ -73,14 +73,6 @@ let updateUserData = (data, id) => {
   });
 };
 
-let getAwards = () => {
-  return axios({
-    method: "get",
-    url: urls.awardsUrl,
-    headers: headers(),
-  });
-};
-
 let getSubjectQuiz = (id) => {
   return axios({
     method: "get",
@@ -95,18 +87,29 @@ let getSubjectVideos = (id) => {
   });
 };
 
-let getUserAward = () => {
+let getAwards = () => {
+  return axios({
+    method: "get",
+    url: urls.awardsUrl,
+    headers: headers(),
+  });
+};
+
+let getUserAward = (id) => {
   return axios({
     method: "get",
     url: urls.userAwardsUrl,
     headers: headers(),
+    params: {
+      id,
+    },
   });
 };
 
 let getLeaderboard = (userID, quizID) => {
   return axios({
     method: "get",
-    url: urls.userAwardsUrl + "/leader/" + userID + "?id=" + quizID,
+    url: urls.userAwardsUrl + "/leaders/" + userID + "?id=" + quizID,
     headers: headers(),
   });
 };

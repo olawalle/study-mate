@@ -2,10 +2,13 @@ import React, { useState, useContext, useEffect } from "react";
 import "./Edit.scss";
 
 import Switch from "react-switch";
+import { motion } from "framer-motion";
 import Links from "../../../../components/sidebar/Links";
 import edit from "../../../../assets/images/edit.svg";
 import Nav from "../../../../components/nav/Nav";
 import backArrow from "../../../../assets/images/back.svg";
+import userIcon from "../../../../assets/images/user.svg";
+import editIcon from "../../../../assets/images/edit.svg";
 import { withRouter } from "react-router-dom";
 import { userContext } from "../../../../store/UserContext";
 
@@ -32,7 +35,13 @@ export default withRouter(function EditProfile({ history }) {
     history.push("/dashboard/");
   };
   return (
-    <div className="edit">
+    <motion.div
+      className="edit"
+      initial={{ opacity: 0, x: "-5vw" }}
+      animate={{ opacity: 1, x: "0vw" }}
+      exit={{ opacity: 0, x: 0 }}
+      transition={{ duration: 0.6 }}
+    >
       <Nav />
       <div className="banner">
         <span>
@@ -49,7 +58,7 @@ export default withRouter(function EditProfile({ history }) {
       </div>
       <div className="contents">
         <div className="wide">
-          <p className="heading">Edit Profile</p>
+          <p className="heading">Profile information</p>
           <div className="form">
             <div className="inp-wrap ">
               <span className="label">Full Name</span>
@@ -107,6 +116,20 @@ export default withRouter(function EditProfile({ history }) {
           </div>
         </div>
         <div className="small">
+          <div className="user">
+            <img
+              src={userIcon}
+              style={{ height: "100%", margin: " 12px auto" }}
+              alt=""
+            />
+            <div className="edit_">
+              <img
+                src={editIcon}
+                style={{ height: "20px", margin: "10px auto" }}
+                alt=""
+              />
+            </div>
+          </div>
           <p className="heading">General</p>
           <div className="switches">
             <p>
@@ -163,6 +186,6 @@ export default withRouter(function EditProfile({ history }) {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 });

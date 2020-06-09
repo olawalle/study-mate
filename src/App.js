@@ -5,8 +5,10 @@ import {
   Route,
   Link,
   HashRouter,
+  withRouter,
 } from "react-router-dom";
 import UserContextProvider from "./store/UserContext";
+import { motion, AnimatePresence } from "framer-motion";
 import "./App.scss";
 
 // pages
@@ -52,6 +54,9 @@ export default function App() {
   useEffect(() => {
     // preload images to reduce weird image load lag after components mount
 
+    // let token = localStorage.getItem("studymate-token");
+    // !token && history.push("/signup");
+
     const imagesToBePreloaded = [
       play,
       Learn,
@@ -91,28 +96,28 @@ export default function App() {
     <HashRouter>
       <div className="App">
         <UserContextProvider>
-          {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
-          <Switch>
-            <Route path="/login">
-              <Login />
-            </Route>
-            <Route path="/signup">
-              <Signup />
-            </Route>
-            <Route path="/dashboard/">
-              <Dashboard />
-            </Route>
-            <Route path="/subject/:subject">
-              <Subject />
-            </Route>
-            <Route path="/studypack/:subject">
-              <Studypack />
-            </Route>
-            <Route path={`/edit-profile`}>
-              <EditProfile />
-            </Route>
-          </Switch>
+          <AnimatePresence exitBeforeEnter>
+            <Switch>
+              <Route path="/login">
+                <Login />
+              </Route>
+              <Route path="/signup">
+                <Signup />
+              </Route>
+              <Route path="/dashboard/">
+                <Dashboard />
+              </Route>
+              <Route path="/subject/:subject">
+                <Subject />
+              </Route>
+              <Route path="/studypack/:subject">
+                <Studypack />
+              </Route>
+              <Route path={`/edit-profile`}>
+                <EditProfile />
+              </Route>
+            </Switch>
+          </AnimatePresence>
         </UserContextProvider>
       </div>
     </HashRouter>
