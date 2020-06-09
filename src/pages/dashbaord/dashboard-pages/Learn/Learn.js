@@ -59,7 +59,7 @@ export default withRouter(function Learn({ history }) {
       .then((res) => {
         console.log(res);
         authServices
-          .getUserCourses()
+          .getUserCourses(null, user.id)
           .then((res) => {
             console.log(res);
             updateUserCourses(res.data);
