@@ -13,7 +13,7 @@ export default function Days() {
   return (
     <div className="days">
       {days.map((day) => (
-        <div className="day">
+        <div className="day" key={day.day}>
           <div className={`ball ${day.came ? "present" : ""}`}></div>
           <span className={day.came ? "came" : ""}>{day.day}</span>
         </div>

@@ -181,6 +181,11 @@ a {
   background-color: #fff;
 }
 
+.has-error {
+  border: 1px solid #ff6868 !important;
+  background-color: #fff6f6 !important;
+}
+
 input:focus {
   outline: none;
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Studypack.scss";
 import ProgressBar from "../../components/progress-bar/ProgressBar";
 import Nav from "../../components/nav/Nav";
@@ -7,9 +7,12 @@ import Quiz from "../../components/quiz/Quiz";
 import students from "../../assets/images/students.png";
 import backArrow from "../../assets/images/back.svg";
 import { withRouter } from "react-router-dom";
+import { userContext } from "../../store/UserContext";
 // import students from "../../assets/images/students.png";
 
 export default withRouter(function Studypack({ history }) {
+  const context = useContext(userContext);
+  const { selectedSubject } = context;
   const back = () => {
     history.push("/dashboard/");
   };
@@ -62,21 +65,11 @@ export default withRouter(function Studypack({ history }) {
           <img src={students} alt="" />
         </div>
         <div className="wide list">
-          <Quiz />
-          <Quiz />
-          <Quiz />
-          <Quiz />
-          <Quiz />
-          <Quiz />
-          <Quiz />
-          <Quiz />
-          <Quiz />
-          <Quiz />
-          <Quiz />
-          <Quiz />
-          <Quiz />
-          <Quiz />
-          <Quiz />
+          {selectedSubject &&
+            selectedSubject.quizzes &&
+            selectedSubject.quizzes.length && (
+              <Quiz quiz={selectedSubject.quizzes} />
+            )}
         </div>
       </div>
     </div>

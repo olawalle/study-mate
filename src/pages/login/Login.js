@@ -8,6 +8,7 @@ import dots from "../../assets/images/Dots.svg";
 import eye from "../../assets/images/eye.svg";
 import { Link, withRouter } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useSnackbar } from "react-simple-snackbar";
 
 import authServices from "../../services/authServices";
 import Loader from "../../components/loader/Loader";
@@ -15,8 +16,13 @@ import Loader from "../../components/loader/Loader";
 export default withRouter(function Login(props) {
   const context = useContext(userContext);
   const [email, setemail] = useState("");
+  const [hasError, sethasError] = useState(false);
   const [password, setpassword] = useState("");
   const [viewPwrd, setViewPwrd] = useState(false);
+  const options = {
+    position: "top-right",
+  };
+  const [openSnackbar, closeSnackbar] = useSnackbar(options);
 
   const {
     updateLoader,
@@ -59,7 +65,16 @@ export default withRouter(function Login(props) {
       });
   }, []);
 
+  const showError = (err) => {
+    console.log(err);
+    openSnackbar(err, 5000);
+  };
   const login = () => {
+    if (!email || !password) {
+      sethasError(true);
+      return;
+    }
+    sethasError(false);
     let data = {
       email,
       password,
@@ -85,7 +100,7 @@ export default withRouter(function Login(props) {
             }, 500);
           })
           .catch((err) => {
-            console.log(err);
+            console.log({ err });
           });
 
         authServices
@@ -106,9 +121,10 @@ export default withRouter(function Login(props) {
             console.log({ err });
           });
       })
-      .catch((err) => {
+      .catch(function (err) {
         console.log({ err });
         updateLoader(false);
+        showError("Incorrect username or password");
       });
   };
 
@@ -140,7 +156,12 @@ export default withRouter(function Login(props) {
             <img src={logo2} alt="" />
           </div>
 
-          <p className="welcome mt50">Good to see you again!</p>
+          <p
+            className="welcome mt50"
+            onClick={() => showError("Incorrect email or username")}
+          >
+            Good to see you again!
+          </p>
 
           <div className="buttons">
             <button className="fb"></button>
@@ -152,11 +173,16 @@ export default withRouter(function Login(props) {
           </p>
           <div className="form">
             <span className="label">Email address</span>
-            <input type="text" onChange={(e) => setemail(e.target.value)} />
+            <input
+              className={hasError && !email ? "has-error" : ""}
+              type="text"
+              onChange={(e) => setemail(e.target.value)}
+            />
 
             <div className="inp-wrap">
               <span className="label">Password</span>
               <input
+                className={hasError && !password ? "has-error" : ""}
                 type={pwrdType}
                 onChange={(e) => setpassword(e.target.value)}
               />

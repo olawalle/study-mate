@@ -10,6 +10,7 @@ import {
 import UserContextProvider from "./store/UserContext";
 import { motion, AnimatePresence } from "framer-motion";
 import "./App.scss";
+import SnackbarProvider from "react-simple-snackbar";
 
 // pages
 import Signup from "./pages/signup/Signup.js";
@@ -94,32 +95,34 @@ export default function App() {
   }, []);
   return (
     <HashRouter>
-      <div className="App">
-        <UserContextProvider>
-          <AnimatePresence exitBeforeEnter>
-            <Switch>
-              <Route path="/login">
-                <Login />
-              </Route>
-              <Route path="/signup">
-                <Signup />
-              </Route>
-              <Route path="/dashboard/">
-                <Dashboard />
-              </Route>
-              <Route path="/subject/:subject">
-                <Subject />
-              </Route>
-              <Route path="/studypack/:subject">
-                <Studypack />
-              </Route>
-              <Route path={`/edit-profile`}>
-                <EditProfile />
-              </Route>
-            </Switch>
-          </AnimatePresence>
-        </UserContextProvider>
-      </div>
+      <SnackbarProvider>
+        <div className="App">
+          <UserContextProvider>
+            <AnimatePresence exitBeforeEnter>
+              <Switch>
+                <Route path="/login">
+                  <Login />
+                </Route>
+                <Route path="/signup">
+                  <Signup />
+                </Route>
+                <Route path="/dashboard/">
+                  <Dashboard />
+                </Route>
+                <Route path="/subject/:subject">
+                  <Subject />
+                </Route>
+                <Route path="/studypack/:subject">
+                  <Studypack />
+                </Route>
+                <Route path={`/edit-profile`}>
+                  <EditProfile />
+                </Route>
+              </Switch>
+            </AnimatePresence>
+          </UserContextProvider>
+        </div>
+      </SnackbarProvider>
     </HashRouter>
   );
 }

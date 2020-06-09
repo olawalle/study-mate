@@ -174,20 +174,6 @@ export default withRouter(function Lesson({ disableClick, history, video }) {
             </ul>
           </div>
           <div className="frame">
-            <span className="close">
-              <img
-                src={close}
-                alt=""
-                onClick={() => setopen(false)}
-                style={{
-                  width: "20px",
-                  float: "right",
-                  marginTop: "15px",
-                  marginRight: 20,
-                  cursor: "pointer",
-                }}
-              />
-            </span>
             <video
               style={{ width: "100%", height: "calc(90vh - 90px)" }}
               controls
@@ -219,6 +205,23 @@ export default withRouter(function Lesson({ disableClick, history, video }) {
                 Next video
               </button>
             </div>
+            <span className="close">
+              <img
+                src={close}
+                alt=""
+                onClick={() => setopen(false)}
+                style={{
+                  width: "20px",
+                  float: "right",
+                  marginTop: "15px",
+                  marginRight: 20,
+                  cursor: "pointer",
+                  position: "absolute",
+                  top: 12,
+                  right: 2,
+                }}
+              />
+            </span>
           </div>
         </div>
       </Modal>

@@ -140,8 +140,8 @@ export default withRouter(function Profile({ history }) {
             <p className="possibles">Possible badges</p>
 
             <div className="streaks">
-              {streaks.map((streak) => (
-                <div className="streak">
+              {streaks.map((streak, i) => (
+                <div className="streak" key={streak.subText + i}>
                   <div className="ing">
                     <img src={streak.image} alt="" />
                   </div>
