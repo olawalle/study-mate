@@ -4,7 +4,6 @@ import "./Learn.scss";
 import Badges from "../../../../components/badges/Badges";
 import { motion } from "framer-motion";
 
-import play from "../../../../assets/images/play.svg";
 import banner1 from "../../../../assets/images/banner1.svg";
 import banner2 from "../../../../assets/images/Subjects.svg";
 import students from "../../../../assets/images/students.png";
