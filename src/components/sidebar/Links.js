@@ -18,6 +18,7 @@ export default withRouter(function Links({ history }) {
 
   const navigate = (i, to) => {
     setlinkIndex(i);
+    console.log(to);
     history.push(`${match.path}${to}`);
   };
 
