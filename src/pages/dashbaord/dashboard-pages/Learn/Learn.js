@@ -25,13 +25,28 @@ export default withRouter(function Learn({ history }) {
     updateUserCourses,
     selectedSubject,
   } = context;
+  const preSelectedCourses = userCourses.reduce((agg, curr) => {
+    agg[curr.learnCourseId] = curr;
+    return agg;
+  }, {});
+
   const [open, setopen] = useState(false);
   const [verified, setverified] = useState(true);
   const [level, setlevel] = useState(null);
   const [step, setStep] = useState(1);
+  const [subjects_, setsubjects_] = useState([]);
+  const [newSelectedCourses, setnewSelectedCourses] = useState([]);
+  const [toBeRemoved, settoBeRemoved] = useState([]);
 
   useEffect(() => {
     !userCourses.length && setopen(true);
+    let refinedSubjects = subjects.map((s) => {
+      return {
+        ...s,
+        preSelected: preSelectedCourses[s.id] ? true : false,
+      };
+    });
+    setsubjects_(refinedSubjects);
   }, []);
 
   const onOpenModal = () => {
@@ -43,34 +58,70 @@ export default withRouter(function Learn({ history }) {
   };
 
   const jumpStep = () => {
-    step < 2 ? setStep(step + 1) : setopen(false);
+    step < 2 ? setStep(step + 1) : selectCourse();
   };
 
   const toSubject = () => {
     history.push(`/subject/${selectedSubject.id}`);
   };
 
-  const selectCourse = (course) => {
-    authServices
-      .updateUserCourses({
-        userId: user.id,
-        learnCourseId: course.id,
-      })
-      .then((res) => {
-        console.log(res);
-        authServices
-          .getUserCourses(null, user.id)
-          .then((res) => {
-            console.log(res);
-            updateUserCourses(res.data.userLearnCourses);
-          })
-          .catch((err) => {
-            console.log({ err });
-          });
-      })
-      .catch((err) => {
-        console.log({ err });
-      });
+  const selectCourse = () => {
+    console.log(newSelectedCourses, toBeRemoved);
+    newSelectedCourses.forEach((id) => {
+      authServices
+        .updateUserCourses({
+          userId: user.id,
+          learnCourseId: id,
+        })
+        .then((res) => {
+          console.log(res);
+          authServices
+            .getUserCourses(null, user.id)
+            .then((res) => {
+              setopen(false);
+              let user_courses = res.data.userLearnCourses;
+              let sievedCourses = Object.values(
+                user_courses.reduce((agg, curr) => {
+                  agg[curr.learnCourseId] = curr;
+                  return agg;
+                }, {})
+              );
+              updateUserCourses(sievedCourses);
+            })
+            .catch((err) => {
+              console.log({ err });
+            });
+        })
+        .catch((err) => {
+          console.log({ err });
+        });
+    });
+
+    toBeRemoved.forEach((id) => {
+      authServices
+        .deleteUserCourse(id)
+        .then((res) => {
+          authServices
+            .getUserCourses(null, user.id)
+            .then((res) => {
+              setopen(false);
+              let user_courses = res.data.userLearnCourses;
+              let sievedCourses = Object.values(
+                user_courses.reduce((agg, curr) => {
+                  agg[curr.learnCourseId] = curr;
+                  return agg;
+                }, {})
+              );
+              updateUserCourses(sievedCourses);
+            })
+            .catch((err) => {
+              console.log({ err });
+            });
+        })
+        .catch((err) => {
+          console.log({ err });
+        });
+    });
   };
 
   const updateLevel = (level) => {
@@ -93,8 +144,26 @@ export default withRouter(function Learn({ history }) {
       });
   };
 
-  const logg = () => {
-    console.log(selectedSubject);
+  const pickSubject = (i) => {
+    let subject = subjects_[i];
+    if (subject.preSelected) {
+      settoBeRemoved([...toBeRemoved, subject.id]);
+      setnewSelectedCourses(
+        [...newSelectedCourses].filter((n) => n !== subject.id)
+      );
+    } else {
+      setnewSelectedCourses([...newSelectedCourses, subject.id]);
+      settoBeRemoved([...toBeRemoved].filter((n) => n !== subject.id));
+    }
+    let newSubjectArr = subjects_.map((sub, j) => {
+      return i === j
+        ? {
+            ...sub,
+            preSelected: !sub.preSelected,
+          }
+        : { ...sub };
+    });
+    setsubjects_(newSubjectArr);
   };
 
   return (
@@ -143,7 +212,7 @@ export default withRouter(function Learn({ history }) {
             {selectedSubject &&
             selectedSubject.quizzes &&
             selectedSubject.quizzes.length ? (
-              <Quiz quiz={selectedSubject.quizzes} />
+              <Quiz quiz={selectedSubject.quizzes} quizType="normal" />
             ) : null}
           </div>
         </div>
@@ -176,6 +245,7 @@ export default withRouter(function Learn({ history }) {
           onClose={onCloseModal}
           center
           styles={{ modal: { width: "60%" } }}
+          closeOnOverlayClick={false}
         >
           <div
             className="banner"
@@ -227,14 +297,21 @@ export default withRouter(function Learn({ history }) {
             </div>
           ) : (
             <div className="modal-data">
-              {subjects.map((subject, i) => {
+              {subjects_.map((subject, i) => {
                 return (
                   <button
                     className={`subject bg_${i + 1}`}
-                    onClick={() => selectCourse(subject)}
+                    onClick={() => pickSubject(i)}
                     key={`subject-${subject.name}`}
                   >
-                    <input type="checkbox" name="" id="" />
+                    <input
+                      type="checkbox"
+                      name=""
+                      id=""
+                      style={{ transform: "scale(1.02)" }}
+                      checked={subject.preSelected}
+                      onChange={() => pickSubject(i)}
+                    />
                     {subject.name}
                   </button>
                 );

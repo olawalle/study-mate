@@ -56,8 +56,9 @@
           position: relative;
           top: -29px;
           font-size: 10px;
-          color: #e0e0e0 !important;
+          color: #c4c4c4 !important;
           left: 74px;
+          font-weight: 600;
         }
         p {
           display: inline-block;
@@ -70,6 +71,13 @@
         color: #14ac00 !important;
         .label {
           background-color: #14ac00 !important;
+          color: #fff;
+        }
+      }
+      .wrong {
+        color: #b40505 !important;
+        .label {
+          background-color: #b40505 !important;
           color: #fff;
         }
       }

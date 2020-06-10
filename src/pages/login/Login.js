@@ -19,6 +19,7 @@ export default withRouter(function Login(props) {
   const [hasError, sethasError] = useState(false);
   const [password, setpassword] = useState("");
   const [viewPwrd, setViewPwrd] = useState(false);
+  const [onLogin, setonLogin] = useState(true);
   const options = {
     position: "top-right",
   };
@@ -66,9 +67,9 @@ export default withRouter(function Login(props) {
   }, []);
 
   const showError = (err) => {
-    console.log(err);
     openSnackbar(err, 5000);
   };
+
   const login = () => {
     if (!email || !password) {
       sethasError(true);
@@ -83,7 +84,6 @@ export default withRouter(function Login(props) {
     authServices
       .login(data)
       .then((res) => {
-        console.log(res);
         let user = res.data;
         localStorage.setItem("studymate-token", user.token);
         updateUser(user);
@@ -92,8 +92,14 @@ export default withRouter(function Login(props) {
         authServices
           .getUserCourses(user.token, user.id)
           .then((res) => {
-            console.log("usercourses", res.data.userLearnCourses);
-            updateUserCourses(res.data.userLearnCourses);
+            let user_courses = res.data.userLearnCourses;
+            let sievedCourses = Object.values(
+              user_courses.reduce((agg, curr) => {
+                agg[curr.learnCourseId] = curr;
+                return agg;
+              }, {})
+            );
+            updateUserCourses(sievedCourses);
             updateLoader(false);
             setTimeout(() => {
               props.history.push("/dashboard");
@@ -106,7 +112,7 @@ export default withRouter(function Login(props) {
         authServices
           .getUserAward(user.id)
           .then((res) => {
-            console.log(res);
+            // console.log(res);
           })
           .catch((err) => {
             console.log({ err });
@@ -115,7 +121,7 @@ export default withRouter(function Login(props) {
         authServices
           .getLeaderboard(user.id, awards[0].id)
           .then((res) => {
-            console.log(res);
+            // console.log(res);
           })
           .catch((err) => {
             console.log({ err });
@@ -126,6 +132,12 @@ export default withRouter(function Login(props) {
         updateLoader(false);
         showError("Incorrect username or password");
       });
+  };
+
+  const forgotPwrd = () => {};
+
+  const keyUP = (e) => {
+    e.key === "Enter" && login();
   };
 
   return (
@@ -151,67 +163,110 @@ export default withRouter(function Login(props) {
           <div className="teacher"></div>
         </div>
 
-        <div className="right-side">
-          <div className="mobileLogo">
-            <img src={logo2} alt="" />
-          </div>
-
-          <p
-            className="welcome mt50"
-            onClick={() => showError("Incorrect email or username")}
-          >
-            Good to see you again!
-          </p>
-
-          <div className="buttons">
-            <button className="fb"></button>
-            <button className="tw"></button>
-            <button className="gg"></button>
-          </div>
-          <p className="or">
-            <span>or</span>
-          </p>
-          <div className="form">
-            <span className="label">Email address</span>
-            <input
-              className={hasError && !email ? "has-error" : ""}
-              type="text"
-              onChange={(e) => setemail(e.target.value)}
-            />
-
-            <div className="inp-wrap">
-              <span className="label">Password</span>
+        {!onLogin ? (
+          <div className="right-side">
+            <p style={{ fontSize: 24, fontWeight: "600", marginTop: 100 }}>
+              Forgot Password
+            </p>
+            <div className="form">
+              <span className="label">Email address</span>
               <input
-                className={hasError && !password ? "has-error" : ""}
-                type={pwrdType}
-                onChange={(e) => setpassword(e.target.value)}
+                className={hasError && !email ? "has-error" : ""}
+                type="text"
+                onChange={(e) => setemail(e.target.value)}
               />
-              <img
-                src={eye}
-                onClick={() => setViewPwrd(!viewPwrd)}
-                alt=""
-                className="eye"
-              />
+              <button className="main-btn mt30" onClick={forgotPwrd}>
+                Continue
+              </button>
+              <span
+                className="no-acct"
+                style={{
+                  fontSize: 12,
+                  position: "relative",
+                  top: 10,
+                  cursor: "pointer",
+                  float: "right",
+                }}
+                onClick={() => setonLogin(true)}
+              >
+                Back to <span className="blue--text">login</span>
+              </span>
+            </div>
+            <p className="cc" style={{ position: "absolute", bottom: 20 }}>
+              @2020 All Rights Reserved. Studymate Powered by InfoMall Nigeria
+            </p>
+          </div>
+        ) : (
+          <div className="right-side">
+            <div className="mobileLogo">
+              <img src={logo2} alt="" />
             </div>
 
-            <span className="forgot blue--text">Forgot password?</span>
+            <p
+              className="welcome mt50"
+              onClick={() => showError("Incorrect email or username")}
+            >
+              Good to see you again!
+            </p>
 
-            <button className="main-btn mt30" onClick={login}>
-              Log in
-            </button>
+            <div className="buttons">
+              <button className="fb"></button>
+              <button className="tw"></button>
+              <button className="gg"></button>
+            </div>
+            <p className="or">
+              <span>or</span>
+            </p>
+            <div className="form">
+              <span className="label">Email address</span>
+              <input
+                className={hasError && !email ? "has-error" : ""}
+                type="text"
+                onChange={(e) => setemail(e.target.value)}
+                onKeyDown={(e) => keyUP(e)}
+              />
 
-            <span className="no-acct">
-              <Link to="/signup">
-                Don’t have a Studymate account?{" "}
-                <span className="blue--text">Create an Account</span>
-              </Link>
-            </span>
+              <div className="inp-wrap">
+                <span className="label">Password</span>
+                <input
+                  className={hasError && !password ? "has-error" : ""}
+                  type={pwrdType}
+                  onChange={(e) => setpassword(e.target.value)}
+                  onKeyDown={(e) => keyUP(e)}
+                />
+                <img
+                  src={eye}
+                  onClick={() => setViewPwrd(!viewPwrd)}
+                  alt=""
+                  className="eye"
+                />
+              </div>
+
+              <span
+                className="forgot blue--text"
+                onClick={() => setonLogin(false)}
+                style={{ cursor: "pointer" }}
+              >
+                Forgot password?
+              </span>
+
+              <button className="main-btn mt30" onClick={login}>
+                Log in
+              </button>
+
+              <span className="no-acct">
+                <Link to="/signup">
+                  Don’t have a Studymate account?{" "}
+                  <span className="blue--text">Create an Account</span>
+                </Link>
+              </span>
+            </div>
+
+            <p className="cc">
+              @2020 All Rights Reserved. Studymate Powered by InfoMall Nigeria
+            </p>
           </div>
-
-          <p className="cc">
-            @2020 All Rights Reserved. Studymate Powered by InfoMall Nigeria
-          </p>
-        </div>
+        )}
       </motion.div>
     </>
   );

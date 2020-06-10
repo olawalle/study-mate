@@ -93,7 +93,7 @@ export default withRouter(function Subject({ history }) {
           {selectedSubject &&
           selectedSubject.quizzes &&
           selectedSubject.quizzes.length ? (
-            <Quiz quiz={selectedSubject.quizzes} />
+            <Quiz quizType="normal" quiz={selectedSubject.quizzes} />
           ) : null}
 
           <p className="heading">Intermediate</p>
@@ -107,7 +107,7 @@ export default withRouter(function Subject({ history }) {
           {selectedSubject &&
             selectedSubject.quizzes &&
             selectedSubject.quizzes.length && (
-              <Quiz quiz={selectedSubject.quizzes} />
+              <Quiz quizType="normal" quiz={selectedSubject.quizzes} />
             )}
 
           <p className="heading">Advanced</p>
@@ -121,7 +121,7 @@ export default withRouter(function Subject({ history }) {
           {selectedSubject &&
             selectedSubject.quizzes &&
             selectedSubject.quizzes.length && (
-              <Quiz quiz={selectedSubject.quizzes} />
+              <Quiz quizType="normal" quiz={selectedSubject.quizzes} />
             )}
 
           <div className="pack">

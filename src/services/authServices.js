@@ -56,6 +56,13 @@ let updateUserCourses = (data) => {
   });
 };
 
+let deleteUserCourse = (id) => {
+  return axios({
+    method: "delete",
+    url: urls.userLearnCourseUrl + "/" + id,
+  });
+};
+
 let getAllCourses = (token) => {
   return axios({
     method: "get",
@@ -121,6 +128,7 @@ export default {
   getCurrentUser,
   getUserCourses,
   updateUserCourses,
+  deleteUserCourse,
   getAllCourses,
   getAwards,
   getSubjectQuiz,

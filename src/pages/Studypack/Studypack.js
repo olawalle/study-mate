@@ -68,7 +68,7 @@ export default withRouter(function Studypack({ history }) {
           {selectedSubject &&
             selectedSubject.quizzes &&
             selectedSubject.quizzes.length && (
-              <Quiz quiz={selectedSubject.quizzes} />
+              <Quiz quiz={selectedSubject.quizzes} quizType="advanced" />
             )}
         </div>
       </div>

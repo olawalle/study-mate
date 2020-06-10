@@ -20,7 +20,7 @@ export default function Leaderboard() {
           />
           <span className="name">Isabelle Allen</span>
 
-          <span className="points">2,516 pts.</span>
+          <span className="points">0 pts.</span>
           <img src={best} className="best" alt="" />
         </div>
         <div className="person second">
@@ -32,7 +32,7 @@ export default function Leaderboard() {
           />
           <span className="name">Isabelle Allen</span>
 
-          <span className="points">2,516 pts.</span>
+          <span className="points">0 pts.</span>
         </div>
         <div className="person third">
           <img src={b3} alt="" />
@@ -43,7 +43,7 @@ export default function Leaderboard() {
           />
           <span className="name">Isabelle Allen</span>
 
-          <span className="points">2,516 pts.</span>
+          <span className="points">0 pts.</span>
         </div>
 
         <div className="person others">
@@ -55,7 +55,7 @@ export default function Leaderboard() {
           />
           <span className="name">Isabelle Allen</span>
 
-          <span className="points">2,516 pts.</span>
+          <span className="points">0 pts.</span>
         </div>
 
         <div className="person others">
@@ -67,7 +67,7 @@ export default function Leaderboard() {
           />
           <span className="name">Isabelle Allen</span>
 
-          <span className="points">2,516 pts.</span>
+          <span className="points">0 pts.</span>
         </div>
 
         <p className="my">My position</p>
@@ -81,7 +81,7 @@ export default function Leaderboard() {
           />
           <span className="name">Isabelle Allen</span>
 
-          <span className="points">2,516 pts.</span>
+          <span className="points">0 pts.</span>
         </div>
       </div>
     </div>

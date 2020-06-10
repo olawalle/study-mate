@@ -24,19 +24,19 @@ export default function Achievements({ setseeAchievements }) {
       <div className="medals">
         <div className="medal">
           <img src={b1} alt="" />
-          <span>5</span>
+          <span>0</span>
         </div>
         <div className="medal">
           <img src={b2} alt="" />
-          <span>7</span>
+          <span>0</span>
         </div>
         <div className="medal">
           <img src={b3} alt="" />
-          <span>12</span>
+          <span>0</span>
         </div>
         <div className="medal">
           <img src={b4} alt="" />
-          <span>10</span>
+          <span>0</span>
         </div>
         <div className="medal">
           <img src={b5} alt="" />

@@ -12,10 +12,12 @@ export default function QuizQuestion(props) {
   const [passage, setpassage] = useState(false);
   const [feedback, setFeedback] = useState(false);
   const [answered, setanswered] = useState(false);
+  const [wrongAnswer, setwrongAnswer] = useState(false);
   const [currentQuestion, setcurrentQuestion] = useState(0);
   const [duration, setduration] = useState(duration_);
   const [answers, setanswers] = useState([]);
   const [remains, setremains] = useState({ hr: 0, min: 0, sec: 0 });
+  const [optionSelected, setoptionSelected] = useState(false);
   const { selectedQuizMode, questions } = props;
   let activeQuestion = questions[currentQuestion];
 
@@ -72,6 +74,8 @@ export default function QuizQuestion(props) {
   const pickAnswer = (i) => {
     setanswered(true);
     let prevAnswers = [...answers];
+    prevAnswers[currentQuestion] = options[i].id;
+    setanswers(prevAnswers);
     setoptions(
       options.map((option, j) => {
         return i === j
@@ -85,8 +89,9 @@ export default function QuizQuestion(props) {
             };
       })
     );
-    prevAnswers[currentQuestion] = options[i].id;
-    setanswers(prevAnswers);
+
+    if (selectedQuizMode === "Learning Approach") {
+    }
   };
 
   const openPassage = () => {
@@ -100,11 +105,13 @@ export default function QuizQuestion(props) {
   };
 
   const getOptions = (no) => {
+    let previouslyAnswered = [...answers][no];
     let options = questions[no].options.map((option, i) => {
       return {
         ...option,
         text: option.content,
-        picked: false,
+        picked:
+          previouslyAnswered && previouslyAnswered === option.id ? true : false,
         option: i === 0 ? "A" : i === 1 ? "B" : i === 2 ? "C" : "D",
       };
     });
@@ -124,8 +131,21 @@ export default function QuizQuestion(props) {
     props.completeTest({ score, percent, count });
   };
 
-  const pickedClassName =
-    selectedQuizMode === "Learning Approach" ? "correct_" : "correct";
+  const submitLearingAnswer = () => {
+    console.log(answers);
+  };
+
+  const getClass = (option) => {
+    if (option.picked && selectedQuizMode !== "Learning Approach") {
+      return `correct`;
+    } else {
+      if (option.picked && option.id === activeQuestion.answerId) {
+        return `correct_`;
+      } else if (option.picked && option.id !== activeQuestion.answerId) {
+        return "wrong";
+      }
+    }
+  };
 
   return (
     <div className="quiz-quuestion">
@@ -146,7 +166,7 @@ export default function QuizQuestion(props) {
                 style={{
                   width: "20px",
                   float: "right",
-                  marginTop: "-15px",
+                  marginTop: "-5px",
                   cursor: "pointer",
                 }}
               />
@@ -161,18 +181,29 @@ export default function QuizQuestion(props) {
             return (
               <div
                 key={option.text}
-                className={`answer ${option.picked ? pickedClassName : ""}`}
+                className={`answer ${getClass(option)}`}
                 onClick={() => pickAnswer(i)}
               >
                 <span className="label">{option.option}</span>
                 <p>
                   {option.text} - {option.id} - {activeQuestion.answerId}
                 </p>
-                {selectedQuizMode !== "Learning Approach" &&
+                {/* {selectedQuizMode !== "Learning Approach" &&
+                  answered &&
+                  option.id === activeQuestion.answerId && (
+                    <h4 className="caveat">correct answer</h4>
+                  )} */}
+
+                {selectedQuizMode === "Learning Approach" &&
                   answered &&
                   option.id === activeQuestion.answerId && (
                     <h4 className="caveat">correct answer</h4>
                   )}
+
+                {selectedQuizMode === "Learning Approach" &&
+                  answered &&
+                  option.id !== activeQuestion.answerId &&
+                  option.picked && <h4 className="caveat">Incorrect answer</h4>}
               </div>
             );
           })}
@@ -219,49 +250,122 @@ export default function QuizQuestion(props) {
           </div>
         )}
       </div>
-      <div className="footer">
-        <b>
-          {currentQuestion > 0 && (
-            <img
-              src={caret}
-              width="12"
-              alt=""
-              style={{
-                transform: "rotate(90deg)",
-                marginRight: "10px",
-                cursor: "pointer",
-              }}
-              onClick={prevQuestion}
-            />
-          )}
-          {currentQuestion + 1} of {questions.length}
-          {currentQuestion < questions.length - 1 && (
-            <img
-              src={caret}
-              width="12"
-              alt=""
-              style={{
-                transform: "rotate(-90deg)",
-                marginLeft: "10px",
-                cursor: "pointer",
-              }}
-              onClick={nextQuestion}
-            />
-          )}
-        </b>
-        <button
-          className="tw-btn"
-          onClick={() => submit()}
-          style={{ marginLeft: 20 }}
-        >
-          SUBMIT
-        </button>
-        {activeQuestion.hasPassage && (
-          <button className="blue-btn" onClick={() => openPassage()}>
-            {passage ? "Close passage" : "Open passage"}
+
+      {selectedQuizMode === "Learning Approach" ? (
+        <div className="footer">
+          <b
+            style={{
+              position: "relative",
+              top: 13,
+            }}
+          >
+            {currentQuestion > 0 && (
+              <img
+                src={caret}
+                width="12"
+                alt=""
+                style={{
+                  transform: "rotate(90deg)",
+                  marginRight: "10px",
+                }}
+              />
+            )}
+            {currentQuestion + 1} of {questions.length}
+            {currentQuestion < questions.length - 1 && (
+              <img
+                src={caret}
+                width="12"
+                alt=""
+                style={{
+                  transform: "rotate(-90deg)",
+                  marginLeft: "10px",
+                }}
+              />
+            )}
+          </b>
+
+          <button
+            className="tw-btn"
+            onClick={() => submitLearingAnswer()}
+            style={{ marginLeft: 20 }}
+          >
+            {!optionSelected
+              ? "SUBMIT"
+              : wrongAnswer
+              ? "TRY AGAIN"
+              : "NEXT QUESTION"}
           </button>
-        )}
-      </div>
+        </div>
+      ) : (
+        <div className="footer">
+          <b
+            style={{
+              position: "relative",
+              top: 13,
+            }}
+          >
+            {currentQuestion > 0 && (
+              <img
+                src={caret}
+                width="12"
+                alt=""
+                style={{
+                  transform: "rotate(90deg)",
+                  marginRight: "10px",
+                  cursor: "pointer",
+                }}
+                onClick={prevQuestion}
+              />
+            )}
+            {currentQuestion + 1} of {questions.length}
+            {currentQuestion < questions.length - 1 && (
+              <img
+                src={caret}
+                width="12"
+                alt=""
+                style={{
+                  transform: "rotate(-90deg)",
+                  marginLeft: "10px",
+                  cursor: "pointer",
+                }}
+                onClick={nextQuestion}
+              />
+            )}
+          </b>
+          <button
+            className="tw-btn"
+            onClick={() => submit()}
+            style={{ marginLeft: 20 }}
+          >
+            SUBMIT
+          </button>
+
+          {currentQuestion < questions.length - 1 && (
+            <button
+              className="blue-btn"
+              onClick={nextQuestion}
+              style={{ marginLeft: 20 }}
+            >
+              NEXT
+            </button>
+          )}
+
+          {currentQuestion > 0 && (
+            <button
+              className="bare-btn"
+              onClick={prevQuestion}
+              style={{ marginLeft: 20 }}
+            >
+              PREVIOUS
+            </button>
+          )}
+          {activeQuestion.hasPassage && (
+            <button className="blue-btn" onClick={() => openPassage()}>
+              {passage ? "Close passage" : "Open passage"}
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 }

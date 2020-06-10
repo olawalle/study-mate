@@ -2,11 +2,13 @@ import React, { useState, useContext, useEffect } from "react";
 import "./Lesson.scss";
 
 import play from "../../assets/images/play.svg";
+import playIcn from "../../assets/images/play-button.svg";
 import close from "../../assets/images/close.svg";
 import Modal from "react-responsive-modal";
 import { withRouter } from "react-router-dom";
 
 import icn from "../../assets/images/dashboard.svg";
+import clock from "../../assets/images/clock.svg";
 import listener from "../../assets/images/Nice-listener.svg";
 import streak from "../../assets/images/streak.svg";
 import { appUrl } from "../../services/urls";
@@ -92,7 +94,7 @@ export default withRouter(function Lesson({ disableClick, history, video }) {
           )}
           <div className="videos">
             <div
-              style={{ fontWeight: 600, fontSize: 16, padding: "20px 40px" }}
+              style={{ fontWeight: 600, fontSize: 20, padding: "30px 40px" }}
             >
               Intermediate
             </div>
@@ -103,14 +105,20 @@ export default withRouter(function Lesson({ disableClick, history, video }) {
                 className="tag"
                 style={{
                   display: "inline-block",
-                  width: "33%",
+                  width: "50%",
                   color: "#717171",
-                  fontSize: 12,
+                  fontSize: 14,
                 }}
               >
-                <img src={icn} width="12" alt="" /> {videos.length} videos
+                <img
+                  src={playIcn}
+                  width="15"
+                  alt=""
+                  style={{ marginRight: 4, position: "relative", top: 3 }}
+                />{" "}
+                {videos.length} videos
               </div>
-              <div
+              {/* <div
                 className="tag"
                 style={{
                   display: "inline-block",
@@ -120,17 +128,23 @@ export default withRouter(function Lesson({ disableClick, history, video }) {
                 }}
               >
                 <img src={icn} width="12" alt="" /> 18 Topics
-              </div>
+              </div> */}
               <div
                 className="tag"
                 style={{
                   display: "inline-block",
-                  width: "33%",
+                  width: "50%",
                   color: "#717171",
                   fontSize: 12,
                 }}
               >
-                <img src={icn} width="12" alt="" /> {timeFrame}
+                <img
+                  src={clock}
+                  width="15"
+                  alt=""
+                  style={{ marginRight: 4, position: "relative", top: 3 }}
+                />{" "}
+                {timeFrame}
               </div>
             </div>
 

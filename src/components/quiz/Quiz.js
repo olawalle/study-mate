@@ -65,7 +65,12 @@ export default function Quiz(props) {
   };
 
   const startQuiz = () => {
-    selectedQuizMode ? setStarted(true) : console.log("select a mode");
+    if (props.quizType === "normal") {
+      selectMode(2);
+      setStarted(true);
+    } else {
+      selectedQuizMode ? setStarted(true) : console.log("select a mode");
+    }
   };
 
   const logg = () => {
@@ -104,7 +109,9 @@ export default function Quiz(props) {
             {!finishedTest ? (
               <div className="right">
                 <p className="header">
-                  Please select a test approach
+                  {props.quizType === "normal"
+                    ? "All set for the unit test?"
+                    : "Please select a test approach"}
                   <span className="close">
                     <img
                       src={close}
@@ -126,72 +133,80 @@ export default function Quiz(props) {
                 </p>
                 <div>
                   <div className="radios">
-                    {modes.map((mode, i) => {
-                      return (
-                        <span key={mode.text} onClick={() => selectMode(i)}>
-                          <input
-                            type="radio"
-                            name=""
-                            id=""
-                            onChange={() => selectMode(i)}
-                            checked={mode.selected}
-                          />{" "}
-                          {mode.text}
-                          {mode.selected && i === 0 && (
-                            <div className="blue--text">
-                              This gives the option to view explanation for each
-                              question
-                            </div>
-                          )}
-                          {mode.selected && i === 1 && (
-                            <div className="blue--text">
-                              <p>
-                                This simulates exam environment with timing.You
-                                can generate your result and review questions
-                                afterwards
-                              </p>
-                              <div>
-                                <span
-                                  style={{
-                                    position: "relative",
-                                    top: "-26px",
-                                    color: "#000",
-                                  }}
-                                >
-                                  Set time
-                                </span>
+                    {props.quizType !== "normal" &&
+                      modes.map((mode, i) => {
+                        return (
+                          <span key={mode.text} onClick={() => selectMode(i)}>
+                            <input
+                              type="radio"
+                              name=""
+                              id=""
+                              onChange={() => selectMode(i)}
+                              checked={mode.selected}
+                            />{" "}
+                            {mode.text}
+                            {mode.selected && i === 0 && (
+                              <div className="blue--text">
+                                This gives the option to view explanation for
+                                each question
                               </div>
-                              <div>
-                                <input
-                                  type="text"
-                                  onChange={(e) => setHr(e.target.value)}
-                                />
-                                <span>Hrs</span>
+                            )}
+                            {mode.selected && i === 1 && (
+                              <div className="blue--text">
+                                <p>
+                                  This simulates exam environment with
+                                  timing.You can generate your result and review
+                                  questions afterwards
+                                </p>
+                                <div>
+                                  <span
+                                    style={{
+                                      position: "relative",
+                                      top: "-26px",
+                                      color: "#000",
+                                    }}
+                                  >
+                                    Set time
+                                  </span>
+                                </div>
+                                <div>
+                                  <input
+                                    type="text"
+                                    onChange={(e) => setHr(e.target.value)}
+                                  />
+                                  <span>Hrs</span>
+                                </div>
+                                <div>
+                                  <input
+                                    type="text"
+                                    onChange={(e) => setMin(e.target.value)}
+                                  />
+                                  <span>Mins</span>
+                                </div>
                               </div>
-                              <div>
-                                <input
-                                  type="text"
-                                  onChange={(e) => setMin(e.target.value)}
-                                />
-                                <span>Mins</span>
+                            )}
+                            {mode.selected && i === 2 && (
+                              <div className="blue--text">
+                                This simulates exam environment without timing
                               </div>
-                            </div>
-                          )}
-                          {mode.selected && i === 2 && (
-                            <div className="blue--text">
-                              This simulates exam environment without timing
-                            </div>
-                          )}
-                        </span>
-                      );
-                    })}
+                            )}
+                          </span>
+                        );
+                      })}
                   </div>
                 </div>
-                {/* <p className="duration">
-                  <span style={{ lineHeight: "50px" }}>10 Questions </span>{" "}
-                  <br />
-                  <span style={{ lineHeight: "50px" }}>9 - 12 minutes</span>
-                </p> */}
+                {props.quizType === "normal" && (
+                  <p className="duration">
+                    <span style={{ lineHeight: "50px" }}>
+                      {props.quiz.length} Questions{" "}
+                    </span>{" "}
+                    <br />
+                    <span style={{ lineHeight: "50px" }}>
+                      {props.quiz.length * 0.5} - {props.quiz.length * 0.75}{" "}
+                      minutes
+                    </span>
+                  </p>
+                )}
                 <button className="tw-btn mt15" onClick={startQuiz}>
                   Lets get started
                 </button>
@@ -239,6 +254,7 @@ export default function Quiz(props) {
             completeTest={completeTest}
             questions={props.quiz}
             time={{ hour, minutes }}
+            quizType={props.quizType}
           />
         )}
       </Modal>

@@ -88,12 +88,13 @@
       }
     }
     .subject {
-      padding: 15px 50px;
+      padding: 0px 50px;
       margin: 0 15px 15px 0;
       border-radius: 5px;
       border: 0;
       color: #fff;
       position: relative;
+      text-transform: capitalize;
       input {
         margin-right: 5px;
         border: 0;
@@ -217,7 +218,7 @@
         bottom: 0;
         right: 0;
         button {
-          padding: 10px !important;
+          padding: 0 10px !important;
           width: 28%;
           margin: 0 5px;
           img {
@@ -237,7 +238,7 @@
         }
       }
       button {
-        padding: 15px 30px;
+        padding: 0 30px;
       }
     }
   }
@@ -468,7 +469,7 @@
         height: 80px;
         font-size: 12px;
         button {
-          padding: 12px;
+          padding: 0 12px;
         }
       }
     }

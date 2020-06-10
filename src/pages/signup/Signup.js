@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { useSnackbar } from "react-simple-snackbar";
 // import { userContext } from "../../store/UserContext";
 import "./Signup.scss";
 
@@ -26,6 +27,11 @@ export default withRouter(function Signup(props) {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [viewPwrd, setViewPwrd] = useState(false);
+  const [hasError, sethasError] = useState(false);
+  const options = {
+    position: "top-right",
+  };
+  const [openSnackbar, closeSnackbar] = useSnackbar(options);
 
   const pwrdType = viewPwrd ? "text" : "password";
 
@@ -36,7 +42,24 @@ export default withRouter(function Signup(props) {
     loading,
     pageTransitions,
   } = context;
+
+  const showError = (err) => {
+    console.log(err);
+    openSnackbar(err, 5000);
+  };
+
   const signup = () => {
+    if (
+      !surName ||
+      !firstName ||
+      !phoneNumber ||
+      !email ||
+      !password ||
+      !phoneNumber
+    ) {
+      sethasError(true);
+      return;
+    }
     let data = {
       surName,
       firstName,
@@ -61,6 +84,7 @@ export default withRouter(function Signup(props) {
       .catch((err) => {
         console.log({ err });
         updateLoader(false);
+        showError("An error occured. Please try again");
       });
   };
 
@@ -138,24 +162,38 @@ export default withRouter(function Signup(props) {
             <div className="half">
               <span className="label">First name</span>
               <input
+                className={hasError && !firstName ? "has-error" : ""}
                 type="text"
                 onChange={(e) => setfirstName(e.target.value)}
               />
             </div>
             <div className="half f-right">
               <span className="label">Last name</span>
-              <input type="text" onChange={(e) => setsurName(e.target.value)} />
+              <input
+                className={hasError && !surName ? "has-error" : ""}
+                type="text"
+                onChange={(e) => setsurName(e.target.value)}
+              />
             </div>
 
             <span className="label">Email address</span>
-            <input type="text" onChange={(e) => setemail(e.target.value)} />
+            <input
+              className={hasError && !email ? "has-error" : ""}
+              type="text"
+              onChange={(e) => setemail(e.target.value)}
+            />
 
             <span className="label">Phone number</span>
-            <input type="text" onChange={(e) => setPhone(e.target.value)} />
+            <input
+              className={hasError && !phoneNumber ? "has-error" : ""}
+              type="text"
+              onChange={(e) => setPhone(e.target.value)}
+            />
 
             <div className="inp-wrap">
               <span className="label">Password</span>
               <input
+                className={hasError && !password ? "has-error" : ""}
                 type={pwrdType}
                 onChange={(e) => setpassword(e.target.value)}
               />
