@@ -178,6 +178,12 @@
     .wide {
       width: 100%;
       display: block;
+      .form {
+        .left,
+        .right {
+          width: 100%;
+        }
+      }
     }
     .small {
       width: 100%;

@@ -30,6 +30,13 @@ export default withRouter(function Nav(props) {
     props.history.push("/edit-profile");
   };
 
+  const goTo = (to) => {
+    if (to === "courses") props.history.push("/dashboard/");
+    if (to === "edit") props.history.push("/edit-profile");
+    if (to === "logout") logout();
+    setshow_nav(false);
+  };
+
   return (
     <div className="nav">
       <span className="logo">
@@ -80,9 +87,9 @@ export default withRouter(function Nav(props) {
       <div className={`mobilenav ${show_nav ? "open" : ""}`}>
         <input type="text" placeholder="What do you want learn?" />
 
-        <p>Courses</p>
-        <p>Edit Profile</p>
-        <p>Logout</p>
+        <p onClick={() => goTo("courses")}>Courses</p>
+        <p onClick={() => goTo("edit")}>Edit Profile</p>
+        <p onClick={() => goTo("logout")}>Logout</p>
       </div>
     </div>
   );

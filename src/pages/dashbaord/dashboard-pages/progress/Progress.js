@@ -22,14 +22,26 @@ export default function Progress() {
     };
   });
   const options = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
+    { value: "Videos", label: "Videos" },
+    { value: "Quizzes", label: "Quizzes" },
+  ];
+  const days = [
+    { value: "Monday", label: "Monday" },
+    { value: "Tuesday", label: "Tuesday" },
+    { value: "Wednesday", label: "Wednesday" },
+    { value: "Thursday", label: "Thursday" },
+    { value: "Friday", label: "Friday" },
+    { value: "Saturday", label: "Saturday" },
+    { value: "Subday", label: "Subday" },
   ];
   const [selectedOption, setselectedOption] = useState("");
+  const [selectedOption_, setselectedOption_] = useState("");
+
   const handleChange = (selectedOption) => {
-    console.log(`Option selected:`, selectedOption);
     setselectedOption(selectedOption);
+  };
+  const handleChange_ = (selectedOption) => {
+    setselectedOption_(selectedOption);
   };
 
   const handleChangeCourse = (e) => console.log(e);
@@ -56,8 +68,8 @@ export default function Progress() {
               <Select
                 placeholder="Last 7 days"
                 value={selectedOption}
-                onChange={handleChange}
-                options={options}
+                onChange={handleChange_}
+                options={days}
               />
             </div>
             <div className="selects">
