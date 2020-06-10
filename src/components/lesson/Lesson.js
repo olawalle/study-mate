@@ -23,22 +23,28 @@ export default withRouter(function Lesson({ disableClick, history, video }) {
   );
   const timeFrame = `${Math.floor(duration / 60)}hrs ${duration % 60}mins`;
   useEffect(() => {
-    setVideos(
-      selectedSubject.videos.map((vid) => {
-        return {
-          ...vid,
-          text: vid.name,
-          selected: vid.id === video.id,
-        };
-      })
-    );
+    let data = [];
+    selectedSubject.videos.forEach((vid, i) => {
+      if (vid.id === video.id) {
+        setactiveVideo(i);
+      }
+      data.push({
+        ...vid,
+        text: vid.name,
+        selected: vid.id === video.id,
+      });
+    });
+    setVideos(data);
   }, []);
   const [open, setopen] = useState(false);
   const [showStreak, setshowStreak] = useState(false);
   const [url, seturl] = useState("");
   const [videos, setVideos] = useState([]);
+  const [activeVideo, setactiveVideo] = useState(null);
 
   const selectVideo = (i) => {
+    setactiveVideo(i);
+    seturl(videos[i].url);
     setVideos(
       videos.map((v, j) => {
         return i === j
@@ -210,11 +216,12 @@ export default withRouter(function Lesson({ disableClick, history, video }) {
                 className="blue--text mt10 video-name"
                 style={{ fontWeight: 600, position: "relative", top: "5px" }}
               >
-                Brief history of Mathematics
+                {videos[activeVideo] && videos[activeVideo].text}
               </span>
               <button
                 className="f-right tw-btn"
                 style={{ padding: "12px 30px" }}
+                onClick={() => selectVideo(activeVideo + 1)}
               >
                 Next video
               </button>
