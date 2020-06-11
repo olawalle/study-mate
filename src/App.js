@@ -50,6 +50,7 @@ import teacher from "./assets/images/teacher.png";
 import EditProfile from "./pages/dashbaord/dashboard-pages/edit-profile/Edit";
 import Studypack from "./pages/Studypack/Studypack";
 import authServices from "./services/authServices";
+import Terms from "./pages/Terms/Terms";
 
 export default function App() {
   useEffect(() => {
@@ -117,6 +118,9 @@ export default function App() {
                 </Route>
                 <Route path={`/edit-profile`}>
                   <EditProfile />
+                </Route>
+                <Route path={`/terms`}>
+                  <Terms />
                 </Route>
               </Switch>
             </AnimatePresence>

@@ -22,7 +22,7 @@
     float: left;
     overflow: auto;
     .banner {
-      height: 180px;
+      height: 160px;
       width: 100%;
       padding: 20px;
       position: relative;
@@ -31,11 +31,11 @@
       background-image: url("../../assets/images/dash.svg");
       background-position-x: 80%;
       p {
-        font-size: 24px;
+        font-size: 20px;
         font-weight: 600;
         color: #ffff;
         position: absolute;
-        bottom: 0px;
+        bottom: 5px;
         left: 40px;
       }
     }
@@ -410,6 +410,37 @@
     }
   }
   .react-responsive-modal-modal {
+    .banner {
+      height: 200px;
+      width: 100%;
+      color: #fff;
+      text-align: center;
+      padding: 30px;
+      background-position-x: 0px;
+      background-size: cover;
+      background-repeat: no-repeat;
+      .main-text {
+        font-size: 22px;
+        font-weight: 600;
+        margin-bottom: 0;
+        margin-top: 53px;
+      }
+      .sub-text {
+        font-size: 16px;
+        margin-top: 5px;
+      }
+    }
+    .modal-data {
+      padding: 20px;
+      .subject,
+      .class {
+        width: 100%;
+        margin: 0 0 10px;
+      }
+    }
+    .modal-footer {
+      font-size: 12px;
+    }
     .quiz-modal {
       .left {
         display: none;
@@ -557,7 +588,7 @@
       }
     }
     .videos {
-      display: none;
+      display: none !important;
     }
     .frame {
       width: 100%;

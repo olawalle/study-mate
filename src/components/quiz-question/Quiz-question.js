@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Quiz-question.scss";
 import ProgressBar from "../progress-bar/ProgressBar";
 import close from "../../assets/images/close.svg";
+import streak from "../../assets/images/repeat.svg";
 import caret from "../../assets/images/down-arrow.svg";
 
 export default function QuizQuestion(props) {
@@ -18,13 +19,15 @@ export default function QuizQuestion(props) {
   const [answers, setanswers] = useState([]);
   const [remains, setremains] = useState({ hr: 0, min: 0, sec: 0 });
   const [optionSelected, setoptionSelected] = useState(false);
+  const [attempts, setattempts] = useState(0);
+  const [showAlert, setshowAlert] = useState(true);
+  const [showExplanation, setshowExplanation] = useState(false);
   const { selectedQuizMode, questions } = props;
   let activeQuestion = questions[currentQuestion];
 
   const [options, setoptions] = useState([]);
 
   useEffect(() => {
-    console.log(selectedQuizMode);
     getOptions(0);
     const timer = window.setInterval(() => {
       setduration((prevTime) => {
@@ -62,6 +65,10 @@ export default function QuizQuestion(props) {
     setcurrentQuestion(no);
     getOptions(no);
     setanswered(false);
+    setwrongAnswer(false);
+    setoptionSelected(false);
+    btnText();
+    !answers[no] && setattempts(0);
   };
 
   const prevQuestion = () => {
@@ -69,9 +76,22 @@ export default function QuizQuestion(props) {
     setcurrentQuestion(no);
     getOptions(no);
     setanswered(false);
+    setwrongAnswer(false);
+    setoptionSelected(false);
+    btnText();
+    !answers[no] && setattempts(0);
   };
 
   const pickAnswer = (i) => {
+    if (attempts > 1 || showExplanation) return;
+    if (selectedQuizMode === "Learning Approach" && attempts < 2) {
+      setattempts(attempts + 1);
+      let correctlyAnswered = options[i].id !== activeQuestion.answerId;
+      setwrongAnswer(correctlyAnswered);
+      !correctlyAnswered && setshowAlert(true);
+    }
+    setoptionSelected(true);
+
     setanswered(true);
     let prevAnswers = [...answers];
     prevAnswers[currentQuestion] = options[i].id;
@@ -89,9 +109,6 @@ export default function QuizQuestion(props) {
             };
       })
     );
-
-    if (selectedQuizMode === "Learning Approach") {
-    }
   };
 
   const openPassage = () => {
@@ -105,6 +122,10 @@ export default function QuizQuestion(props) {
   };
 
   const getOptions = (no) => {
+    if (no >= questions.length) {
+      submit();
+      return;
+    }
     let previouslyAnswered = [...answers][no];
     let options = questions[no].options.map((option, i) => {
       return {
@@ -132,10 +153,25 @@ export default function QuizQuestion(props) {
   };
 
   const submitLearingAnswer = () => {
-    console.log(answers);
+    if (answers.length === questions.length || showExplanation) {
+      submit();
+      return;
+    }
+    setwrongAnswer(false);
+    if (attempts < 2 && wrongAnswer) {
+      setshowAlert(false);
+    } else {
+      nextQuestion();
+    }
   };
 
   const getClass = (option) => {
+    if (
+      option.picked &&
+      option.id === activeQuestion.answerId &&
+      showExplanation
+    )
+      return "correct";
     if (option.picked && selectedQuizMode !== "Learning Approach") {
       return `correct`;
     } else {
@@ -145,6 +181,20 @@ export default function QuizQuestion(props) {
         return "wrong";
       }
     }
+  };
+
+  const viewExplanation = () => {
+    setshowExplanation(true);
+  };
+
+  const btnText = () => {
+    if (
+      answers.length === questions.length ||
+      (!optionSelected && !wrongAnswer)
+    )
+      return "SUBMIT";
+    if (wrongAnswer && attempts === 1) return "TRY AGAIN";
+    else return "NEXT QUESTION";
   };
 
   return (
@@ -171,46 +221,114 @@ export default function QuizQuestion(props) {
                 }}
               />
             </span>
+            {attempts === 1 && showAlert && wrongAnswer && (
+              <div className="alert">
+                <img src={streak} className="badge" alt="" />
+                <div className="streak-text">
+                  <p className="top">
+                    Not quite yet ...
+                    <img
+                      src={close}
+                      alt=""
+                      onClick={() => setshowAlert(false)}
+                      className="ex"
+                    />
+                  </p>
+                  <p style={{ fontSize: 10 }}>
+                    Your answer is incorrect. Try again
+                  </p>
+                  <p style={{ fontSize: 12 }}>
+                    <span
+                      className="blue--text"
+                      onClick={viewExplanation}
+                      style={{ fontSize: 14, fontWeight: 600 }}
+                    >
+                      View explanation
+                    </span>{" "}
+                    or{" "}
+                    <span
+                      className="blue--text"
+                      onClick={nextQuestion}
+                      style={{ fontSize: 14, fontWeight: 600 }}
+                    >
+                      Move on
+                    </span>
+                  </p>
+                </div>
+              </div>
+            )}
           </div>
           <ProgressBar width={currentQuestion / (questions.length - 1)} />
         </div>
         <div className="content">
           <p className="question">{activeQuestion.question}</p>
-
-          {options.map((option, i) => {
-            return (
-              <div
-                key={option.text}
-                className={`answer ${getClass(option)}`}
-                onClick={() => pickAnswer(i)}
-              >
-                <span className="label">{option.option}</span>
-                <p>
-                  {option.text} - {option.id} - {activeQuestion.answerId}
-                </p>
-                {/* {selectedQuizMode !== "Learning Approach" &&
+          <div className="questions">
+            {options.map((option, i) => {
+              return (
+                <div
+                  key={option.text}
+                  className={`answer ${getClass(option)} ${
+                    showExplanation && option.id === activeQuestion.answerId
+                      ? "correct"
+                      : ""
+                  }`}
+                  onClick={() => pickAnswer(i)}
+                >
+                  <span className="label">{option.option}</span>
+                  <p>
+                    {option.text} - {option.id} - {activeQuestion.answerId}{" "}
+                    <br />
+                    {showExplanation && option.id === activeQuestion.answerId && (
+                      <span
+                        style={{
+                          fontSize: 14,
+                          color: "#afafaf",
+                          position: "relative",
+                          top: "10px",
+                        }}
+                      >
+                        this answer is wring this answer is wring this answer is
+                        wring this answer is wring this answer is wring this
+                        answer is wring this answer is wring this answer is
+                        wring this answer is wring this answer is wring this
+                        answer is wring this answer is wring this answer is
+                        wring this answer is wring this answer is wring this
+                        answer is wring this answer is wring this answer is
+                        wring this answer is wring this answer is wring this
+                        answer is wring this answer is wring this answer is
+                        wring this answer is wring
+                      </span>
+                    )}
+                  </p>
+                  {/* {selectedQuizMode !== "Learning Approach" &&
                   answered &&
                   option.id === activeQuestion.answerId && (
                     <h4 className="caveat">correct answer</h4>
                   )} */}
+                  {selectedQuizMode === "Learning Approach" &&
+                    answered &&
+                    attempts === 2 &&
+                    !showExplanation &&
+                    option.id === activeQuestion.answerId && (
+                      <h4 className="caveat">correct answer</h4>
+                    )}
 
-                {selectedQuizMode === "Learning Approach" &&
-                  answered &&
-                  option.id === activeQuestion.answerId && (
-                    <h4 className="caveat">correct answer</h4>
-                  )}
+                  {selectedQuizMode === "Learning Approach" &&
+                    answered &&
+                    option.id !== activeQuestion.answerId &&
+                    option.picked && (
+                      <h4 className="caveat">Incorrect answer</h4>
+                    )}
+                </div>
+              );
+            })}
+          </div>
 
-                {selectedQuizMode === "Learning Approach" &&
-                  answered &&
-                  option.id !== activeQuestion.answerId &&
-                  option.picked && <h4 className="caveat">Incorrect answer</h4>}
-              </div>
-            );
-          })}
-
-          <p className="feedback blue--text" onClick={() => openFeedback()}>
-            <em>Feedback</em>
-          </p>
+          {!showExplanation && (
+            <p className="feedback blue--text" onClick={() => openFeedback()}>
+              <em>Feedback</em>
+            </p>
+          )}
         </div>
         {passage && <div className="passage">{activeQuestion.passage}</div>}
         {feedback && (
@@ -289,11 +407,7 @@ export default function QuizQuestion(props) {
             onClick={() => submitLearingAnswer()}
             style={{ marginLeft: 20 }}
           >
-            {!optionSelected
-              ? "SUBMIT"
-              : wrongAnswer
-              ? "TRY AGAIN"
-              : "NEXT QUESTION"}
+            {btnText()}
           </button>
         </div>
       ) : (
@@ -332,13 +446,15 @@ export default function QuizQuestion(props) {
               />
             )}
           </b>
-          <button
-            className="tw-btn"
-            onClick={() => submit()}
-            style={{ marginLeft: 20 }}
-          >
-            SUBMIT
-          </button>
+          {currentQuestion === questions.length - 1 && (
+            <button
+              className="tw-btn"
+              onClick={() => submit()}
+              style={{ marginLeft: 20 }}
+            >
+              SUBMIT
+            </button>
+          )}
 
           {currentQuestion < questions.length - 1 && (
             <button

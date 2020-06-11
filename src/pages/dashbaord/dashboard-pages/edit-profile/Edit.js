@@ -34,6 +34,12 @@ export default withRouter(function EditProfile({ history }) {
   const back = () => {
     history.push("/dashboard/");
   };
+
+  const toTerms = () => {
+    console.log("olo");
+    history.push("/terms");
+  };
+
   return (
     <motion.div
       className="edit"
@@ -182,7 +188,9 @@ export default withRouter(function EditProfile({ history }) {
             </p>
 
             <button className="tw-btn">Contact support</button>
-            <button className="tw-btn">Terms/Privacy</button>
+            <button className="tw-btn" onClick={toTerms}>
+              Terms/Privacy
+            </button>
           </div>
         </div>
       </div>

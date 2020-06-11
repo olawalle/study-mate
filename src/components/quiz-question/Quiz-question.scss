@@ -21,9 +21,56 @@
         padding: 5px;
       }
     }
+    .alert {
+      position: absolute;
+      top: 455px;
+      right: 0px;
+      overflow: hidden;
+      width: 350px;
+      height: 110px;
+      z-index: 12323;
+      background: #fff;
+      padding: 15px 25px;
+      border-radius: 10px;
+      border: 1px solid #dddddd;
+      .badge {
+        width: 70px;
+        position: relative;
+        top: -4px;
+      }
+      .streak-text {
+        display: inline-block;
+        width: 70%;
+        padding-left: 25px;
+        position: relative;
+        top: -10px;
+        .top {
+          font-weight: 600;
+          position: relative;
+          top: 5px;
+          margin-bottom: 10px;
+          color: #000;
+          .ex {
+            width: 10px;
+            float: right;
+            position: relative;
+            top: -10px;
+            right: -20px;
+            cursor: pointer;
+          }
+        }
+        .blue--text {
+          cursor: pointer;
+        }
+      }
+    }
     .content {
       width: 60%;
       display: inline-block;
+      .questions {
+        max-height: 440px;
+        overflow: auto;
+      }
       .question {
         font-size: 17px;
         line-height: 28px;
@@ -33,11 +80,12 @@
         border-bottom: 1px solid #eee;
       }
       .answer {
-        height: 50px;
+        min-height: 50px;
         cursor: pointer;
         font-size: 12px;
+        position: relative;
         &:hover {
-          background-color: #f1f1f1;
+          background-color: #fafafa;
         }
         .label {
           display: inline-block;
@@ -49,15 +97,17 @@
           border-radius: 50%;
           font-size: 12px;
           text-align: center;
-          padding-top: 4px;
+          position: absolute;
+          top: 13px;
+          line-height: 25px !important;
         }
         .caveat {
           margin: 0;
           position: relative;
-          top: -29px;
+          top: -26px;
           font-size: 10px;
           color: #c4c4c4 !important;
-          left: 74px;
+          left: 52px;
           font-weight: 600;
         }
         p {
@@ -65,6 +115,7 @@
           font-size: 16px;
           margin-left: 50px;
           margin-bottom: 30px;
+          width: calc(100% - (25px + 60px));
         }
       }
       .correct {

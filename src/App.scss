@@ -200,6 +200,10 @@ button {
   &:focus {
     outline: none;
   }
+  &:disabled {
+    opacity: 0.5 !important;
+    cursor: not-allowed !important;
+  }
 }
 .main-btn {
   background: #002984;

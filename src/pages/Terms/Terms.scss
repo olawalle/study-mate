@@ -1,0 +1,33 @@
+.terms {
+  padding: 0px;
+  background-color: #fafafa;
+  height: 100vh;
+  .body {
+    height: calc(100vh - 80px);
+    overflow: auto;
+    .banner {
+      height: 130px;
+      width: 100%;
+      background-size: cover;
+      background-repeat: no-repeat;
+      padding: 0 160px;
+      margin: 0;
+      font-size: 24px;
+      font-weight: 600;
+      color: #fff;
+      background-image: url("../../assets/images/dash.svg");
+      position: relative;
+      span {
+        position: absolute;
+        bottom: 30px;
+      }
+    }
+    .contents {
+      padding: 60px 240px;
+      p {
+        line-height: 24px;
+        margin-bottom: 35px;
+      }
+    }
+  }
+}

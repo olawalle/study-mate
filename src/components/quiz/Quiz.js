@@ -9,6 +9,7 @@ import quizPic from "../../assets/images/Quiz-character.svg";
 import close from "../../assets/images/close.svg";
 import Modal from "react-responsive-modal";
 import QuizQuestion from "../quiz-question/Quiz-question";
+import authServices from "../../services/authServices";
 
 export default function Quiz(props) {
   const [open, setopen] = useState(false);
@@ -26,6 +27,16 @@ export default function Quiz(props) {
 
   useEffect(() => {
     console.log(props);
+    if (props.quizType === "advanced") {
+      authServices
+        .getStudypackData(props.quizPackDetails.courseId)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log({ err });
+        });
+    }
   }, []);
 
   const selectMode = (i) => {
@@ -49,7 +60,18 @@ export default function Quiz(props) {
     : "";
 
   const onOpenModal = () => {
+    if (!props.quiz) {
+      return;
+    }
     setopen(true);
+    setModes(
+      modes.map((mod) => {
+        return {
+          ...mod,
+          selected: false,
+        };
+      })
+    );
   };
 
   const onCloseModal = () => {
@@ -80,13 +102,23 @@ export default function Quiz(props) {
   return (
     <div className="quiz">
       <p className="quiz-heading" onClick={logg}>
-        Quiz 1
+        {props.name || "Quiz 1"}
       </p>
       <p className="sub-heading">
-        Level up on the above skills and collect up to 400 Mastery points
+        {props.shortDescription ||
+          "Level up on the above skills and collect up to 400 Mastery points"}
       </p>
 
-      <button className="blue-btn" onClick={onOpenModal}>
+      <button
+        disabled={!props.quiz}
+        title={
+          !props.quiz
+            ? "There are no questions in this quiz. Chech back later"
+            : "Click to take test"
+        }
+        className="blue-btn"
+        onClick={onOpenModal}
+      >
         Resume Quiz
       </button>
 
@@ -120,7 +152,7 @@ export default function Quiz(props) {
                       style={{
                         width: "20px",
                         float: "right",
-                        marginTop: "-90px",
+                        marginTop: "-80px",
                         cursor: "pointer",
                       }}
                     />
@@ -198,12 +230,12 @@ export default function Quiz(props) {
                 {props.quizType === "normal" && (
                   <p className="duration">
                     <span style={{ lineHeight: "50px" }}>
-                      {props.quiz.length} Questions{" "}
+                      {props.quiz ? props.quiz.length : "0"} Questions{" "}
                     </span>{" "}
                     <br />
                     <span style={{ lineHeight: "50px" }}>
-                      {props.quiz.length * 0.5} - {props.quiz.length * 0.75}{" "}
-                      minutes
+                      {props.quiz ? props.quiz.length * 0.5 : "0"} -{" "}
+                      {props.quiz ? props.quiz.length * 0.75 : "0"} minutes
                     </span>
                   </p>
                 )}
@@ -252,7 +284,7 @@ export default function Quiz(props) {
             selectedQuizMode={selectedQuizMode}
             onClose={onCloseModal}
             completeTest={completeTest}
-            questions={props.quiz}
+            questions={props.quiz || []}
             time={{ hour, minutes }}
             quizType={props.quizType}
           />

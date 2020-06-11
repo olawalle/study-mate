@@ -54,32 +54,33 @@ export default function Courses(props) {
   }, []);
 
   return (
-    <div className="courses">
-      <div className="flex-grid-thirds">
-        <p className="title mt30">Courses</p>
-        {sortesubjects.map((course, i) => {
-          return (
-            <div
-              key={course.name + i}
-              onClick={() => selectCourse(course)}
-              style={{ textTransform: "capitalize" }}
-              className={`bg_${(i % 17) + 2} course ${
-                course.width === 3
-                  ? "wide"
-                  : course.width === 2
-                  ? "mid"
-                  : "small"
-              }`}
-            >
-              {course.learnCourse.name}{" "}
-              {course.new && <img src={neww} className="new" alt="" />}
-            </div>
-          );
-        })}
-        <button onClick={props.onOpenModal} className="mt15 tw-btn">
-          Add more Courses +
-        </button>
+    <div className="courses-wrap">
+      <div className="courses">
+        <div className="flex-grid-thirds">
+          {sortesubjects.map((course, i) => {
+            return (
+              <div
+                key={course.name + i}
+                onClick={() => selectCourse(course)}
+                style={{ textTransform: "capitalize" }}
+                className={`bg_${(i % 17) + 2} course ${
+                  course.width === 3
+                    ? "wide"
+                    : course.width === 2
+                    ? "mid"
+                    : "small"
+                }`}
+              >
+                {course.learnCourse.name}{" "}
+                {course.new && <img src={neww} className="new" alt="" />}
+              </div>
+            );
+          })}
+        </div>
       </div>
+      <button onClick={props.onOpenModal} className="mt15 tw-btn">
+        Add more Courses +
+      </button>
     </div>
   );
 }

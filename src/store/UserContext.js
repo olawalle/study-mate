@@ -23,16 +23,7 @@ export default class UserContextProvider extends Component {
     awards: [],
     userAwards: [],
     token: "",
-    pageTransitions: {
-      in: {
-        opacity: 1,
-        x: 0,
-      },
-      in: {
-        opacity: 0,
-        x: "-100vw",
-      },
-    },
+    studyPacks: [],
   };
 
   componentWillMount() {
@@ -61,6 +52,8 @@ export default class UserContextProvider extends Component {
   updateLoggedInStatus = (isLoggedIn) => {
     this.setState({ isLoggedIn });
   };
+
+  updateStudyPack = (studyPacks) => this.setState({ studyPacks });
 
   updateUser = (user) => {
     this.setState({ user });
@@ -124,6 +117,7 @@ export default class UserContextProvider extends Component {
       updateUserCourses,
       updateAwards,
       updateUserAwards,
+      updateStudyPack,
     } = this;
     return (
       <userContext.Provider
@@ -138,6 +132,7 @@ export default class UserContextProvider extends Component {
           saveSelectedSubject,
           updateAwards,
           updateUserAwards,
+          updateStudyPack,
         }}
       >
         {this.props.children}

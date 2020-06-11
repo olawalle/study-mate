@@ -48,6 +48,16 @@ let getUserCourses = (token, id) => {
   });
 };
 
+let getCourseByName = (name) => {
+  return axios({
+    method: "get",
+    url: urls.courseUrl + "/byname",
+    params: {
+      name,
+    },
+  });
+};
+
 let updateUserCourses = (data) => {
   return axios({
     method: "post",
@@ -121,12 +131,21 @@ let getLeaderboard = (userID, quizID) => {
   });
 };
 
+let getStudypackData = (quizID) => {
+  return axios({
+    method: "get",
+    url: `${urls.baseUrl}${quizID}?child=true`,
+    headers: headers(),
+  });
+};
+
 export default {
   signup,
   login,
   updateUserData,
   getCurrentUser,
   getUserCourses,
+  getCourseByName,
   updateUserCourses,
   deleteUserCourse,
   getAllCourses,
@@ -135,4 +154,5 @@ export default {
   getSubjectVideos,
   getUserAward,
   getLeaderboard,
+  getStudypackData,
 };

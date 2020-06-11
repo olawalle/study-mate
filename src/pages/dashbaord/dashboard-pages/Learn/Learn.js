@@ -146,6 +146,7 @@ export default withRouter(function Learn({ history }) {
 
   const pickSubject = (i) => {
     let subject = subjects_[i];
+    console.log(subject);
     if (subject.preSelected) {
       settoBeRemoved([...toBeRemoved, subject.id]);
       setnewSelectedCourses(
@@ -235,6 +236,7 @@ export default withRouter(function Learn({ history }) {
         </div>
 
         <div className="courses">
+          <p className="title mt30">Courses</p>
           <Courses onOpenModal={onOpenModal} className="mt20" />
         </div>
 
@@ -244,7 +246,7 @@ export default withRouter(function Learn({ history }) {
           open={open}
           onClose={onCloseModal}
           center
-          styles={{ modal: { width: "60%" } }}
+          styles={{ modal: { width: "98%" } }}
           closeOnOverlayClick={false}
         >
           <div
