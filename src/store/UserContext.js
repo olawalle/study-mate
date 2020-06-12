@@ -24,6 +24,7 @@ export default class UserContextProvider extends Component {
     userAwards: [],
     token: "",
     studyPacks: [],
+    quizzes: [],
   };
 
   componentWillMount() {
@@ -54,6 +55,7 @@ export default class UserContextProvider extends Component {
   };
 
   updateStudyPack = (studyPacks) => this.setState({ studyPacks });
+  updateStudyPackQuizes = (quizzes) => this.setState({ quizzes });
 
   updateUser = (user) => {
     this.setState({ user });

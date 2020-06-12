@@ -12,6 +12,7 @@ export const learnCourseUrl = `${baseUrl}learncourses`;
 export const userLearnCourseUrl = `${baseUrl}userlearncourses`;
 export const getUserLearnCourseUrl = `${baseUrl}account/getuserlearncourses`;
 export const userAwardsUrl = `${baseUrl}userawards`;
+export const studyPackUrl = `${baseUrl}quizes/`;
 export const awardsUrl = `${baseUrl}awards`;
 export const quizUrl = `${baseUrl}quizes`;
 export const videosUrl = `${baseUrl}videos`;

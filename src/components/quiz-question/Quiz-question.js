@@ -25,6 +25,7 @@ export default function QuizQuestion(props) {
   const { selectedQuizMode, questions } = props;
   let activeQuestion = questions[currentQuestion];
 
+  console.log({myquestion: questions})
   const [options, setoptions] = useState([]);
 
   useEffect(() => {

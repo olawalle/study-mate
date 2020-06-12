@@ -67,23 +67,23 @@ export default withRouter(function Studypack({ history }) {
             <div className="level">Studtpack 1</div>
             <div className="level">Studtpack 2</div>
             <div className="level">Studtpack 3</div>
-
             <img src={students} alt="" />
           </div>
           <div className="wide list">
             {studyPacks &&
               studyPacks.length &&
               studyPacks
-                .filter((a, b) => b === 1)
-                .map((quiz, i) => (
+                .map((quiz, i) => {
+                  return (
                   <Quiz
-                    quiz={quiz.quizes}
+                    quiz={quiz.id}
+                    quizId={quiz.id}
                     name={`Study pack ${i + 1}`}
                     shortDescription={quiz.shortDescription}
-                    quizType="advanced"
+                    quizType="studypack"
                     quizPackDetails={quiz}
                   />
-                ))}
+                )})}
           </div>
         </div>
       </div>

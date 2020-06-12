@@ -13,6 +13,7 @@ import authServices from "../../services/authServices";
 
 export default function Quiz(props) {
   const [open, setopen] = useState(false);
+  const [quizFromPack, setQuizFromPack] = useState([]);
   const [started, setStarted] = useState(false);
   const [finishedTest, setfinishedTest] = useState(false);
   const [scores, setScore] = useState({ score: 0, percent: 0, count: 0 });
@@ -25,13 +26,16 @@ export default function Quiz(props) {
     { text: "Free Form Mode", selected: false },
   ]);
 
+  //console.log({quizFromPack})
+
   useEffect(() => {
     console.log(props);
-    if (props.quizType === "advanced") {
+    if (props.quizType === "studypack") {
       authServices
-        .getStudypackData(props.quizPackDetails.courseId)
+        .getStudypackData(props.quizId)
         .then((res) => {
-          console.log(res);
+          console.log({resQuestions: res});
+          setQuizFromPack(res.data)
         })
         .catch((err) => {
           console.log({ err });
@@ -284,7 +288,7 @@ export default function Quiz(props) {
             selectedQuizMode={selectedQuizMode}
             onClose={onCloseModal}
             completeTest={completeTest}
-            questions={props.quiz || []}
+            questions={props.quiz.length ? props.quiz : quizFromPack}
             time={{ hour, minutes }}
             quizType={props.quizType}
           />

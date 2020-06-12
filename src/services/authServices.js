@@ -134,7 +134,7 @@ let getLeaderboard = (userID, quizID) => {
 let getStudypackData = (quizID) => {
   return axios({
     method: "get",
-    url: `${urls.baseUrl}${quizID}?child=true`,
+    url: `${urls.studyPackUrl}${quizID}?child=true`,
     headers: headers(),
   });
 };
