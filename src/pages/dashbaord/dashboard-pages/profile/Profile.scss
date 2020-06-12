@@ -114,7 +114,7 @@
             text-align: right !important;
           }
           &.inactive {
-            opacity: 0.5;
+            opacity: 0.35;
           }
           &:hover {
             opacity: 1;
@@ -191,7 +191,8 @@
   }
 
   @media (max-width: 768px), (min-width: 768px) and (max-width: 1024px) {
-    padding: 0 20px;
+    padding: 0 !important;
+    overflow-x: hidden !important;
     .wide {
       width: 100%;
       display: block;
@@ -226,16 +227,20 @@
       display: block;
       margin-top: 30px;
     }
+    .badgess {
+      margin: 50px 0 !important;
+    }
     .achs {
       background-color: #fafafa !important;
       height: auto;
       overflow: auto;
       .arc-contents {
-        padding: 0px;
+        padding: 0 20px;
         .trophies {
           border-bottom: 1px solid #eee;
           display: flex;
           flex-flow: wrap;
+          margin: 0 -15px;
           .trophy {
             // display: inline-block;
             width: 20%;
@@ -247,7 +252,7 @@
             }
             p {
               margin-top: 5px;
-              font-size: 12px;
+              font-size: 11px;
             }
             &.left {
               text-align: left !important;
@@ -256,7 +261,7 @@
               text-align: right !important;
             }
             &.inactive {
-              opacity: 0.5;
+              opacity: 0.35;
             }
             &:hover {
               opacity: 1;

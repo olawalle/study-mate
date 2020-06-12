@@ -109,9 +109,6 @@ export default withRouter(function Profile({ history }) {
       exit={{ opacity: 0, x: 0 }}
       transition={{ duration: 0.6 }}
     >
-      <div className="links-wrap">
-        <Links />
-      </div>
       {seeAchievements ? (
         <div className="wide achs">
           <p

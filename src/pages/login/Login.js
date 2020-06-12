@@ -10,8 +10,14 @@ import { Link, withRouter } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useSnackbar } from "react-simple-snackbar";
 
+import TwitterLogin from "react-twitter-auth";
+import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
+import { GoogleLogin } from "react-google-login";
+
 import authServices from "../../services/authServices";
 import Loader from "../../components/loader/Loader";
+
+import * as config from "../../config.json";
 
 export default withRouter(function Login(props) {
   const context = useContext(userContext);
@@ -140,6 +146,19 @@ export default withRouter(function Login(props) {
     e.key === "Enter" && login();
   };
 
+  const twitterResponse = (e) => {};
+
+  const facebookResponse = (e) => {
+    console.log(e);
+  };
+
+  const googleResponse = (e) => {
+    console.log(e);
+  };
+  const onFailure = (error) => {
+    alert(error);
+  };
+
   return (
     <>
       {loading && <Loader />}
@@ -210,9 +229,24 @@ export default withRouter(function Login(props) {
             </p>
 
             <div className="buttons">
-              <button className="fb"></button>
+              <FacebookLogin
+                appId={config.FACEBOOK_APP_ID}
+                autoLoad={false}
+                callback={facebookResponse}
+                render={(renderProps) => (
+                  <button onClick={renderProps.onClick} className="fb"></button>
+                )}
+              />
               <button className="tw"></button>
-              <button className="gg"></button>
+              <GoogleLogin
+                clientId={config.GOOGLE_CLIENT_ID}
+                buttonText="Login"
+                onSuccess={googleResponse}
+                onFailure={onFailure}
+                render={(renderProps) => (
+                  <button onClick={renderProps.onClick} className="gg"></button>
+                )}
+              />
             </div>
             <p className="or">
               <span>or</span>

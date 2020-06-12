@@ -6,7 +6,7 @@ import { Modal } from "react-responsive-modal";
 import { userContext } from "../../store/UserContext";
 import { motion } from "framer-motion";
 
-import { Switch, Route, useRouteMatch } from "react-router-dom";
+import { Switch, Route, useRouteMatch, withRouter } from "react-router-dom";
 
 import Sidebar from "../../components/sidebar/Sidebar";
 import Nav from "../../components/nav/Nav";
@@ -23,15 +23,43 @@ import Badge2 from "../../assets/images/Badge2.svg";
 import Medal from "../../assets/images/Medal.svg";
 import Loader from "../../components/loader/Loader";
 import authServices from "../../services/authServices";
+import MobileCourses from "./dashboard-pages/mobileCourses/MobileCourses";
 
 const Dashboard = (props) => {
   let match = useRouteMatch();
   const context = useContext(userContext);
-  const { updateSubjects } = context;
+  const { updateSubjects, user } = context;
 
   let { loading } = context;
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    console.log(props.history.location.pathname);
+  }, [match]);
+
+  const backToDash = () => props.history.push("/dashboard/");
+
+  const flowRoute = () => {
+    let path = props.history.location.pathname;
+    if (path === "/dashboard/mobile-courses") {
+      return {
+        text: "< Home",
+        title: "Select a prefered course",
+      };
+    }
+    if (path === "/dashboard/profile") {
+      return {
+        text: "< Home",
+        title: "Profile",
+      };
+    }
+    if (path === "/dashboard/progress") {
+      return {
+        text: "< Home",
+        title: "Progress",
+      };
+    }
+    return {};
+  };
 
   return (
     <>
@@ -43,45 +71,34 @@ const Dashboard = (props) => {
         </div>
 
         <div className="contents">
-          <div className="banner">
-            <p>Your dependable learning buddy</p>
-
-            <div className="user_">
-              <img src={userIcon} className="usericon" alt="" />
-              <div className="edit">
-                <img
-                  src={editIcon}
-                  style={{ height: "20px", margin: "10px auto" }}
-                  alt=""
-                />
+          <div className={`banner ${!match.isExact && "shrink"}`}>
+            <p className="title_">Your dependable learning buddy</p>
+            {flowRoute().text && (
+              <span onClick={backToDash} className="mobile-title-text">
+                {flowRoute().text}
+              </span>
+            )}
+            {flowRoute().title && (
+              <p className="mobile-title">{flowRoute().title}</p>
+            )}
+            {match.isExact && (
+              <div className="user_">
+                <img src={userIcon} className="usericon" alt="" />
+                <div className="edit">
+                  <img
+                    src={editIcon}
+                    style={{ height: "20px", margin: "10px auto" }}
+                    alt=""
+                  />
+                </div>
               </div>
-            </div>
-            <p className="user-details_">
-              Chisom Blessing
-              <span>Junior secondary</span>
-            </p>
-            <div className="medals_">
-              <div className="medal b1">
-                <img src={coins} alt="" />
-                <span>5</span>
-              </div>
-              <div className="medal b2">
-                <img src={trophy} alt="" />
-                <span>7</span>
-              </div>
-              <div className="medal b3">
-                <img src={Medal} alt="" />
-                <span>12</span>
-              </div>
-              <div className="medal b4">
-                <img src={Badge1} alt="" />
-                <span>10</span>
-              </div>
-              <div className="medal b5">
-                <img src={Badge2} alt="" />
-                <span>0</span>
-              </div>
-            </div>
+            )}
+            {match.isExact && (
+              <p className="user-details_">
+                {`${user.firstName} ${user.surName}`}
+                <span>Junior secondary</span>
+              </p>
+            )}
           </div>
           <div className="main-content">
             <Switch>
@@ -90,6 +107,9 @@ const Dashboard = (props) => {
               </Route>
               <Route path={`${match.path}progress`}>
                 <Progress />
+              </Route>
+              <Route path={`${match.path}mobile-courses`}>
+                <MobileCourses />
               </Route>
               <Route path={match.path}>
                 <Learn />
@@ -102,4 +122,4 @@ const Dashboard = (props) => {
   );
 };
 
-export default Dashboard;
+export default withRouter(Dashboard);

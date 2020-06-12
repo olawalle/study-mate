@@ -54,9 +54,6 @@ export default function Progress() {
       exit={{ opacity: 0, x: 0 }}
       transition={{ duration: 0.6 }}
     >
-      <div className="links-wrap">
-        <Links />
-      </div>
       <div className="wide-side">
         <p className="heading">Learning Statistics</p>
         <div className="stats">

@@ -57,6 +57,7 @@
   }
 
   @media (max-width: 768px), (min-width: 768px) and (max-width: 1024px) {
+    padding: 0 !important;
     .wide-side {
       width: 100%;
       display: block;

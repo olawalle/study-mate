@@ -16,6 +16,11 @@ import logo from "../../assets/images/logo.svg";
 import logo2 from "../../assets/images/logo.png";
 import { userContext } from "../../store/UserContext";
 
+import TwitterLogin from "react-twitter-auth";
+import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
+import { GoogleLogin } from "react-google-login";
+import * as config from "../../config.json";
+
 import authServices from "../../services/authServices";
 import Loader from "../../components/loader/Loader";
 
@@ -28,6 +33,7 @@ export default withRouter(function Signup(props) {
   const [password, setpassword] = useState("");
   const [viewPwrd, setViewPwrd] = useState(false);
   const [hasError, sethasError] = useState(false);
+  const [image, setimage] = useState("");
   const options = {
     position: "top-right",
   };
@@ -48,28 +54,23 @@ export default withRouter(function Signup(props) {
     openSnackbar(err, 5000);
   };
 
-  const signup = () => {
-    if (
-      !surName ||
-      !firstName ||
-      !phoneNumber ||
-      !email ||
-      !password ||
-      !phoneNumber
-    ) {
+  const submit = (payload) => {
+    if (!payload && (!surName || !firstName || !email || !password)) {
       sethasError(true);
       return;
     }
+
     let data = {
       surName,
       firstName,
       phoneNumber,
       email,
       password,
-      phoneNumber,
+      image,
       confirmPassword: password,
     };
-    console.log(data);
+    let submitData = payload ? payload : data;
+    console.log(submitData);
     updateLoader(true);
     authServices
       .signup(data)
@@ -86,6 +87,28 @@ export default withRouter(function Signup(props) {
         updateLoader(false);
         showError("An error occured. Please try again");
       });
+  };
+
+  const twitterResponse = (e) => {};
+
+  const facebookResponse = (e) => {
+    console.log(e);
+    let data = {
+      email: e.email,
+      surName: e.name.split(" ")[0],
+      firstName: e.name.split(" ")[1],
+      image: e.picture.data.url,
+      password: e.userID,
+    };
+    // submit(data);
+  };
+
+  const googleResponse = (e) => {
+    console.log(e);
+  };
+
+  const onFailure = (error) => {
+    alert(error);
   };
 
   return (
@@ -151,9 +174,26 @@ export default withRouter(function Signup(props) {
           <p className="welcome mt50">Sign up to Studymate</p>
 
           <div className="buttons">
-            <button className="fb"></button>
+            <FacebookLogin
+              appId={config.FACEBOOK_APP_ID}
+              autoLoad={false}
+              callback={facebookResponse}
+              fields="name,email,picture"
+              scope="profile"
+              render={(renderProps) => (
+                <button onClick={renderProps.onClick} className="fb"></button>
+              )}
+            />
             <button className="tw"></button>
-            <button className="gg"></button>
+            <GoogleLogin
+              clientId={config.GOOGLE_CLIENT_ID}
+              buttonText="Login"
+              onSuccess={googleResponse}
+              onFailure={onFailure}
+              render={(renderProps) => (
+                <button onClick={renderProps.onClick} className="gg"></button>
+              )}
+            />
           </div>
           <p className="or">
             <span>or</span>
@@ -218,7 +258,7 @@ export default withRouter(function Signup(props) {
               </Link>
             </span>
 
-            <button className="main-btn mt20" onClick={signup}>
+            <button className="main-btn mt20" onClick={() => submit(null)}>
               Create account
             </button>
 

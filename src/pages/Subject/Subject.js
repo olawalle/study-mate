@@ -38,13 +38,20 @@ export default withRouter(function Subject({ history }) {
       });
   };
 
+  const toCourses = () => {
+    history.push(`/dashboard/mobile-courses`);
+  };
+
   return (
     <>
       {loading && <Loader />}
       <div className="subject">
         <Nav />
         <div className="banner">
-          <span style={{ textTransform: "capitalize" }}>
+          <span onClick={toCourses} className="mobile-title-text">
+            Courses
+          </span>
+          <span className="back" style={{ textTransform: "capitalize" }}>
             <img
               src={backArrow}
               height="25"
