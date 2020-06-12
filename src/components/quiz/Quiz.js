@@ -27,16 +27,12 @@ export default function Quiz(props) {
     { text: "Free Form Mode", selected: false },
   ]);
 
-  //console.log({quizFromPack})
-
   useEffect(() => {
-    console.log(props);
     if (props.quizType === "studypack") {
       authServices
         .getStudypackData(props.quizId)
         .then((res) => {
-          console.log({resQuestions: res});
-          setQuizFromPack(res.data)
+          setQuizFromPack(res.data);
         })
         .catch((err) => {
           console.log({ err });
@@ -298,6 +294,7 @@ export default function Quiz(props) {
             )}
           </div>
         ) : (
+          // remember to make any change to this component to its sibling down this component
           <QuizQuestion
             selectedQuizMode={selectedQuizMode}
             onClose={onCloseModal}
@@ -458,11 +455,12 @@ export default function Quiz(props) {
               )}
             </div>
           ) : (
+            // remember to make any change to this component to its sibling up this component
             <QuizQuestion
               selectedQuizMode={selectedQuizMode}
               onClose={onCloseModal}
               completeTest={completeTest}
-              questions={props.quiz || []}
+              questions={props.quiz.length ? props.quiz : quizFromPack}
               time={{ hour, minutes }}
               quizType={props.quizType}
             />

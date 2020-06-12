@@ -154,6 +154,18 @@ export default withRouter(function Login(props) {
 
   const googleResponse = (e) => {
     console.log(e);
+    let data = {
+      idToken: e.accessToken,
+      role: 0,
+    };
+    authServices
+      .googleLogin(data)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log({ err });
+      });
   };
   const onFailure = (error) => {
     alert(error);

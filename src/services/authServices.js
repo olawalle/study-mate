@@ -22,6 +22,14 @@ let login = (data) => {
   });
 };
 
+let googleLogin = (data) => {
+  return axios({
+    method: "post",
+    url: urls.googleAuthUrl,
+    data,
+  });
+};
+
 let getCurrentUser = (token) => {
   axios({
     method: "get",
@@ -142,6 +150,7 @@ let getStudypackData = (quizID) => {
 export default {
   signup,
   login,
+  googleLogin,
   updateUserData,
   getCurrentUser,
   getUserCourses,
