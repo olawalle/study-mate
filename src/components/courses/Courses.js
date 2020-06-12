@@ -4,8 +4,9 @@ import { userContext } from "../../store/UserContext";
 import "./Courses.scss";
 import neww from "../../assets/images/New.svg";
 import authServices from "../../services/authServices";
+import { withRouter } from "react-router-dom";
 
-export default function Courses(props) {
+export default withRouter(function Courses(props) {
   const context = useContext(userContext);
   const {
     userCourses,
@@ -40,6 +41,8 @@ export default function Courses(props) {
       .then((res) => {
         saveSelectedSubject(res.data);
         updateLoader(false);
+        props.moveToCourse &&
+          props.history.push(`/subject/${selectedSubject.id}`);
       })
       .catch((err) => {
         console.log({ err });
@@ -83,4 +86,4 @@ export default function Courses(props) {
       </button>
     </div>
   );
-}
+});

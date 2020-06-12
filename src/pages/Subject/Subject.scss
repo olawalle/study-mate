@@ -11,7 +11,17 @@
     color: #fff;
     background-image: url("../../assets/images/Banner.svg");
     position: relative;
-    span {
+    .mobile-title-text {
+      font-size: 12px;
+      padding: 10px 25px;
+      background-color: #5eade4;
+      color: #fff;
+      position: absolute;
+      bottom: 45px;
+      left: 20px;
+      border-radius: 25px;
+    }
+    .back {
       position: absolute;
       bottom: 30px;
     }
@@ -82,7 +92,7 @@
   .contents {
     padding: 0px 160px;
     background-color: #fafafa;
-    min-height: 500px;
+    height: calc(100vh - (150px + 130px));
     overflow: auto;
     .small {
       width: 28%;
@@ -182,15 +192,24 @@
       font-size: 14px;
       padding: 20px;
       background-position-x: 83%;
+      .back {
+        position: absolute;
+        bottom: 20px;
+        img {
+          display: none;
+        }
+      }
     }
     .sub-banner {
       padding: 0 20px;
+      z-index: 10 !important;
     }
     .contents {
-      padding: 20px;
+      padding: 0px;
       .small {
         width: 100%;
         padding: 0;
+        display: none;
         img {
           width: 60%;
           margin: 30px 20%;
@@ -204,9 +223,20 @@
           height: 320px;
           .half {
             width: 100%;
+            background-image: url("../../assets/images/Advanced\ test.svg");
+            color: #fff;
+            background-position-x: 73%;
+            background-position-y: -95px;
+            height: 408px;
             p {
               margin-top: 0px;
             }
+            .tw-btn {
+              background-color: #fca702 !important;
+            }
+          }
+          .bg {
+            display: none;
           }
         }
       }

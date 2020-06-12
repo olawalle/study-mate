@@ -30,6 +30,9 @@
       background-repeat: no-repeat;
       background-image: url("../../assets/images/dash.svg");
       background-position-x: 80%;
+      .mobile-title-text {
+        display: none;
+      }
       p {
         font-size: 20px;
         font-weight: 600;
@@ -291,6 +294,10 @@
   svg {
     fill: #fff;
   }
+
+  @media (max-width: 768px), (min-width: 768px) and (max-width: 1024px) {
+    right: -5px !important;
+  }
 }
 
 @media (max-width: 768px), (min-width: 768px) and (max-width: 1024px) {
@@ -310,12 +317,33 @@
     .banner {
       height: 200px !important;
       text-align: center;
-      p {
+      background-position-x: 50% !important;
+      transition: linear all 0.25s;
+      &.shrink {
+        height: 150px !important;
+      }
+      .title_ {
         display: none;
       }
+      .mobile-title-text {
+        display: block;
+        font-size: 12px;
+        padding: 10px 25px;
+        background-color: #5eade4;
+        color: #fff;
+        position: absolute;
+        bottom: 45px;
+        left: 20px;
+        border-radius: 25px;
+      }
+      .mobile-title {
+        font-size: 16px !important;
+        left: 20px !important;
+        bottom: 0 !important;
+      }
       .user_ {
-        width: 75px;
-        height: 75px;
+        width: 120px;
+        height: 120px;
         background-color: #10a3ff;
         border-radius: 50%;
         margin: 0 auto;
@@ -324,7 +352,7 @@
         position: relative;
         display: block !important;
         .usericon {
-          height: 70%;
+          height: 83%;
           margin: 12px auto;
         }
         .edit {

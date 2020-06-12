@@ -26,7 +26,7 @@
     position: relative;
     z-index: 100;
     .small {
-      width: 33%;
+      width: 30%;
       float: left;
       border-right: 1px solid #eee;
       span {
@@ -41,7 +41,7 @@
       }
     }
     .wide {
-      width: 66%;
+      width: 70%;
       float: left;
       white-space: nowrap;
       overflow: hidden;
@@ -85,14 +85,19 @@
     min-height: 500px;
     overflow: auto;
     .small {
-      width: 33%;
+      width: 30%;
       float: left;
       padding-right: 70px;
       padding-top: 30px;
+      position: relative;
       .header {
         font-size: 16px;
         font-weight: 600;
         margin-bottom: 10px;
+      }
+      .desc {
+        font-size: 14px;
+        line-height: 22px;
       }
       .level {
         padding: 20px 0;
@@ -100,13 +105,13 @@
         border-bottom: 1px solid #eee;
       }
       img {
-        width: 65%;
+        width: 90%;
         float: right;
-        margin-top: 40px;
+        margin: 40px 5%;
       }
     }
     .wide {
-      width: 66%;
+      width: 70%;
       float: left;
       height: calc(100vh - (115px + 130px + 75px));
       overflow: auto;

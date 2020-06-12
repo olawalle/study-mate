@@ -64,9 +64,13 @@ export default withRouter(function Studypack({ history }) {
         <div className="contents">
           <div className="small">
             <p className="header">Study Pack</p>
-            <div className="level">Studtpack 1</div>
-            <div className="level">Studtpack 2</div>
-            <div className="level">Studtpack 3</div>
+
+            <span className="desc">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore
+              temporibus dolorum, laborum aut libero aliquam omnis tempore nulla
+              mollitia quasi quidem nihil in sunt harum maiores porro ex
+              reiciendis amet!
+            </span>
             <img src={students} alt="" />
           </div>
           <div className="wide list">

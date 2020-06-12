@@ -210,17 +210,7 @@ export default function QuizQuestion(props) {
               </span>
             )}
             <span className="close">
-              <img
-                src={close}
-                alt=""
-                onClick={() => props.onClose()}
-                style={{
-                  width: "20px",
-                  float: "right",
-                  marginTop: "-5px",
-                  cursor: "pointer",
-                }}
-              />
+              <img src={close} alt="" onClick={() => props.onClose()} />
             </span>
             {attempts === 1 && showAlert && wrongAnswer && (
               <div className="alert">
@@ -277,7 +267,7 @@ export default function QuizQuestion(props) {
                 >
                   <span className="label">{option.option}</span>
                   <p>
-                    {option.text} - {option.id} - {activeQuestion.answerId}{" "}
+                    {option.text}
                     <br />
                     {showExplanation && option.id === activeQuestion.answerId && (
                       <span

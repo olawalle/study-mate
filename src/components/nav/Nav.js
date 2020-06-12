@@ -87,9 +87,14 @@ export default withRouter(function Nav(props) {
       <div className={`mobilenav ${show_nav ? "open" : ""}`}>
         <input type="text" placeholder="What do you want learn?" />
 
-        <p onClick={() => goTo("courses")}>Courses</p>
-        <p onClick={() => goTo("edit")}>Edit Profile</p>
-        <p onClick={() => goTo("logout")}>Logout</p>
+        <p onClick={() => goTo("edit")}>
+          <img src={edit} className="logo" alt="" />
+          Edit Profile
+        </p>
+        <p onClick={() => goTo("logout")}>
+          <img src={logoutIcon} className="logo" alt="" />
+          Logout
+        </p>
       </div>
     </div>
   );
