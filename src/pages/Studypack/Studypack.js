@@ -64,6 +64,7 @@ export default withRouter(function Studypack({ history }) {
         <div className="contents">
           <div className="small">
             <p className="header">Study Pack</p>
+
             <span className="desc">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore
               temporibus dolorum, laborum aut libero aliquam omnis tempore nulla
@@ -76,16 +77,17 @@ export default withRouter(function Studypack({ history }) {
             {studyPacks &&
               studyPacks.length &&
               studyPacks
-                .filter((a, b) => b === 1)
-                .map((quiz, i) => (
+                .map((quiz, i) => {
+                  return (
                   <Quiz
-                    quiz={quiz.quizes}
+                    quiz={quiz.id}
+                    quizId={quiz.id}
                     name={`Study pack ${i + 1}`}
                     shortDescription={quiz.shortDescription}
-                    quizType="advanced"
+                    quizType="studypack"
                     quizPackDetails={quiz}
                   />
-                ))}
+                )})}
           </div>
         </div>
       </div>
