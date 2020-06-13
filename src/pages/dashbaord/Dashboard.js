@@ -42,20 +42,29 @@ const Dashboard = (props) => {
     let path = props.history.location.pathname;
     if (path === "/dashboard/mobile-courses") {
       return {
-        text: "< Home",
+        text: "Home",
         title: "Select a prefered course",
       };
     }
     if (path === "/dashboard/profile") {
       return {
-        text: "< Home",
+        text: "Home",
         title: "Profile",
+        largeTitle: "My Profile",
       };
     }
     if (path === "/dashboard/progress") {
       return {
-        text: "< Home",
+        text: "Home",
         title: "Progress",
+        largeTitle: "Progress Wall",
+      };
+    }
+    if (path === "/dashboard/") {
+      return {
+        text: "Home",
+        title: "Learn",
+        largeTitle: "Your dependable learning buddy",
       };
     }
     return {};
@@ -72,7 +81,7 @@ const Dashboard = (props) => {
 
         <div className="contents">
           <div className={`banner ${!match.isExact && "shrink"}`}>
-            <p className="title_">Your dependable learning buddy</p>
+            <p className="title_">{flowRoute().largeTitle}</p>
             {flowRoute().text && (
               <span onClick={backToDash} className="mobile-title-text">
                 {flowRoute().text}

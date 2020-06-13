@@ -26,7 +26,7 @@ export default withRouter(function Studypack({ history }) {
       <div className="studypack">
         <Nav />
         <div className="banner">
-          <span>
+          <span className="backArrow">
             <img
               src={backArrow}
               height="25"
@@ -36,6 +36,9 @@ export default withRouter(function Studypack({ history }) {
               style={{ position: "relative", top: 5, cursor: "pointer" }}
             />
             Study pack
+          </span>
+          <span onClick={back} className="mobile-title-text">
+            HOME
           </span>
         </div>
         <div className="sub-banner">
@@ -76,9 +79,8 @@ export default withRouter(function Studypack({ history }) {
           <div className="wide list">
             {studyPacks &&
               studyPacks.length &&
-              studyPacks
-                .map((quiz, i) => {
-                  return (
+              studyPacks.map((quiz, i) => {
+                return (
                   <Quiz
                     quiz={quiz.id}
                     quizId={quiz.id}
@@ -87,7 +89,8 @@ export default withRouter(function Studypack({ history }) {
                     quizType="studypack"
                     quizPackDetails={quiz}
                   />
-                )})}
+                );
+              })}
           </div>
         </div>
       </div>

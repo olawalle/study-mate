@@ -168,7 +168,7 @@ export default withRouter(function Login(props) {
       });
   };
   const onFailure = (error) => {
-    alert(error);
+    // alert(error);
   };
 
   return (

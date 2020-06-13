@@ -74,7 +74,7 @@ export default withRouter(function Lesson({ disableClick, history, video }) {
       <div className="lesson" onClick={() => openModal(video.url)}>
         <p>
           <img src={play} width="20" className="mr15 mt5" alt="" />
-          <span style={{ fontSize: 14 }}>{video.name}</span>
+          <span style={{ fontSize: 12 }}>{video.name}</span>
         </p>
       </div>
 

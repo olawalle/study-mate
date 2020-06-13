@@ -173,6 +173,7 @@
   }
 
   @media (max-width: 768px), (min-width: 768px) and (max-width: 1024px) {
+    overflow: auto !important;
     .left-side {
       display: none;
     }
@@ -180,6 +181,7 @@
       width: 100%;
       padding: 160px 20px 20px;
       position: relative;
+      overflow: auto !important;
       .mobileLogo {
         display: block;
         position: absolute;

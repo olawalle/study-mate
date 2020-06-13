@@ -31,7 +31,10 @@
       background-image: url("../../assets/images/dash.svg");
       background-position-x: 80%;
       .mobile-title-text {
-        display: none;
+        display: none !important;
+      }
+      .mobile-title {
+        display: none !important;
       }
       p {
         font-size: 20px;
@@ -326,7 +329,7 @@
         display: none;
       }
       .mobile-title-text {
-        display: block !important;
+        display: block;
         font-size: 12px;
         padding: 10px 25px;
         background-color: #5eade4;

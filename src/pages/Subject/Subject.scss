@@ -20,6 +20,7 @@
       bottom: 45px;
       left: 20px;
       border-radius: 25px;
+      display: none;
     }
     .back {
       position: absolute;
@@ -198,6 +199,9 @@
         img {
           display: none;
         }
+      }
+      .mobile-title-text {
+        display: block;
       }
     }
     .sub-banner {

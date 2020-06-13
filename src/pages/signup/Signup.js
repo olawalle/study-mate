@@ -108,7 +108,7 @@ export default withRouter(function Signup(props) {
   };
 
   const onFailure = (error) => {
-    alert(error);
+    // alert(error);
   };
 
   return (

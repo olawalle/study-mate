@@ -147,6 +147,14 @@ let getStudypackData = (quizID) => {
   });
 };
 
+let uploadFile = (data) => {
+  return axios({
+    method: "post",
+    url: urls.filesUrl,
+    data,
+  });
+};
+
 export default {
   signup,
   login,
@@ -164,4 +172,5 @@ export default {
   getUserAward,
   getLeaderboard,
   getStudypackData,
+  uploadFile,
 };
