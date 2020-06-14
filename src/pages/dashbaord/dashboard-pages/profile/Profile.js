@@ -101,6 +101,7 @@ export default withRouter(function Profile({ history }) {
   const toEdit = () => {
     history.push("/edit-profile");
   };
+
   return (
     <motion.div
       className="profile"
@@ -181,6 +182,10 @@ export default withRouter(function Profile({ history }) {
 
           <div className="badgess">
             <Achievements setseeAchievements={setseeAchievements} />
+          </div>
+
+          <div className="lbd">
+            <Leaderboard />
           </div>
 
           <div className="subs">

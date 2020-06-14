@@ -21,6 +21,9 @@
     height: calc(100% - 75px);
     float: left;
     overflow: auto;
+    .mobile-title-text {
+      display: none;
+    }
     .banner {
       height: 160px;
       width: 100%;
@@ -30,11 +33,8 @@
       background-repeat: no-repeat;
       background-image: url("../../assets/images/dash.svg");
       background-position-x: 80%;
-      .mobile-title-text {
-        display: none !important;
-      }
       .mobile-title {
-        display: none !important;
+        display: block;
       }
       p {
         font-size: 20px;
@@ -48,6 +48,9 @@
     .main-content {
       padding: 20px;
     }
+  }
+  .none {
+    display: none !important;
   }
 }
 // .learn {
@@ -292,8 +295,8 @@
 }
 // }
 .react-responsive-modal-closeButton {
-  top: -35px !important;
-  right: -42px !important;
+  top: -45px !important;
+  right: -25px !important;
   svg {
     fill: #fff;
   }
@@ -566,6 +569,9 @@
         }
       }
     }
+  }
+  .react-responsive-modal-overlay {
+    padding: 0 !important;
   }
 }
 

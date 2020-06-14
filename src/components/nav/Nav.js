@@ -11,6 +11,7 @@ import caret from "../../assets/images/down-arrow.svg";
 import search from "../../assets/images/search.svg";
 import { withRouter } from "react-router-dom";
 import { userContext } from "../../store/UserContext";
+import { appUrl } from "../../services/urls";
 
 export default withRouter(function Nav(props) {
   const context = useContext(userContext);
@@ -44,8 +45,14 @@ export default withRouter(function Nav(props) {
       </span>
 
       <span className="user f-right">
-        <div className="avatar">
-          <img src={userIcon} height="30" alt="" />
+        <div
+          className="avatar"
+          style={{
+            backgroundImage: `url("${appUrl}${context.user.image}")`,
+            backgroundSize: "cover",
+          }}
+        >
+          {!context.user.image && <img src={userIcon} height="30" alt="" />}
         </div>
         {fullname}
         <img

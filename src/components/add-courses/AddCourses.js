@@ -14,6 +14,7 @@ export default function AddCourses(props) {
   const [newSelectedCourses, setnewSelectedCourses] = useState([]);
   const [toBeRemoved, settoBeRemoved] = useState([]);
   const [step, setStep] = useState(1);
+  let modalWidth = window.innerWidth > 1024 ? 98 : 100;
 
   const preSelectedCourses = userCourses.reduce((agg, curr) => {
     agg[curr.learnCourseId] = curr;
@@ -141,7 +142,7 @@ export default function AddCourses(props) {
         open={open}
         onClose={onCloseModal}
         center
-        styles={{ modal: { width: "98%" } }}
+        styles={{ modal: { width: `${modalWidth}%` } }}
         closeOnOverlayClick={false}
       >
         <div

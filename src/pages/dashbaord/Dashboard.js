@@ -16,11 +16,6 @@ import Progress from "./dashboard-pages/progress/Progress";
 
 import userIcon from "../../assets/images/user.svg";
 import editIcon from "../../assets/images/edit.svg";
-import coins from "../../assets/images/coins.svg";
-import trophy from "../../assets/images/Trophy.svg";
-import Badge1 from "../../assets/images/Badge1.svg";
-import Badge2 from "../../assets/images/Badge2.svg";
-import Medal from "../../assets/images/Medal.svg";
 import Loader from "../../components/loader/Loader";
 import authServices from "../../services/authServices";
 import MobileCourses from "./dashboard-pages/mobileCourses/MobileCourses";
@@ -31,6 +26,7 @@ const Dashboard = (props) => {
   const { updateSubjects, user } = context;
 
   let { loading } = context;
+  let path = props.history.location.pathname;
 
   useEffect(() => {
     console.log(props.history.location.pathname);
@@ -39,7 +35,6 @@ const Dashboard = (props) => {
   const backToDash = () => props.history.push("/dashboard/");
 
   const flowRoute = () => {
-    let path = props.history.location.pathname;
     if (path === "/dashboard/mobile-courses") {
       return {
         text: "Home",
@@ -83,12 +78,19 @@ const Dashboard = (props) => {
           <div className={`banner ${!match.isExact && "shrink"}`}>
             <p className="title_">{flowRoute().largeTitle}</p>
             {flowRoute().text && (
-              <span onClick={backToDash} className="mobile-title-text">
+              <span
+                onClick={backToDash}
+                className={`mobile-title-text ${
+                  path === "/dashboard/" && "none"
+                }`}
+              >
                 {flowRoute().text}
               </span>
             )}
             {flowRoute().title && (
-              <p className="mobile-title">{flowRoute().title}</p>
+              <p className={`mobile-title ${path === "/dashboard/" && "none"}`}>
+                {flowRoute().title}
+              </p>
             )}
             {match.isExact && (
               <div className="user_">

@@ -12,6 +12,9 @@ import editIcon from "../../../../assets/images/edit.svg";
 import { withRouter } from "react-router-dom";
 import { userContext } from "../../../../store/UserContext";
 import UserPhoto from "../../../../components/user-photo/UserPhoto";
+import authServices from "../../../../services/authServices";
+import Modal from "react-responsive-modal";
+import Loader from "../../../../components/loader/Loader";
 
 export default withRouter(function EditProfile({ history }) {
   const context = useContext(userContext);
@@ -19,8 +22,14 @@ export default withRouter(function EditProfile({ history }) {
   const [email, setemail] = useState("");
   const [phone, setphone] = useState("");
   const [password, setpassword] = useState("");
+  const [code, setcode] = useState("");
+  const [username, setusername] = useState("");
+  const [location, setlocation] = useState("");
+  const [dob, setdateOfBirth] = useState("");
 
-  const { user } = context;
+  const [modal, setmodal] = useState(false);
+
+  const { user, loading, updateLoader } = context;
 
   useEffect(() => {
     console.log(user);
@@ -28,6 +37,7 @@ export default withRouter(function EditProfile({ history }) {
     setemail(user.email);
     setphone(user.phoneNumber);
   }, []);
+
   const [checked, setchecked] = useState(true);
 
   const handleChange = () => {};
@@ -37,8 +47,68 @@ export default withRouter(function EditProfile({ history }) {
   };
 
   const toTerms = () => {
-    console.log("olo");
     history.push("/terms");
+  };
+
+  const toContact = () => {
+    history.push("/faq");
+  };
+
+  const generateCode = () => {
+    updateLoader(true);
+    let data = { email: "olawalle94@gmail.com" };
+    authServices
+      .generateCode(data)
+      .then((res) => {
+        console.log(res);
+        setmodal(true);
+        updateLoader(false);
+      })
+      .catch((err) => {
+        console.log({ err });
+        updateLoader(false);
+      });
+  };
+
+  const verifyEmail = () => {
+    authServices
+      .generateCode({ code })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log({ err });
+      });
+  };
+
+  const onCloseModal = () => setmodal(false);
+
+  const updateUser = () => {
+    let obj = {
+      firstName: fullname.split(" ")[0],
+      surName: fullname.split(" ")[1],
+      username,
+      location,
+      dob,
+    };
+    updateLoader(true);
+    let data = Object.keys(obj).map((key) => {
+      return {
+        value: obj[key],
+        op: "add",
+        path: `/${key}`,
+      };
+    });
+    authServices
+      .updateUserData(data, user.id)
+      .then((res) => {
+        updateLoader(false);
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log({ err });
+        updateLoader(false);
+      });
   };
 
   return (
@@ -49,6 +119,7 @@ export default withRouter(function EditProfile({ history }) {
       exit={{ opacity: 0, x: 0 }}
       transition={{ duration: 0.6 }}
     >
+      {loading && <Loader />}
       <Nav />
       <div className="edit-contents">
         <div className="banner">
@@ -86,7 +157,10 @@ export default withRouter(function EditProfile({ history }) {
 
               <div className="inp-wrap left">
                 <span className="label">Create Username</span>
-                <input type="text" />
+                <input
+                  type="text"
+                  onChange={(e) => setusername(e.target.value)}
+                />
                 <img src={edit} alt="" />
               </div>
 
@@ -107,18 +181,26 @@ export default withRouter(function EditProfile({ history }) {
                   defaultValue={email}
                   onChange={(e) => setemail(e.target.value)}
                 />
-                <span className="alert">verify email</span>
+                <span className="alert" onClick={() => generateCode()}>
+                  verify email
+                </span>
               </div>
 
               <div className="inp-wrap right">
                 <span className="label">Location</span>
-                <input type="text" />
+                <input
+                  type="text"
+                  onChange={(e) => setlocation(e.target.value)}
+                />
                 <img src={edit} alt="" />
               </div>
 
               <div className="inp-wrap left">
                 <span className="label">Date of birth</span>
-                <input type="text" />
+                <input
+                  type="date"
+                  onChange={(e) => setdateOfBirth(e.target.value)}
+                />
               </div>
 
               <div className="inp-wrap right">
@@ -126,7 +208,9 @@ export default withRouter(function EditProfile({ history }) {
                 <input type="text" />
               </div>
 
-              <button className="tw-btn">Save changes</button>
+              <button className="tw-btn" onClick={updateUser}>
+                Save changes
+              </button>
             </div>
           </div>
           <div className="small">
@@ -184,7 +268,9 @@ export default withRouter(function EditProfile({ history }) {
                 </span>
               </p>
 
-              <button className="tw-btn">Contact support</button>
+              <button className="tw-btn" onClick={toContact}>
+                Contact support
+              </button>
               <button className="tw-btn" onClick={toTerms}>
                 Terms/Privacy
               </button>
@@ -192,6 +278,45 @@ export default withRouter(function EditProfile({ history }) {
           </div>
         </div>
       </div>
+
+      <Modal
+        open={modal}
+        onClose={onCloseModal}
+        center
+        // styles={{ modal: { width: "98%" } }}
+      >
+        <p
+          style={{ borderBottom: "1px solid #eee", padding: "0px 0 15px 15px" }}
+        >
+          Verify Email address
+        </p>
+        <div style={{ padding: 20, width: 500, textAlign: "center" }}>
+          <span className="label">
+            Enter the verification code that was sent to your email address
+          </span>
+          <input
+            style={{
+              background: "#f8f8f8",
+              height: "50px",
+              border: 0,
+              width: "100%",
+              padding: "0 20px",
+              margin: "10px 0 20px",
+            }}
+            placeholder="Verification Code"
+            type="text"
+            onChange={(e) => setcode(e.target.value)}
+          />
+          <br />
+          <button
+            className="tw-btn"
+            onClick={verifyEmail}
+            style={{ padding: "0 30px" }}
+          >
+            Verify Email
+          </button>
+        </div>
+      </Modal>
     </motion.div>
   );
 });

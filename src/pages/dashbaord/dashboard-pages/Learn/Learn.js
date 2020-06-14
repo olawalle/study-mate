@@ -54,6 +54,8 @@ export default withRouter(function Learn({ history }) {
     history.push("/dashboard/mobile-courses");
   };
 
+  const toEdit = () => history.push("/edit-profile");
+
   const toProgress = () => history.push("/dashboard/progress");
   const toProfile = () => history.push("/dashboard/profile");
 
@@ -115,10 +117,10 @@ export default withRouter(function Learn({ history }) {
           2020 All right reserved. Studymate. Powered by infomal Nigeria
         </p>
       </div>
-      {!verified && (
+      {!user.isVerified && (
         <div className="verify">
-          Please edit your profile to complete your registeration
-          <button>EDIT PROFILE</button>
+          <span>Please edit your profile to complete your registeration</span>
+          <button onClick={toEdit}>EDIT PROFILE</button>
         </div>
       )}
       {userCourses.length ? (

@@ -22,6 +22,22 @@ let login = (data) => {
   });
 };
 
+let generateCode = (data) => {
+  return axios({
+    method: "post",
+    url: urls.getCodeUrl,
+    data,
+  });
+};
+
+let verifyEmail = (data) => {
+  return axios({
+    method: "put",
+    url: urls.verifyEmailUrl,
+    data,
+  });
+};
+
 let googleLogin = (data) => {
   return axios({
     method: "post",
@@ -33,7 +49,7 @@ let googleLogin = (data) => {
 let getCurrentUser = (token) => {
   axios({
     method: "get",
-    url: urls.userUrl,
+    url: urls.currentUserUrl,
     headers: { Authorization: `Bearer ${token}` },
   })
     .then((res) => {
@@ -158,6 +174,8 @@ let uploadFile = (data) => {
 export default {
   signup,
   login,
+  generateCode,
+  verifyEmail,
   googleLogin,
   updateUserData,
   getCurrentUser,

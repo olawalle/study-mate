@@ -5,7 +5,7 @@
     font-size: 14px;
     font-weight: 600;
     border-bottom: 1px solid #eee;
-    padding: 20px 30px;
+    padding: 20px;
     margin: 0;
     background-color: #fff;
   }
@@ -83,6 +83,9 @@
         }
       }
     }
+  }
+  .lbd {
+    display: none;
   }
   .achs {
     background-color: #fafafa !important;
@@ -222,9 +225,13 @@
         }
       }
     }
+    .lbd {
+      display: block !important;
+      padding-bottom: 100px;
+    }
     .small {
       width: 100%;
-      display: block;
+      display: none !important;
       margin-top: 30px;
     }
     .badgess {

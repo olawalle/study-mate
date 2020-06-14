@@ -17,6 +17,7 @@ import { userContext } from "../../store/UserContext";
 export default withRouter(function Lesson({ disableClick, history, video }) {
   const context = useContext(userContext);
   const { selectedSubject } = context;
+  let modalWidth = window.innerWidth > 1024 ? 96 : 100;
   const duration = selectedSubject.videos.reduce(
     (sum, vid) => (sum += vid.duration),
     0
@@ -83,7 +84,7 @@ export default withRouter(function Lesson({ disableClick, history, video }) {
         onClose={() => setopen(!open)}
         center
         showCloseIcon={false}
-        styles={{ modal: { width: "96%" } }}
+        styles={{ modal: { width: `${modalWidth}%` } }}
         closeOnOverlayClick={false}
       >
         <div className="video-modal">
