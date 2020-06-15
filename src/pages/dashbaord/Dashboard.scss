@@ -21,7 +21,8 @@
     height: calc(100% - 75px);
     float: left;
     overflow: auto;
-    .mobile-title-text {
+    .mobile-title-text,
+    .mobile-title {
       display: none;
     }
     .banner {
@@ -33,9 +34,6 @@
       background-repeat: no-repeat;
       background-image: url("../../assets/images/dash.svg");
       background-position-x: 80%;
-      .mobile-title {
-        display: block;
-      }
       p {
         font-size: 20px;
         font-weight: 600;
@@ -147,6 +145,7 @@
     }
     .left1 {
       background-image: url("../../assets/images/Test\ Introduction.svg");
+      background-position-x: 64%;
     }
     .left2 {
       background-image: url("../../assets/images/review.svg");
@@ -181,7 +180,7 @@
             margin-right: 12px;
           }
           .blue--text {
-            font-size: 10px;
+            font-size: 12px;
             width: 60%;
             margin: 10px 30px 0;
             p {
@@ -343,6 +342,7 @@
         border-radius: 25px;
       }
       .mobile-title {
+        display: block;
         font-size: 16px !important;
         left: 20px !important;
         bottom: 0 !important;

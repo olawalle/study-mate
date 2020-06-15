@@ -1,11 +1,16 @@
-<svg id="Component_32_1" data-name="Component 32 – 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="899" height="871" viewBox="0 0 899 871">
+<svg id="Component_7_1" data-name="Component 7 – 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="899" height="871" viewBox="0 0 899 871">
   <defs>
     <clipPath id="clip-path">
       <rect id="Rectangle_1569" data-name="Rectangle 1569" width="899" height="871" transform="translate(0 -0.124)" fill="#fff" stroke="#707070" stroke-width="1"/>
     </clipPath>
-    <linearGradient id="linear-gradient" x1="0.544" y1="0.549" x2="0.5" gradientUnits="objectBoundingBox">
-      <stop offset="0" stop-color="#10a3ff"/>
-      <stop offset="1" stop-color="#002984"/>
+    <linearGradient id="linear-gradient" x1="0.5" y1="1" x2="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0.006" stop-color="#bae1f6"/>
+      <stop offset="0.104" stop-color="#b3dbf5"/>
+      <stop offset="0.243" stop-color="#a0cef3"/>
+      <stop offset="0.407" stop-color="#82b7f0"/>
+      <stop offset="0.549" stop-color="#629fee"/>
+      <stop offset="0.731" stop-color="#4c7cec"/>
+      <stop offset="0.989" stop-color="#2a45e9"/>
     </linearGradient>
     <linearGradient id="linear-gradient-2" x1="0.5" y1="1" x2="0.5" gradientUnits="objectBoundingBox">
       <stop offset="0" stop-color="#cdd9ff"/>

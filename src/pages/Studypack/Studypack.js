@@ -83,6 +83,7 @@ export default withRouter(function Studypack({ history }) {
                 return (
                   <Quiz
                     quiz={quiz.id}
+                    open={true}
                     quizId={quiz.id}
                     name={`Study pack ${i + 1}`}
                     shortDescription={quiz.shortDescription}

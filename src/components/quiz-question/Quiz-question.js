@@ -4,6 +4,7 @@ import ProgressBar from "../progress-bar/ProgressBar";
 import close from "../../assets/images/close.svg";
 import streak from "../../assets/images/repeat.svg";
 import caret from "../../assets/images/down-arrow.svg";
+import { appUrl } from "../../services/urls";
 
 export default function QuizQuestion(props) {
   let hr = props.time ? parseFloat(props.time.hour) * 60 : 0;
@@ -25,7 +26,7 @@ export default function QuizQuestion(props) {
   const { selectedQuizMode, questions } = props;
   let activeQuestion = questions[currentQuestion];
 
-  console.log({myquestion: questions})
+  // console.log({ myquestion: questions });
   const [options, setoptions] = useState([]);
 
   useEffect(() => {
@@ -68,6 +69,7 @@ export default function QuizQuestion(props) {
     setanswered(false);
     setwrongAnswer(false);
     setoptionSelected(false);
+    setshowExplanation(false);
     btnText();
     !answers[no] && setattempts(0);
   };
@@ -78,6 +80,7 @@ export default function QuizQuestion(props) {
     getOptions(no);
     setanswered(false);
     setwrongAnswer(false);
+    setshowExplanation(false);
     setoptionSelected(false);
     btnText();
     !answers[no] && setattempts(0);
@@ -89,7 +92,8 @@ export default function QuizQuestion(props) {
       setattempts(attempts + 1);
       let correctlyAnswered = options[i].id !== activeQuestion.answerId;
       setwrongAnswer(correctlyAnswered);
-      !correctlyAnswered && setshowAlert(true);
+      // !correctlyAnswered &&
+      setshowAlert(true);
     }
     setoptionSelected(true);
 
@@ -154,12 +158,14 @@ export default function QuizQuestion(props) {
   };
 
   const submitLearingAnswer = () => {
-    if (answers.length === questions.length || showExplanation) {
+    if (answers.length === questions.length) {
       submit();
       return;
     }
     setwrongAnswer(false);
-    if (attempts < 2 && wrongAnswer) {
+    setshowExplanation(false);
+    setshowAlert(false);
+    if (attempts < 2 && wrongAnswer && !showExplanation) {
       setshowAlert(false);
     } else {
       nextQuestion();
@@ -288,6 +294,12 @@ export default function QuizQuestion(props) {
                         wring this answer is wring this answer is wring this
                         answer is wring this answer is wring this answer is
                         wring this answer is wring
+                        <audio controls>
+                          <source
+                            src={`${appUrl}${activeQuestion.audioUrl}`}
+                            type="audio/mpeg"
+                          />
+                        </audio>
                       </span>
                     )}
                   </p>

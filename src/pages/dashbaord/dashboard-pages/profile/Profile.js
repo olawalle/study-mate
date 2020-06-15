@@ -69,32 +69,27 @@ export default withRouter(function Profile({ history }) {
     {
       image: b1,
       name: "Overall",
-      story: `
-      Badge 1 Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem ipsa vitae molestiae nostrum magnam quae voluptates ad ea placeat voluptas sequi, ullam fugiat esse tempora omnis aliquid deleniti accusamus dignissimos.`,
+      story: `Score the highest points to be at the top of the Leaderboard! This includes topping the charts on videos watched and high test points accumulated.`,
     },
     {
       image: b2,
       name: "Silver",
-      story: `
-      Badge 2 Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem ipsa vitae molestiae nostrum magnam quae voluptates ad ea placeat voluptas sequi, ullam fugiat esse tempora omnis aliquid deleniti accusamus dignissimos.`,
+      story: `Be the second best at the top of the Leaderboard! This includes topping the charts in second place on videos watched and high test points accumulated.`,
     },
     {
       image: b3,
       name: "Bronze",
-      story: `
-      Badge 3 Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem ipsa vitae molestiae nostrum magnam quae voluptates ad ea placeat voluptas sequi, ullam fugiat esse tempora omnis aliquid deleniti accusamus dignissimos.`,
+      story: `Take the third place on the Leaderboard.  This includes topping the charts in third place on videos watched and high test points accumulated. `,
     },
     {
       image: b4,
-      name: "Studypack",
-      story: `
-      Badge 4 Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem ipsa vitae molestiae nostrum magnam quae voluptates ad ea placeat voluptas sequi, ullam fugiat esse tempora omnis aliquid deleniti accusamus dignissimos.`,
+      name: "Flagship Badge",
+      story: `Finish one Study Pack with 70% pass to earn this *Flagship Badge*`,
     },
     {
       image: b5,
-      name: "Studypack 2",
-      story: `
-      Badge 5 Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem ipsa vitae molestiae nostrum magnam quae voluptates ad ea placeat voluptas sequi, ullam fugiat esse tempora omnis aliquid deleniti accusamus dignissimos.`,
+      name: "Champion Badge",
+      story: `Finish all Study Packs per subject with at least 60% and above pass to earn this *Champion Badge* That is, you would be a *Champion in Mathematics or English or Biology....*`,
     },
   ]);
 
@@ -128,7 +123,7 @@ export default withRouter(function Profile({ history }) {
                   onClick={() => setactiveBadge(i)}
                   className={`trophy ${i !== activeBadge ? "inactive" : ""}`}
                 >
-                  <img src={badge.image} alt="" />
+                  <img src={badge.image} alt="" height="70" />
                   <p>{badge.name}</p>
                 </div>
               ))}
@@ -157,7 +152,7 @@ export default withRouter(function Profile({ history }) {
           <p className="heading">Personal Information</p>
           <div className="form">
             <div className="half">
-              <span>Full name</span>
+              <span>Full Name</span>
               <p>{`${user.firstName} ${user.surName}`}</p>
             </div>
             <div className="half">
@@ -165,7 +160,7 @@ export default withRouter(function Profile({ history }) {
               <p>{user.firstName}</p>
             </div>
             <div className="half">
-              <span>Email address</span>
+              <span>Email Address</span>
               <p>{user.email}</p>
             </div>
             <div className="half">

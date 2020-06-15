@@ -64,7 +64,7 @@ export default function Progress() {
             <div className="selects">
               <Select
                 placeholder="Last 7 days"
-                value={selectedOption}
+                value={selectedOption_}
                 onChange={handleChange_}
                 options={days}
               />

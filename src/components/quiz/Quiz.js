@@ -96,6 +96,11 @@ export default function Quiz(props) {
     }
   };
 
+  const handleClick = () => {
+    if (!props.open) return;
+    setopenMobileQuiz(true);
+  };
+
   const logg = () => {
     console.log(props);
   };
@@ -120,7 +125,7 @@ export default function Quiz(props) {
         className="blue-btn big-btn"
         onClick={onOpenModal}
       >
-        Resume Quiz
+        Start Quiz
       </button>
 
       <button
@@ -131,9 +136,9 @@ export default function Quiz(props) {
             : "Click to take test"
         }
         className="blue-btn sm-btn"
-        onClick={() => setopenMobileQuiz(true)}
+        onClick={handleClick}
       >
-        Resume Quiz
+        Start Quiz
       </button>
 
       <div className="patterns">

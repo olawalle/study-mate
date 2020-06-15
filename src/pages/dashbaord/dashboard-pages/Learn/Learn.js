@@ -147,11 +147,15 @@ export default withRouter(function Learn({ history }) {
             </div>
           </div>
 
-          <div className="quizzes mt30">
+          <div className="quizzes mt30" onClick={toSubject}>
             {selectedSubject &&
             selectedSubject.quizzes &&
             selectedSubject.quizzes.length ? (
-              <Quiz quiz={selectedSubject.quizzes} quizType="normal" />
+              <Quiz
+                open={false}
+                quiz={selectedSubject.quizzes}
+                quizType="normal"
+              />
             ) : null}
           </div>
         </div>

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./Subject.scss";
 import ProgressBar from "../../components/progress-bar/ProgressBar";
 import Nav from "../../components/nav/Nav";
@@ -16,7 +16,12 @@ import authServices from "../../services/authServices";
 export default withRouter(function Subject({ history }) {
   const context = useContext(userContext);
   const { selectedSubject, updateLoader, updateStudyPack, loading } = context;
-  console.log(selectedSubject);
+  const [links, setlinks] = useState([
+    { text: "Beginner" },
+    { text: "Intermediate" },
+    { text: "Advanced" },
+  ]);
+  const [linkIndex, setlinkIndex] = useState(0);
   const back = () => {
     history.push("/dashboard/");
   };
@@ -89,9 +94,18 @@ export default withRouter(function Subject({ history }) {
         <div className="contents">
           <div className="small">
             <p className="header">Study Levels</p>
-            <div className="level">Beginner</div>
-            <div className="level">Intermediate</div>
-            <div className="level">Advanced</div>
+            {links.map((link, i) => (
+              <div
+                key={link.text}
+                onClick={() => setlinkIndex(i)}
+                className={`level ${i === linkIndex ? "active" : ""}`}
+              >
+                <div className="band">
+                  <div className="inner"></div>
+                </div>
+                <span>{link.text}</span>
+              </div>
+            ))}
 
             <img src={students} alt="" />
             <img
@@ -107,7 +121,7 @@ export default withRouter(function Subject({ history }) {
             />
           </div>
           <div className="wide">
-            <p className="heading">Beginner</p>
+            <p className="heading">Lesson pack 1</p>
             <div className="lessons-wrap mb30">
               <div className="lessons">
                 {selectedSubject.videos.map((video) => (
@@ -118,10 +132,14 @@ export default withRouter(function Subject({ history }) {
             {selectedSubject &&
             selectedSubject.quizzes &&
             selectedSubject.quizzes.length ? (
-              <Quiz quizType="normal" quiz={selectedSubject.quizzes} />
+              <Quiz
+                open={true}
+                quizType="normal"
+                quiz={selectedSubject.quizzes}
+              />
             ) : null}
 
-            <p className="heading">Intermediate</p>
+            <p className="heading">Lesson pack 2</p>
             <div className="lessons-wrap mb30">
               <div className="lessons">
                 {selectedSubject.videos.map((video) => (
@@ -132,10 +150,14 @@ export default withRouter(function Subject({ history }) {
             {selectedSubject &&
               selectedSubject.quizzes &&
               selectedSubject.quizzes.length && (
-                <Quiz quizType="normal" quiz={selectedSubject.quizzes} />
+                <Quiz
+                  open={true}
+                  quizType="normal"
+                  quiz={selectedSubject.quizzes}
+                />
               )}
 
-            <p className="heading">Advanced</p>
+            <p className="heading">Lesson pack 3</p>
             <div className="lessons-wrap mb30">
               <div className="lessons">
                 {selectedSubject.videos.map((video) => (
@@ -146,7 +168,11 @@ export default withRouter(function Subject({ history }) {
             {selectedSubject &&
               selectedSubject.quizzes &&
               selectedSubject.quizzes.length && (
-                <Quiz quizType="normal" quiz={selectedSubject.quizzes} />
+                <Quiz
+                  open={true}
+                  quizType="normal"
+                  quiz={selectedSubject.quizzes}
+                />
               )}
 
             <div className="pack">

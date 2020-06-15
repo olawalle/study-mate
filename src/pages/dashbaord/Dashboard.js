@@ -81,14 +81,18 @@ const Dashboard = (props) => {
               <span
                 onClick={backToDash}
                 className={`mobile-title-text ${
-                  path === "/dashboard/" && "none"
+                  path === "/dashboard/" ? "none" : ""
                 }`}
               >
                 {flowRoute().text}
               </span>
             )}
             {flowRoute().title && (
-              <p className={`mobile-title ${path === "/dashboard/" && "none"}`}>
+              <p
+                className={`mobile-title ${
+                  path === "/dashboard/" ? "none" : ""
+                }`}
+              >
                 {flowRoute().title}
               </p>
             )}
