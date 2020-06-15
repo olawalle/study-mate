@@ -64,7 +64,7 @@ export default function UserPhoto() {
         className="user-photo"
         style={{
           position: "relative",
-          backgroundImage: `url("${appUrl}${user.image}")`,
+          backgroundImage: `url("${appUrl}${user.image && user.image.replace('\\','/')}")`,
           backgroundSize: "cover",
         }}
         title="change profile photo"

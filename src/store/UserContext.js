@@ -120,6 +120,7 @@ export default class UserContextProvider extends Component {
       updateAwards,
       updateUserAwards,
       updateStudyPack,
+      updateStudyPackQuizes,
     } = this;
     return (
       <userContext.Provider
@@ -135,6 +136,7 @@ export default class UserContextProvider extends Component {
           updateAwards,
           updateUserAwards,
           updateStudyPack,
+          updateStudyPackQuizes
         }}
       >
         {this.props.children}
