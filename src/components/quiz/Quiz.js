@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./Quiz.scss";
 
 import dots from "../../assets/images/Dots.svg";
@@ -10,8 +10,11 @@ import close from "../../assets/images/close.svg";
 import Modal from "react-responsive-modal";
 import QuizQuestion from "../quiz-question/Quiz-question";
 import authServices from "../../services/authServices";
+import { userContext } from "../../store/UserContext";
+import Loader from "../loader/Loader";
 
 export default function Quiz(props) {
+  const { updateStudyPackQuizes, quizzes, loading, updateLoader } = useContext(userContext);
   const [open, setopen] = useState(false);
   const [quizFromPack, setQuizFromPack] = useState([]);
   const [started, setStarted] = useState(false);
@@ -27,18 +30,19 @@ export default function Quiz(props) {
     { text: "Free Form Mode", selected: false },
   ]);
 
-  useEffect(() => {
-    if (props.quizType === "studypack") {
-      authServices
-        .getStudypackData(props.quizId)
-        .then((res) => {
-          setQuizFromPack(res.data);
-        })
-        .catch((err) => {
-          console.log({ err });
-        });
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (props.quizType === "studypack") {
+  //     authServices
+  //       .getStudypackData(props.quizId)
+  //       .then((res) => {
+  //         setQuizFromPack(res.data);
+  //         updateStudyPackQuizes(res.data);
+  //       })
+  //       .catch((err) => {
+  //         console.log({ err });
+  //       });
+  //   }
+  // }, []);
 
   const selectMode = (i) => {
     setModes(
@@ -61,18 +65,30 @@ export default function Quiz(props) {
     : "";
 
   const onOpenModal = () => {
-    if (!props.quiz) {
-      return;
-    }
-    setopen(true);
-    setModes(
-      modes.map((mod) => {
-        return {
-          ...mod,
-          selected: false,
-        };
-      })
-    );
+    updateLoader(true);
+    authServices
+        .getStudypackData(props.quizId)
+        .then((res) => {
+          updateStudyPackQuizes(res.data);
+          updateLoader(false);
+          if (!res.data.length) {
+            return;
+          }
+          setopen(true);
+          setModes(
+            modes.map((mod) => {
+              return {
+                ...mod,
+                selected: false,
+              };
+            })
+          );
+        })
+        .catch((err) => {
+          console.log({ err });
+          updateLoader(false);
+        });
+    
   };
 
   const onCloseModal = () => {
@@ -106,6 +122,8 @@ export default function Quiz(props) {
   };
 
   return (
+    <>
+    {loading && <Loader />}
     <div className="quiz">
       <p className="quiz-heading" onClick={logg}>
         {props.name || "Quiz 1"}
@@ -304,7 +322,7 @@ export default function Quiz(props) {
             selectedQuizMode={selectedQuizMode}
             onClose={onCloseModal}
             completeTest={completeTest}
-            questions={props.quiz.length ? props.quiz : quizFromPack}
+            questions={props.quiz.length ? props.quiz : quizzes}
             time={{ hour, minutes }}
             quizType={props.quizType}
           />
@@ -465,7 +483,7 @@ export default function Quiz(props) {
               selectedQuizMode={selectedQuizMode}
               onClose={onCloseModal}
               completeTest={completeTest}
-              questions={props.quiz.length ? props.quiz : quizFromPack}
+              questions={props.quiz.length ? props.quiz : quizzes}
               time={{ hour, minutes }}
               quizType={props.quizType}
             />
@@ -473,5 +491,7 @@ export default function Quiz(props) {
         </div>
       )}
     </div>
-  );
+
+    </>
+      );
 }

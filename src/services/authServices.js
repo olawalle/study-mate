@@ -147,10 +147,18 @@ let getUserAward = (id) => {
   });
 };
 
-let getLeaderboard = (userID, quizID) => {
+let getAwardboard = (userID, quizID) => {
   return axios({
     method: "get",
     url: urls.userAwardsUrl + "/leaders/" + userID + "?id=" + quizID,
+    headers: headers(),
+  });
+};
+
+let getLeaderboard = (userID) => {
+  return axios({
+    method: "get",
+    url: urls.leadersUrl + userID,
     headers: headers(),
   });
 };

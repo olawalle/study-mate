@@ -48,7 +48,7 @@ export default withRouter(function Nav(props) {
         <div
           className="avatar"
           style={{
-            backgroundImage: `url("${appUrl}${context.user.image}")`,
+            backgroundImage: `url("${appUrl}${context.user.image && context.user.image.replace('\\','/')}")`,
             backgroundSize: "cover",
           }}
         >
