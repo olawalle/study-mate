@@ -217,14 +217,6 @@ export default function QuizQuestion(props) {
       .replace("\\", "/");
   };
 
-  const setPassageHtml = (html) => {
-    let passage = document.getElementById("passage");
-    if (passage)
-      passage.innerHTML = html
-        .replace(`<img src='assets`, `<img src='${appUrl}/assets`)
-        .replace("\\", "/");
-  };
-
   return (
     <div className="quiz-quuestion">
       <div className="upper">
@@ -252,10 +244,10 @@ export default function QuizQuestion(props) {
                       className="ex"
                     />
                   </p>
-                  <p style={{ fontSize: 10 }}>
+                  <p style={{ fontSize: 14 }}>
                     Your answer is incorrect. Try again
                   </p>
-                  <p style={{ fontSize: 12 }}>
+                  <p style={{ fontSize: 14 }}>
                     <span
                       className="blue--text"
                       onClick={viewExplanation}
@@ -288,7 +280,7 @@ export default function QuizQuestion(props) {
                       className="ex"
                     />
                   </p>
-                  <p style={{ fontSize: 10 }}>Keep up the great persistence</p>
+                  <p style={{ fontSize: 14 }}>Keep up the great persistence</p>
                 </div>
               </div>
             )}
@@ -413,9 +405,13 @@ export default function QuizQuestion(props) {
           )}
         </div>
         {passage && (
-          <div className="passage" id="passage">
-            {setPassageHtml(activeQuestion.passage)}
-          </div>
+          <div
+            className="passage"
+            id="passage"
+            dangerouslySetInnerHTML={{
+              __html: setImageUrl(activeQuestion.question),
+            }}
+          ></div>
         )}
         {feedback && (
           <div className="passage formm">
@@ -497,7 +493,7 @@ export default function QuizQuestion(props) {
           <button
             className="tw-btn"
             onClick={() => submitLearingAnswer()}
-            style={{ marginLeft: 20 }}
+            style={{ marginLeft: 10 }}
           >
             {btnText()}
           </button>
@@ -522,7 +518,7 @@ export default function QuizQuestion(props) {
             <button
               className="tw-btn"
               onClick={() => submit()}
-              style={{ marginLeft: 20 }}
+              style={{ marginLeft: 10 }}
             >
               SUBMIT
             </button>
@@ -532,7 +528,7 @@ export default function QuizQuestion(props) {
             <button
               className="blue-btn"
               onClick={nextQuestion}
-              style={{ marginLeft: 20 }}
+              style={{ marginLeft: 10 }}
             >
               NEXT
             </button>
@@ -542,7 +538,7 @@ export default function QuizQuestion(props) {
             <button
               className="bare-btn"
               onClick={prevQuestion}
-              style={{ marginLeft: 20 }}
+              style={{ marginLeft: 10 }}
             >
               PREVIOUS
             </button>

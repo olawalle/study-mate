@@ -204,6 +204,8 @@
       top: 0;
       transform: scale(1);
       width: calc(100% - 40px);
+      height: 57px !important;
+      padding: 10px !important;
       span {
         display: inline-block;
         width: 60%;
@@ -211,6 +213,8 @@
       }
       button {
         margin-top: -3px;
+        top: 5px !important;
+        padding: 0 10px;
       }
     }
   }

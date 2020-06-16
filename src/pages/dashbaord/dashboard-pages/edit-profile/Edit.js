@@ -78,7 +78,7 @@ export default withRouter(function EditProfile({ history }) {
 
   const generateCode = () => {
     updateLoader(true);
-    let data = { email: "olawalle94@gmail.com" };
+    let data = { email };
     authServices
       .generateCode(data)
       .then((res) => {

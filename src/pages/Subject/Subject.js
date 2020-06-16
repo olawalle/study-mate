@@ -54,6 +54,15 @@ export default withRouter(function Subject({ history }) {
     history.push(`/dashboard/mobile-courses`);
   };
 
+  const pickLevel = (i) => {
+    updateLoader(true);
+    // dunno what should be done here so this is for demo :(
+    setTimeout(() => {
+      updateLoader(false);
+      setlinkIndex(i);
+    }, 2000);
+  };
+
   return (
     <>
       {loading && <Loader />}
@@ -104,7 +113,7 @@ export default withRouter(function Subject({ history }) {
             {links.map((link, i) => (
               <div
                 key={link.text}
-                onClick={() => setlinkIndex(i)}
+                onClick={() => pickLevel(i)}
                 className={`level ${i === linkIndex ? "active" : ""}`}
               >
                 <div className="band">
@@ -160,17 +169,12 @@ export default withRouter(function Subject({ history }) {
               <div className="half">
                 <p className="title">Advance your learning</p>
                 <div className="desc">
-                  <p>Advance Your Learning with our Study Packs </p>
                   <p style={{ fontSize: 12 }}>
                     Our Study Packs are Test questions created for advanced
                     Senior Secondary levels. They are simulated for further
                     learning and for exam purposes. Note that the Study Lessons
                     above must have been completed before proceeding to the
                     Study packs.
-                  </p>
-                  <p style={{ fontSize: 12 }}>
-                    Our Study Packs span over 50-100 questions on each subject
-                    per pack. Lets get started
                   </p>
                 </div>
                 <div className="duration">

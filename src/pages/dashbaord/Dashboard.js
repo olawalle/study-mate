@@ -17,6 +17,7 @@ import editIcon from "../../assets/images/edit.svg";
 import Loader from "../../components/loader/Loader";
 import authServices from "../../services/authServices";
 import MobileCourses from "./dashboard-pages/mobileCourses/MobileCourses";
+import UserPhoto from "../../components/user-photo/UserPhoto";
 
 const Dashboard = (props) => {
   let match = useRouteMatch();
@@ -95,21 +96,16 @@ const Dashboard = (props) => {
               </p>
             )}
             {match.isExact && (
-              <div className="user_">
-                <img src={userIcon} className="usericon" alt="" />
-                <div className="edit">
-                  <img
-                    src={editIcon}
-                    style={{ height: "20px", margin: "10px auto" }}
-                    alt=""
-                  />
-                </div>
+              <div className="mobile-photo">
+                <UserPhoto />
               </div>
             )}
             {match.isExact && (
               <p className="user-details_">
                 {`${user.firstName} ${user.surName}`}
-                <span>Junior secondary</span>
+                <span>
+                  {user.level === 2 ? "Junior secondary" : "Senior secondary"}
+                </span>
               </p>
             )}
           </div>

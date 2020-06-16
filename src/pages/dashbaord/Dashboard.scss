@@ -4,7 +4,7 @@
   position: absolute;
   width: 100%;
   top: 0;
-  .user_,
+  .mobile-photo,
   .user-details_,
   .medals_ {
     display: none;
@@ -180,7 +180,7 @@
             margin-right: 12px;
           }
           .blue--text {
-            font-size: 12px;
+            font-size: 14px;
             width: 60%;
             margin: 10px 30px 0;
             p {
@@ -347,7 +347,7 @@
         left: 20px !important;
         bottom: 0 !important;
       }
-      .user_ {
+      .user-photo {
         width: 120px;
         height: 120px;
         background-color: #10a3ff;
@@ -361,7 +361,7 @@
           height: 83%;
           margin: 12px auto;
         }
-        .edit {
+        .edit_ {
           position: absolute;
           right: -5px;
           top: -5px;
@@ -380,7 +380,9 @@
           }
         }
       }
-
+      .mobile-photo {
+        display: block !important;
+      }
       .user-details_ {
         font-size: 15px !important;
         font-weight: 600;
