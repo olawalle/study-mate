@@ -500,7 +500,7 @@ export default function QuizQuestion(props) {
             {btnText()}
           </button>
 
-          {activeQuestion.passage && (
+          {activeQuestion && activeQuestion.passage && (
             <button className="blue-btn" onClick={() => openPassage()}>
               {passage ? "Close passage" : "Open passage"}
             </button>
@@ -545,7 +545,7 @@ export default function QuizQuestion(props) {
               PREVIOUS
             </button>
           )}
-          {activeQuestion.passage && (
+          {activeQuestion && activeQuestion.passage && (
             <button className="blue-btn" onClick={() => openPassage()}>
               {passage ? "Close passage" : "Open passage"}
             </button>
