@@ -4,17 +4,24 @@ import authServices from "../../services/authServices";
 import Modal from "react-responsive-modal";
 import banner1 from "../../assets/images/banner1.svg";
 import banner2 from "../../assets/images/Subjects.svg";
+import { useSnackbar } from "react-simple-snackbar";
 
 export default function AddCourses(props) {
   const context = useContext(userContext);
   const { userCourses, subjects, user, updateUserCourses } = context;
   const { open, onCloseModal } = props;
   const [subjects_, setsubjects_] = useState([]);
+  const [levelSubjects, setLevelSubjects] = useState([]);
   const [level, setlevel] = useState(null);
   const [newSelectedCourses, setnewSelectedCourses] = useState([]);
   const [toBeRemoved, settoBeRemoved] = useState([]);
   const [step, setStep] = useState(1);
-  let modalWidth = window.innerWidth > 1024 ? 98 : 100;
+  const [loader, setloader] = useState(false);
+  const options = {
+    position: "top-right",
+  };
+  const [openSnackbar, closeSnackbar] = useSnackbar(options);
+  let modalWidth = window.innerWidth > 1024 ? 75 : 100;
 
   const preSelectedCourses = userCourses.reduce((agg, curr) => {
     agg[curr.learnCourseId] = curr;
@@ -29,14 +36,21 @@ export default function AddCourses(props) {
       };
     });
     setsubjects_(refinedSubjects);
+    setlevel(user.level);
+    let levelCourses = refinedSubjects.filter(
+      (s) => s.studyLevel === user.level
+    );
+    setLevelSubjects(levelCourses);
+    setStep(user.level ? 2 : 1);
   }, []);
 
   const jumpStep = () => {
+    if (!level) return;
     step < 2 ? setStep(step + 1) : selectCourse();
   };
 
   const selectCourse = () => {
-    console.log(newSelectedCourses, toBeRemoved);
+    setloader(true);
     newSelectedCourses.forEach((id) => {
       authServices
         .updateUserCourses({
@@ -44,11 +58,12 @@ export default function AddCourses(props) {
           learnCourseId: id,
         })
         .then((res) => {
-          console.log(res);
           authServices
             .getUserCourses(null, user.id)
             .then((res) => {
               onCloseModal();
+              openSnackbar("Courses updated sucessfully", 5000);
+              setloader(false);
               let user_courses = res.data.userLearnCourses;
               let sievedCourses = Object.values(
                 user_courses.reduce((agg, curr) => {
@@ -59,11 +74,13 @@ export default function AddCourses(props) {
               updateUserCourses(sievedCourses);
             })
             .catch((err) => {
+              setloader(false);
               console.log({ err });
             });
         })
         .catch((err) => {
           console.log({ err });
+          onCloseModal();
         });
     });
 
@@ -75,6 +92,7 @@ export default function AddCourses(props) {
             .getUserCourses(null, user.id)
             .then((res) => {
               onCloseModal();
+              openSnackbar("Courses updated sucessfully", 5000);
               let user_courses = res.data.userLearnCourses;
               let sievedCourses = Object.values(
                 user_courses.reduce((agg, curr) => {
@@ -90,6 +108,7 @@ export default function AddCourses(props) {
         })
         .catch((err) => {
           console.log({ err });
+          onCloseModal();
         });
     });
   };
@@ -115,7 +134,7 @@ export default function AddCourses(props) {
   };
 
   const pickSubject = (i) => {
-    let subject = subjects_[i];
+    let subject = levelSubjects[i];
     if (subject.preSelected) {
       settoBeRemoved([...toBeRemoved, subject.id]);
       setnewSelectedCourses(
@@ -125,7 +144,7 @@ export default function AddCourses(props) {
       setnewSelectedCourses([...newSelectedCourses, subject.id]);
       settoBeRemoved([...toBeRemoved].filter((n) => n !== subject.id));
     }
-    let newSubjectArr = subjects_.map((sub, j) => {
+    let newSubjectArr = levelSubjects.map((sub, j) => {
       return i === j
         ? {
             ...sub,
@@ -133,7 +152,7 @@ export default function AddCourses(props) {
           }
         : { ...sub };
     });
-    setsubjects_(newSubjectArr);
+    setLevelSubjects(newSubjectArr);
   };
 
   return (
@@ -160,26 +179,26 @@ export default function AddCourses(props) {
         </div>
         {step === 1 ? (
           <div className="modal-data">
-            <p className="blue--text">Secondary / High school</p>
+            <p className="blue--text">Secondary / Basic</p>
 
-            <button className="class bg_1" onClick={() => updateLevel(1)}>
+            <button className="class bg_1" onClick={() => updateLevel(2)}>
               <input
                 type="checkbox"
                 name=""
                 id=""
-                onChange={() => updateLevel(1)}
-                checked={level === 1}
+                onChange={() => updateLevel(2)}
+                defaultChecked={user.level === 2}
               />
               Junior Secondary
             </button>
 
-            <button className="class bg_2" onClick={() => updateLevel(2)}>
+            <button className="class bg_2" onClick={() => updateLevel(3)}>
               <input
                 type="checkbox"
                 name=""
                 id=""
-                onChange={() => updateLevel(1)}
-                checked={level === 2}
+                onChange={() => updateLevel(3)}
+                defaultChecked={user.level === 3}
               />
               Senior Secondary
             </button>
@@ -192,7 +211,7 @@ export default function AddCourses(props) {
           </div>
         ) : (
           <div className="modal-data">
-            {subjects_.map((subject, i) => {
+            {levelSubjects.map((subject, i) => {
               return (
                 <button
                   className={`subject bg_${i + 1}`}
@@ -223,7 +242,7 @@ export default function AddCourses(props) {
               Select learning grade
             </em>
           )}
-          <button className="tw-btn" onClick={jumpStep}>
+          <button className="tw-btn" onClick={jumpStep} disabled={loader}>
             {step === 1 ? "NEXT" : "Start Learning"}
           </button>
         </div>

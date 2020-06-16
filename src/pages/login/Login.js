@@ -26,6 +26,7 @@ export default withRouter(function Login(props) {
   const [password, setpassword] = useState("");
   const [viewPwrd, setViewPwrd] = useState(false);
   const [onLogin, setonLogin] = useState(true);
+  const [sentEmail, setSentEmail] = useState(false);
   const options = {
     position: "top-right",
   };
@@ -94,7 +95,6 @@ export default withRouter(function Login(props) {
         localStorage.setItem("studymate-token", user.token);
         updateUser(user);
         updateLoggedInStatus(true);
-        authServices.getCurrentUser(user.token);
         authServices
           .getUserCourses(user.token, user.id)
           .then((res) => {
@@ -200,15 +200,36 @@ export default withRouter(function Login(props) {
               Forgot Password
             </p>
             <div className="form">
-              <span className="label">Email address</span>
-              <input
-                className={hasError && !email ? "has-error" : ""}
-                type="text"
-                onChange={(e) => setemail(e.target.value)}
-              />
-              <button className="main-btn mt30" onClick={forgotPwrd}>
-                Continue
-              </button>
+              {!sentEmail ? (
+                <>
+                  <span className="label">Email address</span>
+                  <input
+                    className={hasError && !email ? "has-error" : ""}
+                    type="text"
+                    onChange={(e) => setemail(e.target.value)}
+                  />
+                  <button className="main-btn mt30" onClick={forgotPwrd}>
+                    Continue
+                  </button>
+                </>
+              ) : (
+                <div>
+                  <p>
+                    We have sent an email to {email} with a link to reset your
+                    password
+                  </p>
+                  <p>
+                    If you do not receive a mail after a few mninutes, please
+                    check your span folder
+                  </p>
+                  <button
+                    className="main-btn mt30"
+                    onClick={() => setSentEmail(false)}
+                  >
+                    Reset password
+                  </button>
+                </div>
+              )}
               <span
                 className="no-acct"
                 style={{
@@ -302,7 +323,7 @@ export default withRouter(function Login(props) {
 
               <span className="no-acct">
                 <Link to="/signup">
-                  Don’t have a Studymate account?{" "}
+                  Don’t have a StudyMate account?{" "}
                   <span className="blue--text">Create an Account</span>
                 </Link>
               </span>

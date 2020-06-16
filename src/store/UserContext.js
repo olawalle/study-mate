@@ -136,7 +136,7 @@ export default class UserContextProvider extends Component {
           updateAwards,
           updateUserAwards,
           updateStudyPack,
-          updateStudyPackQuizes
+          updateStudyPackQuizes,
         }}
       >
         {this.props.children}

@@ -3,8 +3,11 @@ import "./Quiz-question.scss";
 import ProgressBar from "../progress-bar/ProgressBar";
 import close from "../../assets/images/close.svg";
 import streak from "../../assets/images/repeat.svg";
+import star from "../../assets/images/Star.svg";
 import caret from "../../assets/images/down-arrow.svg";
 import { appUrl } from "../../services/urls";
+
+import MathJax from "react-mathjax";
 
 export default function QuizQuestion(props) {
   let hr = props.time ? parseFloat(props.time.hour) * 60 : 0;
@@ -72,6 +75,7 @@ export default function QuizQuestion(props) {
     setshowExplanation(false);
     btnText();
     !answers[no] && setattempts(0);
+    console.log({ activeQuestion });
   };
 
   const prevQuestion = () => {
@@ -117,8 +121,8 @@ export default function QuizQuestion(props) {
   };
 
   const openPassage = () => {
-    setpassage(true);
-    setFeedback(false);
+    setpassage(!passage);
+    setFeedback(!setFeedback);
   };
 
   const openFeedback = () => {
@@ -200,15 +204,32 @@ export default function QuizQuestion(props) {
       (!optionSelected && !wrongAnswer)
     )
       return "SUBMIT";
-    if (wrongAnswer && attempts === 1) return "TRY AGAIN";
+    if (wrongAnswer && attempts === 1 && !showExplanation) return "TRY AGAIN";
     else return "NEXT QUESTION";
+  };
+
+  const logg = () => console.log({ activeQuestion });
+
+  const setImageUrl = (str) => {
+    return str
+      .replace(`<img src='assets`, `<img src='${appUrl}/assets`)
+      .replace(`<img src="assets`, `<img src="${appUrl}/assets`)
+      .replace("\\", "/");
+  };
+
+  const setPassageHtml = (html) => {
+    let passage = document.getElementById("passage");
+    if (passage)
+      passage.innerHTML = html
+        .replace(`<img src='assets`, `<img src='${appUrl}/assets`)
+        .replace("\\", "/");
   };
 
   return (
     <div className="quiz-quuestion">
       <div className="upper">
         <div style={{ position: "relative" }}>
-          <div className="instruction">
+          <div className="instruction" onClick={logg}>
             Answer question 1 to 5 with the passage{" "}
             {selectedQuizMode === "Time Mode" && (
               <span className="time">
@@ -254,11 +275,47 @@ export default function QuizQuestion(props) {
                 </div>
               </div>
             )}
+            {attempts === 1 && !wrongAnswer && !showExplanation && (
+              <div className="alert">
+                <img src={star} className="badge" alt="" />
+                <div className="streak-text">
+                  <p className="top">
+                    Nice work
+                    <img
+                      src={close}
+                      alt=""
+                      onClick={() => setshowAlert(false)}
+                      className="ex"
+                    />
+                  </p>
+                  <p style={{ fontSize: 10 }}>Keep up the great persistence</p>
+                </div>
+              </div>
+            )}
           </div>
           <ProgressBar width={currentQuestion / (questions.length - 1)} />
         </div>
         <div className="content">
-          <p className="question">{activeQuestion.question}</p>
+          {!activeQuestion.isQuestionMathJax ? (
+            <p
+              className="question"
+              dangerouslySetInnerHTML={{
+                __html: setImageUrl(activeQuestion.question),
+              }}
+            ></p>
+          ) : (
+            <p className="question">
+              <MathJax.Provider>
+                <MathJax.Node
+                  formula={
+                    activeQuestion.question
+                      ? setImageUrl(activeQuestion.question)
+                      : ""
+                  }
+                />
+              </MathJax.Provider>
+            </p>
+          )}
           <div className="questions">
             {options.map((option, i) => {
               return (
@@ -273,34 +330,56 @@ export default function QuizQuestion(props) {
                 >
                   <span className="label">{option.option}</span>
                   <p>
-                    {option.text}
+                    {!option.isMathJax ? (
+                      <span
+                        dangerouslySetInnerHTML={{
+                          __html: setImageUrl(option.text),
+                        }}
+                      ></span>
+                    ) : (
+                      <span>
+                        <MathJax.Provider>
+                          <MathJax.Node
+                            formula={
+                              option.text ? setImageUrl(option.text) : ""
+                            }
+                          />
+                        </MathJax.Provider>
+                      </span>
+                    )}
                     <br />
                     {showExplanation && option.id === activeQuestion.answerId && (
-                      <span
+                      <p
                         style={{
                           fontSize: 14,
                           color: "#afafaf",
                           position: "relative",
                           top: "10px",
+                          marginLeft: 0,
                         }}
                       >
-                        this answer is wring this answer is wring this answer is
-                        wring this answer is wring this answer is wring this
-                        answer is wring this answer is wring this answer is
-                        wring this answer is wring this answer is wring this
-                        answer is wring this answer is wring this answer is
-                        wring this answer is wring this answer is wring this
-                        answer is wring this answer is wring this answer is
-                        wring this answer is wring this answer is wring this
-                        answer is wring this answer is wring this answer is
-                        wring this answer is wring
+                        <p style={{ margin: "10px 0 20px" }}>
+                          this answer is wring this answer is wring this answer
+                          is wring this answer is wring this answer is wring
+                          this answer is wring this answer is wring this answer
+                          is wring this answer is wring this answer is wring
+                          this answer is wring this answer is wring this answer
+                          is wring this answer is wring this answer is wring
+                          this answer is wring this answer is wring this answer
+                          is wring this answer is wring this answer is wring
+                          this answer is wring this answer is wring this answer
+                          is wring this answer is wring
+                        </p>
                         <audio controls>
                           <source
-                            src={`${appUrl}${activeQuestion.audioUrl}`}
+                            src={`${appUrl}${activeQuestion.audioUrl.replace(
+                              "\\",
+                              "/"
+                            )}`}
                             type="audio/mpeg"
                           />
                         </audio>
-                      </span>
+                      </p>
                     )}
                   </p>
                   {/* {selectedQuizMode !== "Learning Approach" &&
@@ -333,11 +412,17 @@ export default function QuizQuestion(props) {
             </p>
           )}
         </div>
-        {passage && <div className="passage">{activeQuestion.passage}</div>}
+        {passage && (
+          <div className="passage" id="passage">
+            {setPassageHtml(activeQuestion.passage)}
+          </div>
+        )}
         {feedback && (
           <div className="passage formm">
             <p className="top">Report a mistake in this question</p>
-            <span className="sub">Thanks for your help! What’s wrong?</span>
+            <span className="sub">
+              Give an applicable feedback on this Question
+            </span>
 
             <form>
               <span className="radio mt30">
@@ -388,47 +473,6 @@ export default function QuizQuestion(props) {
                 style={{
                   transform: "rotate(90deg)",
                   marginRight: "10px",
-                }}
-              />
-            )}
-            {currentQuestion + 1} of {questions.length}
-            {currentQuestion < questions.length - 1 && (
-              <img
-                src={caret}
-                width="12"
-                alt=""
-                style={{
-                  transform: "rotate(-90deg)",
-                  marginLeft: "10px",
-                }}
-              />
-            )}
-          </b>
-
-          <button
-            className="tw-btn"
-            onClick={() => submitLearingAnswer()}
-            style={{ marginLeft: 20 }}
-          >
-            {btnText()}
-          </button>
-        </div>
-      ) : (
-        <div className="footer">
-          <b
-            style={{
-              position: "relative",
-              top: 13,
-            }}
-          >
-            {currentQuestion > 0 && (
-              <img
-                src={caret}
-                width="12"
-                alt=""
-                style={{
-                  transform: "rotate(90deg)",
-                  marginRight: "10px",
                   cursor: "pointer",
                 }}
                 onClick={prevQuestion}
@@ -448,6 +492,31 @@ export default function QuizQuestion(props) {
                 onClick={nextQuestion}
               />
             )}
+          </b>
+
+          <button
+            className="tw-btn"
+            onClick={() => submitLearingAnswer()}
+            style={{ marginLeft: 20 }}
+          >
+            {btnText()}
+          </button>
+
+          {activeQuestion.passage && (
+            <button className="blue-btn" onClick={() => openPassage()}>
+              {passage ? "Close passage" : "Open passage"}
+            </button>
+          )}
+        </div>
+      ) : (
+        <div className="footer">
+          <b
+            style={{
+              position: "relative",
+              top: 13,
+            }}
+          >
+            {currentQuestion + 1} of {questions.length}
           </b>
           {currentQuestion === questions.length - 1 && (
             <button
@@ -478,7 +547,7 @@ export default function QuizQuestion(props) {
               PREVIOUS
             </button>
           )}
-          {activeQuestion.hasPassage && (
+          {activeQuestion.passage && (
             <button className="blue-btn" onClick={() => openPassage()}>
               {passage ? "Close passage" : "Open passage"}
             </button>

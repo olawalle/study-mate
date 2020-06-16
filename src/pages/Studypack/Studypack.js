@@ -69,10 +69,10 @@ export default withRouter(function Studypack({ history }) {
             <p className="header">Study Pack</p>
 
             <span className="desc">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore
-              temporibus dolorum, laborum aut libero aliquam omnis tempore nulla
-              mollitia quasi quidem nihil in sunt harum maiores porro ex
-              reiciendis amet!
+              Our StudyPacks are advanced Tests created to help you test your
+              learning progress and be more proficient in various subjects. They
+              be experienced through 3 main mediums based on your preference. We
+              have the learning mode, the time mode, and the free form mode.
             </span>
             <img src={students} alt="" />
           </div>

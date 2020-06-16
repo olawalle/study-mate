@@ -15,6 +15,7 @@ import UserPhoto from "../../../../components/user-photo/UserPhoto";
 import authServices from "../../../../services/authServices";
 import Modal from "react-responsive-modal";
 import Loader from "../../../../components/loader/Loader";
+import { useSnackbar } from "react-simple-snackbar";
 
 export default withRouter(function EditProfile({ history }) {
   const context = useContext(userContext);
@@ -29,21 +30,42 @@ export default withRouter(function EditProfile({ history }) {
 
   const [modal, setmodal] = useState(false);
 
-  const { user, loading, updateLoader } = context;
+  const { user, loading, updateLoader, updateUser } = context;
 
   useEffect(() => {
     console.log(user);
     setfullname(`${user.firstName} ${user.surName}`);
     setemail(user.email);
     setphone(user.phoneNumber);
+    setlocation(user.location);
+    let dob = user.dob;
+    let reshapedDob = dob ? dob.split("T")[0] : "";
+    setdateOfBirth(reshapedDob);
+    setusername(user.userName);
   }, []);
 
   const [checked, setchecked] = useState(true);
+  const options = {
+    position: "top-right",
+  };
+  const [openSnackbar, closeSnackbar] = useSnackbar(options);
 
   const handleChange = () => {};
 
   const back = () => {
     history.push("/dashboard/");
+  };
+
+  const getCurrentUser = () => {
+    authServices
+      .getCurrentUser()
+      .then((res) => {
+        let user = res.data;
+        updateUser(user);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const toTerms = () => {
@@ -83,7 +105,7 @@ export default withRouter(function EditProfile({ history }) {
 
   const onCloseModal = () => setmodal(false);
 
-  const updateUser = () => {
+  const updateUserData = () => {
     let obj = {
       firstName: fullname.split(" ")[0],
       surName: fullname.split(" ")[1],
@@ -103,6 +125,8 @@ export default withRouter(function EditProfile({ history }) {
       .updateUserData(data, user.id)
       .then((res) => {
         updateLoader(false);
+        openSnackbar("Profile updated successfully", 5000);
+        getCurrentUser();
         console.log(res);
       })
       .catch((err) => {
@@ -159,6 +183,7 @@ export default withRouter(function EditProfile({ history }) {
                 <span className="label">Create Username</span>
                 <input
                   type="text"
+                  defaultValue={username}
                   onChange={(e) => setusername(e.target.value)}
                 />
                 <img src={edit} alt="" />
@@ -190,6 +215,7 @@ export default withRouter(function EditProfile({ history }) {
                 <span className="label">Location</span>
                 <input
                   type="text"
+                  defaultValue={location}
                   onChange={(e) => setlocation(e.target.value)}
                 />
                 <img src={edit} alt="" />
@@ -199,6 +225,7 @@ export default withRouter(function EditProfile({ history }) {
                 <span className="label">Date of birth</span>
                 <input
                   type="date"
+                  defaultValue={dob}
                   onChange={(e) => setdateOfBirth(e.target.value)}
                 />
               </div>
@@ -208,7 +235,7 @@ export default withRouter(function EditProfile({ history }) {
                 <input type="text" />
               </div>
 
-              <button className="tw-btn" onClick={updateUser}>
+              <button className="tw-btn" onClick={updateUserData}>
                 Save changes
               </button>
             </div>

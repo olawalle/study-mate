@@ -26,39 +26,39 @@ export default withRouter(function Profile({ history }) {
   const [streaks, setstreaks] = useState([
     {
       title: "Nice streak",
-      subText: "Correctly answer 10 problems in a row in a single quiz",
+      subText:
+        "You have answered 10 questions correctly in a row within this level!",
       image: streak,
       selected: true,
     },
     {
       title: "Scholar",
-      subText: "Finish watching a particular course video",
+      subText: "You have finished all levels of this course for English!",
       image: scholar,
       selected: false,
     },
     {
       title: "Nice Listener",
-      subText:
-        "You have watched 15 minutes of a single video in a single topic",
+      subText: "You have watched 15 minutes of video lessons per level!",
       image: niceListerner,
       selected: false,
     },
     {
-      title: "Great Listener",
+      title: "Due diligence",
       subText:
-        "You have watched 30 minutes of a single video in a single topic",
+        " You have watch 30 minutes record time of uninterrupted video lessons in this level!",
       image: greatListerner,
       selected: false,
     },
     {
-      title: "Nice streak",
-      subText: "Correctly answer 10 problems in a row in a single quiz",
+      title: "Speedy",
+      subText: "You answered this question in less than 5 seconds!",
       image: streak,
       selected: false,
     },
     {
-      title: "Scholar",
-      subText: "Finish watching a particular course video",
+      title: "Good sport",
+      subText: "You just earned a badge for sharing knowledge with a friend!",
       image: scholar,
       selected: false,
     },
@@ -157,7 +157,7 @@ export default withRouter(function Profile({ history }) {
             </div>
             <div className="half">
               <span>Username</span>
-              <p>{user.firstName}</p>
+              <p>{user.userName}</p>
             </div>
             <div className="half">
               <span>Email Address</span>

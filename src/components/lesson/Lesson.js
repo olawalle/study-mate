@@ -44,6 +44,7 @@ export default withRouter(function Lesson({ disableClick, history, video }) {
   const [activeVideo, setactiveVideo] = useState(null);
 
   const selectVideo = (i) => {
+    if (i >= videos.length) return;
     setactiveVideo(i);
     seturl(videos[i].url);
     setVideos(
@@ -59,6 +60,10 @@ export default withRouter(function Lesson({ disableClick, history, video }) {
             };
       })
     );
+    let videoPlayer = document.getElementById("homevideo");
+    let url = `${appUrl}${videos[i].url}`;
+    videoPlayer.src = url;
+    videoPlayer.play();
   };
 
   const openModal = (url) => {
@@ -199,6 +204,7 @@ export default withRouter(function Lesson({ disableClick, history, video }) {
               style={{ width: "100%", height: "calc(90vh - 90px)" }}
               controls
               autoPlay={true}
+              id="homevideo"
             >
               <source
                 src={`${appUrl}${url}`}
@@ -223,6 +229,7 @@ export default withRouter(function Lesson({ disableClick, history, video }) {
                 className="f-right tw-btn"
                 style={{ padding: "12px 30px" }}
                 onClick={() => selectVideo(activeVideo + 1)}
+                disabled={activeVideo >= videos.length - 1}
               >
                 Next video
               </button>

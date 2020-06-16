@@ -1,4 +1,5 @@
 .subject {
+  height: 100vh;
   .banner {
     height: 130px;
     width: 100%;
@@ -61,7 +62,7 @@
       .progresses {
         overflow-x: auto;
         overflow-y: hidden;
-        height: 92px;
+        height: 95px;
       }
       .progress-wrap {
         width: 550px;
@@ -93,8 +94,8 @@
   .contents {
     padding: 0px 160px;
     background-color: #fafafa;
-    height: calc(100vh - (150px + 130px));
-    overflow: auto;
+    height: calc(100vh - (75px + 130px + 75px));
+    overflow: hidden;
     .small {
       width: 24%;
       float: left;
@@ -146,7 +147,7 @@
     .wide {
       width: 76%;
       float: left;
-      height: calc(100vh - (115px + 130px + 75px));
+      height: calc(100vh - (75px + 130px + 75px));
       overflow: auto;
       .lessons-wrap {
         background-color: #fff;
@@ -177,10 +178,10 @@
           height: 100%;
           padding: 30px;
           background-color: #fff;
-          p {
+          .title {
             font-size: 20px;
             font-weight: 600;
-            margin-top: 70px;
+            margin-top: 35px;
           }
           .desc {
             font-size: 14px;
@@ -197,7 +198,7 @@
             }
           }
           button {
-            padding: 12px 20px;
+            padding: 0 20px;
           }
         }
         .bg {
@@ -215,7 +216,6 @@
   @media (max-width: 768px), (min-width: 768px) and (max-width: 1024px) {
     padding: 0;
     height: auto;
-    overflow: auto;
     .banner {
       font-size: 14px;
       padding: 20px;
@@ -237,6 +237,7 @@
     }
     .contents {
       padding: 0px;
+      overflow: auto;
       .small {
         width: 100%;
         padding: 0;
@@ -249,16 +250,17 @@
       .wide {
         width: 100%;
         padding: 0;
-        height: auto;
+        height: calc(100vh - (75px + 130px + 75px));
         .pack {
           height: 320px;
           .half {
             width: 100%;
             background-image: url("../../assets/images/Advanced\ test.svg");
             color: #fff;
+            background-size: cover;
             background-position-x: 73%;
-            background-position-y: -95px;
-            height: 408px;
+            background-position-y: 0px;
+            height: 560px;
             p {
               margin-top: 0px;
             }

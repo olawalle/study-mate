@@ -171,7 +171,7 @@ export default withRouter(function Signup(props) {
             <img src={logo2} alt="" />
           </div>
 
-          <p className="welcome mt50">Sign up to Studymate</p>
+          <p className="welcome mt50">Sign up to StudyMate</p>
 
           <div className="buttons">
             <FacebookLogin

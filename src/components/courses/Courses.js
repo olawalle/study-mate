@@ -13,20 +13,22 @@ export default withRouter(function Courses(props) {
     updateLoader,
     selectedSubject,
     saveSelectedSubject,
+    user,
   } = context;
   let sortesubjects = userCourses
     .map((subject, i) => {
       return {
         ...subject,
-        width: 2,
-        // subject.name.length <= 7
-        //   ? 1
-        //   : subject.name.length > 7 && subject.name.length <= 13
-        //   ? 2
-        //   : 3,
+        width:
+          subject.learnCourse.name.length <= 7
+            ? 1
+            : subject.name.length > 7 && subject.name.length <= 13
+            ? 2
+            : 3,
         new: false,
       };
     })
+    .filter((c) => c.learnCourse.studyLevel === user.level)
     .sort((a, b) => {
       if (a.width < b.width) return -1;
       if (a.width > b.width) return 1;

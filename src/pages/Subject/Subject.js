@@ -11,6 +11,7 @@ import backArrow from "../../assets/images/back.svg";
 import { withRouter } from "react-router-dom";
 import { userContext } from "../../store/UserContext";
 import authServices from "../../services/authServices";
+import { useEffect } from "react";
 // import students from "../../assets/images/students.png";
 
 export default withRouter(function Subject({ history }) {
@@ -21,7 +22,13 @@ export default withRouter(function Subject({ history }) {
     { text: "Intermediate" },
     { text: "Advanced" },
   ]);
+
   const [linkIndex, setlinkIndex] = useState(0);
+
+  useEffect(() => {
+    console.log(selectedSubject);
+  }, []);
+
   const back = () => {
     history.push("/dashboard/");
   };
@@ -123,9 +130,19 @@ export default withRouter(function Subject({ history }) {
           <div className="wide">
             <p className="heading">Lesson pack 1</p>
             <div className="lessons-wrap mb30">
+              {!selectedSubject.videos.length && (
+                <p style={{ padding: "12px 30px", margin: 0, fontSize: 12 }}>
+                  There are no video lessons in this pack. Kindly check back
+                  later.
+                </p>
+              )}
               <div className="lessons">
-                {selectedSubject.videos.map((video) => (
-                  <Lesson video={video} disableClick={false} />
+                {selectedSubject.videos.map((video, i) => (
+                  <Lesson
+                    key={"video" + i}
+                    video={video}
+                    disableClick={false}
+                  />
                 ))}
               </div>
             </div>
@@ -139,48 +156,22 @@ export default withRouter(function Subject({ history }) {
               />
             ) : null}
 
-            <p className="heading">Lesson pack 2</p>
-            <div className="lessons-wrap mb30">
-              <div className="lessons">
-                {selectedSubject.videos.map((video) => (
-                  <Lesson video={video} disableClick={false} />
-                ))}
-              </div>
-            </div>
-            {selectedSubject &&
-              selectedSubject.quizzes &&
-              selectedSubject.quizzes.length && (
-                <Quiz
-                  open={true}
-                  quizType="normal"
-                  quiz={selectedSubject.quizzes}
-                />
-              )}
-
-            <p className="heading">Lesson pack 3</p>
-            <div className="lessons-wrap mb30">
-              <div className="lessons">
-                {selectedSubject.videos.map((video) => (
-                  <Lesson video={video} disableClick={false} />
-                ))}
-              </div>
-            </div>
-            {selectedSubject &&
-              selectedSubject.quizzes &&
-              selectedSubject.quizzes.length && (
-                <Quiz
-                  open={true}
-                  quizType="normal"
-                  quiz={selectedSubject.quizzes}
-                />
-              )}
-
             <div className="pack">
               <div className="half">
-                <p>Advance your learning</p>
+                <p className="title">Advance your learning</p>
                 <div className="desc">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem
-                  ipsum dolor sit amet consectetur adipisicing elit.
+                  <p>Advance Your Learning with our Study Packs </p>
+                  <p style={{ fontSize: 12 }}>
+                    Our Study Packs are Test questions created for advanced
+                    Senior Secondary levels. They are simulated for further
+                    learning and for exam purposes. Note that the Study Lessons
+                    above must have been completed before proceeding to the
+                    Study packs.
+                  </p>
+                  <p style={{ fontSize: 12 }}>
+                    Our Study Packs span over 50-100 questions on each subject
+                    per pack. Lets get started
+                  </p>
                 </div>
                 <div className="duration">
                   <span>12 Study packs</span>

@@ -2,9 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import "./Dashboard.scss";
 
 import "react-responsive-modal/styles.css";
-import { Modal } from "react-responsive-modal";
 import { userContext } from "../../store/UserContext";
-import { motion } from "framer-motion";
 
 import { Switch, Route, useRouteMatch, withRouter } from "react-router-dom";
 

@@ -137,13 +137,15 @@ export default withRouter(function Learn({ history }) {
             <div className="lessons">
               {selectedSubject &&
                 selectedSubject.videos &&
-                selectedSubject.videos.map((video, i) => (
-                  <Lesson
-                    key={`lesson${i}`}
-                    video={video}
-                    disableClick={true}
-                  />
-                ))}
+                selectedSubject.videos
+                  .filter((v, i) => i < 4)
+                  .map((video, i) => (
+                    <Lesson
+                      key={`lesson${i}`}
+                      video={video}
+                      disableClick={true}
+                    />
+                  ))}
             </div>
           </div>
 

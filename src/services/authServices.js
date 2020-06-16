@@ -47,17 +47,11 @@ let googleLogin = (data) => {
 };
 
 let getCurrentUser = (token) => {
-  axios({
+  return axios({
     method: "get",
     url: urls.currentUserUrl,
-    headers: { Authorization: `Bearer ${token}` },
-  })
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+    headers: token ? { Authorization: `Bearer ${token}` } : headers(),
+  });
 };
 
 let getUserCourses = (token, id) => {
