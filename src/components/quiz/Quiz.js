@@ -66,32 +66,6 @@ export default function Quiz(props) {
     ? modes.find((m) => m.selected).text
     : "";
 
-  const onOpenModal = () => {
-    updateLoader(true);
-    authServices
-      .getStudypackData(props.quizId)
-      .then((res) => {
-        updateStudyPackQuizes(res.data);
-        updateLoader(false);
-        if (!res.data.length) {
-          return;
-        }
-        setopen(true);
-        setModes(
-          modes.map((mod) => {
-            return {
-              ...mod,
-              selected: false,
-            };
-          })
-        );
-      })
-      .catch((err) => {
-        console.log({ err });
-        updateLoader(false);
-      });
-  };
-
   const onCloseModal = () => {
     setopen(false);
     setfinishedTest(false);
@@ -109,13 +83,43 @@ export default function Quiz(props) {
       selectMode(2);
       setStarted(true);
     } else {
+      console.log("quiz starting");
+      setfinishedTest(false);
       selectedQuizMode ? setStarted(true) : console.log("select a mode");
     }
   };
 
-  const handleClick = () => {
-    if (!props.open) return;
-    setopenMobileQuiz(true);
+  const onOpenModal = (n) => {
+    if (!props.open && n === 2) return;
+    if (props.quizType === "normal") {
+      console.log("is normal");
+      n === 1 ? setopen(true) : setopenMobileQuiz(true);
+    } else {
+      console.log("is quizpack");
+      updateLoader(true);
+      authServices
+        .getStudypackData(props.quizId)
+        .then((res) => {
+          updateStudyPackQuizes(res.data);
+          updateLoader(false);
+          if (!res.data.length) {
+            return;
+          }
+          n === 1 ? setopen(true) : setopenMobileQuiz(true);
+          setModes(
+            modes.map((mod) => {
+              return {
+                ...mod,
+                selected: false,
+              };
+            })
+          );
+        })
+        .catch((err) => {
+          console.log({ err });
+          updateLoader(false);
+        });
+    }
   };
 
   const logg = () => {
@@ -138,11 +142,11 @@ export default function Quiz(props) {
           disabled={!props.quiz}
           title={
             !props.quiz
-              ? "There are no questions in this quiz. Chech back later"
+              ? "There are no questions in this quiz. Check back later"
               : "Click to take test"
           }
           className="blue-btn big-btn"
-          onClick={onOpenModal}
+          onClick={() => onOpenModal(1)}
         >
           Start Quiz
         </button>
@@ -151,11 +155,11 @@ export default function Quiz(props) {
           disabled={!props.quiz}
           title={
             !props.quiz
-              ? "There are no questions in this quiz. Chech back later"
+              ? "There are no questions in this quiz. Check back later"
               : "Click to take test"
           }
           className="blue-btn sm-btn"
-          onClick={handleClick}
+          onClick={() => onOpenModal(2)}
         >
           Start Quiz
         </button>

@@ -10,12 +10,13 @@ const setImageUrl = (str) => {
       .replace("assets\\", "assets/");
   };
 
-const Parser = ({className, question, isMathJax, inline}) => {
+const Parser = ({className, question, isMathJax, id, inline}) => {
+    const props = {className, id}
     return (
         <React.Fragment>
             { isMathJax 
-                ? <MathParser className={className} inline={inline} question={question ? setImageUrl(question) : ""} />
-                : <HtmlParser className={className} inline={inline} question={question ? setImageUrl(question) : ""} />      
+                ? <MathParser {...props} inline={inline} question={question ? setImageUrl(question) : ""} />
+                : <HtmlParser {...props} inline={inline} question={question ? setImageUrl(question) : ""} />      
             }
         </React.Fragment>
     )

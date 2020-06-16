@@ -89,9 +89,11 @@ export default class UserContextProvider extends Component {
   };
 
   logout = () => {
+    localStorage.clear();
+    sessionStorage.clear();
     this.setState({
-      isLoggedIn: false,
       loading: false,
+      isLoggedIn: false,
       user: {
         email: "",
         firstName: "",
@@ -101,11 +103,17 @@ export default class UserContextProvider extends Component {
         role: 0,
         sex: 0,
         surName: "",
-        level: 2,
+        level: null,
       },
+      selectedSubject: {},
+      subjects: [],
+      userCourses: [],
+      awards: [],
+      userAwards: [],
+      token: "",
+      studyPacks: [],
+      quizzes: [],
     });
-    localStorage.clear();
-    sessionStorage.clear();
   };
 
   render() {

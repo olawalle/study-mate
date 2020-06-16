@@ -380,7 +380,7 @@ export default function QuizQuestion(props) {
             className="passage"
             id="passage"
             dangerouslySetInnerHTML={{
-              __html: setImageUrl(activeQuestion.question),
+              __html: setImageUrl(activeQuestion.passage),
             }}
           ></div>
         )}
@@ -469,7 +469,7 @@ export default function QuizQuestion(props) {
             {btnText()}
           </button>
 
-          {activeQuestion.passage && (
+          {activeQuestion && activeQuestion.passage && (
             <button className="blue-btn" onClick={() => openPassage()}>
               {passage ? "Close passage" : "Open passage"}
             </button>
@@ -514,7 +514,7 @@ export default function QuizQuestion(props) {
               PREVIOUS
             </button>
           )}
-          {activeQuestion.passage && (
+          {activeQuestion && activeQuestion.passage && (
             <button className="blue-btn" onClick={() => openPassage()}>
               {passage ? "Close passage" : "Open passage"}
             </button>
