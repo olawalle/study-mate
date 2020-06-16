@@ -288,14 +288,16 @@ export default function QuizQuestion(props) {
           <ProgressBar width={currentQuestion / (questions.length - 1)} />
         </div>
         <div className="content">
-          {!activeQuestion.isQuestionMathJax ? (
+          {activeQuestion && !activeQuestion.isQuestionMathJax && (
             <p
               className="question"
               dangerouslySetInnerHTML={{
                 __html: setImageUrl(activeQuestion.question),
               }}
             ></p>
-          ) : (
+          )}
+
+          {activeQuestion && activeQuestion.isQuestionMathJax && (
             <p className="question">
               <MathJax.Provider>
                 <MathJax.Node
