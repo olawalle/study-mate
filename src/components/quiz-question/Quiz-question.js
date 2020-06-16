@@ -5,9 +5,10 @@ import close from "../../assets/images/close.svg";
 import streak from "../../assets/images/repeat.svg";
 import star from "../../assets/images/Star.svg";
 import caret from "../../assets/images/down-arrow.svg";
-import { appUrl } from "../../services/urls";
+import { appUrl, audioUrl } from "../../services/urls";
 
 import MathJax from "react-mathjax";
+import Parser from "../content-display/Parser";
 
 export default function QuizQuestion(props) {
   let hr = props.time ? parseFloat(props.time.hour) * 60 : 0;
@@ -162,11 +163,12 @@ export default function QuizQuestion(props) {
   };
 
   const submitLearingAnswer = () => {
+    debugger;
     if (answers.length === questions.length) {
       submit();
       return;
     }
-    setwrongAnswer(false);
+    //setwrongAnswer(false);
     setshowExplanation(false);
     setshowAlert(false);
     if (attempts < 2 && wrongAnswer && !showExplanation) {
@@ -288,28 +290,11 @@ export default function QuizQuestion(props) {
           <ProgressBar width={currentQuestion / (questions.length - 1)} />
         </div>
         <div className="content">
-          {activeQuestion && !activeQuestion.isQuestionMathJax && (
-            <p
-              className="question"
-              dangerouslySetInnerHTML={{
-                __html: setImageUrl(activeQuestion.question),
-              }}
-            ></p>
-          )}
-
-          {activeQuestion && activeQuestion.isQuestionMathJax && (
-            <p className="question">
-              <MathJax.Provider>
-                <MathJax.Node
-                  formula={
-                    activeQuestion.question
-                      ? setImageUrl(activeQuestion.question)
-                      : ""
-                  }
-                />
-              </MathJax.Provider>
-            </p>
-          )}
+          <Parser 
+              className="question" 
+              isMathJax={activeQuestion.isQuestionMathJax} 
+              question={activeQuestion.question}/>
+          
           <div className="questions">
             {options.map((option, i) => {
               return (
@@ -323,24 +308,13 @@ export default function QuizQuestion(props) {
                   onClick={() => pickAnswer(i)}
                 >
                   <span className="label">{option.option}</span>
+                  
                   <p>
-                    {!option.isMathJax ? (
-                      <span
-                        dangerouslySetInnerHTML={{
-                          __html: setImageUrl(option.text),
-                        }}
-                      ></span>
-                    ) : (
-                      <span>
-                        <MathJax.Provider>
-                          <MathJax.Node
-                            formula={
-                              option.text ? setImageUrl(option.text) : ""
-                            }
-                          />
-                        </MathJax.Provider>
-                      </span>
-                    )}
+                    <Parser 
+                      className="" 
+                      inline={true}
+                      isMathJax={option.isMathJax} 
+                      question={option.text}/>
                     <br />
                     {showExplanation && option.id === activeQuestion.answerId && (
                       <p
@@ -353,20 +327,15 @@ export default function QuizQuestion(props) {
                         }}
                       >
                         <p style={{ margin: "10px 0 20px" }}>
-                          this answer is wring this answer is wring this answer
-                          is wring this answer is wring this answer is wring
-                          this answer is wring this answer is wring this answer
-                          is wring this answer is wring this answer is wring
-                          this answer is wring this answer is wring this answer
-                          is wring this answer is wring this answer is wring
-                          this answer is wring this answer is wring this answer
-                          is wring this answer is wring this answer is wring
-                          this answer is wring this answer is wring this answer
-                          is wring this answer is wring
+                          <Parser 
+                            className="" 
+                            inline={true}
+                            isMathJax={activeQuestion.answerUrl && activeQuestion.answerUrl.includes('\\(')} 
+                            question={activeQuestion.answerUrl}/>
                         </p>
                         <audio controls>
                           <source
-                            src={`${appUrl}${activeQuestion.audioUrl.replace(
+                            src={`${audioUrl}${activeQuestion.audioUrl.replace(
                               "\\",
                               "/"
                             )}`}
@@ -411,7 +380,7 @@ export default function QuizQuestion(props) {
             className="passage"
             id="passage"
             dangerouslySetInnerHTML={{
-              __html: setImageUrl(activeQuestion.question),
+              __html: setImageUrl(activeQuestion.passage),
             }}
           ></div>
         )}
