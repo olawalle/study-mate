@@ -67,6 +67,7 @@ export default function Quiz(props) {
     : "";
 
   const onOpenModal = () => {
+    console.log("opening modal");
     updateLoader(true);
     authServices
       .getStudypackData(props.quizId)
@@ -109,13 +110,37 @@ export default function Quiz(props) {
       selectMode(2);
       setStarted(true);
     } else {
+      console.log("quiz starting");
+      setfinishedTest(false);
       selectedQuizMode ? setStarted(true) : console.log("select a mode");
     }
   };
 
   const handleClick = () => {
     if (!props.open) return;
-    setopenMobileQuiz(true);
+    updateLoader(true);
+    authServices
+      .getStudypackData(props.quizId)
+      .then((res) => {
+        updateStudyPackQuizes(res.data);
+        updateLoader(false);
+        if (!res.data.length) {
+          return;
+        }
+        setopenMobileQuiz(true);
+        setModes(
+          modes.map((mod) => {
+            return {
+              ...mod,
+              selected: false,
+            };
+          })
+        );
+      })
+      .catch((err) => {
+        console.log({ err });
+        updateLoader(false);
+      });
   };
 
   const logg = () => {
@@ -138,7 +163,7 @@ export default function Quiz(props) {
           disabled={!props.quiz}
           title={
             !props.quiz
-              ? "There are no questions in this quiz. Chech back later"
+              ? "There are no questions in this quiz. Check back later"
               : "Click to take test"
           }
           className="blue-btn big-btn"
@@ -151,7 +176,7 @@ export default function Quiz(props) {
           disabled={!props.quiz}
           title={
             !props.quiz
-              ? "There are no questions in this quiz. Chech back later"
+              ? "There are no questions in this quiz. Check back later"
               : "Click to take test"
           }
           className="blue-btn sm-btn"
