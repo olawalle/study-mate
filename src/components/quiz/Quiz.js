@@ -66,33 +66,6 @@ export default function Quiz(props) {
     ? modes.find((m) => m.selected).text
     : "";
 
-  const onOpenModal = () => {
-    console.log("opening modal");
-    updateLoader(true);
-    authServices
-      .getStudypackData(props.quizId)
-      .then((res) => {
-        updateStudyPackQuizes(res.data);
-        updateLoader(false);
-        if (!res.data.length) {
-          return;
-        }
-        setopen(true);
-        setModes(
-          modes.map((mod) => {
-            return {
-              ...mod,
-              selected: false,
-            };
-          })
-        );
-      })
-      .catch((err) => {
-        console.log({ err });
-        updateLoader(false);
-      });
-  };
-
   const onCloseModal = () => {
     setopen(false);
     setfinishedTest(false);
@@ -116,31 +89,37 @@ export default function Quiz(props) {
     }
   };
 
-  const handleClick = () => {
-    if (!props.open) return;
-    updateLoader(true);
-    authServices
-      .getStudypackData(props.quizId)
-      .then((res) => {
-        updateStudyPackQuizes(res.data);
-        updateLoader(false);
-        if (!res.data.length) {
-          return;
-        }
-        setopenMobileQuiz(true);
-        setModes(
-          modes.map((mod) => {
-            return {
-              ...mod,
-              selected: false,
-            };
-          })
-        );
-      })
-      .catch((err) => {
-        console.log({ err });
-        updateLoader(false);
-      });
+  const onOpenModal = (n) => {
+    if (!props.open && n === 2) return;
+    if (props.quizType === "normal") {
+      console.log("is normal");
+      n === 1 ? setopen(true) : setopenMobileQuiz(true);
+    } else {
+      console.log("is quizpack");
+      updateLoader(true);
+      authServices
+        .getStudypackData(props.quizId)
+        .then((res) => {
+          updateStudyPackQuizes(res.data);
+          updateLoader(false);
+          if (!res.data.length) {
+            return;
+          }
+          n === 1 ? setopen(true) : setopenMobileQuiz(true);
+          setModes(
+            modes.map((mod) => {
+              return {
+                ...mod,
+                selected: false,
+              };
+            })
+          );
+        })
+        .catch((err) => {
+          console.log({ err });
+          updateLoader(false);
+        });
+    }
   };
 
   const logg = () => {
@@ -167,7 +146,7 @@ export default function Quiz(props) {
               : "Click to take test"
           }
           className="blue-btn big-btn"
-          onClick={onOpenModal}
+          onClick={() => onOpenModal(1)}
         >
           Start Quiz
         </button>
@@ -180,7 +159,7 @@ export default function Quiz(props) {
               : "Click to take test"
           }
           className="blue-btn sm-btn"
-          onClick={handleClick}
+          onClick={() => onOpenModal(2)}
         >
           Start Quiz
         </button>
