@@ -8,7 +8,13 @@ import { useSnackbar } from "react-simple-snackbar";
 
 export default function AddCourses(props) {
   const context = useContext(userContext);
-  const { userCourses, subjects, user, updateUserCourses } = context;
+  const {
+    userCourses,
+    subjects,
+    user,
+    updateUserCourses,
+    updateUser,
+  } = context;
   const { open, onCloseModal } = props;
   const [subjects_, setsubjects_] = useState([]);
   const [levelSubjects, setLevelSubjects] = useState([]);
@@ -17,6 +23,8 @@ export default function AddCourses(props) {
   const [toBeRemoved, settoBeRemoved] = useState([]);
   const [step, setStep] = useState(1);
   const [loader, setloader] = useState(false);
+  const [junior, setjunior] = useState(false);
+  const [senior, setsenior] = useState(false);
   const options = {
     position: "top-right",
   };
@@ -29,6 +37,8 @@ export default function AddCourses(props) {
   }, {});
 
   useEffect(() => {
+    setjunior(user.level === 2);
+    setsenior(user.level === 3);
     let refinedSubjects = subjects.map((s) => {
       return {
         ...s,
@@ -44,13 +54,44 @@ export default function AddCourses(props) {
     setStep(user.level ? 2 : 1);
   }, []);
 
+  const pickLevel = (n) => {
+    updateLevel(n);
+    if (n === 2) {
+      setjunior(true);
+      setsenior(false);
+    } else {
+      setjunior(false);
+      setsenior(true);
+    }
+
+    let levelCourses = subjects_.filter((s) => s.studyLevel === n);
+    setLevelSubjects(levelCourses);
+  };
+
   const jumpStep = () => {
     if (!level) return;
     step < 2 ? setStep(step + 1) : selectCourse();
   };
 
+  const getCurrentUser = () => {
+    authServices
+      .getCurrentUser()
+      .then((res) => {
+        let user = res.data;
+        updateUser(user);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const selectCourse = () => {
-    setloader(true);
+    if (newSelectedCourses.length || toBeRemoved.length) {
+      setloader(true);
+    } else {
+      onCloseModal();
+      getCurrentUser();
+    }
     newSelectedCourses.forEach((id) => {
       authServices
         .updateUserCourses({
@@ -72,10 +113,12 @@ export default function AddCourses(props) {
                 }, {})
               );
               updateUserCourses(sievedCourses);
+              getCurrentUser();
             })
             .catch((err) => {
               setloader(false);
               console.log({ err });
+              getCurrentUser();
             });
         })
         .catch((err) => {
@@ -92,6 +135,7 @@ export default function AddCourses(props) {
             .getUserCourses(null, user.id)
             .then((res) => {
               onCloseModal();
+              getCurrentUser();
               openSnackbar("Courses updated sucessfully", 5000);
               let user_courses = res.data.userLearnCourses;
               let sievedCourses = Object.values(
@@ -108,6 +152,7 @@ export default function AddCourses(props) {
         })
         .catch((err) => {
           console.log({ err });
+          getCurrentUser();
           onCloseModal();
         });
     });
@@ -117,7 +162,7 @@ export default function AddCourses(props) {
     setlevel(level);
     let data = [
       {
-        value: level === 1 ? "junior" : "senior",
+        value: level === 2 ? "junior" : "senior",
         op: "add",
         path: "/level",
       },
@@ -181,24 +226,24 @@ export default function AddCourses(props) {
           <div className="modal-data">
             <p className="blue--text">Secondary / Basic</p>
 
-            <button className="class bg_1" onClick={() => updateLevel(2)}>
+            <button className="class bg_1" onClick={() => pickLevel(2)}>
               <input
                 type="checkbox"
                 name=""
                 id=""
-                onChange={() => updateLevel(2)}
-                defaultChecked={user.level === 2}
+                onChange={() => pickLevel(2)}
+                checked={junior}
               />
               Junior Secondary
             </button>
 
-            <button className="class bg_2" onClick={() => updateLevel(3)}>
+            <button className="class bg_2" onClick={() => pickLevel(3)}>
               <input
                 type="checkbox"
                 name=""
                 id=""
-                onChange={() => updateLevel(3)}
-                defaultChecked={user.level === 3}
+                onChange={() => pickLevel(3)}
+                checked={senior}
               />
               Senior Secondary
             </button>

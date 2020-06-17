@@ -20,9 +20,9 @@ export default withRouter(function Courses(props) {
       return {
         ...subject,
         width:
-          subject.learnCourse.name.length <= 7
+          subject.learnCourse.name.length <= 12
             ? 1
-            : subject.name.length > 7 && subject.name.length <= 13
+            : subject.name.length > 12 && subject.name.length <= 16
             ? 2
             : 3,
         new: false,
@@ -83,8 +83,8 @@ export default withRouter(function Courses(props) {
           })}
         </div>
       </div>
-      <button onClick={props.onOpenModal} className="mt15 tw-btn">
-        Add more Courses +
+      <button onClick={props.onOpenModal} className="mt25 tw-btn">
+        <b>Add more courses +</b>
       </button>
     </div>
   );

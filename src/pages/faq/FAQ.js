@@ -38,7 +38,7 @@ export default withRouter(function FAQ({ history }) {
       open: false,
     },
     {
-      title: "Q. What are StudyPacks?",
+      title: "Q. What are Study Packs?",
       text: `
       StudyMate designed its practice questions according to packs. Each pack is designed with over 50 unique questions`,
       open: false,
@@ -101,7 +101,7 @@ export default withRouter(function FAQ({ history }) {
             Support
           </span>
           <span onClick={back} className="mobile-title-text">
-            FAQ's
+            HOME
           </span>
         </div>
         <div className="contents">
@@ -153,7 +153,7 @@ export default withRouter(function FAQ({ history }) {
           </div>
         </div>
         <div className="band">
-          2020 All right reserved. Studymate
+          2020 All right reserved. StudyMate
           <p style={{ margin: "4px 0" }}>Powered by infomall</p>
         </div>
       </div>

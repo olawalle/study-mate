@@ -202,7 +202,7 @@ export default withRouter(function Login(props) {
             <div className="form">
               {!sentEmail ? (
                 <>
-                  <span className="label">Email address</span>
+                  <span className="label">Email Address</span>
                   <input
                     className={hasError && !email ? "has-error" : ""}
                     type="text"
@@ -245,7 +245,7 @@ export default withRouter(function Login(props) {
               </span>
             </div>
             <p className="cc" style={{ position: "absolute", bottom: 20 }}>
-              @2020 All Rights Reserved. Studymate Powered by InfoMall Nigeria
+              @2020 All Rights Reserved. StudyMate Powered by InfoMall Nigeria
             </p>
           </div>
         ) : (
@@ -285,7 +285,7 @@ export default withRouter(function Login(props) {
               <span>or</span>
             </p>
             <div className="form">
-              <span className="label">Email address</span>
+              <span className="label">Email Address</span>
               <input
                 className={hasError && !email ? "has-error" : ""}
                 type="text"
@@ -330,7 +330,7 @@ export default withRouter(function Login(props) {
             </div>
 
             <p className="cc">
-              @2020 All Rights Reserved. Studymate Powered by InfoMall Nigeria
+              @2020 All Rights Reserved. StudyMate Powered by InfoMall Nigeria
             </p>
           </div>
         )}

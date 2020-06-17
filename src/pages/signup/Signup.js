@@ -139,11 +139,11 @@ export default withRouter(function Signup(props) {
             <div className="myslide">
               <p className="main-text">Choose your study mate wisely</p>
               <p className="smalls">
-                There are over 1000 video lessons across several topics and
-                subjects provided for you at the speed of your internet and at
-                the comfort of your home.
+                There are over 1,000 Junior and Senior Secondary video lessons
+                on several topics of all subjects, all available to you at the
+                speed of the Internet at your convenience.
               </p>
-              <img src={flex} alt="" />
+              <img src={flex} alt="" style={{ bottom: "-110px" }} />
             </div>
             <div className="myslide">
               <p className="main-text">24hour access to quality learning</p>
@@ -152,7 +152,7 @@ export default withRouter(function Signup(props) {
                 subjects provided for you at the speed of your internet and at
                 the comfort of your home.
               </p>
-              <img src={flex2} alt="" />
+              <img src={flex2} alt="" style={{ bottom: "-110px" }} />
             </div>
             <div className="myslide">
               <p className="main-text">Access quality content every time</p>
@@ -200,7 +200,7 @@ export default withRouter(function Signup(props) {
           </p>
           <div className="form">
             <div className="half">
-              <span className="label">First name</span>
+              <span className="label">First Name</span>
               <input
                 className={hasError && !firstName ? "has-error" : ""}
                 type="text"
@@ -208,7 +208,7 @@ export default withRouter(function Signup(props) {
               />
             </div>
             <div className="half f-right">
-              <span className="label">Last name</span>
+              <span className="label">Last Name</span>
               <input
                 className={hasError && !surName ? "has-error" : ""}
                 type="text"
@@ -216,14 +216,14 @@ export default withRouter(function Signup(props) {
               />
             </div>
 
-            <span className="label">Email address</span>
+            <span className="label">Email Address</span>
             <input
               className={hasError && !email ? "has-error" : ""}
               type="text"
               onChange={(e) => setemail(e.target.value)}
             />
 
-            <span className="label">Phone number</span>
+            <span className="label">Phone Number</span>
             <input
               className={hasError && !phoneNumber ? "has-error" : ""}
               type="text"
@@ -249,11 +249,11 @@ export default withRouter(function Signup(props) {
               <Link to="/login">
                 Creating an account means you are ok with our{" "}
                 <span className="blue--text">
-                  Terms of service,Provacy policy
+                  Terms of service,Privacy policy
                 </span>{" "}
                 and{" "}
                 <span className="blue--text">
-                  default Notification settings
+                  Default Notification Settings
                 </span>
               </Link>
             </span>

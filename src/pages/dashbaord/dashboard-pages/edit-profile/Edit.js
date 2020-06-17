@@ -200,7 +200,7 @@ export default withRouter(function EditProfile({ history }) {
               </div>
 
               <div className="inp-wrap left">
-                <span className="label">Email address</span>
+                <span className="label">Email Address</span>
                 <input
                   type="text"
                   defaultValue={email}

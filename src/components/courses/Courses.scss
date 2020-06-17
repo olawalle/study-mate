@@ -3,7 +3,7 @@
   .courses {
     text-align: center;
     display: flex;
-    max-height: 250px;
+    max-height: 230px;
     overflow: auto;
     .title {
       width: 100%;
@@ -28,7 +28,9 @@
       .course {
         font-size: 12px;
         color: #fff !important;
-        padding: 15px;
+        padding: 0 !important;
+        height: 40px;
+        line-height: 40px;
         margin: 4px 1%;
         position: relative;
         &:hover {
@@ -44,7 +46,7 @@
         }
       }
       .small {
-        width: 31.5%;
+        width: 31.1%;
       }
       .mid {
         width: calc(48%);

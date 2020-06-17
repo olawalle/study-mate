@@ -93,15 +93,15 @@ export default withRouter(function Subject({ history }) {
             <div className="progresses">
               <div className="progress-wrap">
                 <ProgressBar />
-                <span>level 1(400 study points)</span>
+                <span>Basic(400 study points)</span>
               </div>
               <div className="progress-wrap">
                 <ProgressBar />
-                <span>level 1(400 study points)</span>
+                <span>Intermediate(400 study points)</span>
               </div>
               <div className="progress-wrap">
                 <ProgressBar />
-                <span>level 1(400 study points)</span>
+                <span>Advanced(400 study points)</span>
               </div>
             </div>
           </div>
@@ -109,7 +109,7 @@ export default withRouter(function Subject({ history }) {
 
         <div className="contents">
           <div className="small">
-            <p className="header">Study Levels</p>
+            <p className="header">Study Lessons</p>
             {links.map((link, i) => (
               <div
                 key={link.text}

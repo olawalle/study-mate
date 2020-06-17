@@ -12,7 +12,7 @@ export default function Badges() {
   return (
     <div className="badges">
       <p className="heading">
-        Badge count
+        Badge counts
         <span className="coins">
           <img src={coins} alt="" /> coins
         </span>

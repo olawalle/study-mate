@@ -50,15 +50,15 @@ export default withRouter(function Studypack({ history }) {
             <div className="progresses">
               <div className="progress-wrap">
                 <ProgressBar />
-                <span>level 1(400 study points)</span>
+                <span>Basic (400 study points)</span>
               </div>
               <div className="progress-wrap">
                 <ProgressBar />
-                <span>level 1(400 study points)</span>
+                <span>Intermediate (400 study points)</span>
               </div>
               <div className="progress-wrap">
                 <ProgressBar />
-                <span>level 1(400 study points)</span>
+                <span>Advanced (400 study points)</span>
               </div>
             </div>
           </div>
@@ -69,7 +69,7 @@ export default withRouter(function Studypack({ history }) {
             <p className="header">Study Pack</p>
 
             <span className="desc">
-              Our StudyPacks are advanced Tests created to help you test your
+              Our Study Packs are advanced Tests created to help you test your
               learning progress and be more proficient in various subjects. They
               be experienced through 3 main mediums based on your preference. We
               have the learning mode, the time mode, and the free form mode.

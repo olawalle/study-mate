@@ -235,7 +235,7 @@ export default function Quiz(props) {
                                 <div className="blue--text">
                                   <p>
                                     This simulates an examination environment
-                                    without a set time. You get to take the test
+                                    without a timer. You get to take the test
                                     freely and at your own pace
                                   </p>
                                   <div>
@@ -395,8 +395,8 @@ export default function Quiz(props) {
                                   <div className="blue--text">
                                     <p>
                                       This simulates an examination environment
-                                      without a set time. You get to take the
-                                      test freely and at your own pace
+                                      without a timer. You get to take the test
+                                      freely and at your own pace
                                     </p>
                                     <div>
                                       <span

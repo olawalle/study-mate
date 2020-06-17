@@ -114,7 +114,7 @@ export default withRouter(function Learn({ history }) {
           </div>
         </div>
         <p className="foot">
-          2020 All right reserved. Studymate. Powered by infomal Nigeria
+          2020 All right reserved. StudyMate. Powered by infomal Nigeria
         </p>
       </div>
       {!user.isVerified && (
