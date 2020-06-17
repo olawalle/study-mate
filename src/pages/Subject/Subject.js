@@ -161,7 +161,7 @@ export default withRouter(function Subject({ history }) {
               <Quiz
                 open={true}
                 quizType="normal"
-                quiz={selectedSubject.quizzes}
+                quiz={selectedSubject.quizzes.filter(q => q.level === 0)}
               />
             ) : null}
 
@@ -189,7 +189,7 @@ export default withRouter(function Subject({ history }) {
               <Quiz
                 open={true}
                 quizType="normal"
-                quiz={selectedSubject.quizzes}
+                quiz={selectedSubject.quizzes.filter(q => q.level === 1)}
               />
             ) : null}
 
@@ -217,11 +217,10 @@ export default withRouter(function Subject({ history }) {
               <Quiz
                 open={true}
                 quizType="normal"
-                quiz={selectedSubject.quizzes}
+                quiz={selectedSubject.quizzes.filter(q => q.level === 2)}
               />
             ) : null}
-
-            <div className="pack">
+            {selectedSubject.alias && <div className="pack">
               <div className="half">
                 <p className="title">Advance your learning</p>
                 <div className="desc">
@@ -243,6 +242,7 @@ export default withRouter(function Subject({ history }) {
               </div>
               <div className="half bg"></div>
             </div>
+          }
           </div>
         </div>
       </div>
