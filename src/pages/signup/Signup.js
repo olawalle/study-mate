@@ -249,7 +249,7 @@ export default withRouter(function Signup(props) {
               <Link to="/login">
                 Creating an account means you are ok with our{" "}
                 <span className="blue--text">
-                  Terms of service,Privacy policy
+                  Terms of service, Privacy policy
                 </span>{" "}
                 and{" "}
                 <span className="blue--text">
