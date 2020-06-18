@@ -139,14 +139,14 @@ export default withRouter(function Subject({ history }) {
           <div className="wide">
             <p className="heading">Lesson pack 1</p>
             <div className="lessons-wrap mb30">
-              {!selectedSubject.videos.length && (
+              {!selectedSubject.videos.filter(v => v.level === 0).length && (
                 <p style={{ padding: "12px 30px", margin: 0, fontSize: 12 }}>
                   There are no video lessons in this pack. Kindly check back
                   later.
                 </p>
               )}
               <div className="lessons">
-                {selectedSubject.videos.map((video, i) => (
+                {selectedSubject.videos.filter(v => v.level === 0).map((video, i) => (
                   <Lesson
                     key={"video" + i}
                     video={video}
@@ -157,15 +157,70 @@ export default withRouter(function Subject({ history }) {
             </div>
             {selectedSubject &&
             selectedSubject.quizzes &&
-            selectedSubject.quizzes.length ? (
+            selectedSubject.quizzes.filter(q => q.level === 0).length ? (
               <Quiz
                 open={true}
                 quizType="normal"
-                quiz={selectedSubject.quizzes}
+                quiz={selectedSubject.quizzes.filter(q => q.level === 0)}
               />
             ) : null}
 
-            <div className="pack">
+            <p className="heading">Lesson pack 2</p>
+            <div className="lessons-wrap mb30">
+              {!selectedSubject.videos.filter(v => v.level === 1).length && (
+                <p style={{ padding: "12px 30px", margin: 0, fontSize: 12 }}>
+                  There are no video lessons in this pack. Kindly check back
+                  later.
+                </p>
+              )}
+              <div className="lessons">
+                {selectedSubject.videos.filter(v => v.level === 1).map((video, i) => (
+                  <Lesson
+                    key={"video" + i}
+                    video={video}
+                    disableClick={false}
+                  />
+                ))}
+              </div>
+            </div>
+            {selectedSubject &&
+            selectedSubject.quizzes &&
+            selectedSubject.quizzes.filter(q => q.level === 1).length ? (
+              <Quiz
+                open={true}
+                quizType="normal"
+                quiz={selectedSubject.quizzes.filter(q => q.level === 1)}
+              />
+            ) : null}
+
+            <p className="heading">Lesson pack 3</p>
+            <div className="lessons-wrap mb30">
+              {!selectedSubject.videos.filter(v => v.level === 2).length && (
+                <p style={{ padding: "12px 30px", margin: 0, fontSize: 12 }}>
+                  There are no video lessons in this pack. Kindly check back
+                  later.
+                </p>
+              )}
+              <div className="lessons">
+                {selectedSubject.videos.filter(v => v.level === 2).map((video, i) => (
+                  <Lesson
+                    key={"video" + i}
+                    video={video}
+                    disableClick={false}
+                  />
+                ))}
+              </div>
+            </div>
+            {selectedSubject &&
+            selectedSubject.quizzes &&
+            selectedSubject.quizzes.filter(q => q.level === 2).length ? (
+              <Quiz
+                open={true}
+                quizType="normal"
+                quiz={selectedSubject.quizzes.filter(q => q.level === 2)}
+              />
+            ) : null}
+            {selectedSubject.alias && <div className="pack">
               <div className="half">
                 <p className="title">Advance your learning</p>
                 <div className="desc">
@@ -187,6 +242,7 @@ export default withRouter(function Subject({ history }) {
               </div>
               <div className="half bg"></div>
             </div>
+          }
           </div>
         </div>
       </div>
