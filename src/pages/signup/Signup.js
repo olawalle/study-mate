@@ -246,16 +246,15 @@ export default withRouter(function Signup(props) {
             </div>
 
             <span className="no-acct">
-              <Link to="/login">
-                Creating an account means you are ok with our{" "}
-                <span className="blue--text">
-                  Terms of service, Privacy policy
-                </span>{" "}
-                and{" "}
-                <span className="blue--text">
-                  Default Notification Settings
-                </span>
+              Creating an account means you are ok with our{" "}
+              <Link to="/terms">
+                <span className="blue--text">Terms of service, </span>{" "}
               </Link>
+              <Link to="/privacy">
+                <span className="blue--text">Privacy policy </span>
+              </Link>
+              and{" "}
+              <span className="blue--text">Default Notification Settings</span>
             </span>
 
             <button className="main-btn mt20" onClick={() => submit(null)}>

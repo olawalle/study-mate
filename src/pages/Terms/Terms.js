@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Terms.scss";
 import { motion } from "framer-motion";
 import Nav from "../../components/nav/Nav";
 import backArrow from "../../assets/images/back.svg";
 import { withRouter } from "react-router-dom";
+import { userContext } from "../../store/UserContext";
 
 export default withRouter(function Terms({ history }) {
+  const context = useContext(userContext);
+  const { isLoggedIn } = context;
   const back = () => {
-    history.push("/edit-profile");
+    isLoggedIn ? history.push("/edit-profile") : history.push("/login");
   };
 
   return (

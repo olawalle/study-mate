@@ -44,45 +44,49 @@ export default withRouter(function Nav(props) {
         <img src={logo} className="logo" alt="" />
       </span>
 
-      <span className="user f-right">
-        <div
-          className="avatar"
-          style={{
-            backgroundImage: `url("${appUrl}${
-              context.user.image && context.user.image.replace("\\", "/")
-            }")`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        >
-          {!context.user.image && <img src={userIcon} height="30" alt="" />}
-        </div>
-        {fullname}
-        <img
-          src={caret}
-          style={{
-            width: 10,
-            marginLeft: 12,
-            transform: open ? `rotate(180deg)` : "",
-          }}
-          alt=""
-        />
-        <div className="dropdown">
-          <ul>
-            <li className="bb" onClick={toProfile}>
-              Edit profile <img src={edit} className="f-right m15" alt="" />{" "}
-            </li>
-            <li onClick={logout}>
-              Logout <img src={logoutIcon} className="f-right m15" alt="" />{" "}
-            </li>
-          </ul>
-        </div>
-      </span>
+      {context.isLoggedIn && (
+        <span className="user f-right">
+          <div
+            className="avatar"
+            style={{
+              backgroundImage: `url("${appUrl}${
+                context.user.image && context.user.image.replace("\\", "/")
+              }")`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          >
+            {!context.user.image && <img src={userIcon} height="30" alt="" />}
+          </div>
+          {fullname}
+          <img
+            src={caret}
+            style={{
+              width: 10,
+              marginLeft: 12,
+              transform: open ? `rotate(180deg)` : "",
+            }}
+            alt=""
+          />
+          <div className="dropdown">
+            <ul>
+              <li className="bb" onClick={toProfile}>
+                Edit profile <img src={edit} className="f-right m15" alt="" />{" "}
+              </li>
+              <li onClick={logout}>
+                Logout <img src={logoutIcon} className="f-right m15" alt="" />{" "}
+              </li>
+            </ul>
+          </div>
+        </span>
+      )}
 
-      <span className="inp">
-        <img src={search} alt="" />
-        <input type="text" placeholder="What do you want learn?" />
-      </span>
+      {context.isLoggedIn && (
+        <span className="inp">
+          <img src={search} alt="" />
+          <input type="text" placeholder="What do you want learn?" />
+        </span>
+      )}
 
       <div
         id="nav-icon1"

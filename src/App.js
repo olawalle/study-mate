@@ -52,6 +52,7 @@ import Studypack from "./pages/Studypack/Studypack";
 import authServices from "./services/authServices";
 import Terms from "./pages/Terms/Terms";
 import FAQ from "./pages/faq/FAQ";
+import Privacy from "./pages/Terms/Privacy";
 
 export default function App() {
   useEffect(() => {
@@ -122,6 +123,9 @@ export default function App() {
                 </Route>
                 <Route path={`/terms`}>
                   <Terms />
+                </Route>
+                <Route path={`/privacy`}>
+                  <Privacy />
                 </Route>
                 <Route path={`/faq`}>
                   <FAQ />
