@@ -32,13 +32,14 @@ export default function AddCourses(props) {
   let modalWidth = window.innerWidth > 1024 ? 75 : 100;
 
   const preSelectedCourses = userCourses.reduce((agg, curr) => {
-    agg[curr.learnCourseId] = curr;
+    agg[curr.courseId] = curr;
     return agg;
   }, {});
 
   useEffect(() => {
     setjunior(user.level === 3);
     setsenior(user.level === 4);
+    console.log({sub:subjects})
     let refinedSubjects = subjects.map((s) => {
       return {
         ...s,
