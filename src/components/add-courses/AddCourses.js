@@ -37,8 +37,8 @@ export default function AddCourses(props) {
   }, {});
 
   useEffect(() => {
-    setjunior(user.level === 2);
-    setsenior(user.level === 3);
+    setjunior(user.level === 3);
+    setsenior(user.level === 4);
     let refinedSubjects = subjects.map((s) => {
       return {
         ...s,
@@ -96,12 +96,13 @@ export default function AddCourses(props) {
       authServices
         .updateUserCourses({
           userId: user.id,
-          learnCourseId: id,
+          courseId: id,
         })
         .then((res) => {
           authServices
             .getUserCourses(null, user.id)
             .then((res) => {
+              console.log({data: res.data})
               onCloseModal();
               openSnackbar("Courses updated sucessfully", 5000);
               setloader(false);
@@ -162,7 +163,7 @@ export default function AddCourses(props) {
     setlevel(level);
     let data = [
       {
-        value: level === 2 ? "junior" : "senior",
+        value: level === 3 ? "junior" : "senior",
         op: "add",
         path: "/level",
       },
