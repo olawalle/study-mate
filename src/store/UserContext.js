@@ -29,10 +29,12 @@ export default class UserContextProvider extends Component {
 
   componentWillMount() {
     let state = JSON.parse(localStorage.getItem("parentValueKey"));
-    console.log(state);
     this.setState(state);
     let token = this.state.user.token || "";
     axios.defaults.headers.common["Authorization"] = `${token}`;
+    setTimeout(() => {
+      this.setState({ loading: false });
+    }, 1000);
   }
 
   componentDidUpdate(prevProps, prevState) {

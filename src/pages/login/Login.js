@@ -113,6 +113,8 @@ export default withRouter(function Login(props) {
           })
           .catch((err) => {
             console.log({ err });
+            updateLoader(false);
+            showError("An error occured. Please try again");
           });
 
         authServices
