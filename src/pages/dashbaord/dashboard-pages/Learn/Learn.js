@@ -47,6 +47,7 @@ export default withRouter(function Learn({ history }) {
   const onCloseModal = () => setopen(false);
 
   const toSubject = () => {
+    console.log({selectedSubject})
     history.push(`/subject/${selectedSubject.id}`);
   };
 
