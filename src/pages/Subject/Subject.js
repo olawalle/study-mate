@@ -139,7 +139,7 @@ export default withRouter(function Subject({ history }) {
           <div className="wide">
             {selectedSubject.tests.map(test => (
               <React.Fragment key={test.id}>
-            <p className="heading">{test.Year}</p>
+            <p className="heading">{test.year}</p>
             <div className="lessons-wrap mb30">
               {!test.videos.length && (
                 <p style={{ padding: "12px 30px", margin: 0, fontSize: 12 }}>
