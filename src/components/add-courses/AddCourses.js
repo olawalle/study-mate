@@ -57,7 +57,7 @@ export default function AddCourses(props) {
 
   const pickLevel = (n) => {
     updateLevel(n);
-    if (n === 2) {
+    if (n === 3) {
       setjunior(true);
       setsenior(false);
     } else {
@@ -228,23 +228,23 @@ export default function AddCourses(props) {
           <div className="modal-data">
             <p className="blue--text">Secondary / Basic</p>
 
-            <button className="class bg_1" onClick={() => pickLevel(2)}>
-              <input
-                type="checkbox"
-                name=""
-                id=""
-                onChange={() => pickLevel(2)}
-                checked={junior}
-              />
-              Junior Secondary
-            </button>
-
-            <button className="class bg_2" onClick={() => pickLevel(3)}>
+            <button className="class bg_1" onClick={() => pickLevel(3)}>
               <input
                 type="checkbox"
                 name=""
                 id=""
                 onChange={() => pickLevel(3)}
+                checked={junior}
+              />
+              Junior Secondary
+            </button>
+
+            <button className="class bg_2" onClick={() => pickLevel(4)}>
+              <input
+                type="checkbox"
+                name=""
+                id=""
+                onChange={() => pickLevel(4)}
                 checked={senior}
               />
               Senior Secondary
