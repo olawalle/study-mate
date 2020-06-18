@@ -137,8 +137,8 @@ export default withRouter(function Learn({ history }) {
 
             <div className="lessons">
               {selectedSubject &&
-                selectedSubject.videos &&
-                selectedSubject.videos
+                selectedSubject.tests.length &&
+                selectedSubject.tests[0].videos
                   .filter((v, i) => i < 4)
                   .map((video, i) => (
                     <Lesson

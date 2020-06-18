@@ -18,10 +18,10 @@ export default withRouter(function Lesson({ disableClick, history, video }) {
   const context = useContext(userContext);
   const { selectedSubject } = context;
   let modalWidth = window.innerWidth > 1024 ? 96 : 100;
-  const duration = selectedSubject.videos.reduce(
-    (sum, vid) => (sum += vid.duration),
-    0
-  );
+  const duration = selectedSubject.tests.reduce((agg, cur) => {
+    let sum = cur.videos.reduce((sum, vid) => (sum += vid.duration), 0);
+    return agg + sum;
+  }, 0);
   const timeFrame = `${Math.floor(duration / 60)}hrs ${duration % 60}mins`;
   useEffect(() => {
     let data = [];
