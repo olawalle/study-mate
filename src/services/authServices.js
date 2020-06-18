@@ -60,7 +60,7 @@ let getUserCourses = (token, id) => {
     // url: urls.userCourseUrl,
     url: urls.getUserLearnCourseUrl,
     params: {
-      id,
+      id
     },
     headers: token ? { Authorization: `Bearer ${token}` } : headers(),
   });
@@ -111,7 +111,7 @@ let updateUserData = (data, id) => {
 let getSubjectQuiz = (id) => {
   return axios({
     method: "get",
-    url: urls.learnCourseUrl + "/" + id,
+    url: urls.courseUrl + "/" + id,
   });
 };
 
