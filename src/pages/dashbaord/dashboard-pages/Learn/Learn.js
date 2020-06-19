@@ -47,7 +47,7 @@ export default withRouter(function Learn({ history }) {
   const onCloseModal = () => setopen(false);
 
   const toSubject = () => {
-    console.log({selectedSubject})
+    console.log({ selectedSubject });
     history.push(`/subject/${selectedSubject.id}`);
   };
 
@@ -138,7 +138,7 @@ export default withRouter(function Learn({ history }) {
             <div className="lessons">
               {selectedSubject &&
               selectedSubject.tests &&
-                selectedSubject.tests.length &&
+              selectedSubject.tests.length ? (
                 selectedSubject.tests[0].videos
                   .filter((v, i) => i < 4)
                   .map((video, i) => (
@@ -147,7 +147,19 @@ export default withRouter(function Learn({ history }) {
                       video={video}
                       disableClick={true}
                     />
-                  ))}
+                  ))
+              ) : (
+                <p
+                  className="blue--text"
+                  style={{
+                    paddingTop: "30px",
+                    textAlign: "center",
+                  }}
+                >
+                  There are currently no videos in this study pack. Kindly check
+                  back later
+                </p>
+              )}
             </div>
           </div>
 

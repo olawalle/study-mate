@@ -14,27 +14,35 @@ import streak from "../../assets/images/streak.svg";
 import { appUrl } from "../../services/urls";
 import { userContext } from "../../store/UserContext";
 
-export default withRouter(function Lesson({ disableClick, history, video }) {
+export default withRouter(function Lesson({
+  disableClick,
+  history,
+  video,
+  grade,
+}) {
   const context = useContext(userContext);
   const { selectedSubject } = context;
+  const videoLevel =
+    grade === 0 ? "Beginner" : grade === 1 ? "Intermediate" : "Advanced";
   let modalWidth = window.innerWidth > 1024 ? 96 : 100;
-  const duration = selectedSubject.tests.reduce((agg, cur) => {
-    let sum = cur.videos.reduce((sum, vid) => (sum += vid.duration), 0);
-    return agg + sum;
-  }, 0);
-  const timeFrame = `${Math.floor(duration / 60)}hrs ${duration % 60}mins`;
+
   useEffect(() => {
     let data = [];
-    selectedSubject.videos.forEach((vid, i) => {
-      if (vid.id === video.id) {
-        setactiveVideo(i);
-      }
-      data.push({
-        ...vid,
-        text: vid.name,
-        selected: vid.id === video.id,
+    let subjectVideos = selectedSubject.tests.reduce((agg, curr) => {
+      return agg.concat(curr.videos);
+    }, []);
+    subjectVideos
+      .filter((v) => v.level === grade)
+      .forEach((vid, i) => {
+        if (vid.id === video.id) {
+          setactiveVideo(i);
+        }
+        data.push({
+          ...vid,
+          text: vid.name,
+          selected: vid.id === video.id,
+        });
       });
-    });
     setVideos(data);
   }, []);
   const [open, setopen] = useState(false);
@@ -42,6 +50,12 @@ export default withRouter(function Lesson({ disableClick, history, video }) {
   const [url, seturl] = useState("");
   const [videos, setVideos] = useState([]);
   const [activeVideo, setactiveVideo] = useState(null);
+
+  const duration = videos.reduce((agg, vid) => {
+    return agg + vid.duration;
+  }, 0);
+
+  const timeFrame = `${Math.floor(duration / 60)}hrs ${duration % 60}mins`;
 
   const selectVideo = (i) => {
     if (i >= videos.length) return;
@@ -108,7 +122,7 @@ export default withRouter(function Lesson({ disableClick, history, video }) {
             <div
               style={{ fontWeight: 600, fontSize: 20, padding: "30px 40px" }}
             >
-              Intermediate
+              {videoLevel}
             </div>
             <div
               style={{ padding: "0 40px 30px", borderBottom: "1px solid #eee" }}
@@ -184,14 +198,20 @@ export default withRouter(function Lesson({ disableClick, history, video }) {
                     <img
                       src={play}
                       style={{
-                        width: 25,
+                        width: 22,
                         marginRight: 12,
                         position: "relative",
                         top: "3px",
                       }}
                       alt=""
                     />
-                    <span style={{ position: "relative", top: "-5px" }}>
+                    <span
+                      style={{
+                        position: "relative",
+                        top: "-5px",
+                        fontSize: 12,
+                      }}
+                    >
                       {video.text}
                     </span>
                   </li>

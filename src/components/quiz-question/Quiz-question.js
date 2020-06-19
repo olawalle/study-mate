@@ -163,7 +163,7 @@ export default function QuizQuestion(props) {
   };
 
   const submitLearingAnswer = () => {
-    debugger;
+    // debugger;
     if (answers.length === questions.length) {
       submit();
       return;
@@ -290,11 +290,12 @@ export default function QuizQuestion(props) {
           <ProgressBar width={currentQuestion / (questions.length - 1)} />
         </div>
         <div className="content">
-          <Parser 
-              className="question" 
-              isMathJax={activeQuestion.isQuestionMathJax} 
-              question={activeQuestion.question}/>
-          
+          <Parser
+            className="question"
+            isMathJax={activeQuestion.isQuestionMathJax}
+            question={activeQuestion.question}
+          />
+
           <div className="questions">
             {options.map((option, i) => {
               return (
@@ -308,13 +309,14 @@ export default function QuizQuestion(props) {
                   onClick={() => pickAnswer(i)}
                 >
                   <span className="label">{option.option}</span>
-                  
+
                   <p>
-                    <Parser 
-                      className="" 
+                    <Parser
+                      className=""
                       inline={true}
-                      isMathJax={option.isMathJax} 
-                      question={option.text}/>
+                      isMathJax={option.isMathJax}
+                      question={option.text}
+                    />
                     <br />
                     {showExplanation && option.id === activeQuestion.answerId && (
                       <p
@@ -327,11 +329,15 @@ export default function QuizQuestion(props) {
                         }}
                       >
                         <p style={{ margin: "10px 0 20px" }}>
-                          <Parser 
-                            className="" 
+                          <Parser
+                            className=""
                             inline={true}
-                            isMathJax={activeQuestion.answerUrl && activeQuestion.answerUrl.includes('\\(')} 
-                            question={activeQuestion.answerUrl}/>
+                            isMathJax={
+                              activeQuestion.answerUrl &&
+                              activeQuestion.answerUrl.includes("\\(")
+                            }
+                            question={activeQuestion.answerUrl}
+                          />
                         </p>
                         <audio controls>
                           <source

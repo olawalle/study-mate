@@ -98,7 +98,7 @@ export default withRouter(function Login(props) {
         authServices
           .getUserCourses(user.token, user.id)
           .then((res) => {
-            console.log({res})
+            console.log({ res });
             let user_courses = res.data.userCourses;
             let sievedCourses = Object.values(
               user_courses.reduce((agg, curr) => {

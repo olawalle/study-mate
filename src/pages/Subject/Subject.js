@@ -55,12 +55,7 @@ export default withRouter(function Subject({ history }) {
   };
 
   const pickLevel = (i) => {
-    updateLoader(true);
-    // dunno what should be done here so this is for demo :(
-    setTimeout(() => {
-      updateLoader(false);
-      setlinkIndex(i);
-    }, 2000);
+    setlinkIndex(i);
   };
 
   return (
@@ -137,60 +132,73 @@ export default withRouter(function Subject({ history }) {
             />
           </div>
           <div className="wide">
-            {selectedSubject.tests.map(test => (
+            {selectedSubject.tests.map((test) => (
               <React.Fragment key={test.id}>
-            <p className="heading">{test.year}</p>
-            <div className="lessons-wrap mb30">
-              {!test.videos.length && (
-                <p style={{ padding: "12px 30px", margin: 0, fontSize: 12 }}>
-                  There are no video lessons in this pack. Kindly check back
-                  later.
-                </p>
-              )}
-              <div className="lessons">
-                {test.videos.map((video, i) => (
-                  <Lesson
-                    key={"video" + i}
-                    video={video}
-                    disableClick={false}
-                  />
-                ))}
-              </div>
-            </div>
-            {test.quizes.length ? (
-              <Quiz
-                open={true}
-                quizType="normal"
-                quiz={test.quizes}
-              />
-            ) : null}
+                <p className="heading">{test.year}</p>
+                <div className="lessons-wrap mb30">
+                  <div className="lessons">
+                    {test.videos.filter((v) => v.level === linkIndex).length >
+                    0 ? (
+                      test.videos
+                        .filter((v) => v.level === linkIndex)
+                        .map((video, i) => (
+                          <Lesson
+                            key={"video" + i}
+                            video={video}
+                            grade={linkIndex}
+                            disableClick={false}
+                          />
+                        ))
+                    ) : (
+                      <div
+                        className="blue--text"
+                        style={{
+                          padding: "12px 30px",
+                          margin: 0,
+                          fontSize: 12,
+                        }}
+                      >
+                        There are no{" "}
+                        {linkIndex === 0
+                          ? "beginner"
+                          : linkIndex === 1
+                          ? "Intermediate"
+                          : "advanced"}{" "}
+                        video lessons in this pack. Kindly check back later.
+                      </div>
+                    )}
+                  </div>
+                </div>
+                {test.quizes.length ? (
+                  <Quiz open={true} quizType="normal" quiz={test.quizes} />
+                ) : null}
               </React.Fragment>
             ))}
-            
-            
-            {selectedSubject.hasStudyPack && <div className="pack">
-              <div className="half">
-                <p className="title">Advance your learning</p>
-                <div className="desc">
-                  <p style={{ fontSize: 12 }}>
-                    Our Study Packs are Test questions created for advanced
-                    Senior Secondary levels. They are simulated for further
-                    learning and for exam purposes. Note that the Study Lessons
-                    above must have been completed before proceeding to the
-                    Study packs.
-                  </p>
+
+            {selectedSubject.hasStudyPack && (
+              <div className="pack">
+                <div className="half">
+                  <p className="title">Advance your learning</p>
+                  <div className="desc">
+                    <p style={{ fontSize: 12 }}>
+                      Our Study Packs are Test questions created for advanced
+                      Senior Secondary levels. They are simulated for further
+                      learning and for exam purposes. Note that the Study
+                      Lessons above must have been completed before proceeding
+                      to the Study packs.
+                    </p>
+                  </div>
+                  <div className="duration">
+                    <span>12 Study packs</span>
+                    <span>9 - 12 minutes</span>
+                  </div>
+                  <button onClick={gotoPacks} className="tw-btn">
+                    Lets get started
+                  </button>
                 </div>
-                <div className="duration">
-                  <span>12 Study packs</span>
-                  <span>9 - 12 minutes</span>
-                </div>
-                <button onClick={gotoPacks} className="tw-btn">
-                  Lets get started
-                </button>
+                <div className="half bg"></div>
               </div>
-              <div className="half bg"></div>
-            </div>
-          }
+            )}
           </div>
         </div>
       </div>

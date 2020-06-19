@@ -17,20 +17,22 @@ export default withRouter(function Courses(props) {
   } = context;
   let sortesubjects = userCourses
     .map((subject, i) => {
-      console.log({subject})
       return {
         ...subject,
         width:
-          subject.course.name.length <= 12
+          subject.course.name.length <= 7
             ? 1
-            : subject.name.length > 12 && subject.name.length <= 16
+            : subject.course.name.length > 7 && subject.course.name.length <= 12
             ? 2
             : 3,
         new: false,
       };
     })
-    .filter((c) => user.level === 4 ? c.course.studyLevel === 0 
-    || c.course.studyLevel === user.level : c.course.studyLevel === user.level)
+    .filter((c) =>
+      user.level === 4
+        ? c.course.studyLevel === 0 || c.course.studyLevel === user.level
+        : c.course.studyLevel === user.level
+    )
     .sort((a, b) => {
       if (a.width < b.width) return -1;
       if (a.width > b.width) return 1;
@@ -38,7 +40,6 @@ export default withRouter(function Courses(props) {
     });
 
   const selectCourse = (course) => {
-    console.log(course);
     updateLoader(true);
     authServices
       .getSubjectQuiz(course.courseId)
@@ -65,7 +66,6 @@ export default withRouter(function Courses(props) {
       <div className="courses">
         <div className="flex-grid-thirds">
           {sortesubjects.map((course, i) => {
-            console.log({course})
             return (
               <div
                 key={course.name + i}

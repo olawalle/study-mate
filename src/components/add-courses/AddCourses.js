@@ -14,6 +14,7 @@ export default function AddCourses(props) {
     user,
     updateUserCourses,
     updateUser,
+    updateLoader,
   } = context;
   const { open, onCloseModal } = props;
   const [subjects_, setsubjects_] = useState([]);
@@ -39,7 +40,7 @@ export default function AddCourses(props) {
   useEffect(() => {
     setjunior(user.level === 3);
     setsenior(user.level === 4);
-    console.log({sub:subjects})
+    console.log({ sub: subjects });
     let refinedSubjects = subjects.map((s) => {
       return {
         ...s,
@@ -47,6 +48,7 @@ export default function AddCourses(props) {
       };
     });
     setsubjects_(refinedSubjects);
+    console.log({ refinedSubjects });
     setlevel(user.level);
     let levelCourses = refinedSubjects.filter(
       (s) => s.studyLevel === user.level
@@ -89,10 +91,12 @@ export default function AddCourses(props) {
   const selectCourse = () => {
     if (newSelectedCourses.length || toBeRemoved.length) {
       setloader(true);
+      updateLoader(true);
     } else {
       onCloseModal();
       getCurrentUser();
     }
+
     newSelectedCourses.forEach((id) => {
       authServices
         .updateUserCourses({
@@ -100,32 +104,13 @@ export default function AddCourses(props) {
           courseId: id,
         })
         .then((res) => {
-          authServices
-            .getUserCourses(null, user.id)
-            .then((res) => {
-              console.log({data: res.data})
-              onCloseModal();
-              openSnackbar("Courses updated sucessfully", 5000);
-              setloader(false);
-              let user_courses = res.data.userLearnCourses;
-              let sievedCourses = Object.values(
-                user_courses.reduce((agg, curr) => {
-                  agg[curr.learnCourseId] = curr;
-                  return agg;
-                }, {})
-              );
-              updateUserCourses(sievedCourses);
-              getCurrentUser();
-            })
-            .catch((err) => {
-              setloader(false);
-              console.log({ err });
-              getCurrentUser();
-            });
+          fetchUserCourses();
         })
         .catch((err) => {
           console.log({ err });
+          openSnackbar(err.response.data.message, 5000);
           onCloseModal();
+          updateLoader(false);
         });
     });
 
@@ -133,31 +118,39 @@ export default function AddCourses(props) {
       authServices
         .deleteUserCourse(id)
         .then((res) => {
-          authServices
-            .getUserCourses(null, user.id)
-            .then((res) => {
-              onCloseModal();
-              getCurrentUser();
-              openSnackbar("Courses updated sucessfully", 5000);
-              let user_courses = res.data.userLearnCourses;
-              let sievedCourses = Object.values(
-                user_courses.reduce((agg, curr) => {
-                  agg[curr.learnCourseId] = curr;
-                  return agg;
-                }, {})
-              );
-              updateUserCourses(sievedCourses);
-            })
-            .catch((err) => {
-              console.log({ err });
-            });
+          fetchUserCourses();
         })
         .catch((err) => {
           console.log({ err });
+          openSnackbar(err.response.data.message, 5000);
           getCurrentUser();
           onCloseModal();
+          updateLoader(false);
         });
     });
+  };
+
+  const fetchUserCourses = () => {
+    authServices
+      .getUserCourses(null, user.id)
+      .then((res) => {
+        onCloseModal();
+        getCurrentUser();
+        openSnackbar("Courses updated sucessfully", 5000);
+        let user_courses = res.data.userCourses;
+        let sievedCourses = Object.values(
+          user_courses.reduce((agg, curr) => {
+            agg[curr.courseId] = curr;
+            return agg;
+          }, {})
+        );
+        updateLoader(false);
+        updateUserCourses(sievedCourses);
+      })
+      .catch((err) => {
+        updateLoader(false);
+        console.log({ err });
+      });
   };
 
   const updateLevel = (level) => {
@@ -174,6 +167,7 @@ export default function AddCourses(props) {
       .updateUserData(data, user.id)
       .then((res) => {
         console.log(res);
+        getCurrentUser();
       })
       .catch((err) => {
         console.log({ err });
@@ -182,6 +176,7 @@ export default function AddCourses(props) {
 
   const pickSubject = (i) => {
     let subject = levelSubjects[i];
+    if (!subject) return;
     if (subject.preSelected) {
       settoBeRemoved([...toBeRemoved, subject.id]);
       setnewSelectedCourses(
@@ -258,6 +253,11 @@ export default function AddCourses(props) {
           </div>
         ) : (
           <div className="modal-data">
+            {!levelSubjects.length && (
+              <p className="blue--text">
+                There are no courses for your selected level
+              </p>
+            )}
             {levelSubjects.map((subject, i) => {
               return (
                 <button
