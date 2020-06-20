@@ -16,18 +16,37 @@ import { useEffect } from "react";
 
 export default withRouter(function Subject({ history }) {
   const context = useContext(userContext);
-  const { selectedSubject, updateLoader, updateStudyPack, loading } = context;
+  const { selectedSubject, updateLoader, updateStudyPack, loading, user } = context;
+  const [usertests, setusertests] = useState(null);
+  const [linkIndex, setlinkIndex] = useState(0);
+  const [testId, settestId] = useState(0);
+  const [pageLoaded, setpageLoaded] = useState(false);
   const [links, setlinks] = useState([
     { text: "Beginner" },
     { text: "Intermediate" },
     { text: "Advanced" },
   ]);
 
-  const [linkIndex, setlinkIndex] = useState(0);
 
   useEffect(() => {
+    updateLoader(true);
+    authServices
+      .getUcourseWithTests(user.id, selectedSubject.id)
+      .then((res) => {
+        console.log(res);
+        const defaultTestId = selectedSubject 
+          && selectedSubject.tests && selectedSubject.tests.length ? selectedSubject.tests[0].id : 0
+        settestId(defaultTestId)
+        setusertests(res.data.tests);
+        updateLoader(false);
+        setpageLoaded(true)
+      })
+      .catch((err) => {
+        console.log({ err });
+        updateLoader(false);
+      });
     console.log(selectedSubject);
-  }, []);
+  }, [pageLoaded]);
 
   const back = () => {
     history.push("/dashboard/");
@@ -58,6 +77,41 @@ export default withRouter(function Subject({ history }) {
     setlinkIndex(i);
   };
 
+  const generateLevelTest = (id, tests) => {
+    const test = tests.find(t => t.id === id);
+    if(test){
+      const beginnerQuiz = test.quizes.filter(q => q.level === 0)
+      const intermediateQuiz = test.quizes.filter(q => q.level === 1)
+      const advancedQuiz = test.quizes.filter(q => q.level === 2)
+  
+      const beginnerVideo = test.videos.filter(q => q.level === 0)
+      const intermediateVideo = test.videos.filter(q => q.level === 1)
+      const advancedVideo = test.videos.filter(q => q.level === 2)
+  
+      const returnCandidate =  [
+          {
+            take: !!beginnerQuiz.length,
+            quizzes: beginnerQuiz,
+            videos: beginnerVideo
+          },
+          {
+            take: !!intermediateQuiz.length,
+            quizzes: intermediateQuiz,
+            videos: intermediateVideo
+          },
+          {
+            take: !!advancedQuiz.length,
+            quizzes: advancedQuiz,
+            videos: advancedVideo
+          }
+        ]
+  
+        return returnCandidate.filter(r => r.take)
+    }
+    return []
+
+  }
+
   return (
     <>
       {loading && <Loader />}
@@ -86,18 +140,24 @@ export default withRouter(function Subject({ history }) {
           </div>
           <div className="wide">
             <div className="progresses">
-              <div className="progress-wrap">
-                <ProgressBar />
-                <span>Basic(400 study points)</span>
-              </div>
-              <div className="progress-wrap">
-                <ProgressBar />
-                <span>Intermediate(400 study points)</span>
-              </div>
-              <div className="progress-wrap">
-                <ProgressBar />
-                <span>Advanced(400 study points)</span>
-              </div>
+              {
+                usertests 
+                && usertests.userTests 
+                && usertests.userTests.map(utest => {
+                  return (
+                    <div key={utest.id} className="progress-wrap">
+                      <ProgressBar />
+                      <span>
+                        {
+                          selectedSubject.tests.find(t => t.id == utest.testId) 
+                          && selectedSubject.tests.find(t => t.id == utest.testId).year
+                        }({utest.score} study points)
+                      </span>
+                    </div>
+                  )
+                })
+              }
+              
             </div>
           </div>
         </div>
@@ -105,16 +165,16 @@ export default withRouter(function Subject({ history }) {
         <div className="contents">
           <div className="small">
             <p className="header">Study Lessons</p>
-            {links.map((link, i) => (
+            {selectedSubject && selectedSubject.tests && selectedSubject.tests.map((test, i) => (
               <div
-                key={link.text}
-                onClick={() => pickLevel(i)}
-                className={`level ${i === linkIndex ? "active" : ""}`}
+                key={test.id}
+                onClick={() => settestId(test.id)}
+                className={`level ${testId === test.id ? "active" : ""}`}
               >
                 <div className="band">
                   <div className="inner"></div>
                 </div>
-                <span>{link.text}</span>
+                <span>{test.year}</span>
               </div>
             ))}
 
@@ -132,18 +192,16 @@ export default withRouter(function Subject({ history }) {
             />
           </div>
           <div className="wide">
-            {selectedSubject.tests.map((test) => (
-              <React.Fragment key={test.id}>
-                <p className="heading">{test.year}</p>
+            {selectedSubject && selectedSubject.tests && generateLevelTest(testId, selectedSubject.tests).map((test, i) => (
+              <React.Fragment key={"lesson_"+i}>
+                <p className="heading">Lesson Pack {i + 1}</p>
                 <div className="lessons-wrap mb30">
                   <div className="lessons">
-                    {test.videos.filter((v) => v.level === linkIndex).length >
-                    0 ? (
+                    {test.videos.length ? (
                       test.videos
-                        .filter((v) => v.level === linkIndex)
                         .map((video, i) => (
                           <Lesson
-                            key={"video" + i}
+                            key={"video" +video.id+""+i}
                             video={video}
                             grade={linkIndex}
                             disableClick={false}
@@ -158,19 +216,13 @@ export default withRouter(function Subject({ history }) {
                           fontSize: 12,
                         }}
                       >
-                        There are no{" "}
-                        {linkIndex === 0
-                          ? "beginner"
-                          : linkIndex === 1
-                          ? "Intermediate"
-                          : "advanced"}{" "}
-                        video lessons in this pack. Kindly check back later.
+                        There are no video lessons in this pack. Kindly check back later.
                       </div>
                     )}
                   </div>
                 </div>
-                {test.quizes.length ? (
-                  <Quiz open={true} quizType="normal" quiz={test.quizes} />
+                {test.quizzes.length ? (
+                  <Quiz open={true} quizType="normal" quiz={test.quizzes} />
                 ) : null}
               </React.Fragment>
             ))}

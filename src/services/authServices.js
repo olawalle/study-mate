@@ -141,6 +141,14 @@ let getUserAward = (id) => {
   });
 };
 
+let getUcourseWithTests = (uid, courseId) => {
+  return axios({
+    method: "get",
+    url: `${urls.userCourseWithTestsUrl}/${courseId}/user/${uid}`,
+    headers: headers(),
+  });
+};
+
 let getAwardboard = (userID, quizID) => {
   return axios({
     method: "get",
@@ -193,4 +201,5 @@ export default {
   getLeaderboard,
   getStudypackData,
   uploadFile,
+  getUcourseWithTests,
 };
