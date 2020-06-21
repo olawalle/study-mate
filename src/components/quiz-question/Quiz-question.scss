@@ -139,6 +139,9 @@
           color: #fff;
         }
       }
+      .lock:hover{
+        cursor: not-allowed;
+      }
       .wrong {
         color: #b40505 !important;
         .label {
@@ -147,9 +150,9 @@
         }
       }
       .correct_ {
-        color: #10a3ff !important;
+        color: #10a3ff;
         .label {
-          background-color: #10a3ff !important;
+          background-color: #10a3ff;
           color: #fff;
         }
       }

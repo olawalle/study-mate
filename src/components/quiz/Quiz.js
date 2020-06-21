@@ -304,7 +304,7 @@ export default function Quiz(props) {
                   </div>
                   <div className="scores">
                     <h4>Learning points</h4>
-                    <h2>80% (400 Points)</h2>
+                    <h2>80% ({0.8 * scores.count} Points)</h2>
                   </div>
                   <button className="tw-btn mt15" onClick={onCloseModal}>
                     Done

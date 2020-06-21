@@ -90,21 +90,23 @@ export default withRouter(function Subject({ history }) {
   
       const returnCandidate =  [
           {
-            take: !!beginnerQuiz.length,
+            take: !!beginnerVideo.length,
             quizzes: beginnerQuiz,
             videos: beginnerVideo
           },
           {
-            take: !!intermediateQuiz.length,
+            take: !!intermediateVideo.length,
             quizzes: intermediateQuiz,
             videos: intermediateVideo
           },
           {
-            take: !!advancedQuiz.length,
+            take: !!advancedVideo.length,
             quizzes: advancedQuiz,
             videos: advancedVideo
           }
         ]
+
+        console.log({returnCandidate})
   
         return returnCandidate.filter(r => r.take)
     }
