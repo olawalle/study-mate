@@ -31,6 +31,7 @@ export default withRouter(function Learn({ history }) {
     user,
     updateUserCourses,
     selectedSubject,
+    updateLoader,
   } = context;
 
   const [open, setopen] = useState(false);

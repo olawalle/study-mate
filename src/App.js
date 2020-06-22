@@ -6,6 +6,7 @@ import {
   Link,
   HashRouter,
   withRouter,
+  useHistory,
 } from "react-router-dom";
 import UserContextProvider from "./store/UserContext";
 import { motion, AnimatePresence } from "framer-motion";
@@ -55,12 +56,13 @@ import FAQ from "./pages/faq/FAQ";
 import Privacy from "./pages/Terms/Privacy";
 
 export default function App() {
+  let history = useHistory();
   useEffect(() => {
-    // preload images to reduce weird image load lag after components mount
-
+    console.log({ history });
     // let token = localStorage.getItem("studymate-token");
-    // !token && history.push("/signup");
+    // !token && history.push("/login");
 
+    // preload images to reduce weird image load lag after components mount
     const imagesToBePreloaded = [
       play,
       Learn,
@@ -102,8 +104,11 @@ export default function App() {
         <div className="App">
           <UserContextProvider>
             <AnimatePresence exitBeforeEnter>
-              <Switch>
+              <Switch match>
                 <Route path="/login">
+                  <Login />
+                </Route>
+                <Route exact strict path="/">
                   <Login />
                 </Route>
                 <Route path="/signup">

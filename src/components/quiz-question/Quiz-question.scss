@@ -139,7 +139,7 @@
           color: #fff;
         }
       }
-      .lock:hover{
+      .lock:hover {
         cursor: not-allowed;
       }
       .wrong {
@@ -236,14 +236,14 @@
   @media (max-width: 768px), (min-width: 768px) and (max-width: 1024px) {
     background-color: #fff;
     width: 100%;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     padding: 20px;
     height: 100vh;
     .upper {
       padding: 0;
-      height: 690px;
+      height: calc(100vh - 85px);
       overflow: auto;
       .instruction {
         margin-top: 50px;
@@ -251,13 +251,17 @@
           img {
             width: 20px;
             float: right;
-            margin-top: -45px;
+            // margin-top: -45px;
             cursor: pointer;
+            position: fixed;
+            top: 30px;
+            right: 30px;
           }
         }
       }
       .content {
         width: 100%;
+        height: auto;
         .questions {
           overflow-x: hidden;
           overflow-y: auto;
