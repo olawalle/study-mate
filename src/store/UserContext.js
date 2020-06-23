@@ -91,8 +91,6 @@ export default class UserContextProvider extends Component {
   };
 
   logout = () => {
-    localStorage.clear();
-    sessionStorage.clear();
     this.setState({
       loading: false,
       isLoggedIn: false,
@@ -116,6 +114,10 @@ export default class UserContextProvider extends Component {
       studyPacks: [],
       quizzes: [],
     });
+    setTimeout(() => {
+      localStorage.clear();
+      sessionStorage.clear();
+    }, 1000);
   };
 
   render() {

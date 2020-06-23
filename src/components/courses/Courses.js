@@ -70,7 +70,7 @@ export default withRouter(function Courses(props) {
               <div
                 key={course.name + i}
                 onClick={() => selectCourse(course)}
-                style={{ textTransform: "capitalize" }}
+                style={{ textTransform: "uppercase" }}
                 className={`bg_${(i % 17) + 2} course ${
                   course.width === 3
                     ? "wide"

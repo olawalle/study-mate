@@ -25,40 +25,45 @@ export default withRouter(function Profile({ history }) {
   const [seeAchievements, setseeAchievements] = useState(false);
   const [streaks, setstreaks] = useState([
     {
-      title: "Nice streak",
+      title: "Nice Streak",
       subText:
-        "You have answered 10 questions correctly in a row within this level!",
+        "You have answered 10 questions correctly in a row within this lesson!",
       image: streak,
       selected: true,
     },
     {
       title: "Scholar",
-      subText: "You have finished all levels of this course for English!",
+      subText: `You have finished all the lessons in
+      English!`,
       image: scholar,
       selected: false,
     },
     {
-      title: "Nice Listener",
-      subText: "You have watched 15 minutes of video lessons per level!",
+      title: "Great Listener",
+      subText: `You have watched 15 minutes of
+      video per lesson!`,
       image: niceListerner,
       selected: false,
     },
     {
-      title: "Due diligence",
-      subText:
-        " You have watch 30 minutes record time of uninterrupted video lessons in this level!",
+      title: "Due Diligence",
+      subText: `You have watched 30 minutes
+        record time of uninterrupted videos
+        in this lesson!`,
       image: greatListerner,
       selected: false,
     },
     {
       title: "Speedy",
-      subText: "You answered this question in less than 5 seconds!",
+      subText: `You answered this question in less
+      than 5 seconds!`,
       image: streak,
       selected: false,
     },
     {
-      title: "Good sport",
-      subText: "You just earned a badge for sharing knowledge with a friend!",
+      title: "Good Sport",
+      subText: `You just earned a badge for sharing
+      knowledge with a friend!`,
       image: scholar,
       selected: false,
     },
@@ -89,7 +94,18 @@ export default withRouter(function Profile({ history }) {
     {
       image: b5,
       name: "Champion Badge",
-      story: `Finish all Study Packs per subject with at least 60% and above pass to earn this *Champion Badge* That is, you would be a *Champion in Mathematics or English or Biology....*`,
+      story: `Finish all Study Packs per
+      subject with at least 60% and
+      above pass mark to earn this *Champion Badge* 
+      What this statement means is that,
+      when you earn this badge. It would
+      read on your profile like this: 
+      <ul>
+      <li> *Champion in Mathematics* </li>
+      <li> *Champion in English </li>
+      <li> *Champion in Biology* </li>
+      </ul>
+      Etc.`,
     },
   ]);
 
@@ -128,7 +144,12 @@ export default withRouter(function Profile({ history }) {
                 </div>
               ))}
             </div>
-            <p className="tro-desc">{badges[activeBadge].story}</p>
+            <p
+              className="tro-desc"
+              dangerouslySetInnerHTML={{
+                __html: badges[activeBadge].story,
+              }}
+            ></p>
 
             <p className="possibles">Possible badges</p>
 
@@ -153,7 +174,9 @@ export default withRouter(function Profile({ history }) {
           <div className="form">
             <div className="half">
               <span>Full Name</span>
-              <p>{`${user.firstName} ${user.surName}`}</p>
+              <p
+                style={{ textTransform: "capitalize" }}
+              >{`${user.firstName} ${user.surName}`}</p>
             </div>
             <div className="half">
               <span>Username</span>

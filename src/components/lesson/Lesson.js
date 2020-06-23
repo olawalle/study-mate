@@ -178,7 +178,8 @@ export default withRouter(function Lesson({
               style={{
                 padding: 0,
                 overflow: "auto",
-                height: "calc(90vh - 125px)",
+                height: "calc(90vh - 140px)",
+                margin: 0,
               }}
             >
               {videos.map((video, i) => {
@@ -193,6 +194,9 @@ export default withRouter(function Lesson({
                       listStyle: "none",
                       color: video.selected ? "#fff" : "#000",
                       backgroundColor: video.selected ? "#10A3FF" : "#fff",
+                      whiteSpace: "nowrap",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
                     }}
                   >
                     <img
@@ -211,6 +215,7 @@ export default withRouter(function Lesson({
                         top: "-5px",
                         fontSize: 12,
                       }}
+                      title={video.text}
                     >
                       {video.text}
                     </span>

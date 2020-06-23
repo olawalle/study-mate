@@ -16,7 +16,13 @@ import { useEffect } from "react";
 
 export default withRouter(function Subject({ history }) {
   const context = useContext(userContext);
-  const { selectedSubject, updateLoader, updateStudyPack, loading, user } = context;
+  const {
+    selectedSubject,
+    updateLoader,
+    updateStudyPack,
+    loading,
+    user,
+  } = context;
   const [usertests, setusertests] = useState(null);
   const [linkIndex, setlinkIndex] = useState(0);
   const [testId, settestId] = useState(0);
@@ -27,19 +33,22 @@ export default withRouter(function Subject({ history }) {
     { text: "Advanced" },
   ]);
 
-
   useEffect(() => {
     updateLoader(true);
     authServices
       .getUcourseWithTests(user.id, selectedSubject.id)
       .then((res) => {
         console.log(res);
-        const defaultTestId = selectedSubject 
-          && selectedSubject.tests && selectedSubject.tests.length ? selectedSubject.tests[0].id : 0
-        settestId(defaultTestId)
+        const defaultTestId =
+          selectedSubject &&
+          selectedSubject.tests &&
+          selectedSubject.tests.length
+            ? selectedSubject.tests[0].id
+            : 0;
+        settestId(defaultTestId);
         setusertests(res.data.tests);
         updateLoader(false);
-        setpageLoaded(true)
+        setpageLoaded(true);
       })
       .catch((err) => {
         console.log({ err });
@@ -78,41 +87,40 @@ export default withRouter(function Subject({ history }) {
   };
 
   const generateLevelTest = (id, tests) => {
-    const test = tests.find(t => t.id === id);
-    if(test){
-      const beginnerQuiz = test.quizes.filter(q => q.level === 0)
-      const intermediateQuiz = test.quizes.filter(q => q.level === 1)
-      const advancedQuiz = test.quizes.filter(q => q.level === 2)
-  
-      const beginnerVideo = test.videos.filter(q => q.level === 0)
-      const intermediateVideo = test.videos.filter(q => q.level === 1)
-      const advancedVideo = test.videos.filter(q => q.level === 2)
-  
-      const returnCandidate =  [
-          {
-            take: !!beginnerVideo.length,
-            quizzes: beginnerQuiz,
-            videos: beginnerVideo
-          },
-          {
-            take: !!intermediateVideo.length,
-            quizzes: intermediateQuiz,
-            videos: intermediateVideo
-          },
-          {
-            take: !!advancedVideo.length,
-            quizzes: advancedQuiz,
-            videos: advancedVideo
-          }
-        ]
+    const test = tests.find((t) => t.id === id);
+    if (test) {
+      const beginnerQuiz = test.quizes.filter((q) => q.level === 0);
+      const intermediateQuiz = test.quizes.filter((q) => q.level === 1);
+      const advancedQuiz = test.quizes.filter((q) => q.level === 2);
 
-        console.log({returnCandidate})
-  
-        return returnCandidate.filter(r => r.take)
+      const beginnerVideo = test.videos.filter((q) => q.level === 0);
+      const intermediateVideo = test.videos.filter((q) => q.level === 1);
+      const advancedVideo = test.videos.filter((q) => q.level === 2);
+
+      const returnCandidate = [
+        {
+          take: !!beginnerVideo.length,
+          quizzes: beginnerQuiz,
+          videos: beginnerVideo,
+        },
+        {
+          take: !!intermediateVideo.length,
+          quizzes: intermediateQuiz,
+          videos: intermediateVideo,
+        },
+        {
+          take: !!advancedVideo.length,
+          quizzes: advancedQuiz,
+          videos: advancedVideo,
+        },
+      ];
+
+      console.log({ returnCandidate });
+
+      return returnCandidate.filter((r) => r.take);
     }
-    return []
-
-  }
+    return [];
+  };
 
   return (
     <>
@@ -142,24 +150,24 @@ export default withRouter(function Subject({ history }) {
           </div>
           <div className="wide">
             <div className="progresses">
-              {
-                usertests 
-                && usertests.userTests 
-                && usertests.userTests.map(utest => {
+              {usertests &&
+                usertests.userTests &&
+                usertests.userTests.map((utest) => {
                   return (
                     <div key={utest.id} className="progress-wrap">
                       <ProgressBar />
                       <span>
-                        {
-                          selectedSubject.tests.find(t => t.id == utest.testId) 
-                          && selectedSubject.tests.find(t => t.id == utest.testId).year
-                        }({utest.score} study points)
+                        {selectedSubject.tests.find(
+                          (t) => t.id == utest.testId
+                        ) &&
+                          selectedSubject.tests.find(
+                            (t) => t.id == utest.testId
+                          ).year}
+                        ({utest.score} study points)
                       </span>
                     </div>
-                  )
-                })
-              }
-              
+                  );
+                })}
             </div>
           </div>
         </div>
@@ -167,18 +175,20 @@ export default withRouter(function Subject({ history }) {
         <div className="contents">
           <div className="small">
             <p className="header">Study Lessons</p>
-            {selectedSubject && selectedSubject.tests && selectedSubject.tests.map((test, i) => (
-              <div
-                key={test.id}
-                onClick={() => settestId(test.id)}
-                className={`level ${testId === test.id ? "active" : ""}`}
-              >
-                <div className="band">
-                  <div className="inner"></div>
+            {selectedSubject &&
+              selectedSubject.tests &&
+              selectedSubject.tests.map((test, i) => (
+                <div
+                  key={test.id}
+                  onClick={() => settestId(test.id)}
+                  className={`level ${testId === test.id ? "active" : ""}`}
+                >
+                  <div className="band">
+                    <div className="inner"></div>
+                  </div>
+                  <span>{test.year}</span>
                 </div>
-                <span>{test.year}</span>
-              </div>
-            ))}
+              ))}
 
             <img src={students} alt="" />
             <img
@@ -194,40 +204,44 @@ export default withRouter(function Subject({ history }) {
             />
           </div>
           <div className="wide">
-            {selectedSubject && selectedSubject.tests && generateLevelTest(testId, selectedSubject.tests).map((test, i) => (
-              <React.Fragment key={"lesson_"+i}>
-                <p className="heading">Lesson Pack {i + 1}</p>
-                <div className="lessons-wrap mb30">
-                  <div className="lessons">
-                    {test.videos.length ? (
-                      test.videos
-                        .map((video, i) => (
-                          <Lesson
-                            key={"video" +video.id+""+i}
-                            video={video}
-                            grade={linkIndex}
-                            disableClick={false}
-                          />
-                        ))
-                    ) : (
-                      <div
-                        className="blue--text"
-                        style={{
-                          padding: "12px 30px",
-                          margin: 0,
-                          fontSize: 12,
-                        }}
-                      >
-                        There are no video lessons in this pack. Kindly check back later.
+            {selectedSubject &&
+              selectedSubject.tests &&
+              generateLevelTest(testId, selectedSubject.tests).map(
+                (test, i) => (
+                  <React.Fragment key={"lesson_" + i}>
+                    <p className="heading">Lesson Pack {i + 1}</p>
+                    <div className="lessons-wrap mb30">
+                      <div className="lessons">
+                        {test.videos.length ? (
+                          test.videos.map((video, i) => (
+                            <Lesson
+                              key={"video" + video.id + "" + i}
+                              video={video}
+                              grade={linkIndex}
+                              disableClick={false}
+                            />
+                          ))
+                        ) : (
+                          <div
+                            className="blue--text"
+                            style={{
+                              padding: "12px 30px",
+                              margin: 0,
+                              fontSize: 12,
+                            }}
+                          >
+                            There are no video lessons in this pack. Kindly
+                            check back later.
+                          </div>
+                        )}
                       </div>
-                    )}
-                  </div>
-                </div>
-                {test.quizzes.length ? (
-                  <Quiz open={true} quizType="normal" quiz={test.quizzes} />
-                ) : null}
-              </React.Fragment>
-            ))}
+                    </div>
+                    {test.quizzes.length ? (
+                      <Quiz open={true} quizType="normal" quiz={test.quizzes} />
+                    ) : null}
+                  </React.Fragment>
+                )
+              )}
 
             {selectedSubject.hasStudyPack && (
               <div className="pack">
@@ -235,11 +249,11 @@ export default withRouter(function Subject({ history }) {
                   <p className="title">Advance your learning</p>
                   <div className="desc">
                     <p style={{ fontSize: 12 }}>
-                      Our Study Packs are Test questions created for advanced
-                      Senior Secondary levels. They are simulated for further
-                      learning and for exam purposes. Note that the Study
-                      Lessons above must have been completed before proceeding
-                      to the Study packs.
+                      Our Study Packs are test questions created for advanced
+                      Senior Secondary levels. They are simulated for exam
+                      purposes and further learning. Note: The Lesson Packs
+                      above must have been completed before proceeding to the
+                      Study Packs.
                     </p>
                   </div>
                   <div className="duration">

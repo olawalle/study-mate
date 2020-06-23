@@ -385,10 +385,9 @@ export default function Quiz(props) {
                                 {mode.text}
                                 {mode.selected && i === 0 && (
                                   <div className="blue--text">
-                                    This helps you learn better as you take each
-                                    question. You get to see the answer and
-                                    explanation of each question as you take the
-                                    test
+                                    This helps you learn better as you get to
+                                    see the explanation and answer after each
+                                    question.
                                   </div>
                                 )}
                                 {mode.selected && i === 1 && (

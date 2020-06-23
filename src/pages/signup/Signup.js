@@ -70,7 +70,6 @@ export default withRouter(function Signup(props) {
       confirmPassword: password,
     };
     let submitData = payload ? payload : data;
-    console.log(submitData);
     updateLoader(true);
     authServices
       .signup(data)
@@ -80,12 +79,17 @@ export default withRouter(function Signup(props) {
         updateUser(user);
         updateLoggedInStatus(true);
         updateLoader(false);
+        setsurName("");
+        setfirstName("");
+        setPhone("");
+        setemail("");
+        setpassword("");
         props.history.push("/dashboard");
       })
       .catch((err) => {
         console.log({ err });
         updateLoader(false);
-        showError("An error occured. Please try again");
+        showError(err.response.data.message);
       });
   };
 
@@ -139,27 +143,26 @@ export default withRouter(function Signup(props) {
             <div className="myslide">
               <p className="main-text">Choose your study mate wisely</p>
               <p className="smalls">
-                There are over 1,000 Junior and Senior Secondary video lessons
-                on several topics of all subjects, all available to you at the
-                speed of the Internet at your convenience.
+                Get ahead of your peers in knowledge with over 1,000 Junior and
+                Senior Secondary School video lessons on all statutory subjects
+                at your convenience
               </p>
               <img src={flex} alt="" style={{ bottom: "-110px" }} />
             </div>
             <div className="myslide">
               <p className="main-text">24hour access to quality learning</p>
               <p className="smalls">
-                There are over 1000 video lessons across several topics and
-                subjects provided for you at the speed of your internet and at
-                the comfort of your home.
+                While access to classrooms remain limited, StudyMate ensures you
+                continue learning with over 10,000 practice questions and mini
+                lessons across all approved subjects.
               </p>
               <img src={flex2} alt="" style={{ bottom: "-110px" }} />
             </div>
             <div className="myslide">
               <p className="main-text">Access quality content every time</p>
               <p className="smalls">
-                There are over 1000 video lessons across several topics and
-                subjects provided for you at the speed of your internet and at
-                the comfort of your home.
+                Join thousands of students who continue learning on our always-
+                available quality educational contents.
               </p>
               <img src={flex3} alt="" />
             </div>
@@ -248,13 +251,13 @@ export default withRouter(function Signup(props) {
             <span className="no-acct">
               Creating an account means you are ok with our{" "}
               <Link to="/terms">
-                <span className="blue--text">Terms of service, </span>{" "}
+                <span className="blue--text">Terms of Service, </span>{" "}
               </Link>
               <Link to="/privacy">
-                <span className="blue--text">Privacy policy </span>
+                <span className="blue--text">Privacy Policy </span>
               </Link>
               and{" "}
-              <span className="blue--text">Default Notification Settings</span>
+              <span className="blue--text">Default Notification Settings.</span>
             </span>
 
             <button className="main-btn mt20" onClick={() => submit(null)}>

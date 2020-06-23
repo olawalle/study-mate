@@ -58,7 +58,7 @@ const Dashboard = (props) => {
       return {
         text: "Home",
         title: "Learn",
-        largeTitle: "Your dependable learning buddy",
+        largeTitle: "Your Dependable Learning Partner",
       };
     }
     return {};

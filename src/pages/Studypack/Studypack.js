@@ -69,10 +69,13 @@ export default withRouter(function Studypack({ history }) {
             <p className="header">Study Pack</p>
 
             <span className="desc">
-              Our Study Packs are advanced Tests created to help you test your
-              learning progress and be more proficient in various subjects. They
-              be experienced through 3 main mediums based on your preference. We
-              have the learning mode, the time mode, and the free form mode.
+              Our Study Packs are advanced tests created to assess your
+              proficiency in various subjects and to improve your learning
+              progress. They can be experienced in three mediums based on your
+              preference. <br />
+              -Learn mode <br />
+              -Time mode <br />
+              -Free form mode. <br />
             </span>
             <img src={students} alt="" />
           </div>

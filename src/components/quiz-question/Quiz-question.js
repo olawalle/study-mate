@@ -35,7 +35,7 @@ export default function QuizQuestion(props) {
   //const [showExplanation, setshowExplanation] = useState(false);
   const { selectedQuizMode, questions } = props;
   let activeQuestion = questions[currentQuestion];
-  
+
   const {
     userScore,
     updateThisAnswer,
@@ -60,11 +60,11 @@ export default function QuizQuestion(props) {
     userAnswersCount,
     showExplanation,
     lockAllAnswers,
-    lockThisAnswer
+    lockThisAnswer,
   } = useStudy([], activeQuestion.id, props.selectedQuizMode);
 
-  const qid = activeQuestion.quizId
-  const uid = answer ? answer.userOptionId : 0
+  const qid = activeQuestion.quizId;
+  const uid = answer ? answer.userOptionId : 0;
 
   const [userOption, setuserOption] = useState(uid);
 
@@ -72,18 +72,18 @@ export default function QuizQuestion(props) {
   const [options, setoptions] = useState([]);
   useEffect(() => {
     getOptions(0);
-    
-    if(selectedQuizMode === "Time Mode"){
-      console.log({effect: {userScore, userAnswers}})
+
+    if (selectedQuizMode === "Time Mode") {
+      // console.log({ effect: { userScore, userAnswers } });
       const timer = window.setInterval(() => {
-        const prevTime = duration
-        console.log({prevTime})
+        const prevTime = duration;
+        // console.log({ prevTime });
         if (prevTime <= 0) {
-          console.log("to clear interval")
+          console.log("to clear interval");
           window.clearInterval(timer);
         } else {
-          console.log("to clear intervalss")
-          let dur = prevTime - 1
+          // console.log("to clear intervalss");
+          let dur = prevTime - 1;
           let hoursRemaining = dur > 3600 ? Math.floor(dur / 3600) : 0;
           let minutesRemaining = Math.floor(dur / 60 - 60 * hoursRemaining);
           let secondsRemaining =
@@ -100,7 +100,7 @@ export default function QuizQuestion(props) {
                 : `0${secondsRemaining}`,
           };
           setremains(data);
-          console.log({dur})
+          // console.log({ dur });
           setduration(dur);
           setStopper(() => stopper + 1);
         }
@@ -136,11 +136,10 @@ export default function QuizQuestion(props) {
         window.clearInterval(timer);
       };
     }
-    
   }, [stopper]);
 
   const nextQuestion = () => {
-    console.log({userAnswers, userScore})
+    // console.log({ userAnswers, userScore });
     let no = currentQuestion + 1;
     updateAnswers();
     setcurrentQuestion(no);
@@ -151,7 +150,7 @@ export default function QuizQuestion(props) {
     settryAttempt(false);
     setshowAlert(false);
     setbuttonText("TRY AGAIN");
-    console.log({ activeQuestion });
+    // console.log({ activeQuestion });
   };
 
   const prevQuestion = () => {
@@ -163,19 +162,25 @@ export default function QuizQuestion(props) {
     setwrongAnswer(false);
     setoptionSelected(false);
     //btnText();
+    console.log(answers, userAnswers);
     !answers[no] && setattempts(0);
   };
 
   const pickAnswerOne = (i) => {
     setuserOption(i);
     setoptionSelected(true);
-    if(selectedQuizMode !== "Learning Approach"){
-      updateThisAnswer({quizId: activeQuestion.id,userOptionId: i, 
-        correctOptionId: activeQuestion.answerId, alert: true})
+    if (selectedQuizMode !== "Learning Approach") {
+      updateThisAnswer({
+        quizId: activeQuestion.id,
+        userOptionId: i,
+        correctOptionId: activeQuestion.answerId,
+        alert: true,
+      });
     }
-  }
-
-  console.log({userAnswers})
+    let prevAnswers = [...answers];
+    prevAnswers[currentQuestion] = options[i].id;
+    setanswers(prevAnswers);
+  };
 
   const pickAnswer = (i) => {
     if (attempts > 1 || showExplanation) return;
@@ -224,13 +229,11 @@ export default function QuizQuestion(props) {
     }
   };
 
-  const submitOne = () => {
-    
-  }
+  const submitOne = () => {};
 
   const submit = () => {
     let score = userScore;
-    console.log({userScore, userAnswers})
+    console.log({ userScore, userAnswers });
     let count = questions.length;
     let percent = (score * 100) / count;
     //setcurrentQuestion(0);
@@ -238,24 +241,26 @@ export default function QuizQuestion(props) {
   };
 
   const tryAgain = () => {
-    if(buttonText === "TRY AGAIN"){
-      setbuttonText("SUBMIT")
-      setuserOption(0)
-      settryAttempt(false)
-      onTryAgain({userOptionId: 0, alert: false})
+    if (buttonText === "TRY AGAIN") {
+      setbuttonText("SUBMIT");
+      setuserOption(0);
+      settryAttempt(false);
+      onTryAgain({ userOptionId: 0, alert: false });
       return;
-    }
-    else{
+    } else {
       submitLearingAnswer();
     }
-
-  }
+  };
 
   const submitLearingAnswer = () => {
     setoptionSelected(false);
-    settryAttempt(true)
-    updateThisAnswer({quizId: activeQuestion.id,userOptionId: userOption, 
-      correctOptionId: activeQuestion.answerId, alert: true})
+    settryAttempt(true);
+    updateThisAnswer({
+      quizId: activeQuestion.id,
+      userOptionId: userOption,
+      correctOptionId: activeQuestion.answerId,
+      alert: true,
+    });
     setoptions(
       options.map((option, j) => {
         return userOption === j
@@ -269,7 +274,7 @@ export default function QuizQuestion(props) {
             };
       })
     );
-    
+
     // if (answers.length === questions.length) {
     //   submit();
     //   return;
@@ -285,10 +290,7 @@ export default function QuizQuestion(props) {
   };
 
   const getClass = (option) => {
-    if (
-      option.id === userOption &&
-      option.id === activeQuestion.answerId 
-    )
+    if (option.id === userOption && option.id === activeQuestion.answerId)
       return "correct";
     if (option.picked && selectedQuizMode !== "Learning Approach") {
       return `correct`;
@@ -302,12 +304,11 @@ export default function QuizQuestion(props) {
   };
 
   const viewExplanation = () => {
-    showExplanation()
+    showExplanation();
   };
 
-
   // const btnText = () => {
-  //   const attempts = answerInStore 
+  //   const attempts = answerInStore
   //   ? answerInStore.attempts : 0;
   //   const state = answerInStore && answerInStore.state;
   //   if (attempts === 0) setbuttonText("SUBMIT");
@@ -324,19 +325,27 @@ export default function QuizQuestion(props) {
       .replace("\\", "/");
   };
 
-  if(duration <= 0 && selectedQuizMode === "Time Mode"){
-    console.log("inside life")
-    submit()
+  if (duration <= 0 && selectedQuizMode === "Time Mode") {
+    console.log("inside life");
+    submit();
   }
-
-  console.log({answer})
 
   return (
     <div className="quiz-quuestion">
       <div className="upper">
         <div style={{ position: "relative" }}>
           <div className="instruction" onClick={logg}>
-            <p>{activeQuestion && activeQuestion.section ? activeQuestion.section : <span>&nbsp;</span>}{" "}
+            <p>
+              {activeQuestion && activeQuestion.section ? (
+                <span
+                  style={{ maxWidth: "80%" }}
+                  dangerouslySetInnerHTML={{
+                    __html: setImageUrl(activeQuestion.section),
+                  }}
+                ></span>
+              ) : (
+                <span>&nbsp;</span>
+              )}{" "}
               {selectedQuizMode === "Time Mode" && (
                 <span className="time">
                   {remains.hr}: {remains.min}: {remains.sec}
@@ -346,51 +355,46 @@ export default function QuizQuestion(props) {
                 <img src={close} alt="" onClick={() => props.onClose()} />
               </span>
             </p>
-            {answer && answer.alert && selectedQuizMode === "Learning Approach" && (
-              <div className="alert">
-                <img src={streak} className="badge" alt="" />
-                <div className="streak-text">
-                  <p className="top">
-                    {
-                      answerIsCorrect 
-                      ? "Excellent."
-                      : "Not quite yet ..."
-                    }
-                    <img
-                      src={close}
-                      alt=""
-                      onClick={() => hideShowAlert()}
-                      className="ex"
-                    />
-                  </p>
-                  <p style={{ fontSize: 14 }}>
-                    {
-                      answerIsCorrect 
-                      ? "Your answer is correct. Keep up the great persistence."
-                      : "Your answer is incorrect."
-                    }
-                    
-                  </p>
-                  <p style={{ fontSize: 14 }}>
-                    <span
-                      className="blue--text"
-                      onClick={viewExplanation}
-                      style={{ fontSize: 14, fontWeight: 600 }}
-                    >
-                      View explanation
-                    </span>{" "}
-                    or{" "}
-                    <span
-                      className="blue--text"
-                      onClick={nextQuestion}
-                      style={{ fontSize: 14, fontWeight: 600 }}
-                    >
-                      Move on
-                    </span>
-                  </p>
+            {answer &&
+              answer.alert &&
+              selectedQuizMode === "Learning Approach" && (
+                <div className="alert">
+                  <img src={streak} className="badge" alt="" />
+                  <div className="streak-text">
+                    <p className="top">
+                      {answerIsCorrect ? "Excellent." : "Not quite yet ..."}
+                      <img
+                        src={close}
+                        alt=""
+                        onClick={() => hideShowAlert()}
+                        className="ex"
+                      />
+                    </p>
+                    <p style={{ fontSize: 14 }}>
+                      {answerIsCorrect
+                        ? "Your answer is correct. Keep up the great persistence."
+                        : "Your answer is incorrect."}
+                    </p>
+                    <p style={{ fontSize: 14 }}>
+                      <span
+                        className="blue--text"
+                        onClick={viewExplanation}
+                        style={{ fontSize: 14, fontWeight: 600 }}
+                      >
+                        View explanation
+                      </span>{" "}
+                      or{" "}
+                      <span
+                        className="blue--text"
+                        onClick={nextQuestion}
+                        style={{ fontSize: 14, fontWeight: 600 }}
+                      >
+                        Move on
+                      </span>
+                    </p>
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
           </div>
           <ProgressBar width={userAnswersCount / (questions.length - 1)} />
         </div>
@@ -407,12 +411,44 @@ export default function QuizQuestion(props) {
                 <div
                   key={option.text}
                   className={`answer
-                              ${((answer && lockState) || tryAttempt) && selectedQuizMode === "Learning Approach" ? "lock": ""}
-                              ${answer && (answer.userOptionId === option.id || userOption === option.id) ? "correct_": ""}
-                              ${(answer && (correctClassName(option.id) && (!!answer.userOptionId || userOption) && !optionSelected)) && selectedQuizMode === "Learning Approach" ? "correct" : "" }
-                              ${(answer && (wrongClassName(option.id) && (!!answer.userOptionId || userOption) && !optionSelected)) && selectedQuizMode === "Learning Approach" ? "wrong" : "" }
+                              ${
+                                ((answer && lockState) || tryAttempt) &&
+                                selectedQuizMode === "Learning Approach"
+                                  ? "lock"
+                                  : ""
+                              }
+                              ${
+                                answer &&
+                                (answer.userOptionId === option.id ||
+                                  userOption === option.id)
+                                  ? "correct_"
+                                  : ""
+                              }
+                              ${
+                                answer &&
+                                correctClassName(option.id) &&
+                                (!!answer.userOptionId || userOption) &&
+                                !optionSelected &&
+                                selectedQuizMode === "Learning Approach"
+                                  ? "correct"
+                                  : ""
+                              }
+                              ${
+                                answer &&
+                                wrongClassName(option.id) &&
+                                (!!answer.userOptionId || userOption) &&
+                                !optionSelected &&
+                                selectedQuizMode === "Learning Approach"
+                                  ? "wrong"
+                                  : ""
+                              }
                             `}
-                  onClick={() => ((answer && lockState) || (tryAttempt)) && selectedQuizMode === "Learning Approach" ? ()=>{} : pickAnswerOne(option.id)}
+                  onClick={() =>
+                    ((answer && lockState) || tryAttempt) &&
+                    selectedQuizMode === "Learning Approach"
+                      ? () => {}
+                      : pickAnswerOne(option.id)
+                  }
                 >
                   <span className="label">{String.fromCharCode(65 + i)}</span>
 
@@ -424,39 +460,41 @@ export default function QuizQuestion(props) {
                       question={option.content}
                     />
                     <br />
-                    {((answer && (answer.showExplanation && optionIsCorrect(option.id)))) 
-                    && selectedQuizMode === "Learning Approach" && (
-                     <p
-                        style={{
-                          fontSize: 14,
-                          color: "#afafaf",
-                          position: "relative",
-                          top: "10px",
-                          marginLeft: 0,
-                        }}
-                      >
-                        <p style={{ margin: "10px 0 20px" }}>
-                          <Parser
-                            className=""
-                            inline={true}
-                            isMathJax={
-                              activeQuestion.answerUrl &&
-                              activeQuestion.answerUrl.includes("\\(")
-                            }
-                            question={activeQuestion.answerUrl}
-                          />
+                    {answer &&
+                      answer.showExplanation &&
+                      optionIsCorrect(option.id) &&
+                      selectedQuizMode === "Learning Approach" && (
+                        <p
+                          style={{
+                            fontSize: 14,
+                            color: "#afafaf",
+                            position: "relative",
+                            top: "10px",
+                            marginLeft: 0,
+                          }}
+                        >
+                          <p style={{ margin: "10px 0 20px" }}>
+                            <Parser
+                              className=""
+                              inline={true}
+                              isMathJax={
+                                activeQuestion.answerUrl &&
+                                activeQuestion.answerUrl.includes("\\(")
+                              }
+                              question={activeQuestion.answerUrl}
+                            />
+                          </p>
+                          <audio controls>
+                            <source
+                              src={`${audioUrl}${activeQuestion.audioUrl.replace(
+                                "\\",
+                                "/"
+                              )}`}
+                              type="audio/mpeg"
+                            />
+                          </audio>
                         </p>
-                        <audio controls>
-                          <source
-                            src={`${audioUrl}${activeQuestion.audioUrl.replace(
-                              "\\",
-                              "/"
-                            )}`}
-                            type="audio/mpeg"
-                          />
-                        </audio>
-                      </p>
-                    )}
+                      )}
                   </p>
                   {/* {selectedQuizMode !== "Learning Approach" &&
                   answered &&
@@ -464,12 +502,18 @@ export default function QuizQuestion(props) {
                     <h4 className="caveat">correct answer</h4>
                   )} */}
                   {selectedQuizMode === "Learning Approach" &&
-                    (answer && (correctClassName(option.id) && (!!answer.userOptionId || userOption) && !optionSelected)) && (
-                      <h4 className="caveat">correct answer</h4>
+                    answer &&
+                    correctClassName(option.id) &&
+                    (!!answer.userOptionId || userOption) &&
+                    !optionSelected && (
+                      <h4 className="caveat">Correct answer</h4>
                     )}
 
                   {selectedQuizMode === "Learning Approach" &&
-                    (answer && (wrongClassName(option.id) && (!!answer.userOptionId || userOption) && !optionSelected)) && (
+                    answer &&
+                    wrongClassName(option.id) &&
+                    (!!answer.userOptionId || userOption) &&
+                    !optionSelected && (
                       <h4 className="caveat">Incorrect answer</h4>
                     )}
                 </div>
@@ -504,13 +548,13 @@ export default function QuizQuestion(props) {
                 <input type="radio" name="type" id="" />
                 The answer is wrong
               </span>
-              <span className="radio">
+              {/* <span className="radio">
                 <input type="radio" name="type" id="" />I caught a typo
               </span>
               <span className="radio">
                 <input type="radio" name="type" id="" />
                 The question or hit are confusing
-              </span>
+              </span> */}
               <span className="radio">
                 <input type="radio" name="type" id="" />
                 The image is not clear
@@ -569,38 +613,35 @@ export default function QuizQuestion(props) {
             )}
           </b>
 
-          {
-            willSubmit &&
+          {willSubmit && (
             <button
               className="tw-btn"
               onClick={() => submitLearingAnswer()}
               style={{ marginLeft: 10 }}
             >
               SUBMIT
-          </button>
-          }
+            </button>
+          )}
 
-          {
-            willTryAgain &&
+          {willTryAgain && (
             <button
               className="tw-btn"
               onClick={() => tryAgain()}
               style={{ marginLeft: 10 }}
             >
               {buttonText}
-          </button>
-          }
+            </button>
+          )}
 
-          {
-            willMoveNext &&
+          {willMoveNext && (
             <button
               className="tw-btn"
               onClick={() => nextQuestion()}
               style={{ marginLeft: 10 }}
             >
               NEXT QUESTION
-          </button>
-          }
+            </button>
+          )}
 
           {activeQuestion && activeQuestion.passage && (
             <button className="blue-btn" onClick={() => openPassage()}>
@@ -655,6 +696,5 @@ export default function QuizQuestion(props) {
         </div>
       )}
     </div>
-  
   );
 }

@@ -56,59 +56,67 @@ export default withRouter(function Privacy({ history }) {
           <p>For the purposes of this Privacy Policy:</p>
           <ul>
             <li>
-              You means the individual accessing or using the Service, or the
-              company, or other legal entity on behalf of which such individual
-              is accessing or using the Service, as applicable.
+              <b>You</b> means the individual accessing or using the Service, or
+              the company, or other legal entity on behalf of which such
+              individual is accessing or using the Service, as applicable.
             </li>
             <li>
-              Company (referred to as either "the Company", "We", "Us" or "Our"
-              in this Agreement) refers to InfoMall Nigeria Limited, 22A Prof
-              Kiumi Akingbehin Street, Lekki.
+              <b>Company</b> (referred to as either "the Company", "We", "Us" or
+              "Our" in this Agreement) refers to InfoMall Nigeria Limited, 22A
+              Prof Kiumi Akingbehin Street, Lekki.
             </li>
             <li>
-              Affiliate means an entity that controls, is controlled by or is
-              under common control with a party, where "control" means ownership
-              of 50% or more of the shares, equity interest or other securities
-              entitled to vote for election of directors or other managing
-              authority.
+              <b>Affiliate</b> means an entity that controls, is controlled by
+              or is under common control with a party, where "control" means
+              ownership of 50% or more of the shares, equity interest or other
+              securities entitled to vote for election of directors or other
+              managing authority.
             </li>
             <li>
-              Account means a unique account created for You to access our
-              Service or parts of our Service.
+              <b>Account</b> means a unique account created for You to access
+              our Service or parts of our Service.
             </li>
             <li>
-              Website refers to StudyMATE, accessible from www.studymate.ng
-            </li>
-            <li> Service refers to the Website.</li>
-            <li> Country refers to: Nigeria</li>
-            <li>
-              Service Provider means any natural or legal person who processes
-              the data on behalf of the Company. It refers to third-party
-              companies or individuals employed by the Company to facilitate the
-              Service, to provide the Service on behalf of the Company, to
-              perform services related to the Service or to assist the Company
-              in analyzing how the Service is used.
+              <b>Website</b> refers to StudyMATE, accessible from
+              www.studymate.ng
             </li>
             <li>
-              Third-party Social Media Service refers to any website or any
-              social network website through which a User can log in or create
-              an account to use the Service.
+              {" "}
+              <b>Service</b> refers to the Website.
             </li>
             <li>
-              Personal Data is any information that relates to an identified or
-              identifiable individual.
+              {" "}
+              <b>Country</b> refers to: Nigeria
             </li>
             <li>
-              Cookies are small files that are placed on Your computer, mobile
-              device or any other device by a website, containing the details of
-              Your browsing history on that website among its many uses.
+              <b>Service Provider</b> means any natural or legal person who
+              processes the data on behalf of the Company. It refers to
+              third-party companies or individuals employed by the Company to
+              facilitate the Service, to provide the Service on behalf of the
+              Company, to perform services related to the Service or to assist
+              the Company in analyzing how the Service is used.
             </li>
             <li>
-              Device means any device that can access the Service such as a
-              computer, a cellphone or a digital tablet.
+              <b>Third-party Social Media Service</b> refers to any website or
+              any social network website through which a User can log in or
+              create an account to use the Service.
             </li>
             <li>
-              Usage Data refers to data collected automatically, either
+              <b>Personal Data</b> is any information that relates to an
+              identified or identifiable individual.
+            </li>
+            <li>
+              <b>Cookies</b> are small files that are placed on Your computer,
+              mobile device or any other device by a website, containing the
+              details of Your browsing history on that website among its many
+              uses.
+            </li>
+            <li>
+              <b>Device</b> means any device that can access the Service such as
+              a computer, a cellphone or a digital tablet.
+            </li>
+            <li>
+              <b>Usage Data</b> refers to data collected automatically, either
               generated by the use of the Service or from the Service
               infrastructure itself (for example, the duration of a page visit).
             </li>
