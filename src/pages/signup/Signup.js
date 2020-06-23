@@ -84,6 +84,7 @@ export default withRouter(function Signup(props) {
         setPhone("");
         setemail("");
         setpassword("");
+        localStorage.setItem("studymate-token", user.token);
         props.history.push("/dashboard");
       })
       .catch((err) => {

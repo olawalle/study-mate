@@ -3,7 +3,7 @@ import "./Quiz-question.scss";
 import ProgressBar from "../progress-bar/ProgressBar";
 import close from "../../assets/images/close.svg";
 import streak from "../../assets/images/repeat.svg";
-import star from "../../assets/images/Star.svg";
+import Passage from "../../assets/images/Passage.svg";
 import caret from "../../assets/images/down-arrow.svg";
 import { appUrl, audioUrl } from "../../services/urls";
 
@@ -31,6 +31,7 @@ export default function QuizQuestion(props) {
   const [optionSelected, setoptionSelected] = useState(false);
   const [showAlert, setshowAlert] = useState(true);
   const [stopper, setStopper] = useState(0);
+  const [readInstructions, setreadInstructions] = useState(false);
   //const [showExplanation, setshowExplanation] = useState(false);
   const { selectedQuizMode, questions } = props;
   let activeQuestion = questions[currentQuestion];
@@ -103,33 +104,6 @@ export default function QuizQuestion(props) {
           setduration(dur);
           setStopper(() => stopper + 1);
         }
-        // setduration((prevTime) => {
-        //   console.log({effect1: {userScore, userAnswers}})
-        //   let dur = prevTime - 1;
-        //   if (prevTime > 0) {
-        //     let hoursRemaining = dur > 3600 ? Math.floor(dur / 3600) : 0;
-        //     let minutesRemaining = Math.floor(dur / 60 - 60 * hoursRemaining);
-        //     let secondsRemaining =
-        //       dur - (hoursRemaining * 3600 + minutesRemaining * 60);
-        //     let data = {
-        //       hr: hoursRemaining,
-        //       min:
-        //         minutesRemaining >= 10
-        //           ? minutesRemaining
-        //           : `0${minutesRemaining}`,
-        //       sec:
-        //         secondsRemaining >= 10
-        //           ? secondsRemaining
-        //           : `0${secondsRemaining}`,
-        //     };
-        //     setremains(data);
-        //   } else {
-        //     if (selectedQuizMode === "Time Mode") {
-        //       window.clearInterval(timer);
-        //     }
-        //   }
-        //   return dur;
-        // });
       }, 1000);
       return () => {
         window.clearInterval(timer);
@@ -138,7 +112,6 @@ export default function QuizQuestion(props) {
   }, [stopper]);
 
   const nextQuestion = () => {
-    // console.log({ userAnswers, userScore });
     let no = currentQuestion + 1;
     updateAnswers();
     setcurrentQuestion(no);
@@ -149,6 +122,7 @@ export default function QuizQuestion(props) {
     settryAttempt(false);
     setshowAlert(false);
     setbuttonText("TRY AGAIN");
+    setreadInstructions(false);
     // console.log({ activeQuestion });
   };
 
@@ -160,6 +134,7 @@ export default function QuizQuestion(props) {
     setanswered(false);
     setwrongAnswer(false);
     setoptionSelected(false);
+    setreadInstructions(false);
   };
 
   const pickAnswerOne = (i) => {
@@ -239,20 +214,6 @@ export default function QuizQuestion(props) {
     );
   };
 
-  const getClass = (option) => {
-    if (option.id === userOption && option.id === activeQuestion.answerId)
-      return "correct";
-    if (option.picked && selectedQuizMode !== "Learning Approach") {
-      return `correct`;
-    } else {
-      if (option.picked && option.id === activeQuestion.answerId) {
-        return `correct_`;
-      } else if (option.picked && option.id !== activeQuestion.answerId) {
-        return "wrong";
-      }
-    }
-  };
-
   const viewExplanation = () => {
     showExplanation();
   };
@@ -276,28 +237,32 @@ export default function QuizQuestion(props) {
       </span>
       <div className="upper">
         <div className="upper-bar">
-          {activeQuestion.section ||
-            (selectedQuizMode === "Time Mode" && (
-              <div className="instruction">
-                <p>
-                  {activeQuestion && activeQuestion.section ? (
-                    <span
-                      style={{ maxWidth: "80%" }}
-                      dangerouslySetInnerHTML={{
-                        __html: setImageUrl(activeQuestion.section),
-                      }}
-                    ></span>
-                  ) : (
-                    <span>&nbsp;</span>
-                  )}{" "}
-                  {selectedQuizMode === "Time Mode" && (
-                    <span className="time">
-                      {remains.hr}: {remains.min}: {remains.sec}
-                    </span>
-                  )}
-                </p>
-              </div>
-            ))}
+          {
+            (activeQuestion.isFirstSection && readInstructions) ||
+              (!activeQuestion.isFirstSection && (
+                // (selectedQuizMode === "Time Mode" && (
+                <div className="instruction">
+                  <p>
+                    {activeQuestion && activeQuestion.section ? (
+                      <span
+                        style={{ maxWidth: "80%" }}
+                        dangerouslySetInnerHTML={{
+                          __html: setImageUrl(activeQuestion.section),
+                        }}
+                      ></span>
+                    ) : (
+                      <span>&nbsp;</span>
+                    )}{" "}
+                    {selectedQuizMode === "Time Mode" && (
+                      <span className="time">
+                        {remains.hr}: {remains.min}: {remains.sec}
+                      </span>
+                    )}
+                  </p>
+                </div>
+              ))
+            // ))
+          }
           {answer && answer.alert && selectedQuizMode === "Learning Approach" && (
             <div className="alert">
               <img src={streak} className="badge" alt="" />
@@ -311,25 +276,17 @@ export default function QuizQuestion(props) {
                     className="ex"
                   />
                 </p>
-                <p style={{ fontSize: 14 }}>
+                <p>
                   {answerIsCorrect
                     ? "Your answer is correct. Keep up the great persistence."
                     : "Your answer is incorrect."}
                 </p>
-                <p style={{ fontSize: 14 }}>
-                  <span
-                    className="blue--text"
-                    onClick={viewExplanation}
-                    style={{ fontSize: 14, fontWeight: 600 }}
-                  >
+                <p>
+                  <span className="blue--text" onClick={viewExplanation}>
                     View explanation
                   </span>{" "}
                   or{" "}
-                  <span
-                    className="blue--text"
-                    onClick={nextQuestion}
-                    style={{ fontSize: 14, fontWeight: 600 }}
-                  >
+                  <span className="blue--text" onClick={nextQuestion}>
                     Move on
                   </span>
                 </p>
@@ -338,19 +295,33 @@ export default function QuizQuestion(props) {
           )}
           <ProgressBar width={userAnswersCount / (questions.length - 1)} />
         </div>
-        <div className="content">
-          <Parser
-            className="question"
-            isMathJax={activeQuestion.isQuestionMathJax}
-            question={activeQuestion.question}
-          />
+        {activeQuestion.isFirstSection && !readInstructions ? (
+          <>
+            <div className="content content_">
+              <Parser
+                isMathJax={activeQuestion.isQuestionMathJax}
+                question={activeQuestion.section}
+              />
+            </div>
+            <div className="passage passage_" id="passage">
+              <img src={Passage} alt="" />
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="content">
+              <Parser
+                className="question"
+                isMathJax={activeQuestion.isQuestionMathJax}
+                question={activeQuestion.question}
+              />
 
-          <div className="questions">
-            {activeQuestion.options.map((option, i) => {
-              return (
-                <div
-                  key={option.text}
-                  className={`answer
+              <div className="questions">
+                {activeQuestion.options.map((option, i) => {
+                  return (
+                    <div
+                      key={option.text}
+                      className={`answer
                               ${
                                 ((answer && lockState) || tryAttempt) &&
                                 selectedQuizMode === "Learning Approach"
@@ -383,140 +354,162 @@ export default function QuizQuestion(props) {
                                   : ""
                               }
                             `}
-                  onClick={() =>
-                    ((answer && lockState) || tryAttempt) &&
-                    selectedQuizMode === "Learning Approach"
-                      ? () => {}
-                      : pickAnswerOne(option.id)
-                  }
-                >
-                  <span className="label">{String.fromCharCode(65 + i)}</span>
+                      onClick={() =>
+                        ((answer && lockState) || tryAttempt) &&
+                        selectedQuizMode === "Learning Approach"
+                          ? () => {}
+                          : pickAnswerOne(option.id)
+                      }
+                    >
+                      <span className="label">
+                        {String.fromCharCode(65 + i)}
+                      </span>
 
-                  <p>
-                    <Parser
-                      className=""
-                      inline={true}
-                      isMathJax={option.isMathJax}
-                      question={option.content}
-                    />
-                    <br />
-                    {answer &&
-                      answer.showExplanation &&
-                      optionIsCorrect(option.id) &&
-                      selectedQuizMode === "Learning Approach" && (
-                        <p
-                          style={{
-                            fontSize: 14,
-                            color: "#afafaf",
-                            position: "relative",
-                            top: "10px",
-                            marginLeft: 0,
-                          }}
-                        >
-                          <p style={{ margin: "10px 0 20px" }}>
-                            <Parser
-                              className=""
-                              inline={true}
-                              isMathJax={
-                                activeQuestion.answerUrl &&
-                                activeQuestion.answerUrl.includes("\\(")
-                              }
-                              question={activeQuestion.answerUrl}
-                            />
-                          </p>
-                          <audio controls>
-                            <source
-                              src={`${audioUrl}${activeQuestion.audioUrl.replace(
-                                "\\",
-                                "/"
-                              )}`}
-                              type="audio/mpeg"
-                            />
-                          </audio>
-                        </p>
-                      )}
-                  </p>
-                  {/* {selectedQuizMode !== "Learning Approach" &&
+                      <p>
+                        <Parser
+                          className=""
+                          inline={true}
+                          isMathJax={option.isMathJax}
+                          question={option.content}
+                        />
+                        <br />
+                        {answer &&
+                          answer.showExplanation &&
+                          optionIsCorrect(option.id) &&
+                          selectedQuizMode === "Learning Approach" && (
+                            <p
+                              style={{
+                                fontSize: 14,
+                                color: "#afafaf",
+                                position: "relative",
+                                top: "10px",
+                                marginLeft: 0,
+                              }}
+                            >
+                              <p style={{ margin: "10px 0 20px" }}>
+                                <Parser
+                                  className=""
+                                  inline={true}
+                                  isMathJax={
+                                    activeQuestion.answerUrl &&
+                                    activeQuestion.answerUrl.includes("\\(")
+                                  }
+                                  question={activeQuestion.answerUrl}
+                                />
+                              </p>
+                              <audio controls>
+                                <source
+                                  src={`${audioUrl}${activeQuestion.audioUrl.replace(
+                                    "\\",
+                                    "/"
+                                  )}`}
+                                  type="audio/mpeg"
+                                />
+                              </audio>
+                            </p>
+                          )}
+                      </p>
+                      {/* {selectedQuizMode !== "Learning Approach" &&
                   answered &&
                   option.id === activeQuestion.answerId && (
                     <h4 className="caveat">correct answer</h4>
                   )} */}
-                  {selectedQuizMode === "Learning Approach" &&
-                    answer &&
-                    correctClassName(option.id) &&
-                    (!!answer.userOptionId || userOption) &&
-                    !optionSelected && (
-                      <h4 className="caveat">Correct answer</h4>
-                    )}
+                      {selectedQuizMode === "Learning Approach" &&
+                        answer &&
+                        correctClassName(option.id) &&
+                        (!!answer.userOptionId || userOption) &&
+                        !optionSelected && (
+                          <h4 className="caveat">Correct answer</h4>
+                        )}
 
-                  {selectedQuizMode === "Learning Approach" &&
-                    answer &&
-                    wrongClassName(option.id) &&
-                    (!!answer.userOptionId || userOption) &&
-                    !optionSelected && (
-                      <h4 className="caveat">Incorrect answer</h4>
-                    )}
-                </div>
-              );
-            })}
-          </div>
+                      {selectedQuizMode === "Learning Approach" &&
+                        answer &&
+                        wrongClassName(option.id) &&
+                        (!!answer.userOptionId || userOption) &&
+                        !optionSelected && (
+                          <h4 className="caveat">Incorrect answer</h4>
+                        )}
+                    </div>
+                  );
+                })}
+              </div>
 
-          {answer && !answer.showExplanation && (
-            <p className="feedback blue--text" onClick={() => openFeedback()}>
-              <em>Feedback</em>
-            </p>
-          )}
-        </div>
-        {passage && (
-          <div
-            className="passage"
-            id="passage"
-            dangerouslySetInnerHTML={{
-              __html: setImageUrl(activeQuestion.passage),
-            }}
-          ></div>
-        )}
-        {feedback && (
-          <div className="passage formm">
-            <p className="top">Report a mistake in this question</p>
-            <span className="sub">
-              Give an applicable feedback on this Question
-            </span>
+              {answer && !answer.showExplanation && (
+                <p
+                  className="feedback blue--text"
+                  onClick={() => openFeedback()}
+                >
+                  <em>Feedback</em>
+                </p>
+              )}
+            </div>
+            {passage && (
+              <div
+                className="passage"
+                id="passage"
+                dangerouslySetInnerHTML={{
+                  __html: setImageUrl(activeQuestion.passage),
+                }}
+              ></div>
+            )}
+            {feedback && (
+              <div className="passage formm">
+                <p className="top">Report a mistake in this question</p>
+                <span className="sub">
+                  Give an applicable feedback on this Question
+                </span>
 
-            <form>
-              <span className="radio mt30">
-                <input type="radio" name="type" id="" />
-                The answer is wrong
-              </span>
-              {/* <span className="radio">
+                <form>
+                  <span className="radio mt30">
+                    <input type="radio" name="type" id="" />
+                    The answer is wrong
+                  </span>
+                  {/* <span className="radio">
                 <input type="radio" name="type" id="" />I caught a typo
               </span>
               <span className="radio">
                 <input type="radio" name="type" id="" />
                 The question or hit are confusing
               </span> */}
-              <span className="radio">
-                <input type="radio" name="type" id="" />
-                The image is not clear
-              </span>
-            </form>
+                  <span className="radio">
+                    <input type="radio" name="type" id="" />
+                    The image is not clear
+                  </span>
+                </form>
 
-            <p className="sub">
-              Alternatively, you can report any technical problems you may be
-              experiencing.
-            </p>
+                <p className="sub">
+                  Alternatively, you can report any technical problems you may
+                  be experiencing.
+                </p>
 
-            <span className="sub">Description of issue:</span>
-            <textarea name="" id="" cols="30" rows="10"></textarea>
-            <button className="tw-btn">Submit issue</button>
-            <span onClick={openFeedback} className="cancel">
-              Cancel
-            </span>
-          </div>
+                <span className="sub">Description of issue:</span>
+                <textarea name="" id="" cols="30" rows="10"></textarea>
+                <button className="tw-btn">Submit issue</button>
+                <span onClick={openFeedback} className="cancel">
+                  Cancel
+                </span>
+              </div>
+            )}
+          </>
         )}
       </div>
 
-      {selectedQuizMode === "Learning Approach" ? (
+      {activeQuestion.isFirstSection && !readInstructions ? (
+        <div className="footer">
+          <b
+            style={{
+              position: "relative",
+              top: 13,
+            }}
+          >
+            {currentQuestion + 1} of {questions.length}
+          </b>
+
+          <button className="tw-btn" onClick={() => setreadInstructions(true)}>
+            Continue
+          </button>
+        </div>
+      ) : selectedQuizMode === "Learning Approach" ? (
         <div className="footer">
           <b
             style={{
