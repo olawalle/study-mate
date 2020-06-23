@@ -166,11 +166,12 @@ export default withRouter(function Learn({ history }) {
 
           <div className="quizzes mt30" onClick={toSubject}>
             {selectedSubject &&
-            selectedSubject.quizzes &&
-            selectedSubject.quizzes.length ? (
+              selectedSubject.tests &&
+              selectedSubject.tests.length
+              && selectedSubject.tests[0].quizes.length  ? (
               <Quiz
                 open={false}
-                quiz={selectedSubject.quizzes}
+                quiz={selectedSubject.tests[0].quizes}
                 quizType="normal"
               />
             ) : null}

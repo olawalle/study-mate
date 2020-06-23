@@ -258,6 +258,7 @@ export default function QuizQuestion(props) {
   };
 
   const setImageUrl = (str) => {
+    if(!str) return;
     return str
       .replace(`<img src='assets`, `<img src='${appUrl}/assets`)
       .replace(`<img src="assets`, `<img src="${appUrl}/assets`)
@@ -272,7 +273,7 @@ export default function QuizQuestion(props) {
   return (
     <div className="quiz-quuestion">
       <span className="close">
-        <img src={close} alt="" onClick={() => props.onClose()} />
+        <img src={close} alt="" style={{zIndex: 20}} onClick={() => props.onClose()} />
       </span>
       <div className="upper">
         <div className="upper-bar">

@@ -11,7 +11,7 @@ import icn from "../../assets/images/dashboard.svg";
 import clock from "../../assets/images/clock.svg";
 import listener from "../../assets/images/Nice-listener.svg";
 import streak from "../../assets/images/streak.svg";
-import { appUrl } from "../../services/urls";
+import { appUrl, videoUrl } from "../../services/urls";
 import { userContext } from "../../store/UserContext";
 
 export default withRouter(function Lesson({
@@ -232,7 +232,7 @@ export default withRouter(function Lesson({
               id="homevideo"
             >
               <source
-                src={`${appUrl}${url}`}
+                src={`${videoUrl}${url.replace("assets", "video")}`}
                 type="video/mp4"
                 frameBorder="0"
                 allow="autoplay; encrypted-media"
