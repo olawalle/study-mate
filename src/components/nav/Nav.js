@@ -81,12 +81,12 @@ export default withRouter(function Nav(props) {
         </span>
       )}
 
-      {context.isLoggedIn && (
+      {/* {context.isLoggedIn && (
         <span className="inp">
           <img src={search} alt="" />
           <input type="text" placeholder="What do you want learn?" />
         </span>
-      )}
+      )} */}
 
       <div
         id="nav-icon1"

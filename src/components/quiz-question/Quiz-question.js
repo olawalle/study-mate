@@ -29,7 +29,6 @@ export default function QuizQuestion(props) {
   const [buttonText, setbuttonText] = useState("TRY AGAIN");
   const [remains, setremains] = useState({ hr: 0, min: 0, sec: 0 });
   const [optionSelected, setoptionSelected] = useState(false);
-  const [attempts, setattempts] = useState(0);
   const [showAlert, setshowAlert] = useState(true);
   const [stopper, setStopper] = useState(0);
   //const [showExplanation, setshowExplanation] = useState(false);
@@ -161,9 +160,6 @@ export default function QuizQuestion(props) {
     setanswered(false);
     setwrongAnswer(false);
     setoptionSelected(false);
-    //btnText();
-    // console.log(answers, userAnswers);
-    // !answers[no] && setattempts(0);
   };
 
   const pickAnswerOne = (i) => {
@@ -177,39 +173,6 @@ export default function QuizQuestion(props) {
         alert: true,
       });
     }
-    let prevAnswers = [...answers];
-    prevAnswers[currentQuestion] = options[i].id;
-    setanswers(prevAnswers);
-  };
-
-  const pickAnswer = (i) => {
-    if (attempts > 1 || showExplanation) return;
-    if (selectedQuizMode === "Learning Approach" && attempts < 2) {
-      setattempts(attempts + 1);
-      let correctlyAnswered = options[i].id !== activeQuestion.answerId;
-      setwrongAnswer(correctlyAnswered);
-      // !correctlyAnswered &&
-      setshowAlert(true);
-    }
-    setoptionSelected(true);
-
-    setanswered(true);
-    let prevAnswers = [...answers];
-    prevAnswers[currentQuestion] = options[i].id;
-    setanswers(prevAnswers);
-    setoptions(
-      options.map((option, j) => {
-        return i === j
-          ? {
-              ...option,
-              picked: true,
-            }
-          : {
-              ...option,
-              picked: false,
-            };
-      })
-    );
   };
 
   const openPassage = () => {
@@ -274,19 +237,6 @@ export default function QuizQuestion(props) {
             };
       })
     );
-
-    // if (answers.length === questions.length) {
-    //   submit();
-    //   return;
-    // }
-    // //setwrongAnswer(false);
-    // setshowExplanation(false);
-    // setshowAlert(false);
-    // if (attempts < 2 && wrongAnswer && !showExplanation) {
-    //   setshowAlert(false);
-    // } else {
-    //   nextQuestion();
-    // }
   };
 
   const getClass = (option) => {
@@ -307,17 +257,6 @@ export default function QuizQuestion(props) {
     showExplanation();
   };
 
-  // const btnText = () => {
-  //   const attempts = answerInStore
-  //   ? answerInStore.attempts : 0;
-  //   const state = answerInStore && answerInStore.state;
-  //   if (attempts === 0) setbuttonText("SUBMIT");
-  //   if (attempts < 2 && !state) setbuttonText("TRY AGAIN");
-  //   else setbuttonText("NEXT QUESTION");
-  // };
-
-  const logg = () => console.log({ activeQuestion });
-
   const setImageUrl = (str) => {
     return str
       .replace(`<img src='assets`, `<img src='${appUrl}/assets`)
@@ -332,70 +271,71 @@ export default function QuizQuestion(props) {
 
   return (
     <div className="quiz-quuestion">
+      <span className="close">
+        <img src={close} alt="" onClick={() => props.onClose()} />
+      </span>
       <div className="upper">
-        <div style={{ position: "relative" }}>
-          <div className="instruction" onClick={logg}>
-            <p>
-              {activeQuestion && activeQuestion.section ? (
-                <span
-                  style={{ maxWidth: "80%" }}
-                  dangerouslySetInnerHTML={{
-                    __html: setImageUrl(activeQuestion.section),
-                  }}
-                ></span>
-              ) : (
-                <span>&nbsp;</span>
-              )}{" "}
-              {selectedQuizMode === "Time Mode" && (
-                <span className="time">
-                  {remains.hr}: {remains.min}: {remains.sec}
-                </span>
-              )}
-              <span className="close">
-                <img src={close} alt="" onClick={() => props.onClose()} />
-              </span>
-            </p>
-            {answer &&
-              answer.alert &&
-              selectedQuizMode === "Learning Approach" && (
-                <div className="alert">
-                  <img src={streak} className="badge" alt="" />
-                  <div className="streak-text">
-                    <p className="top">
-                      {answerIsCorrect ? "Excellent." : "Not quite yet ..."}
-                      <img
-                        src={close}
-                        alt=""
-                        onClick={() => hideShowAlert()}
-                        className="ex"
-                      />
-                    </p>
-                    <p style={{ fontSize: 14 }}>
-                      {answerIsCorrect
-                        ? "Your answer is correct. Keep up the great persistence."
-                        : "Your answer is incorrect."}
-                    </p>
-                    <p style={{ fontSize: 14 }}>
-                      <span
-                        className="blue--text"
-                        onClick={viewExplanation}
-                        style={{ fontSize: 14, fontWeight: 600 }}
-                      >
-                        View explanation
-                      </span>{" "}
-                      or{" "}
-                      <span
-                        className="blue--text"
-                        onClick={nextQuestion}
-                        style={{ fontSize: 14, fontWeight: 600 }}
-                      >
-                        Move on
-                      </span>
-                    </p>
-                  </div>
-                </div>
-              )}
-          </div>
+        <div className="upper-bar">
+          {activeQuestion.section ||
+            (selectedQuizMode === "Time Mode" && (
+              <div className="instruction">
+                <p>
+                  {activeQuestion && activeQuestion.section ? (
+                    <span
+                      style={{ maxWidth: "80%" }}
+                      dangerouslySetInnerHTML={{
+                        __html: setImageUrl(activeQuestion.section),
+                      }}
+                    ></span>
+                  ) : (
+                    <span>&nbsp;</span>
+                  )}{" "}
+                  {selectedQuizMode === "Time Mode" && (
+                    <span className="time">
+                      {remains.hr}: {remains.min}: {remains.sec}
+                    </span>
+                  )}
+                </p>
+              </div>
+            ))}
+          {answer && answer.alert && selectedQuizMode === "Learning Approach" && (
+            <div className="alert">
+              <img src={streak} className="badge" alt="" />
+              <div className="streak-text">
+                <p className="top">
+                  {answerIsCorrect ? "Excellent." : "Not quite yet ..."}
+                  <img
+                    src={close}
+                    alt=""
+                    onClick={() => hideShowAlert()}
+                    className="ex"
+                  />
+                </p>
+                <p style={{ fontSize: 14 }}>
+                  {answerIsCorrect
+                    ? "Your answer is correct. Keep up the great persistence."
+                    : "Your answer is incorrect."}
+                </p>
+                <p style={{ fontSize: 14 }}>
+                  <span
+                    className="blue--text"
+                    onClick={viewExplanation}
+                    style={{ fontSize: 14, fontWeight: 600 }}
+                  >
+                    View explanation
+                  </span>{" "}
+                  or{" "}
+                  <span
+                    className="blue--text"
+                    onClick={nextQuestion}
+                    style={{ fontSize: 14, fontWeight: 600 }}
+                  >
+                    Move on
+                  </span>
+                </p>
+              </div>
+            </div>
+          )}
           <ProgressBar width={userAnswersCount / (questions.length - 1)} />
         </div>
         <div className="content">

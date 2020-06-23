@@ -121,7 +121,7 @@ export default withRouter(function Learn({ history }) {
       </div>
       {!user.isVerified && (
         <div className="verify">
-          <span>Please edit your profile to complete your registeration</span>
+          <span>Please edit your profile to complete your registration</span>
           <button onClick={toEdit}>EDIT PROFILE</button>
         </div>
       )}
@@ -130,7 +130,7 @@ export default withRouter(function Learn({ history }) {
           <p className="heading">{selectedSubject.name}</p>
           <div className="lessons-wrap">
             <p className="sub-heading">
-              Section A
+              Lesson Pack 1
               <button className="tw-btn f-right" onClick={toSubject}>
                 Start learning
               </button>

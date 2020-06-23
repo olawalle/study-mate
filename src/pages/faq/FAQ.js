@@ -16,7 +16,7 @@ export default withRouter(function FAQ({ history }) {
     {
       title: "Q. What are Badges?",
       text: `
-      ncentives used to encourage students for mastery and practice, completion of missions, as well as for participating positively in the Khan Academy community`,
+      Incentives used to encourage students for mastery and practice, completion of missions, as well as for participating positively in the StudyMate community`,
       open: false,
     },
     {
