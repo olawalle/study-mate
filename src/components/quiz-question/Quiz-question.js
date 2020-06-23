@@ -162,8 +162,8 @@ export default function QuizQuestion(props) {
     setwrongAnswer(false);
     setoptionSelected(false);
     //btnText();
-    console.log(answers, userAnswers);
-    !answers[no] && setattempts(0);
+    // console.log(answers, userAnswers);
+    // !answers[no] && setattempts(0);
   };
 
   const pickAnswerOne = (i) => {
