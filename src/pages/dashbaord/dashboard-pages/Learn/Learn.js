@@ -121,7 +121,7 @@ export default withRouter(function Learn({ history }) {
       </div>
       {!user.isVerified && (
         <div className="verify">
-          <span>Please edit your profile to complete your registration</span>
+          <span>Please edit your profile to complete your registration within a week from registration.</span>
           <button onClick={toEdit}>EDIT PROFILE</button>
         </div>
       )}
