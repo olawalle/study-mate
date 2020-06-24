@@ -25,7 +25,7 @@ export default withRouter(function Verify({ history }) {
 
   const verifyEmail = (code) => {
     authServices
-      .verifyEmail(code)
+      .verifyEmail({ code })
       .then((res) => {
         console.log(res);
         openSnackbar("Email verified successfully", 5000);
@@ -37,6 +37,7 @@ export default withRouter(function Verify({ history }) {
         console.log({ err });
         updateLoader(false);
         openSnackbar(err.response.data.message, 5000);
+        history.push("/login");
       });
   };
 
