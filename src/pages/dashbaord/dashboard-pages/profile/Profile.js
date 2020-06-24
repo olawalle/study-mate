@@ -214,7 +214,7 @@ export default withRouter(function Profile({ history }) {
               <span className="blue--text">Active Subscription</span>
               <p>
                 Your account is active. Continue learning to improve your rank
-                at the leader board
+                at the Leaderboard
               </p>
             </div>
           </div>

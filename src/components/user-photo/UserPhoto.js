@@ -44,7 +44,6 @@ export default function UserPhoto() {
       .uploadFile(f)
       .then((res) => {
         let url = res.data.name;
-        console.log(url);
         updateUserPhoto(url);
         openSnackbar("Profile photo updated sucessfully", 5000);
         getCurrentUser();
@@ -63,15 +62,14 @@ export default function UserPhoto() {
         path: "/image",
       },
     ];
-    console.log(data);
     authServices
       .updateUserData(data, user.id)
       .then((res) => {
-        console.log(res);
         updateLoader(false);
         let url = res.data.image.replace("\\", "/");
-        console.log(url);
         setuserPic(url);
+        openSnackbar("Profile photo updated sucessfully", 5000);
+        getCurrentUser();
       })
       .catch((err) => {
         updateLoader(false);

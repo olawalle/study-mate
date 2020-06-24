@@ -27,7 +27,7 @@ export default function Quiz(props) {
   const [openMobileQuiz, setopenMobileQuiz] = useState(false);
 
   const [modes, setModes] = useState([
-    { text: "Learning Approach", selected: false },
+    { text: "Learning Mode", selected: false },
     { text: "Time Mode", selected: false },
     { text: "Free Form Mode", selected: false },
   ]);

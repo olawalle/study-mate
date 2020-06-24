@@ -21,7 +21,7 @@ export default withRouter(function EditProfile({ history }) {
   const context = useContext(userContext);
   const [fullname, setfullname] = useState("");
   const [email, setemail] = useState("");
-  const [phone, setphone] = useState("");
+  const [phoneNumber, setphone] = useState("");
   const [password, setpassword] = useState("");
   const [code, setcode] = useState("");
   const [username, setusername] = useState("");
@@ -78,12 +78,10 @@ export default withRouter(function EditProfile({ history }) {
 
   const generateCode = () => {
     updateLoader(true);
-    console.log({email})
     let data = { email };
     authServices
       .generateCode(data)
       .then((res) => {
-        console.log(res);
         // setmodal(true);
         openSnackbar(
           "Please check your email address for instructions to complete your verification",
@@ -97,19 +95,17 @@ export default withRouter(function EditProfile({ history }) {
       });
   };
 
-  const verifyEmail = () => {
-    authServices
-      .verifyEmail({ code })
-      .then((res) => {
-        updateUser({...user, isVerified: true})
-        setmodal(false);
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log({ err });
-        setmodal(true);
-      });
-  };
+  // const verifyEmail = () => {
+  //   authServices
+  //     .verifyEmail({ code })
+  //     .then((res) => {
+  //       updateUser({ ...user, isVerified: true });
+  //       setmodal(false);
+  //     })
+  //     .catch((err) => {
+  //       console.log({ err });
+  //     });
+  // };
 
   const onCloseModal = () => setmodal(false);
 
@@ -119,6 +115,7 @@ export default withRouter(function EditProfile({ history }) {
       surName: fullname.split(" ")[1],
       username,
       location,
+      phoneNumber,
       dob,
     };
     updateLoader(true);
@@ -135,7 +132,6 @@ export default withRouter(function EditProfile({ history }) {
         updateLoader(false);
         openSnackbar("Profile updated successfully", 5000);
         getCurrentUser();
-        console.log(res);
       })
       .catch((err) => {
         console.log({ err });
@@ -201,7 +197,7 @@ export default withRouter(function EditProfile({ history }) {
                 <span className="label">Phone no</span>
                 <input
                   type="text"
-                  defaultValue={phone}
+                  defaultValue={phoneNumber}
                   onChange={(e) => setphone(e.target.value)}
                 />
                 <img src={edit} alt="" />
@@ -313,45 +309,6 @@ export default withRouter(function EditProfile({ history }) {
           </div>
         </div>
       </div>
-
-      <Modal
-        open={modal}
-        onClose={onCloseModal}
-        center
-        // styles={{ modal: { width: "98%" } }}
-      >
-        <p
-          style={{ borderBottom: "1px solid #eee", padding: "0px 0 15px 15px" }}
-        >
-          Verify Email address
-        </p>
-        <div style={{ padding: 20, width: 500, textAlign: "center" }}>
-          <span className="label">
-            Enter the verification code that was sent to your email address
-          </span>
-          <input
-            style={{
-              background: "#f8f8f8",
-              height: "50px",
-              border: 0,
-              width: "100%",
-              padding: "0 20px",
-              margin: "10px 0 20px",
-            }}
-            placeholder="Verification Code"
-            type="text"
-            onChange={(e) => setcode(e.target.value)}
-          />
-          <br />
-          <button
-            className="tw-btn"
-            onClick={verifyEmail}
-            style={{ padding: "0 30px" }}
-          >
-            Verify Email
-          </button>
-        </div>
-      </Modal>
     </motion.div>
   );
 });

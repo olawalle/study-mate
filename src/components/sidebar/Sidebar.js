@@ -18,7 +18,7 @@ export default withRouter(function Sidebar({ history }) {
         <p className="user-details">
           {fullname}
           <span>
-            {context.user.level === 2 ? "Junior secondary" : "Senior secondary"}
+            {context.user.level === 3 ? "Junior secondary" : "Senior secondary"}
           </span>
         </p>
         <Links />
