@@ -53,6 +53,7 @@ export default function useTest(previousData, quizId, includeApiFunction) {
   };
 
   const updateAnswers = () => {
+    if(!answer.userOptionId) return;
     const currentAnswer = { ...answer, attempts: 2 };
     if (includeApiFunction) {
       if (previousData.some((ans) => ans.quizId === currentAnswer.quizId)) {
