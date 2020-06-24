@@ -45,6 +45,7 @@ export default withRouter(function Signup(props) {
     updateLoader,
     updateUser,
     updateLoggedInStatus,
+    updateUserCourses,
     loading,
     pageTransitions,
   } = context;
@@ -78,14 +79,33 @@ export default withRouter(function Signup(props) {
         let user = res.data;
         updateUser(user);
         updateLoggedInStatus(true);
-        updateLoader(false);
         setsurName("");
         setfirstName("");
         setPhone("");
         setemail("");
         setpassword("");
         localStorage.setItem("studymate-token", user.token);
-        props.history.push("/dashboard");
+        authServices
+          .getUserCourses(user.token, user.id)
+          .then((res) => {
+            let user_courses = res.data.userCourses;
+            let sievedCourses = Object.values(
+              user_courses.reduce((agg, curr) => {
+                agg[curr.courseId] = curr;
+                return agg;
+              }, {})
+            );
+            updateUserCourses(sievedCourses);
+            updateLoader(false);
+            setTimeout(() => {
+              props.history.push("/dashboard");
+            }, 500);
+          })
+          .catch((err) => {
+            console.log({ err });
+            updateLoader(false);
+            showError("An error occured. Please try again");
+          });
       })
       .catch((err) => {
         console.log({ err });

@@ -105,11 +105,16 @@ export default function AddCourses(props) {
         })
         .then((res) => {
           fetchUserCourses();
+          setloader(true);
         })
         .catch((err) => {
           console.log({ err });
-          openSnackbar(err.response.data.message, 5000);
+          openSnackbar(
+            err.response.data ? err.response.data.message : "An error occured",
+            5000
+          );
           onCloseModal();
+          setloader(true);
           updateLoader(false);
         });
     });
@@ -119,13 +124,18 @@ export default function AddCourses(props) {
         .deleteUserCourse(id)
         .then((res) => {
           fetchUserCourses();
+          setloader(true);
         })
         .catch((err) => {
           console.log({ err });
-          openSnackbar(err.response.data.message, 5000);
+          openSnackbar(
+            err.response.data ? err.response.data.message : "An error occured",
+            5000
+          );
           getCurrentUser();
           onCloseModal();
           updateLoader(false);
+          setloader(true);
         });
     });
   };

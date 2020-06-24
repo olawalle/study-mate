@@ -204,11 +204,12 @@
     }
     .verify {
       position: absolute;
-      top: 0;
+      top: 4px;
       transform: scale(1);
       width: calc(100% - 40px);
       height: 57px !important;
       padding: 10px !important;
+      border-radius: 5px;
       span {
         display: inline-block;
         width: 60%;
@@ -218,6 +219,8 @@
         margin-top: -3px;
         top: 5px !important;
         padding: 0 10px;
+        border-radius: 5px;
+        font-size: 12px !important;
       }
     }
   }
