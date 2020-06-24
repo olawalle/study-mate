@@ -94,7 +94,7 @@ export default function UserPhoto() {
         {!userPic && (
           <img
             src={userIcon}
-            style={{ height: "100%", margin: " 12px auto" }}
+            style={{ height: "85%", margin: " 12px auto" }}
             alt=""
           />
         )}
