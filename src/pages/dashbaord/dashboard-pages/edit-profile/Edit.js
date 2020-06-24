@@ -84,7 +84,11 @@ export default withRouter(function EditProfile({ history }) {
       .generateCode(data)
       .then((res) => {
         console.log(res);
-        setmodal(true);
+        // setmodal(true);
+        openSnackbar(
+          "Please check your email address for instructions to complete your verification",
+          10000
+        );
         updateLoader(false);
       })
       .catch((err) => {

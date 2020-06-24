@@ -54,11 +54,11 @@ import authServices from "./services/authServices";
 import Terms from "./pages/Terms/Terms";
 import FAQ from "./pages/faq/FAQ";
 import Privacy from "./pages/Terms/Privacy";
+import Verify from "./pages/Verify";
 
 export default function App() {
   let history = useHistory();
   useEffect(() => {
-    console.log({ history });
     // let token = localStorage.getItem("studymate-token");
     // !token && history.push("/login");
 
@@ -105,6 +105,9 @@ export default function App() {
           <UserContextProvider>
             <AnimatePresence exitBeforeEnter>
               <Switch match>
+                <Route path="/verifyemail">
+                  <Verify />
+                </Route>
                 <Route path="/login">
                   <Login />
                 </Route>
