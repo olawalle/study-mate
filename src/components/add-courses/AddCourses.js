@@ -186,6 +186,7 @@ export default function AddCourses(props) {
 
   const pickSubject = (i) => {
     let subject = levelSubjects[i];
+    console.log(subject);
     if (!subject) return;
     if (subject.preSelected) {
       settoBeRemoved([...toBeRemoved, subject.id]);
