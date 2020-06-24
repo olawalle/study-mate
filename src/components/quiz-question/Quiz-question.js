@@ -128,7 +128,7 @@ export default function QuizQuestion(props) {
 
   const prevQuestion = () => {
     let no = currentQuestion - 1;
-    //updateAnswers();
+    updateAnswers();
     setcurrentQuestion(no);
     getOptions(no);
     setanswered(false);
@@ -278,7 +278,7 @@ export default function QuizQuestion(props) {
                 </p>
                 <p>
                   {answerIsCorrect
-                    ? "Your answer is correct. Keep up the great persistence."
+                    ? "Great work! Well done."
                     : "Your answer is incorrect."}
                 </p>
                 <p>
