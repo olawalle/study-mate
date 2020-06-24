@@ -84,10 +84,10 @@ let updateUserCourses = (data) => {
   });
 };
 
-let deleteUserCourse = (id) => {
+let deleteUserCourse = (cid,uid) => {
   return axios({
     method: "delete",
-    url: urls.userLearnCourseUrl + "/" + id,
+    url: urls.userLearnCourseUrl + "/course/" + cid + "/user/" + uid,
   });
 };
 

@@ -105,7 +105,7 @@ export default function AddCourses(props) {
         })
         .then((res) => {
           fetchUserCourses();
-          setloader(true);
+          setloader(false);
         })
         .catch((err) => {
           console.log({ err });
@@ -114,17 +114,18 @@ export default function AddCourses(props) {
             5000
           );
           onCloseModal();
-          setloader(true);
+          setloader(false);
           updateLoader(false);
         });
     });
 
     toBeRemoved.forEach((id) => {
+      console.log({toBeRemoved})
       authServices
-        .deleteUserCourse(id)
+        .deleteUserCourse(id, user.id)
         .then((res) => {
           fetchUserCourses();
-          setloader(true);
+          setloader(false);
         })
         .catch((err) => {
           console.log({ err });
@@ -135,7 +136,7 @@ export default function AddCourses(props) {
           getCurrentUser();
           onCloseModal();
           updateLoader(false);
-          setloader(true);
+          setloader(false);
         });
     });
   };
