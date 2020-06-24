@@ -78,6 +78,7 @@ export default withRouter(function EditProfile({ history }) {
 
   const generateCode = () => {
     updateLoader(true);
+    console.log({email})
     let data = { email };
     authServices
       .generateCode(data)
@@ -98,12 +99,15 @@ export default withRouter(function EditProfile({ history }) {
 
   const verifyEmail = () => {
     authServices
-      .generateCode({ code })
+      .verifyEmail({ code })
       .then((res) => {
+        updateUser({...user, isVerified: true})
+        setmodal(false);
         console.log(res);
       })
       .catch((err) => {
         console.log({ err });
+        setmodal(true);
       });
   };
 

@@ -120,8 +120,9 @@ export default function AddCourses(props) {
     });
 
     toBeRemoved.forEach((id) => {
+      console.log({toBeRemoved})
       authServices
-        .deleteUserCourse(id)
+        .deleteUserCourse(id, user.id)
         .then((res) => {
           fetchUserCourses();
           setloader(false);

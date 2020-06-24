@@ -25,15 +25,15 @@ let login = (data) => {
 let generateCode = (data) => {
   return axios({
     method: "post",
-    url: urls.getCodeUrl,
-    data,
+    url: urls.getCodeUrl + "?email=" + data.email + "&validate=true",
+    headers: headers(),
   });
 };
 
 let verifyEmail = (data) => {
   return axios({
     method: "put",
-    url: urls.verifyEmailUrl,
+    url: urls.verifyEmailUrl + "?code=" + data.code,
     data,
   });
 };
@@ -84,10 +84,10 @@ let updateUserCourses = (data) => {
   });
 };
 
-let deleteUserCourse = (id) => {
+let deleteUserCourse = (cid,uid) => {
   return axios({
     method: "delete",
-    url: urls.userLearnCourseUrl + "/" + id,
+    url: urls.userLearnCourseUrl + "/course/" + cid + "/user/" + uid,
   });
 };
 
