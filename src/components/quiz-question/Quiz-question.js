@@ -63,6 +63,7 @@ export default function QuizQuestion(props) {
     lockThisAnswer,
   } = useStudy([], activeQuestion.id, props.selectedQuizMode);
 
+  console.log({userAnswersToAdd, userAnswersToUpdate})
   const qid = activeQuestion.quizId;
   const uid = answer ? answer.userOptionId : 0;
 

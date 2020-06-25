@@ -9,7 +9,7 @@ const answerBuilder = (quizId, userOptionId, correctOptionId) => ({
   alert: false,
 });
 
-export default function useTest(previousData, quizId, includeApiFunction) {
+export default function useTest(previousData, quizId) {
   const [answers, setAnswers] = useState([]);
   const [answer, setAnswer] = useState();
   const [answersToUpdate, setanswersToUpdate] = useState([]);
@@ -55,16 +55,14 @@ export default function useTest(previousData, quizId, includeApiFunction) {
   const updateAnswers = () => {
     if(!answer.userOptionId) return;
     const currentAnswer = { ...answer, attempts: 2 };
-    if (includeApiFunction) {
-      if (previousData.some((ans) => ans.quizId === currentAnswer.quizId)) {
-        setanswersToUpdate(
-          answersToUpdate.map((ans) =>
-            ans.quizId === currentAnswer.quizId ? currentAnswer : ans
-          )
-        );
-      } else {
-        setanswersToAdd(answersToAdd.concat(currentAnswer));
-      }
+    if (previousData.some((ans) => ans.quizId === currentAnswer.quizId)) {
+      setanswersToUpdate(
+        answersToUpdate.map((ans) =>
+          ans.quizId === currentAnswer.quizId ? currentAnswer : ans
+        )
+      );
+    } else {
+      setanswersToAdd(answersToAdd.concat(currentAnswer));
     }
     setAnswers(upsertAnswer(currentAnswer));
   };
