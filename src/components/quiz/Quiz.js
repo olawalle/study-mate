@@ -347,12 +347,12 @@ export default function Quiz(props) {
         <Modal
           open={openSave}
           onClose={onCloseModal_}
-          styles={{ modal: { width: "50%" } }}
+          styles={{ modal: { width: "80%" } }}
           center
           showCloseIcon={true}
           closeOnOverlayClick={true}
         >
-          <div style={{ padding: 30, height: "320px" }}>
+          <div style={{ padding: 30, height: "330px" }}>
             <div style={{ textAlign: "center" }}>
               <img src={quizPic} style={{ width: "170px" }} alt="" />
               <p style={{ fontSize: "16px" }}>
