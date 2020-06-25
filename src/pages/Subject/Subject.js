@@ -26,6 +26,7 @@ export default withRouter(function Subject({ history }) {
   const [usertests, setusertests] = useState(null);
   const [linkIndex, setlinkIndex] = useState(0);
   const [testId, settestId] = useState(0);
+  const [usercourseid, setusercourseid] = useState(0);
   const [pageLoaded, setpageLoaded] = useState(false);
   const [links, setlinks] = useState([
     { text: "Beginner" },
@@ -38,7 +39,7 @@ export default withRouter(function Subject({ history }) {
     authServices
       .getUcourseWithTests(user.id, selectedSubject.id)
       .then((res) => {
-        console.log(res);
+        console.log({testes: res.data});
         const defaultTestId =
           selectedSubject &&
           selectedSubject.tests &&
@@ -46,7 +47,8 @@ export default withRouter(function Subject({ history }) {
             ? selectedSubject.tests[0].id
             : 0;
         settestId(defaultTestId);
-        setusertests(res.data.tests);
+        setusercourseid(res.data.id)
+        setusertests(res.data.userTests);
         updateLoader(false);
         setpageLoaded(true);
       })
@@ -99,16 +101,19 @@ export default withRouter(function Subject({ history }) {
 
       const returnCandidate = [
         {
+          id: test.id,
           take: !!beginnerVideo.length,
           quizzes: beginnerQuiz,
           videos: beginnerVideo,
         },
         {
+          id: test.id,
           take: !!intermediateVideo.length,
           quizzes: intermediateQuiz,
           videos: intermediateVideo,
         },
         {
+          id: test.id,
           take: !!advancedVideo.length,
           quizzes: advancedQuiz,
           videos: advancedVideo,
@@ -121,6 +126,14 @@ export default withRouter(function Subject({ history }) {
     }
     return [];
   };
+
+  const getPreviousQuiz = (usertest, quizzes) => {
+    if(usertest){
+      const intersection = usertest.userQuizzes.filter(value => quizzes.some(q => q.id === value.quizId))
+      return intersection;
+    }
+    return []
+  }
 
   return (
     <>
@@ -237,7 +250,12 @@ export default withRouter(function Subject({ history }) {
                       </div>
                     </div>
                     {test.quizzes.length ? (
-                      <Quiz open={true} quizType="normal" quiz={test.quizzes} />
+                      <Quiz open={true} 
+                            usertests={(usertests && usertests.length) ? usertests.filter(ut => ut.testId === test.id):[]}
+                            userquizzes={getPreviousQuiz(usertests && usertests.find(ut => ut.testId === test.id), test.quizzes)}
+                            usercourseid={usercourseid} 
+                            quizType="normal" 
+                            quiz={test.quizzes} />
                     ) : null}
                   </React.Fragment>
                 )

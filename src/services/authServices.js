@@ -157,6 +157,22 @@ let getAwardboard = (userID, quizID) => {
   });
 };
 
+let addUserTest = (data) => {
+  return axios({
+    method: "post",
+    url: urls.userTestUrl,
+    data,
+  });
+};
+
+let addMultipleUserQuizzes = (data) => {
+  return axios({
+    method: "post",
+    url: urls.addMultipleUserQuizesUrl,
+    data,
+  });
+};
+
 let getLeaderboard = (userID) => {
   return axios({
     method: "get",
@@ -201,5 +217,7 @@ export default {
   getLeaderboard,
   getStudypackData,
   uploadFile,
+  addUserTest,
   getUcourseWithTests,
+  addMultipleUserQuizzes,
 };

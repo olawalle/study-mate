@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./Quiz-question.scss";
 import ProgressBar from "../progress-bar/ProgressBar";
 import close from "../../assets/images/close.svg";
@@ -6,15 +6,22 @@ import streak from "../../assets/images/repeat.svg";
 import Passage from "../../assets/images/Passage.svg";
 import caret from "../../assets/images/down-arrow.svg";
 import { appUrl, audioUrl } from "../../services/urls";
+import { userContext } from "../../store/UserContext";
 
 import MathJax from "react-mathjax";
 import Parser from "../content-display/Parser";
 import useStudy from "../../custom-hooks/usestudy";
+import authServices from "../../services/authServices";
+import Loader from "../loader/Loader";
 
 export default function QuizQuestion(props) {
+  const { loading, updateLoader } = useContext(
+    userContext
+  );
   let hr = props.time ? parseFloat(props.time.hour) * 60 : 0;
   let min = parseFloat(props.time.minutes);
   let duration_ = (hr + min) * 60;
+
 
   const [passage, setpassage] = useState(false);
   const [feedback, setFeedback] = useState(false);
@@ -36,6 +43,13 @@ export default function QuizQuestion(props) {
   const { selectedQuizMode, questions } = props;
   let activeQuestion = questions[currentQuestion];
 
+  const getThisTestForUser = () => {
+    if(props.usertests){
+      const data = props.usertests.find(ut => ut.testId === activeQuestion.testId)
+      if(data) return data.userQuizzes
+    }
+    return []
+  }
   const {
     userScore,
     updateThisAnswer,
@@ -61,13 +75,98 @@ export default function QuizQuestion(props) {
     showExplanation,
     lockAllAnswers,
     lockThisAnswer,
-  } = useStudy([], activeQuestion.id, props.selectedQuizMode);
+  } = useStudy(props.userQuizzes 
+    ? props.userQuizzes.map(uq => 
+      ({...uq, correctOptionId: uq.correctOption, userOptionId: uq.userOption, attempts: 2})) 
+    : [], 
+    activeQuestion.id, props.selectedQuizMode);
 
   console.log({userAnswersToAdd, userAnswersToUpdate})
   const qid = activeQuestion.quizId;
   const uid = answer ? answer.userOptionId : 0;
 
   const [userOption, setuserOption] = useState(uid);
+  console.log({usercid: props.usercourseid, tests: props.usertests})
+  // useEffect(() => {
+  //   return () => {
+  //     //send answers on destroy
+  //     console.log({final: userAnswersToAdd})
+  //     //sendUserAnswersToStore()
+  //     //console.log("quiz destroyed or finished...")
+  //   }
+  // }, [userAnswersToAdd])
+
+  const modeConverter = () => {
+    if(selectedQuizMode === "Learning Mode") return 0
+    else if(selectedQuizMode === "Time Mode") return 1
+    else if(selectedQuizMode === "Free Form Mode") return 2
+  }
+
+  const sendUserAnswersToStore = (callback) => {
+    //add a user's test and then add the courses
+    //check if user answered
+    if(userAnswersToAdd.length){
+      console.log("quiz commenced adding...")
+      let userTestId = 0;
+      if(props.usertests && props.usertests.length){
+        userTestId = props.usertests[0].id;
+      }
+      if(userTestId){
+        const addAnswers = userAnswersToAdd.map(ua => (
+          {...ua, userOption: ua.userOptionId, mode: modeConverter(), 
+            correctOption: ua.correctOptionId, userTestId}))
+        sendUserQuizToServer(addAnswers, callback, false)
+      }
+      else{
+        const data = 
+        {
+          userCourseId: props.usercourseid, 
+          testId: activeQuestion.testId, 
+          currentLevel: activeQuestion.level,
+          score: selectedQuizMode === "Time Mode" ? userScore : 0
+        }
+        updateLoader(true);
+        sendUserTestToServer(data, callback)
+      }
+    }
+    else{
+      console.log("quiz nothing to add")
+    }
+    
+  }
+
+  const sendUserTestToServer = (data, callback) => {
+    authServices
+        .addUserTest(data)
+        .then((res) => {
+          console.log({usertest: res.data, mode: modeConverter()})
+          
+          const data = userAnswersToAdd.map(ua => (
+            {...ua, userOption: ua.userOptionId, mode: modeConverter(), 
+              correctOption: ua.correctOptionId, userTestId: res.data.id}))
+          sendUserQuizToServer(data, callback, false)
+        })
+        .catch((err) => {
+          console.log({ err });
+          callback();
+          updateLoader(false);
+        });
+  }
+
+  const sendUserQuizToServer = (data, callback, loadstate) => {
+    authServices
+        .addMultipleUserQuizzes(data)
+        .then((res) => {
+          console.log({usertest: res.data})
+          callback();
+          updateLoader(loadstate);
+        })
+        .catch((err) => {
+          console.log({ err });
+          callback();
+          updateLoader(loadstate);
+        });
+  }
 
   // console.log({ myquestion: questions });
   const [options, setoptions] = useState([]);
@@ -168,9 +267,11 @@ export default function QuizQuestion(props) {
     }
   };
 
-  const submitOne = () => {};
-
   const submit = () => {
+    sendUserAnswersToStore(submitAction)
+  };
+
+  const submitAction = () => {
     let score = userScore;
     console.log({ userScore, userAnswers });
     let count = questions.length;
@@ -197,6 +298,10 @@ export default function QuizQuestion(props) {
     updateThisAnswer({
       quizId: activeQuestion.id,
       userOptionId: userOption,
+      mode: modeConverter(),
+      correctOption: activeQuestion.answerId,
+      userOption: userOption,
+      mode: modeConverter(),
       correctOptionId: activeQuestion.answerId,
       alert: true,
     });
@@ -232,6 +337,8 @@ export default function QuizQuestion(props) {
   }
 
   return (
+    <>
+    {loading && <Loader />}
     <div className="quiz-quuestion">
       <span className="close">
         <img src={close} alt="" onClick={() => props.onClose()} />
@@ -630,5 +737,7 @@ export default function QuizQuestion(props) {
         </div>
       )}
     </div>
+
+    </>
   );
 }

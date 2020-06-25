@@ -16,6 +16,7 @@ export const allCourseUrl = `${baseUrl}courses/all`;
 export const userCourseUrl = `${baseUrl}usercourses`;
 export const learnCourseUrl = `${baseUrl}courses/alllevels/`;
 export const userLearnCourseUrl = `${baseUrl}usercourses`;
+export const userTestUrl = `${baseUrl}usertests`;
 export const getUserLearnCourseUrl = `${baseUrl}account/getusercourses`;
 export const userAwardsUrl = `${baseUrl}userawards`;
 export const studyPackUrl = `${baseUrl}quizes/`;
@@ -24,3 +25,5 @@ export const leadersUrl = `${baseUrl}account/leaderboard/`;
 export const quizUrl = `${baseUrl}quizes`;
 export const videosUrl = `${baseUrl}videos`;
 export const filesUrl = `${baseUrl}files/upload`;
+
+export const addMultipleUserQuizesUrl = `${baseUrl}userquizzes/multiple`;

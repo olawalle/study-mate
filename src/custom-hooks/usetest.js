@@ -55,7 +55,7 @@ export default function useTest(previousData, quizId) {
   const updateAnswers = () => {
     if(!answer.userOptionId) return;
     const currentAnswer = { ...answer, attempts: 2 };
-    if (previousData.some((ans) => ans.quizId === currentAnswer.quizId)) {
+    if (previousData.some((ans) => ans.quizId === currentAnswer.quizId && ans.mode === currentAnswer.mode)) {
       setanswersToUpdate(
         answersToUpdate.map((ans) =>
           ans.quizId === currentAnswer.quizId ? currentAnswer : ans
@@ -95,8 +95,8 @@ export default function useTest(previousData, quizId) {
     setAnswer(thisanswer);
   };
 
-  const updateThisAnswer = (options) => {
-    const thisanswer = { ...answer, ...options };
+  const updateThisAnswer = (extras) => {
+    const thisanswer = { ...answer, ...extras };
     setAnswer(thisanswer);
   };
 

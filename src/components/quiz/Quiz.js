@@ -17,6 +17,8 @@ export default function Quiz(props) {
   const { updateStudyPackQuizes, quizzes, loading, updateLoader } = useContext(
     userContext
   );
+
+  console.log({ust: props.usertests, ut: props.userquizzes})
   const [open, setopen] = useState(false);
   const [quizFromPack, setQuizFromPack] = useState([]);
   const [started, setStarted] = useState(false);
@@ -24,6 +26,7 @@ export default function Quiz(props) {
   const [scores, setScore] = useState({ score: 0, percent: 0, count: 0 });
   const [hour, setHr] = useState(0);
   const [minutes, setMin] = useState(0);
+
   const [openMobileQuiz, setopenMobileQuiz] = useState(false);
 
   const [modes, setModes] = useState([
@@ -62,9 +65,36 @@ export default function Quiz(props) {
     );
   };
 
+  
+
   const selectedQuizMode = modes.find((m) => m.selected)
     ? modes.find((m) => m.selected).text
     : "";
+
+  const availableModes = props.userquizzes && props.userquizzes.length && props.userquizzes.map(q => q.mode)
+
+  const userData = () => {
+    if(props.userquizzes && props.userquizzes.length){
+      let modeNum = null;
+      console.log({selectedQuizMode})
+      if(selectedQuizMode){
+        if(selectedQuizMode === "Learning Mode"){
+          modeNum = 0
+        }
+        else if(selectedQuizMode === "Time Mode"){
+          modeNum = 1
+        }
+        else if(selectedQuizMode === "Free Form Mode"){
+          modeNum = 2
+        }
+        console.log({modeNum})
+        const data = props.userquizzes.filter(uq => uq.mode === modeNum);
+        console.log({data})
+        return data
+      }
+    }
+    return []
+  }
 
   const onCloseModal = () => {
     setopen(false);
@@ -79,6 +109,7 @@ export default function Quiz(props) {
   };
 
   const startQuiz = () => {
+
     if (props.quizType === "normal") {
       selectMode(2);
       setStarted(true);
@@ -148,7 +179,7 @@ export default function Quiz(props) {
           className="blue-btn big-btn"
           onClick={() => onOpenModal(1)}
         >
-          Start Quiz
+          {(props.usertests && props.usertests.length) ? "Resume Quiz" : "Start Quiz" } 
         </button>
 
         <button
@@ -161,7 +192,7 @@ export default function Quiz(props) {
           className="blue-btn sm-btn"
           onClick={() => onOpenModal(2)}
         >
-          Start Quiz
+          {(props.usertests && props.usertests.length) ? "Resume Quiz" : "Start Quiz" }
         </button>
 
         <div className="patterns">
@@ -330,6 +361,9 @@ export default function Quiz(props) {
           ) : (
             // remember to make any change to this component to its sibling down this component
             <QuizQuestion
+              usercourseid={props.usercourseid}
+              userquizzes={userData()}
+              usertests={props.usertests}
               selectedQuizMode={selectedQuizMode}
               onClose={onCloseModal}
               completeTest={completeTest}
@@ -499,6 +533,10 @@ export default function Quiz(props) {
             ) : (
               // remember to make any change to this component to its sibling up this component
               <QuizQuestion
+                usercourseid={props.usercourseid}
+                userquizzes={props.userquizzes}
+                userquizzes={userData()}
+                usertests={props.usertests}
                 selectedQuizMode={selectedQuizMode}
                 onClose={onCloseModal}
                 completeTest={completeTest}

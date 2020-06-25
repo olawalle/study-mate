@@ -21,12 +21,14 @@ export default function useLearn(previousData, quizId){
         willMoveNext,
         lockState,
         correctClassName,
+        userAnswersToAdd,
+        userAnswersToUpdate,
         wrongClassName,
         lockThisAnswer,
         ...rest} = useTest(previousData, quizId)
 
-        const updateThisAnswer = (options) => {
-            const thisanswer = {...answer, ...options, attempts: answer.attempts + 1};
+        const updateThisAnswer = (extras) => {
+            const thisanswer = {...answer, ...extras, attempts: answer.attempts + 1};
             rest.updateThisAnswer(thisanswer);
         }
 
@@ -64,6 +66,8 @@ export default function useLearn(previousData, quizId){
         lockState,
         hideShowAlert,
         willShowAlert,
+        userAnswersToAdd,
+        userAnswersToUpdate,
         willMoveNext,
         lockThisAnswer,
         canTryAgain,
