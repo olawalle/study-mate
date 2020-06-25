@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 
-const answerBuilder = (quizId, userOptionId, correctOptionId) => ({
+const answerBuilder = (quizId, userOptionId, correctOptionId, attempts = 0, showExplanation = false) => ({
   quizId,
   userOptionId,
   correctOptionId,
-  attempts: 0,
-  showExplanation: false,
+  attempts: attempts,
+  showExplanation: showExplanation,
   alert: false,
 });
 
@@ -23,21 +23,27 @@ export default function useTest(previousData, quizId) {
 
   useEffect(() => {
     // console.log(previousData)
-    const prepareUserData =
-      previousData &&
+    if(previousData && previousData.length){
+      const prepareUserData =
+      (previousData && previousData.length) &&
       previousData.reduce((aggregate, current) => {
         const state = current.userOption === current.correctOption;
         const build = answerBuilder(
           current.quizId,
           current.userOption,
           current.correctOption,
-          state
+          2,
+          true
         );
         aggregate = aggregate.concat(build);
         return aggregate;
       }, []);
     setcomponentLoaded(true);
+    console.log({prepareUserData, previousData})
     setAnswers(prepareUserData);
+    setAnswer(prepareUserData[0])
+    }
+    
   }, [componentLoaded]);
 
   const upsertAnswer = (currentAnswer) => {

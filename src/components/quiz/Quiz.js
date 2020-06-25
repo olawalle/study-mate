@@ -24,6 +24,7 @@ export default function Quiz(props) {
   const [quizFromPack, setQuizFromPack] = useState([]);
   const [started, setStarted] = useState(false);
   const [finishedTest, setfinishedTest] = useState(false);
+  const [callback, setCallback] = useState(null);
   const [scores, setScore] = useState({ score: 0, percent: 0, count: 0 });
   const [hour, setHr] = useState(0);
   const [minutes, setMin] = useState(0);
@@ -35,6 +36,11 @@ export default function Quiz(props) {
     { text: "Time Mode", selected: false },
     { text: "Free Form Mode", selected: false },
   ]);
+
+  const onSaveProgress = () => {
+    callback && callback();
+    setopenSave(false)
+  }
 
   // useEffect(() => {
   //   if (props.quizType === "studypack") {
@@ -104,7 +110,9 @@ export default function Quiz(props) {
     setopenSave(true);
   };
 
-  const onCloseModal_ = () => {};
+  const onCloseModal_ = () => {
+    setopenSave(false)
+  };
 
   const completeTest = (score) => {
     setfinishedTest(!finishedTest);
@@ -367,6 +375,7 @@ export default function Quiz(props) {
             <QuizQuestion
               usercourseid={props.usercourseid}
               userquizzes={userData()}
+              onSaveProgress={(callback) => setCallback(callback)}
               usertests={props.usertests}
               selectedQuizMode={selectedQuizMode}
               onClose={onCloseModal}
@@ -394,11 +403,12 @@ export default function Quiz(props) {
               </p>
               <button
                 className="gg-btn"
+                onClick={() => setopenSave(false)}
                 style={{ padding: "0 30px", margin: "0 10px" }}
               >
                 Cancel
               </button>
-              <button className="tw-btn" style={{ padding: "0 30px" }}>
+              <button onClick={onSaveProgress} className="tw-btn" style={{ padding: "0 30px" }}>
                 Save
               </button>
             </div>
@@ -565,8 +575,8 @@ export default function Quiz(props) {
               // remember to make any change to this component to its sibling up this component
               <QuizQuestion
                 usercourseid={props.usercourseid}
-                userquizzes={props.userquizzes}
                 userquizzes={userData()}
+                onSaveProgress={(callback) => setCallback(callback)}
                 usertests={props.usertests}
                 selectedQuizMode={selectedQuizMode}
                 onClose={onCloseModal}

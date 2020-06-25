@@ -7,6 +7,7 @@ import Passage from "../../assets/images/Passage.svg";
 import caret from "../../assets/images/down-arrow.svg";
 import { appUrl, audioUrl } from "../../services/urls";
 import { userContext } from "../../store/UserContext";
+import beep from '../../assets/audio/beep.mp3'
 
 import MathJax from "react-mathjax";
 import Parser from "../content-display/Parser";
@@ -50,6 +51,7 @@ export default function QuizQuestion(props) {
     }
     return []
   }
+  console.log({dataIn: props.userquizzes})
   const {
     userScore,
     updateThisAnswer,
@@ -75,11 +77,7 @@ export default function QuizQuestion(props) {
     showExplanation,
     lockAllAnswers,
     lockThisAnswer,
-  } = useStudy(props.userQuizzes 
-    ? props.userQuizzes.map(uq => 
-      ({...uq, correctOptionId: uq.correctOption, userOptionId: uq.userOption, attempts: 2})) 
-    : [], 
-    activeQuestion.id, props.selectedQuizMode);
+  } = useStudy(props.userquizzes || [], activeQuestion.id, props.selectedQuizMode);
 
   console.log({userAnswersToAdd, userAnswersToUpdate})
   const qid = activeQuestion.quizId;
@@ -320,6 +318,11 @@ export default function QuizQuestion(props) {
     );
   };
 
+  if(answerIsCorrect){
+    const snd = new Audio(beep);
+    snd.play();
+  }
+
   const viewExplanation = () => {
     showExplanation();
   };
@@ -336,12 +339,17 @@ export default function QuizQuestion(props) {
     submit();
   }
 
+  const onClose = () => {
+    props.onSaveProgress(() => sendUserAnswersToStore(() => {}))
+    props.onClose();
+  }
+
   return (
     <>
     {loading && <Loader />}
     <div className="quiz-quuestion">
       <span className="close">
-        <img src={close} alt="" onClick={() => props.onClose()} />
+        <img src={close} alt="" onClick={() => onClose()} />
       </span>
       <div className="upper">
         <div className="upper-bar">
