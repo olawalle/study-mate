@@ -20,6 +20,7 @@ export default function Quiz(props) {
 
   console.log({ust: props.usertests, ut: props.userquizzes})
   const [open, setopen] = useState(false);
+  const [openSave, setopenSave] = useState(false);
   const [quizFromPack, setQuizFromPack] = useState([]);
   const [started, setStarted] = useState(false);
   const [finishedTest, setfinishedTest] = useState(false);
@@ -100,7 +101,10 @@ export default function Quiz(props) {
     setopen(false);
     setfinishedTest(false);
     setStarted(false);
+    setopenSave(true);
   };
+
+  const onCloseModal_ = () => {};
 
   const completeTest = (score) => {
     setfinishedTest(!finishedTest);
@@ -372,6 +376,33 @@ export default function Quiz(props) {
               quizType={props.quizType}
             />
           )}
+        </Modal>
+
+        <Modal
+          open={openSave}
+          onClose={onCloseModal_}
+          styles={{ modal: { width: "80%" } }}
+          center
+          showCloseIcon={true}
+          closeOnOverlayClick={true}
+        >
+          <div style={{ padding: 30, height: "330px" }}>
+            <div style={{ textAlign: "center" }}>
+              <img src={quizPic} style={{ width: "170px" }} alt="" />
+              <p style={{ fontSize: "16px" }}>
+                Do you want to save your score/progress?
+              </p>
+              <button
+                className="gg-btn"
+                style={{ padding: "0 30px", margin: "0 10px" }}
+              >
+                Cancel
+              </button>
+              <button className="tw-btn" style={{ padding: "0 30px" }}>
+                Save
+              </button>
+            </div>
+          </div>
         </Modal>
 
         {openMobileQuiz && (
