@@ -32,7 +32,7 @@ export default function Quiz(props) {
   const [openMobileQuiz, setopenMobileQuiz] = useState(false);
 
   const [modes, setModes] = useState([
-    { text: "Learning Mode", selected: false },
+    { text: "Learn Mode", selected: false },
     { text: "Time Mode", selected: false },
     { text: "Free Form Mode", selected: false },
   ]);
@@ -85,7 +85,7 @@ export default function Quiz(props) {
       let modeNum = null;
       console.log({selectedQuizMode})
       if(selectedQuizMode){
-        if(selectedQuizMode === "Learning Mode"){
+        if(selectedQuizMode === "Learn Mode"){
           modeNum = 0
         }
         else if(selectedQuizMode === "Time Mode"){
@@ -268,9 +268,8 @@ export default function Quiz(props) {
                               {mode.text}
                               {mode.selected && i === 0 && (
                                 <div className="blue--text">
-                                  This helps you learn better as you take each
-                                  question. You get to see the answer and
-                                  explanation of each question as you take the
+                                  This helps you learn better as you get to see the 
+                                  explanation and answer after each question
                                   test
                                 </div>
                               )}

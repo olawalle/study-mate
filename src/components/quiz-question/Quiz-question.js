@@ -95,7 +95,7 @@ export default function QuizQuestion(props) {
   // }, [userAnswersToAdd])
 
   const modeConverter = () => {
-    if(selectedQuizMode === "Learning Mode") return 0
+    if(selectedQuizMode === "Learn Mode") return 0
     else if(selectedQuizMode === "Time Mode") return 1
     else if(selectedQuizMode === "Free Form Mode") return 2
   }
@@ -238,7 +238,7 @@ export default function QuizQuestion(props) {
   const pickAnswerOne = (i) => {
     setuserOption(i);
     setoptionSelected(true);
-    if (selectedQuizMode !== "Learning Mode") {
+    if (selectedQuizMode !== "Learn Mode") {
       updateThisAnswer({
         quizId: activeQuestion.id,
         userOptionId: i,
@@ -379,7 +379,7 @@ export default function QuizQuestion(props) {
             )
             // ))
           }
-          {answer && answer.alert && selectedQuizMode === "Learning Mode" && (
+          {answer && answer.alert && selectedQuizMode === "Learn Mode" && (
             <div className="alert">
               <img src={streak} className="badge" alt="" />
               <div className="streak-text">
@@ -440,7 +440,7 @@ export default function QuizQuestion(props) {
                       className={`answer
                               ${
                                 ((answer && lockState) || tryAttempt) &&
-                                selectedQuizMode === "Learning Mode"
+                                selectedQuizMode === "Learn Mode"
                                   ? "lock"
                                   : ""
                               }
@@ -456,7 +456,7 @@ export default function QuizQuestion(props) {
                                 correctClassName(option.id) &&
                                 (!!answer.userOptionId || userOption) &&
                                 !optionSelected &&
-                                selectedQuizMode === "Learning Mode"
+                                selectedQuizMode === "Learn Mode"
                                   ? "correct"
                                   : ""
                               }
@@ -465,14 +465,14 @@ export default function QuizQuestion(props) {
                                 wrongClassName(option.id) &&
                                 (!!answer.userOptionId || userOption) &&
                                 !optionSelected &&
-                                selectedQuizMode === "Learning Mode"
+                                selectedQuizMode === "Learn Mode"
                                   ? "wrong"
                                   : ""
                               }
                             `}
                       onClick={() =>
                         ((answer && lockState) || tryAttempt) &&
-                        selectedQuizMode === "Learning Mode"
+                        selectedQuizMode === "Learn Mode"
                           ? () => {}
                           : pickAnswerOne(option.id)
                       }
@@ -492,7 +492,7 @@ export default function QuizQuestion(props) {
                         {answer &&
                           answer.showExplanation &&
                           optionIsCorrect(option.id) &&
-                          selectedQuizMode === "Learning Mode" && (
+                          selectedQuizMode === "Learn Mode" && (
                             <p
                               style={{
                                 fontSize: 14,
@@ -525,12 +525,12 @@ export default function QuizQuestion(props) {
                             </p>
                           )}
                       </p>
-                      {/* {selectedQuizMode !== "Learning Mode" &&
+                      {/* {selectedQuizMode !== "Learn Mode" &&
                   answered &&
                   option.id === activeQuestion.answerId && (
                     <h4 className="caveat">correct answer</h4>
                   )} */}
-                      {selectedQuizMode === "Learning Mode" &&
+                      {selectedQuizMode === "Learn Mode" &&
                         answer &&
                         correctClassName(option.id) &&
                         (!!answer.userOptionId || userOption) &&
@@ -538,7 +538,7 @@ export default function QuizQuestion(props) {
                           <h4 className="caveat">Correct answer</h4>
                         )}
 
-                      {selectedQuizMode === "Learning Mode" &&
+                      {selectedQuizMode === "Learn Mode" &&
                         answer &&
                         wrongClassName(option.id) &&
                         (!!answer.userOptionId || userOption) &&
@@ -625,7 +625,7 @@ export default function QuizQuestion(props) {
             Continue
           </button>
         </div>
-      ) : selectedQuizMode === "Learning Mode" ? (
+      ) : selectedQuizMode === "Learn Mode" ? (
         <div className="footer">
           <b
             style={{
