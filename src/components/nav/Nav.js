@@ -99,7 +99,7 @@ export default withRouter(function Nav(props) {
       </div>
 
       <div className={`mobilenav ${show_nav ? "open" : ""}`}>
-        <input type="text" placeholder="What do you want learn?" />
+        {/* <input type="text" placeholder="What do you want learn?" /> */}
 
         <p onClick={() => goTo("edit")}>
           <img src={edit} className="logo" alt="" />

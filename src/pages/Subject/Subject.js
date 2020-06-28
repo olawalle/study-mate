@@ -39,7 +39,7 @@ export default withRouter(function Subject({ history }) {
     authServices
       .getUcourseWithTests(user.id, selectedSubject.id)
       .then((res) => {
-        console.log({testes: res.data});
+        console.log({ testes: res.data });
         const defaultTestId =
           selectedSubject &&
           selectedSubject.tests &&
@@ -47,7 +47,7 @@ export default withRouter(function Subject({ history }) {
             ? selectedSubject.tests[0].id
             : 0;
         settestId(defaultTestId);
-        setusercourseid(res.data.id)
+        setusercourseid(res.data.id);
         setusertests(res.data.userTests);
         updateLoader(false);
         setpageLoaded(true);
@@ -128,12 +128,14 @@ export default withRouter(function Subject({ history }) {
   };
 
   const getPreviousQuiz = (usertest, quizzes) => {
-    if(usertest){
-      const intersection = usertest.userQuizzes.filter(value => quizzes.some(q => q.id === value.quizId))
+    if (usertest) {
+      const intersection = usertest.userQuizzes.filter((value) =>
+        quizzes.some((q) => q.id === value.quizId)
+      );
       return intersection;
     }
-    return []
-  }
+    return [];
+  };
 
   return (
     <>
@@ -187,7 +189,7 @@ export default withRouter(function Subject({ history }) {
 
         <div className="contents">
           <div className="small">
-            <p className="header">Study Lessons</p>
+            <p className="header">Study Levels</p>
             {selectedSubject &&
               selectedSubject.tests &&
               selectedSubject.tests.map((test, i) => (
@@ -222,7 +224,7 @@ export default withRouter(function Subject({ history }) {
               generateLevelTest(testId, selectedSubject.tests).map(
                 (test, i) => (
                   <React.Fragment key={"lesson_" + i}>
-                    <p className="heading">Lesson Pack {i + 1}</p>
+                    <p className="heading">Lessons</p>
                     <div className="lessons-wrap mb30">
                       <div className="lessons">
                         {test.videos.length ? (
@@ -250,12 +252,22 @@ export default withRouter(function Subject({ history }) {
                       </div>
                     </div>
                     {test.quizzes.length ? (
-                      <Quiz open={true} 
-                            usertests={(usertests && usertests.length) ? usertests.filter(ut => ut.testId === test.id):[]}
-                            userquizzes={getPreviousQuiz(usertests && usertests.find(ut => ut.testId === test.id), test.quizzes)}
-                            usercourseid={usercourseid} 
-                            quizType="normal" 
-                            quiz={test.quizzes} />
+                      <Quiz
+                        open={true}
+                        usertests={
+                          usertests && usertests.length
+                            ? usertests.filter((ut) => ut.testId === test.id)
+                            : []
+                        }
+                        userquizzes={getPreviousQuiz(
+                          usertests &&
+                            usertests.find((ut) => ut.testId === test.id),
+                          test.quizzes
+                        )}
+                        usercourseid={usercourseid}
+                        quizType="normal"
+                        quiz={test.quizzes}
+                      />
                     ) : null}
                   </React.Fragment>
                 )
@@ -269,9 +281,11 @@ export default withRouter(function Subject({ history }) {
                     <p style={{ fontSize: 12 }}>
                       Our Study Packs are test questions created for advanced
                       Senior Secondary levels. They are simulated for exam
-                      purposes and further learning. Note: The Lesson Packs
-                      above must have been completed before proceeding to the
-                      Study Packs.
+                      purposes and further learning.
+                    </p>
+                    <p style={{ fontSize: 12 }}>
+                      Note: The Lesson Packs above must have been completed
+                      before proceeding to the Study Packs.
                     </p>
                   </div>
                   <div className="duration">
