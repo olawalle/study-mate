@@ -521,7 +521,8 @@ export default function QuizQuestion(props) {
                                 </p>
                                 <audio controls>
                                   <source
-                                    src={`${audioUrl}${activeQuestion.audioUrl.replace(
+                                    src={`${audioUrl}${activeQuestion.audioUrl &&
+                                      activeQuestion.audioUrl.replace(
                                       "\\",
                                       "/"
                                     )}`}

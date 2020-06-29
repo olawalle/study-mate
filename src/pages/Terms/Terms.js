@@ -39,7 +39,7 @@ export default withRouter(function Terms({ history }) {
         <div className="contents">
           <p>
             {" "}
-            Please read these terms and conditions carefully before using Our
+            Please read these Terms and Conditions carefully before using Our
             Service.
           </p>
           <p className="x-big">Interpretation and Definitions</p>
