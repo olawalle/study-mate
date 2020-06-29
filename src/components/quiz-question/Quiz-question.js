@@ -79,19 +79,22 @@ export default function QuizQuestion(props) {
     lockThisAnswer,
   } = useStudy(
     props.userquizzes || [],
-    activeQuestion.id,
+    activeQuestion && activeQuestion.id,
     props.selectedQuizMode
   );
 
   console.log({ userAnswersToAdd, userAnswersToUpdate });
-  const qid = activeQuestion.quizId;
+  //const qid = activeQuestion && activeQuestion.quizId;
   const uid = answer ? answer.userOptionId : 0;
 
   const [userOption, setuserOption] = useState(uid);
   console.log({ usercid: props.usercourseid, tests: props.usertests });
   useEffect(() => {
-    console.log("beep")
-    setBeepSound(true)
+    if(selectedQuizMode === "Learn Mode"){
+      console.log("beep")
+      setBeepSound(true)
+    }
+    
   }, [beepSound])
 
   const modeConverter = () => {
@@ -117,6 +120,7 @@ export default function QuizQuestion(props) {
           correctOption: ua.correctOptionId,
           userTestId,
         }));
+        updateLoader(true);
         sendUserQuizToServer(addAnswers, callback, false);
       } else {
         const data = {
@@ -129,6 +133,7 @@ export default function QuizQuestion(props) {
         sendUserTestToServer(data, callback);
       }
     } else {
+      callback()
       console.log("quiz nothing to add");
     }
   };
@@ -217,8 +222,11 @@ export default function QuizQuestion(props) {
   const nextQuestion = () => {
     let no = currentQuestion + 1;
     updateAnswers();
+    if (no >= questions.length) {
+      submit();
+      return;
+    }
     setcurrentQuestion(no);
-    getOptions(no);
     setanswered(false);
     setwrongAnswer(false);
     setoptionSelected(false);
@@ -264,6 +272,7 @@ export default function QuizQuestion(props) {
   };
 
   const getOptions = (no) => {
+    console.log({no})
     if (no >= questions.length) {
       submit();
       return;
@@ -271,6 +280,7 @@ export default function QuizQuestion(props) {
   };
 
   const submit = () => {
+    console.log("Submitting")
     sendUserAnswersToStore(submitAction);
   };
 
@@ -353,7 +363,10 @@ export default function QuizQuestion(props) {
   return (
     <>
       {loading && <Loader />}
-      <div className="quiz-quuestion">
+      {
+        activeQuestion 
+        && 
+        <div className="quiz-quuestion">
         <span className="close">
           <img src={close} alt="" onClick={() => onClose()} />
         </span>
@@ -721,7 +734,7 @@ export default function QuizQuestion(props) {
             {currentQuestion === questions.length - 1 && (
               <button
                 className="tw-btn"
-                onClick={() => submit()}
+                onClick={submit}
                 style={{ marginLeft: 10 }}
               >
                 SUBMIT
@@ -755,6 +768,8 @@ export default function QuizQuestion(props) {
           </div>
         )}
       </div>
+      }
+      
     </>
   );
 }

@@ -103,11 +103,11 @@ export default function Quiz(props) {
     return [];
   };
 
-  const onCloseModal = () => {
+  const onCloseModal = (saveModal = true) => {
     setopen(false);
     setfinishedTest(false);
     setStarted(false);
-    setopenSave(true);
+    setopenSave(saveModal);
   };
 
   const onCloseModal_ = () => {
@@ -352,7 +352,7 @@ export default function Quiz(props) {
                     <h4>Learning points</h4>
                     <h2>80% ({(0.8 * scores.count).toFixed(2)} Points)</h2>
                   </div>
-                  <button className="tw-btn mt15" onClick={onCloseModal}>
+                  <button className="tw-btn mt15" onClick={() => onCloseModal(false)}>
                     Done
                   </button>
 
