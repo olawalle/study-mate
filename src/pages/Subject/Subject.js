@@ -222,7 +222,7 @@ export default withRouter(function Subject({ history }) {
               generateLevelTest(testId, selectedSubject.tests).map(
                 (test, i) => (
                   <React.Fragment key={"lesson_" + i}>
-                    <p className="heading">Lesson Pack {i + 1}</p>
+                    <p className="heading">Lesson</p>
                     <div className="lessons-wrap mb30">
                       <div className="lessons">
                         {test.videos.length ? (

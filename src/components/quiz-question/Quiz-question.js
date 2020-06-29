@@ -318,7 +318,7 @@ export default function QuizQuestion(props) {
     );
   };
 
-  if(answerIsCorrect){
+  if(answerIsCorrect && selectedQuizMode === "Learn Mode"){
     const snd = new Audio(beep);
     snd.play();
   }
@@ -515,7 +515,8 @@ export default function QuizQuestion(props) {
                               </p>
                               <audio controls>
                                 <source
-                                  src={`${audioUrl}${activeQuestion.audioUrl.replace(
+                                  src={`${audioUrl}${activeQuestion.audioUrl && 
+                                    activeQuestion.audioUrl.replace(
                                     "\\",
                                     "/"
                                   )}`}

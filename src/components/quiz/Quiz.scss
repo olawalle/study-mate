@@ -5,6 +5,11 @@
     font-size: 18px;
     margin-top: 0px;
   }
+  .custom-img:hover{
+    transition: ease-in;
+    width: 150px;
+    cursor: zoom-out;
+  }
   .sub-heading {
     font-size: 12px;
   }
