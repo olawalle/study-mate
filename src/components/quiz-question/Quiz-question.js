@@ -306,31 +306,34 @@ export default function QuizQuestion(props) {
   };
 
   const submitLearingAnswer = () => {
-    setoptionSelected(false);
-    settryAttempt(true);
-    updateThisAnswer({
-      quizId: activeQuestion.id,
-      userOptionId: userOption,
-      mode: modeConverter(),
-      correctOption: activeQuestion.answerId,
-      userOption: userOption,
-      mode: modeConverter(),
-      correctOptionId: activeQuestion.answerId,
-      alert: true,
-    });
-    setoptions(
-      options.map((option, j) => {
-        return userOption === j
-          ? {
-              ...option,
-              picked: true,
-            }
-          : {
-              ...option,
-              picked: false,
-            };
-      })
-    );
+    if(userOption){
+      setoptionSelected(false);
+      settryAttempt(true);
+      updateThisAnswer({
+        quizId: activeQuestion.id,
+        userOptionId: userOption,
+        mode: modeConverter(),
+        correctOption: activeQuestion.answerId,
+        userOption: userOption,
+        mode: modeConverter(),
+        correctOptionId: activeQuestion.answerId,
+        alert: true,
+      });
+      setoptions(
+        options.map((option, j) => {
+          return userOption === j
+            ? {
+                ...option,
+                picked: true,
+              }
+            : {
+                ...option,
+                picked: false,
+              };
+        })
+      );
+    }
+    
   };
 
   if(answerIsCorrect && selectedQuizMode === "Learn Mode" && beepSound && !lockState){
