@@ -38,10 +38,10 @@ export default withRouter(function Privacy({ history }) {
         </div>
         <div className="contents">
           <p>
-            This Privacy Policy describes Our policies and procedures on the
+            This Privacy Policy describes our policies and procedures on the
             collection, use and disclosure of Your information when You use the
             Service and tells You about Your privacy rights and how the law
-            protects You. We use Your Personal data to provide and improve the
+            protects You. We use Your personal data to provide and improve the
             Service. By using the Service, You agree to the collection and use
             of information in accordance with this Privacy Policy.
           </p>
@@ -62,8 +62,7 @@ export default withRouter(function Privacy({ history }) {
             </li>
             <li>
               <b>Company</b> (referred to as either "the Company", "We", "Us" or
-              "Our" in this Agreement) refers to InfoMall Nigeria Limited, 22A
-              Prof Kiumi Akingbehin Street, Lekki.
+              "Our" in this Agreement) refers to InfoMall Nigeria Limited.
             </li>
             <li>
               <b>Affiliate</b> means an entity that controls, is controlled by
@@ -123,7 +122,9 @@ export default withRouter(function Privacy({ history }) {
           </ul>
           <p className="x-big">Collecting and Using Your Personal Data</p>
           <p className="big">Types of Data Collected</p>
-          <p>Personal Data</p>
+          <p>
+            <b>Personal Data</b>
+          </p>
           <p>
             While using Our Service, We may ask You to provide Us with certain
             personally identifiable information that can be used to contact or
@@ -161,7 +162,7 @@ export default withRouter(function Privacy({ history }) {
             unique device identifiers and other diagnostic data. We may also
             collect information that Your browser sends whenever You visit our
             Service or when You access the Service by or through a mobile
-            device. Tracking Technologies and Cookies
+            device. <b>Tracking Technologies and Cookies</b>
           </p>
           <p>
             We use Cookies and similar tracking technologies to track the

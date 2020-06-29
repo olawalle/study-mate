@@ -139,7 +139,10 @@ export default withRouter(function Login(props) {
       .catch(function (err) {
         console.log({ err });
         updateLoader(false);
-        showError("Incorrect username or password");
+        let {message: errMsg = undefined } = err.response.data;
+        showError(
+          errMsg ? "Incorrect username or password" : "An error occured"
+        );
       });
   };
 
@@ -248,7 +251,7 @@ export default withRouter(function Login(props) {
               </span>
             </div>
             <p className="cc" style={{ position: "absolute", bottom: 20 }}>
-              @2020 All Rights Reserved. StudyMate Powered by InfoMall Nigeria
+              Copyright (C) 2020 InfoMall Ltd. All rights reserved.
             </p>
           </div>
         ) : (

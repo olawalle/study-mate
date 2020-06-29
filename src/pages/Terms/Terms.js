@@ -33,7 +33,7 @@ export default withRouter(function Terms({ history }) {
               onClick={back}
               style={{ position: "relative", top: 5, cursor: "pointer" }}
             />
-            Terms and conditions
+            Terms and Conditions
           </span>
         </div>
         <div className="contents">
@@ -63,15 +63,20 @@ export default withRouter(function Terms({ history }) {
             </li>
             <li>
               <b>Company</b> (referred to as either "the Company", "We", "Us" or
-              "Our" in this Agreement) refers to InfoMall Nigeria Limited, 22a
-              Prof. Kiumi Akingbehin Street, Lekki, Lagos.
+              "Our" in this Agreement) refers to InfoMall Nigeria Limited.
+              {/* 22a
+              Prof. Kiumi Akingbehin Street, Lekki, Lagos. */}
             </li>
-            <li>Country refers to: Nigeria</li>
+            <li>
+              <b>Country</b> refers to: Nigeria
+            </li>
             <li>
               <b>Device</b> means any device that can access the Service such as
               a computer, a cellphone or a digital tablet.
             </li>
-            <li>Service refers to the Website.</li>
+            <li>
+              <b>Service</b> refers to the Website.
+            </li>
             <li>
               <b>Terms and Conditions </b>(also referred as "Terms") mean these
               Terms and Conditions that form the entire agreement between You
@@ -84,7 +89,7 @@ export default withRouter(function Terms({ history }) {
               available by the Service.
             </li>
             <li>
-              <b>Website</b> refers to InfoMall Nigeria Limited, accessible from
+              <b>Website</b> refers to StudyMate, accessible from
               www.studymate.ng
             </li>
             <li>
@@ -107,7 +112,7 @@ export default withRouter(function Terms({ history }) {
             access or use the Service.
           </p>
           <p>
-            By accessing or using the Service You agree to be bound by these
+            By accessing or using the Service, You agree to be bound by these
             Terms and Conditions. If You disagree with any part of these Terms
             and Conditions then You may not access the Service.
           </p>
@@ -141,8 +146,8 @@ export default withRouter(function Terms({ history }) {
             services available on or through any such web sites or services.
           </p>
           <p>
-            We strongly advise You to read the terms and conditions and privacy
-            policies of any third-party web sites or services that You visit.
+            We strongly advise You to read the Terms and Conditions and Privacy
+            Policies of any third-party web sites or services that You visit.
           </p>
           <p className="x-big">Subscription</p>
           <p>
@@ -150,7 +155,7 @@ export default withRouter(function Terms({ history }) {
             fee. When this happens, you are required to make payment for the
             service, otherwise you will lose access to the portal. We may
             suspend Your access immediately to the use of the service. Upon
-            suspension, Your right to use the Service will cease immediately,
+            suspension, Your right to our the Service will cease immediately,
             until you have paid to use our service.
           </p>
           <p className="x-big">Termination</p>
@@ -158,7 +163,7 @@ export default withRouter(function Terms({ history }) {
             We may terminate or suspend Your access immediately, without prior
             notice or liability, for any reason whatsoever, including without
             limitation if You breach these Terms and Conditions. Upon
-            termination, Your right to use the Service will cease immediately.
+            termination, Your right to use our Service will cease immediately.
           </p>
           <p className="x-big">Limitation of Liability</p>
           <p>
@@ -257,7 +262,7 @@ export default withRouter(function Terms({ history }) {
           <p className="x-big">Changes to These Terms and Conditions</p>
           <p>
             We reserve the right, at Our sole discretion, to modify or replace
-            these Terms at any time. If a revision is material We will make
+            these Terms at any time. If a revision is material we will make
             reasonable efforts to provide at least 15 days' notice prior to any
             new terms taking effect. What constitutes a material change will be
             determined at Our sole discretion.

@@ -48,6 +48,7 @@ export default withRouter(function Learn({ history }) {
   const onCloseModal = () => setopen(false);
 
   const toSubject = () => {
+    if (!userCourses.length) return;
     console.log({ selectedSubject });
     history.push(`/subject/${selectedSubject.id}`);
   };
@@ -121,7 +122,10 @@ export default withRouter(function Learn({ history }) {
       </div>
       {!user.isVerified && (
         <div className="verify">
-          <span>Please edit your profile to complete your registration within a week from registration.</span>
+          <span>
+            Please edit your profile to complete your registration within a week
+            from registration.
+          </span>
           <button onClick={toEdit}>EDIT PROFILE</button>
         </div>
       )}
@@ -130,7 +134,7 @@ export default withRouter(function Learn({ history }) {
           <p className="heading">{selectedSubject.name}</p>
           <div className="lessons-wrap">
             <p className="sub-heading">
-              Lesson Pack 1
+              Lessons
               <button className="tw-btn f-right" onClick={toSubject}>
                 Start learning
               </button>
@@ -157,8 +161,9 @@ export default withRouter(function Learn({ history }) {
                     textAlign: "center",
                   }}
                 >
-                  There are currently no videos in this study pack. Kindly check
-                  back later
+                  {userCourses.length
+                    ? "There are currently no videos in this study pack. Kindly check back later"
+                    : "Select a course to get started."}
                 </p>
               )}
             </div>

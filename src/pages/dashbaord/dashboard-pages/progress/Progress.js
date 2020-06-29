@@ -89,7 +89,7 @@ export default function Progress() {
               <div className="th points">Points aquired</div>
               <div className="th">Test score</div>
             </div>
-            <div className="tbody">
+            {/* <div className="tbody">
               <div className="tr">
                 <div className="td activity"> Mathematics quiz 1</div>
                 <div className="td">05/05/2020</div>
@@ -132,7 +132,8 @@ export default function Progress() {
                 <div className="td points">1000</div>
                 <div className="td">12/21</div>
               </div>
-            </div>
+            </div> */}
+            <div style={{textAlign: "center", paddingTop: 5 ,fontSize: "1rem"}}>You dont have enough data to pull stats yet</div>
           </div>
         </div>
       </div>

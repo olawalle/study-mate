@@ -12,13 +12,14 @@ import QuizQuestion from "../quiz-question/Quiz-question";
 import authServices from "../../services/authServices";
 import { userContext } from "../../store/UserContext";
 import Loader from "../loader/Loader";
+import { wait } from "@testing-library/react";
 
 export default function Quiz(props) {
   const { updateStudyPackQuizes, quizzes, loading, updateLoader } = useContext(
     userContext
   );
 
-  console.log({ust: props.usertests, ut: props.userquizzes})
+  console.log({ ust: props.usertests, ut: props.userquizzes });
   const [open, setopen] = useState(false);
   const [openSave, setopenSave] = useState(false);
   const [quizFromPack, setQuizFromPack] = useState([]);
@@ -39,8 +40,8 @@ export default function Quiz(props) {
 
   const onSaveProgress = () => {
     callback && callback();
-    setopenSave(false)
-  }
+    setopenSave(false);
+  };
 
   // useEffect(() => {
   //   if (props.quizType === "studypack") {
@@ -72,36 +73,35 @@ export default function Quiz(props) {
     );
   };
 
-  
-
   const selectedQuizMode = modes.find((m) => m.selected)
     ? modes.find((m) => m.selected).text
     : "";
 
-  const availableModes = props.userquizzes && props.userquizzes.length && props.userquizzes.map(q => q.mode)
+  const availableModes =
+    props.userquizzes &&
+    props.userquizzes.length &&
+    props.userquizzes.map((q) => q.mode);
 
   const userData = () => {
-    if(props.userquizzes && props.userquizzes.length){
+    if (props.userquizzes && props.userquizzes.length) {
       let modeNum = null;
-      console.log({selectedQuizMode})
-      if(selectedQuizMode){
-        if(selectedQuizMode === "Learn Mode"){
-          modeNum = 0
+      console.log({ selectedQuizMode });
+      if (selectedQuizMode) {
+        if (selectedQuizMode === "Learn Mode") {
+          modeNum = 0;
+        } else if (selectedQuizMode === "Time Mode") {
+          modeNum = 1;
+        } else if (selectedQuizMode === "Free Form Mode") {
+          modeNum = 2;
         }
-        else if(selectedQuizMode === "Time Mode"){
-          modeNum = 1
-        }
-        else if(selectedQuizMode === "Free Form Mode"){
-          modeNum = 2
-        }
-        console.log({modeNum})
-        const data = props.userquizzes.filter(uq => uq.mode === modeNum);
-        console.log({data})
-        return data
+        console.log({ modeNum });
+        const data = props.userquizzes.filter((uq) => uq.mode === modeNum);
+        console.log({ data });
+        return data;
       }
     }
-    return []
-  }
+    return [];
+  };
 
   const onCloseModal = () => {
     setopen(false);
@@ -111,7 +111,7 @@ export default function Quiz(props) {
   };
 
   const onCloseModal_ = () => {
-    setopenSave(false)
+    setopenSave(false);
   };
 
   const completeTest = (score) => {
@@ -121,7 +121,6 @@ export default function Quiz(props) {
   };
 
   const startQuiz = () => {
-
     if (props.quizType === "normal") {
       selectMode(2);
       setStarted(true);
@@ -191,7 +190,9 @@ export default function Quiz(props) {
           className="blue-btn big-btn"
           onClick={() => onOpenModal(1)}
         >
-          {(props.usertests && props.usertests.length) ? "Resume Quiz" : "Start Quiz" } 
+          {props.usertests && props.usertests.length
+            ? "Resume Quiz"
+            : "Start Quiz"}
         </button>
 
         <button
@@ -204,7 +205,9 @@ export default function Quiz(props) {
           className="blue-btn sm-btn"
           onClick={() => onOpenModal(2)}
         >
-          {(props.usertests && props.usertests.length) ? "Resume Quiz" : "Start Quiz" }
+          {props.usertests && props.usertests.length
+            ? "Resume Quiz"
+            : "Start Quiz"}
         </button>
 
         <div className="patterns">
@@ -268,8 +271,8 @@ export default function Quiz(props) {
                               {mode.text}
                               {mode.selected && i === 0 && (
                                 <div className="blue--text">
-                                  This helps you learn better as you get to see the 
-                                  explanation and answer after each question
+                                  This helps you learn better as you get to see
+                                  the explanation and answer after each question
                                   test
                                 </div>
                               )}
@@ -341,12 +344,13 @@ export default function Quiz(props) {
                   <div className="scores">
                     <h4>Your score:</h4>
                     <h2>
-                      {scores.percent}% ({scores.score}/{scores.count} correct)
+                      {scores.percent.toFixed(2)}% ({scores.score}/
+                      {scores.count} correct)
                     </h2>
                   </div>
                   <div className="scores">
                     <h4>Learning points</h4>
-                    <h2>80% ({0.8 * scores.count} Points)</h2>
+                    <h2>80% ({(0.8 * scores.count).toFixed(2)} Points)</h2>
                   </div>
                   <button className="tw-btn mt15" onClick={onCloseModal}>
                     Done
@@ -407,7 +411,11 @@ export default function Quiz(props) {
               >
                 Cancel
               </button>
-              <button onClick={onSaveProgress} className="tw-btn" style={{ padding: "0 30px" }}>
+              <button
+                onClick={onSaveProgress}
+                className="tw-btn"
+                style={{ padding: "0 30px" }}
+              >
                 Save
               </button>
             </div>

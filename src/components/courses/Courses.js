@@ -71,13 +71,7 @@ export default withRouter(function Courses(props) {
                 key={course.name + i}
                 onClick={() => selectCourse(course)}
                 style={{ textTransform: "uppercase" }}
-                className={`bg_${(i % 17) + 2} course ${
-                  course.width === 3
-                    ? "wide"
-                    : course.width === 2
-                    ? "mid"
-                    : "small"
-                }`}
+                className={`bg_${(i % 17) + 2} course pLR`}
               >
                 {course.course.name}{" "}
                 {course.new && <img src={neww} className="new" alt="" />}

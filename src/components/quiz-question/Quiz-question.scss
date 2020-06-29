@@ -1,5 +1,24 @@
 .quiz-quuestion {
   position: relative;
+  .custom-img {
+    -webkit-transition: all 1s ease; /* Safari and Chrome */
+  	-moz-transition: all 1s ease; /* Firefox */
+  	-o-transition: all 1s ease; /* IE 9 */
+  	-ms-transition: all 1s ease; /* Opera */
+  	transition: all 1s ease;
+}
+
+.custom-img:hover {
+    // -webkit-transform:scale(4); /* Safari and Chrome */
+    // -moz-transform:scale(4); /* Firefox */
+    // -ms-transform:scale(4); /* IE 9 */
+    // -o-transform:scale(4); /* Opera */
+    //  transform:scale(4);
+    width: 100% !important;
+    cursor: zoom-out;
+    z-index: 100
+}
+
   .close {
     cursor: pointer;
     position: absolute;

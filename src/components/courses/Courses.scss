@@ -5,6 +5,7 @@
     display: flex;
     max-height: 230px;
     overflow: auto;
+    
     .title {
       width: 100%;
     }
@@ -28,7 +29,10 @@
       .course {
         font-size: 12px;
         color: #fff !important;
-        padding: 0 !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        padding-right: 7.5px !important;
+        padding-left: 7.5px !important;
         height: 40px;
         line-height: 40px;
         margin: 4px 1%;
