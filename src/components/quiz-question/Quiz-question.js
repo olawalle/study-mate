@@ -536,7 +536,7 @@ export default function QuizQuestion(props) {
                                     question={activeQuestion.answerUrl}
                                   />
                                 </p>
-                                <audio controls>
+                                <audio controls controlsList="nodownload">
                                   <source
                                     src={`${audioUrl}${activeQuestion.audioUrl &&
                                       activeQuestion.audioUrl.replace(
