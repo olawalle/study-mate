@@ -149,6 +149,9 @@
       float: left;
       height: calc(100vh - (75px + 130px + 75px));
       overflow: auto;
+      &.narrow {
+        display: none;
+      }
       .lessons-wrap {
         background-color: #fff;
         padding-bottom: 20px;
@@ -251,6 +254,12 @@
         width: 100%;
         padding: 0;
         height: calc(100vh - (75px + 130px + 75px));
+        &.narrow {
+          display: block;
+        }
+        &.big {
+          display: none;
+        }
         .pack {
           height: 320px;
           .half {
