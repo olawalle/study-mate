@@ -345,8 +345,7 @@ export default withRouter(function Subject({ history }) {
                     </p>
                   </div>
                   <div className="duration">
-                    <span>12 Study packs</span>
-                    <span>9 - 12 minutes</span>
+                    <span>Approximately 12 Study packs</span>
                   </div>
                   <button onClick={gotoPacks} className="tw-btn">
                     Lets get started
