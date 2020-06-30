@@ -94,10 +94,24 @@ export default withRouter(function Subject({ history }) {
       const beginnerQuiz = test.quizes.filter((q) => q.level === 0);
       const intermediateQuiz = test.quizes.filter((q) => q.level === 1);
       const advancedQuiz = test.quizes.filter((q) => q.level === 2);
+      const fourQuiz = test.quizes.filter((q) => q.level === 3);
+      const fiveQuiz = test.quizes.filter((q) => q.level === 4);
+      const sixQuiz = test.quizes.filter((q) => q.level === 5);
+      const sevenQuiz = test.quizes.filter((q) => q.level === 6);
+      const eightQuiz = test.quizes.filter((q) => q.level === 7);
+      const nineQuiz = test.quizes.filter((q) => q.level === 8);
+      const tenQuiz = test.quizes.filter((q) => q.level === 8);
 
       const beginnerVideo = test.videos.filter((q) => q.level === 0);
       const intermediateVideo = test.videos.filter((q) => q.level === 1);
       const advancedVideo = test.videos.filter((q) => q.level === 2);
+      const fourVideo = test.videos.filter((q) => q.level === 3);
+      const fiveVideo = test.videos.filter((q) => q.level === 4);
+      const sixVideo = test.videos.filter((q) => q.level === 5);
+      const sevenVideo = test.videos.filter((q) => q.level === 6);
+      const eightVideo = test.videos.filter((q) => q.level === 7);
+      const nineVideo = test.videos.filter((q) => q.level === 8);
+      const tenVideo = test.videos.filter((q) => q.level === 9);
 
       const returnCandidate = [
         {
@@ -117,6 +131,48 @@ export default withRouter(function Subject({ history }) {
           take: !!advancedVideo.length,
           quizzes: advancedQuiz,
           videos: advancedVideo,
+        },
+        {
+          id: test.id,
+          take: !!fourVideo.length,
+          quizzes: fourQuiz,
+          videos: fourVideo,
+        },
+        {
+          id: test.id,
+          take: !!fiveVideo.length,
+          quizzes: fiveQuiz,
+          videos: fiveVideo,
+        },
+        {
+          id: test.id,
+          take: !!sixVideo.length,
+          quizzes: sixQuiz,
+          videos: sixVideo,
+        },
+        {
+          id: test.id,
+          take: !!sevenVideo.length,
+          quizzes: sevenQuiz,
+          videos: sevenVideo,
+        },
+        {
+          id: test.id,
+          take: !!eightVideo.length,
+          quizzes: eightQuiz,
+          videos: eightVideo,
+        },
+        {
+          id: test.id,
+          take: !!nineVideo.length,
+          quizzes: nineQuiz,
+          videos: nineVideo,
+        },
+        {
+          id: test.id,
+          take: !!tenVideo.length,
+          quizzes: tenQuiz,
+          videos: tenVideo,
         },
       ];
 

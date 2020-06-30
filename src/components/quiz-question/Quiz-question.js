@@ -347,6 +347,7 @@ export default function QuizQuestion(props) {
   };
 
   const setImageUrl = (str) => {
+    if(!str) return
     return str
       .replace(`<img src='assets`, `<img src='${appUrl}/assets`)
       .replace(`<img src="assets`, `<img src="${appUrl}/assets`)
