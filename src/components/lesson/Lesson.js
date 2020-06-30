@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, createRef } from "react";
 import "./Lesson.scss";
 
 import play from "../../assets/images/play.svg";
@@ -11,7 +11,7 @@ import icn from "../../assets/images/dashboard.svg";
 import clock from "../../assets/images/clock.svg";
 import listener from "../../assets/images/Nice-listener.svg";
 import streak from "../../assets/images/streak.svg";
-import { appUrl, videoUrl } from "../../services/urls";
+import { appUrl, videoUrl, fakeVideoUrl } from "../../services/urls";
 import { userContext } from "../../store/UserContext";
 
 export default withRouter(function Lesson({
@@ -21,10 +21,15 @@ export default withRouter(function Lesson({
   grade,
 }) {
   const context = useContext(userContext);
-  const { selectedSubject } = context;
+  const ref = createRef();
+  const { selectedSubject, loading, updateLoader } = context;
   const videoLevel =
     grade === 0 ? "Beginner" : grade === 1 ? "Intermediate" : "Advanced";
   let modalWidth = window.innerWidth > 1024 ? 96 : 100;
+
+  const getVideo = (src) => {
+    
+  }
 
   useEffect(() => {
     let data = [];
@@ -51,6 +56,39 @@ export default withRouter(function Lesson({
   const [videos, setVideos] = useState([]);
   const [activeVideo, setactiveVideo] = useState(null);
 
+  useEffect(() => {
+    console.log({url})
+    if(url){
+      const src = `${fakeVideoUrl}${url.replace("assets", "video")}`;
+      var xhr = new XMLHttpRequest();
+      updateLoader(true);
+      xhr.open('GET', src, true);
+      xhr.responseType = 'blob'; //important
+      xhr.onload = function(e) {
+          if (this.status == 200) {
+              console.log("loaded");
+              var blob = this.response;
+              const videoPlayer = document.getElementById("homevideo");
+              if(videoPlayer){
+                console.log("vid is some")
+                videoPlayer.oncontextmenu = () => false
+                videoPlayer.oncanplaythrough = function() {
+                console.log("Can play through video without stopping");
+                URL.revokeObjectURL(this.src);
+                
+              };
+              videoPlayer.src = URL.createObjectURL(blob);
+              videoPlayer.load();
+              }
+              updateLoader(false);
+          }
+          else{
+            updateLoader(false);
+          }
+      };
+      xhr.send();
+    }
+  }, [url])
   const duration = videos.reduce((agg, vid) => {
     return agg + vid.duration;
   }, 0);
@@ -228,18 +266,19 @@ export default withRouter(function Lesson({
             <video
               style={{ width: "100%", height: "calc(90vh - 90px)" }}
               controls
+              ref={ref}
+              controlsList="nodownload"
               autoPlay={true}
               id="homevideo"
-              src={`${videoUrl}${url ? url.replace("assets", "video"): url}`}
             >
-              <source
+              {/* <source
                 src={`${videoUrl}${url ? url.replace("assets", "video"): url}`}
                 type="video/mp4"
                 frameBorder="0"
                 allow="autoplay; encrypted-media"
                 allowFullScreen
                 title="video"
-              ></source>
+              ></source> */}
             </video>
             <div
               className="info"
