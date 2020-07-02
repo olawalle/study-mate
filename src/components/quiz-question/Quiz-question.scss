@@ -2,13 +2,13 @@
   position: relative;
   .custom-img {
     -webkit-transition: all 1s ease; /* Safari and Chrome */
-  	-moz-transition: all 1s ease; /* Firefox */
-  	-o-transition: all 1s ease; /* IE 9 */
-  	-ms-transition: all 1s ease; /* Opera */
-  	transition: all 1s ease;
-}
+    -moz-transition: all 1s ease; /* Firefox */
+    -o-transition: all 1s ease; /* IE 9 */
+    -ms-transition: all 1s ease; /* Opera */
+    transition: all 1s ease;
+  }
 
-.custom-img:hover {
+  .custom-img:hover {
     // -webkit-transform:scale(4); /* Safari and Chrome */
     // -moz-transform:scale(4); /* Firefox */
     // -ms-transform:scale(4); /* IE 9 */
@@ -16,8 +16,8 @@
     //  transform:scale(4);
     width: 100% !important;
     cursor: zoom-out;
-    z-index: 100
-}
+    z-index: 100;
+  }
 
   .close {
     cursor: pointer;
@@ -307,7 +307,8 @@
       position: relative;
       .upper-bar {
         position: relative;
-        width: 84%;
+        width: 100%;
+        margin-top: -50px;
       }
       .instruction {
         margin-top: 50px;
@@ -397,8 +398,8 @@
         font-size: 12px;
       }
       button {
-        padding: 0 5px;
-        font-size: 12px !important;
+        padding: 0 12px;
+        font-size: 14px !important;
       }
     }
   }

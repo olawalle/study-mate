@@ -5,7 +5,7 @@
     display: flex;
     max-height: 230px;
     overflow: auto;
-    
+
     .title {
       width: 100%;
     }
@@ -67,5 +67,10 @@
     position: absolute;
     // top: 240px;
     // z-index: 12324343;
+  }
+  @media (max-width: 768px), (min-width: 768px) and (max-width: 1024px) {
+    .courses {
+      max-height: unset !important;
+    }
   }
 }

@@ -235,8 +235,18 @@
       }
     }
     .sub-banner {
-      padding: 0 20px;
+      padding: 0;
       z-index: 10 !important;
+      .small {
+        p {
+          position: relative;
+          top: -158px;
+          font-size: 16px;
+        }
+      }
+      .wide {
+        width: 100%;
+      }
     }
     .contents {
       padding: 0px;
@@ -256,9 +266,15 @@
         height: calc(100vh - (75px + 130px + 75px));
         &.narrow {
           display: block;
+          .quiz-contents {
+            padding: 15px;
+          }
         }
         &.big {
           display: none;
+        }
+        .lessons-wrap {
+          margin-bottom: 0 !important;
         }
         .pack {
           height: 320px;

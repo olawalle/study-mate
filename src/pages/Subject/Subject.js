@@ -201,7 +201,7 @@ export default withRouter(function Subject({ history }) {
         <Nav />
         <div className="banner">
           <span onClick={toCourses} className="mobile-title-text">
-            Courses
+            Learning Levels
           </span>
           <span className="back" style={{ textTransform: "capitalize" }}>
             <img
@@ -216,10 +216,10 @@ export default withRouter(function Subject({ history }) {
           </span>
         </div>
         <div className="sub-banner">
-          <div className="small">
+          {/* <div className="small">
             <span>Possible points:</span>
             <p>1000</p>
-          </div>
+          </div> */}
           <div className="wide">
             <div className="progresses">
               {usertests &&
@@ -357,57 +357,59 @@ export default withRouter(function Subject({ history }) {
             )}
           </div>
           <div className="wide narrow">
-            {selectedSubject &&
-              selectedSubject.tests &&
-              selectedSubject.tests.map((test, i) => (
-                <React.Fragment key={"lesson_" + i}>
-                  <p className="heading">{test.year}</p>
-                  <div className="lessons-wrap mb30">
-                    <div className="lessons">
-                      {test.videos.length ? (
-                        test.videos.map((video, i) => (
-                          <Lesson
-                            key={"video" + video.id + "" + i}
-                            video={video}
-                            grade={linkIndex}
-                            disableClick={false}
-                          />
-                        ))
-                      ) : (
-                        <div
-                          className="blue--text"
-                          style={{
-                            padding: "12px 30px",
-                            margin: 0,
-                            fontSize: 12,
-                          }}
-                        >
-                          There are no video lessons in this pack. Kindly check
-                          back later.
-                        </div>
-                      )}
+            <div className="quiz-contents">
+              {selectedSubject &&
+                selectedSubject.tests &&
+                selectedSubject.tests.map((test, i) => (
+                  <React.Fragment key={"lesson_" + i}>
+                    <p className="heading">{test.year}</p>
+                    <div className="lessons-wrap mb30">
+                      <div className="lessons">
+                        {test.videos.length ? (
+                          test.videos.map((video, i) => (
+                            <Lesson
+                              key={"video" + video.id + "" + i}
+                              video={video}
+                              grade={linkIndex}
+                              disableClick={false}
+                            />
+                          ))
+                        ) : (
+                          <div
+                            className="blue--text"
+                            style={{
+                              padding: "12px 30px",
+                              margin: 0,
+                              fontSize: 12,
+                            }}
+                          >
+                            There are no video lessons in this pack. Kindly
+                            check back later.
+                          </div>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                  {test.quizes.length ? (
-                    <Quiz
-                      open={true}
-                      usertests={
-                        usertests && usertests.length
-                          ? usertests.filter((ut) => ut.testId === test.id)
-                          : []
-                      }
-                      userquizzes={getPreviousQuiz(
-                        usertests &&
-                          usertests.find((ut) => ut.testId === test.id),
-                        test.quizzes
-                      )}
-                      usercourseid={usercourseid}
-                      quizType="normal"
-                      quiz={test.quizzes}
-                    />
-                  ) : null}
-                </React.Fragment>
-              ))}
+                    {test.quizes.length ? (
+                      <Quiz
+                        open={true}
+                        usertests={
+                          usertests && usertests.length
+                            ? usertests.filter((ut) => ut.testId === test.id)
+                            : []
+                        }
+                        userquizzes={getPreviousQuiz(
+                          usertests &&
+                            usertests.find((ut) => ut.testId === test.id),
+                          test.quizzes
+                        )}
+                        usercourseid={usercourseid}
+                        quizType="normal"
+                        quiz={test.quizzes}
+                      />
+                    ) : null}
+                  </React.Fragment>
+                ))}
+            </div>
 
             {selectedSubject.hasStudyPack && (
               <div className="pack">
