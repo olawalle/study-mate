@@ -438,7 +438,7 @@ export default function QuizQuestion(props) {
             <>
               <div className="content content_">
                 <Parser
-                  isMathJax={activeQuestion.isQuestionMathJax}
+                  isMathJax={!!activeQuestion.section}
                   question={activeQuestion.section}
                 />
               </div>
@@ -451,7 +451,7 @@ export default function QuizQuestion(props) {
               <div className="content">
                 <Parser
                   className="question"
-                  isMathJax={activeQuestion.isQuestionMathJax}
+                  isMathJax={!!activeQuestion.question}
                   question={activeQuestion.question}
                 />
 
@@ -644,13 +644,20 @@ export default function QuizQuestion(props) {
             >
               {currentQuestion + 1} of {questions.length}
             </b>
-
+            
             <button
               className="tw-btn"
               onClick={() => setreadInstructions(true)}
             >
               Continue
             </button>
+            {currentQuestion > 0 && (
+              <button
+                onClick={prevQuestion}
+              >
+                PREVIOUS
+              </button>
+            )}
           </div>
         ) : selectedQuizMode === "Learn Mode" ? (
           <div className="footer">

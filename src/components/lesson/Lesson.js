@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, createRef } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./Lesson.scss";
 
 import play from "../../assets/images/play.svg";
@@ -21,17 +21,13 @@ export default withRouter(function Lesson({
   grade,
 }) {
   const context = useContext(userContext);
-  const ref = createRef();
-  const { selectedSubject, loading, updateLoader } = context;
+  const { selectedSubject } = context;
   const videoLevel =
     grade === 0 ? "Beginner" : grade === 1 ? "Intermediate" : "Advanced";
   let modalWidth = window.innerWidth > 1024 ? 96 : 100;
 
-  const getVideo = (src) => {
-    
-  }
-
   useEffect(() => {
+    
     let data = [];
     let subjectVideos = selectedSubject.tests.reduce((agg, curr) => {
       return agg.concat(curr.videos);
@@ -55,40 +51,12 @@ export default withRouter(function Lesson({
   const [url, seturl] = useState("");
   const [videos, setVideos] = useState([]);
   const [activeVideo, setactiveVideo] = useState(null);
-
-  useEffect(() => {
-    console.log({url})
-    if(url){
-      const src = `${fakeVideoUrl}${url.replace("assets", "video")}`;
-      var xhr = new XMLHttpRequest();
-      updateLoader(true);
-      xhr.open('GET', src, true);
-      xhr.responseType = 'blob'; //important
-      xhr.onload = function(e) {
-          if (this.status == 200) {
-              console.log("loaded");
-              var blob = this.response;
-              const videoPlayer = document.getElementById("homevideo");
-              if(videoPlayer){
-                console.log("vid is some")
-                videoPlayer.oncontextmenu = () => false
-                videoPlayer.oncanplaythrough = function() {
-                console.log("Can play through video without stopping");
-                URL.revokeObjectURL(this.src);
-                
-              };
-              videoPlayer.src = URL.createObjectURL(blob);
-              videoPlayer.load();
-              }
-              updateLoader(false);
-          }
-          else{
-            updateLoader(false);
-          }
-      };
-      xhr.send();
-    }
-  }, [url])
+  // useEffect(() => {
+  //   if(url){
+  //     prepVideo(url);
+  //   }
+  // }, [url])
+  const oncontextmenu = (e) => e.preventDefault();
   const duration = videos.reduce((agg, vid) => {
     return agg + vid.duration;
   }, 0);
@@ -112,11 +80,21 @@ export default withRouter(function Lesson({
             };
       })
     );
-    let videoPlayer = document.getElementById("homevideo");
-    let url = `${appUrl}${videos[i].url}`;
-    videoPlayer.src = url;
-    videoPlayer.play();
+    const url = `${videoUrl}${videos[i].url}`;
+    prepVideo(url);
+    
   };
+
+  const prepVideo = (url) => {
+    if(url){
+      url = url.replace('assets', 'video');
+      let videoPlayer = document.getElementById("homevideo");
+      videoPlayer.oncontextmenu = () => false;
+      console.log({url})
+      videoPlayer.src = url.replace('assets', 'video');
+      videoPlayer.play();
+    }
+  }
 
   const openModal = (url) => {
     if (disableClick) {
@@ -266,9 +244,10 @@ export default withRouter(function Lesson({
             <video
               style={{ width: "100%", height: "calc(90vh - 90px)" }}
               controls
-              ref={ref}
-              controlsList="nodownload"
+              onContextMenu={oncontextmenu}
               autoPlay={true}
+              src={`${videoUrl}${url ? url.replace("assets", "video"): url}`}
+              controlsList="nodownload"
               id="homevideo"
             >
               {/* <source
