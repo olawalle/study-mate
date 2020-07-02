@@ -219,10 +219,18 @@
   @media (max-width: 768px), (min-width: 768px) and (max-width: 1024px) {
     padding: 0;
     height: auto;
+    .nav-wrap {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1200;
+      width: 100%;
+    }
     .banner {
       font-size: 14px;
       padding: 20px;
       background-position-x: 83%;
+      margin-top: 65px;
       .back {
         position: absolute;
         bottom: 20px;
@@ -251,6 +259,7 @@
     .contents {
       padding: 0px;
       overflow: auto;
+      height: unset;
       .small {
         width: 100%;
         padding: 0;
@@ -263,7 +272,7 @@
       .wide {
         width: 100%;
         padding: 0;
-        height: calc(100vh - (75px + 130px + 75px));
+        height: unset;
         &.narrow {
           display: block;
           .quiz-contents {

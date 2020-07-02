@@ -198,7 +198,9 @@ export default withRouter(function Subject({ history }) {
     <>
       {loading && <Loader />}
       <div className="subject">
-        <Nav />
+        <div className="nav-wrap">
+          <Nav />
+        </div>
         <div className="banner">
           <span onClick={toCourses} className="mobile-title-text">
             Learning Levels
