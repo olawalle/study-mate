@@ -90,6 +90,7 @@ export default withRouter(function Subject({ history }) {
 
   const generateLevelTest = (id, tests) => {
     const test = tests.find((t) => t.id === id);
+    console.log({ test });
     if (test) {
       const beginnerQuiz = test.quizes.filter((q) => q.level === 0);
       const intermediateQuiz = test.quizes.filter((q) => q.level === 1);
@@ -274,7 +275,7 @@ export default withRouter(function Subject({ history }) {
               }}
             />
           </div>
-          <div className="wide">
+          <div className="wide big">
             {selectedSubject &&
               selectedSubject.tests &&
               generateLevelTest(testId, selectedSubject.tests).map(
@@ -328,6 +329,85 @@ export default withRouter(function Subject({ history }) {
                   </React.Fragment>
                 )
               )}
+
+            {selectedSubject.hasStudyPack && (
+              <div className="pack">
+                <div className="half">
+                  <p className="title">Advance your learning</p>
+                  <div className="desc">
+                    <p style={{ fontSize: 12 }}>
+                      Our Study Packs are test questions created for advanced
+                      Senior Secondary levels. They are simulated for exam
+                      purposes and further learning.
+                    </p>
+                    <p style={{ fontSize: 12 }}>
+                      Note: The Lesson Packs above must have been completed
+                      before proceeding to the Study Packs.
+                    </p>
+                  </div>
+                  <div className="duration">
+                    <span>Approximately 12 Study packs</span>
+                  </div>
+                  <button onClick={gotoPacks} className="tw-btn">
+                    Lets get started
+                  </button>
+                </div>
+                <div className="half bg"></div>
+              </div>
+            )}
+          </div>
+          <div className="wide narrow">
+            {selectedSubject &&
+              selectedSubject.tests &&
+              selectedSubject.tests.map((test, i) => (
+                <React.Fragment key={"lesson_" + i}>
+                  <p className="heading">{test.year}</p>
+                  <div className="lessons-wrap mb30">
+                    <div className="lessons">
+                      {test.videos.length ? (
+                        test.videos.map((video, i) => (
+                          <Lesson
+                            key={"video" + video.id + "" + i}
+                            video={video}
+                            grade={linkIndex}
+                            disableClick={false}
+                          />
+                        ))
+                      ) : (
+                        <div
+                          className="blue--text"
+                          style={{
+                            padding: "12px 30px",
+                            margin: 0,
+                            fontSize: 12,
+                          }}
+                        >
+                          There are no video lessons in this pack. Kindly check
+                          back later.
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                  {test.quizes.length ? (
+                    <Quiz
+                      open={true}
+                      usertests={
+                        usertests && usertests.length
+                          ? usertests.filter((ut) => ut.testId === test.id)
+                          : []
+                      }
+                      userquizzes={getPreviousQuiz(
+                        usertests &&
+                          usertests.find((ut) => ut.testId === test.id),
+                        test.quizzes
+                      )}
+                      usercourseid={usercourseid}
+                      quizType="normal"
+                      quiz={test.quizzes}
+                    />
+                  ) : null}
+                </React.Fragment>
+              ))}
 
             {selectedSubject.hasStudyPack && (
               <div className="pack">
