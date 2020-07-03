@@ -46,8 +46,9 @@ export default withRouter(function Courses(props) {
       .then((res) => {
         saveSelectedSubject(res.data);
         updateLoader(false);
-        props.moveToCourse &&
-          props.history.push(`/subject/${selectedSubject.id}`);
+        props.moveToCourse && !props.toPreview
+          ? props.history.push(`/subject/${selectedSubject.id}`)
+          : props.history.push(`/preview-subject/${selectedSubject.id}`);
       })
       .catch((err) => {
         console.log({ err });

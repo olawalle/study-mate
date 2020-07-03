@@ -21,29 +21,35 @@
       color: #fff;
       margin-top: 150px;
     }
-    .student {
-      height: 400px;
-      width: 350px;
-      overflow: hidden;
-      position: absolute;
-      right: 180px;
-      top: 200px;
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-image: url("../../assets/images/student.png");
+    .pair {
+      width: 60%;
+      position: relative;
+      top: 245px;
+      left: 0px;
     }
-    .teacher {
-      height: 270px;
-      width: 240px;
-      overflow: hidden;
-      position: absolute;
-      left: 180px;
-      top: 260px;
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position-x: -100px;
-      background-image: url("../../assets/images/teacher.png");
-    }
+    // .student {
+    //   height: 400px;
+    //   width: 350px;
+    //   overflow: hidden;
+    //   position: absolute;
+    //   right: 180px;
+    //   top: 200px;
+    //   background-size: cover;
+    //   background-repeat: no-repeat;
+    //   background-image: url("../../assets/images/student.png");
+    // }
+    // .teacher {
+    //   height: 270px;
+    //   width: 240px;
+    //   overflow: hidden;
+    //   position: absolute;
+    //   left: 180px;
+    //   top: 260px;
+    //   background-size: cover;
+    //   background-repeat: no-repeat;
+    //   background-position-x: -100px;
+    //   background-image: url("../../assets/images/teacher.png");
+    // }
     .right-dot {
       position: absolute;
       top: 207px;

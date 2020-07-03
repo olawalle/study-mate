@@ -8,14 +8,13 @@ import Quiz from "../../components/quiz/Quiz";
 import students from "../../assets/images/students.png";
 import dots from "../../assets/images/Dots.svg";
 import backArrow from "../../assets/images/back.svg";
-import { withRouter, useRouteMatch } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { userContext } from "../../store/UserContext";
 import authServices from "../../services/authServices";
 import { useEffect } from "react";
 // import students from "../../assets/images/students.png";
 
-export default withRouter(function Subject({ history }) {
-  let match = useRouteMatch();
+export default withRouter(function PreviewSubject({ history }) {
   const context = useContext(userContext);
   const {
     selectedSubject,
@@ -56,14 +55,19 @@ export default withRouter(function Subject({ history }) {
         console.log({ err });
         updateLoader(false);
       });
-    console.log(selectedSubject);
   }, [pageLoaded]);
 
   const back = () => {
     history.push("/dashboard/");
   };
 
+  const toSubject = (t) => {
+    let level = t.year;
+    history.push(`/subject/${selectedSubject.name}/${level}`);
+  };
+
   const gotoPacks = () => {
+    console.log(selectedSubject);
     updateLoader(true);
     authServices
       .getCourseByName(selectedSubject.name)
@@ -80,7 +84,7 @@ export default withRouter(function Subject({ history }) {
   };
 
   const toCourses = () => {
-    history.push(`/preview-subject/${selectedSubject.id}`);
+    history.push(`/dashboard/mobile-courses`);
   };
 
   const pickLevel = (i) => {
@@ -88,7 +92,7 @@ export default withRouter(function Subject({ history }) {
   };
 
   const generateLevelTest = (id, tests) => {
-    const test = tests.find((t) => t.year === match.params.level);
+    const test = tests.find((t) => t.id === id);
     if (test) {
       const beginnerQuiz = test.quizes.filter((q) => q.level === 0);
       const intermediateQuiz = test.quizes.filter((q) => q.level === 1);
@@ -199,7 +203,7 @@ export default withRouter(function Subject({ history }) {
         </div>
         <div className="banner">
           <span onClick={toCourses} className="mobile-title-text">
-            Learning Levels
+            Courses
           </span>
           <span className="back" style={{ textTransform: "capitalize" }}>
             <img
@@ -212,34 +216,6 @@ export default withRouter(function Subject({ history }) {
             />
             {selectedSubject.name}
           </span>
-        </div>
-        <div className="sub-banner">
-          {/* <div className="small">
-            <span>Possible points:</span>
-            <p>1000</p>
-          </div> */}
-          <div className="wide">
-            <div className="progresses">
-              {usertests &&
-                usertests.userTests &&
-                usertests.userTests.map((utest) => {
-                  return (
-                    <div key={utest.id} className="progress-wrap">
-                      <ProgressBar />
-                      <span>
-                        {selectedSubject.tests.find(
-                          (t) => t.id == utest.testId
-                        ) &&
-                          selectedSubject.tests.find(
-                            (t) => t.id == utest.testId
-                          ).year}
-                        ({utest.score} study points)
-                      </span>
-                    </div>
-                  );
-                })}
-            </div>
-          </div>
         </div>
 
         <div className="contents">
@@ -273,11 +249,12 @@ export default withRouter(function Subject({ history }) {
               }}
             />
           </div>
-          <div className="wide big">
+          <div className="wide big big_">
             {selectedSubject &&
               selectedSubject.tests &&
-              generateLevelTest(testId, selectedSubject.tests).map(
-                (test, i) => (
+              generateLevelTest(testId, selectedSubject.tests)
+                .filter((t, i) => i === 0) // return just 1 item from the array
+                .map((test, i) => (
                   <React.Fragment key={"lesson_" + i}>
                     <p className="heading">Lessons</p>
                     <div className="lessons-wrap mb30">
@@ -288,7 +265,7 @@ export default withRouter(function Subject({ history }) {
                               key={"video" + video.id + "" + i}
                               video={video}
                               grade={linkIndex}
-                              disableClick={false}
+                              disableClick={true}
                             />
                           ))
                         ) : (
@@ -308,6 +285,7 @@ export default withRouter(function Subject({ history }) {
                     </div>
                     {test.quizzes.length ? (
                       <Quiz
+                        dummy={true}
                         open={true}
                         usertests={
                           usertests && usertests.length
@@ -325,8 +303,104 @@ export default withRouter(function Subject({ history }) {
                       />
                     ) : null}
                   </React.Fragment>
-                )
-              )}
+                ))}
+
+            {selectedSubject.hasStudyPack && (
+              <div className="pack">
+                <div className="half">
+                  <p className="title">Advance your learning</p>
+                  <div className="desc">
+                    <p style={{ fontSize: 12 }}>
+                      Our Study Packs are test questions created for advanced
+                      Senior Secondary levels. They are simulated for exam
+                      purposes and further learning.
+                    </p>
+                    <p style={{ fontSize: 12 }}>
+                      Note: The Lesson Packs above must have been completed
+                      before proceeding to the Study Packs.
+                    </p>
+                  </div>
+                  <div className="duration">
+                    <span>Approximately 12 Study packs</span>
+                  </div>
+                  <button onClick={gotoPacks} className="tw-btn">
+                    Lets get started
+                  </button>
+                </div>
+                <div className="half bg"></div>
+              </div>
+            )}
+          </div>
+          <div className="wide narrow narrow_">
+            <div className="quiz-contents">
+              {selectedSubject &&
+                selectedSubject.tests &&
+                selectedSubject.tests.map((test, i) => (
+                  <React.Fragment key={"lesson_" + i}>
+                    <p className="heading" onClick={() => toSubject(test)}>
+                      {test.year}
+                    </p>
+                    <div
+                      className="lessons-wrap mb30"
+                      onClick={() => toSubject(test)}
+                    >
+                      <div
+                        className="lessons"
+                        style={{ pointerEvents: "none" }}
+                      >
+                        {test.videos.length ? (
+                          test.videos.map((video, i) => (
+                            <Lesson
+                              key={"video" + video.id + "" + i}
+                              video={video}
+                              grade={linkIndex}
+                              disableClick={true}
+                            />
+                          ))
+                        ) : (
+                          <div
+                            className="blue--text"
+                            style={{
+                              padding: "12px 30px",
+                              margin: 0,
+                              fontSize: 12,
+                              pointerEvents: "none",
+                            }}
+                          >
+                            There are no video lessons in this pack. Kindly
+                            check back later.
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                    {test.quizes.length ? (
+                      <div onClick={() => toSubject(test)}>
+                        <div style={{ pointerEvents: "none" }}>
+                          <Quiz
+                            open={true}
+                            dummy={true}
+                            usertests={
+                              usertests && usertests.length
+                                ? usertests.filter(
+                                    (ut) => ut.testId === test.id
+                                  )
+                                : []
+                            }
+                            userquizzes={getPreviousQuiz(
+                              usertests &&
+                                usertests.find((ut) => ut.testId === test.id),
+                              test.quizzes
+                            )}
+                            usercourseid={usercourseid}
+                            quizType="normal"
+                            quiz={test.quizzes}
+                          />
+                        </div>
+                      </div>
+                    ) : null}
+                  </React.Fragment>
+                ))}
+            </div>
 
             {selectedSubject.hasStudyPack && (
               <div className="pack">

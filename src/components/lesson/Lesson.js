@@ -27,7 +27,6 @@ export default withRouter(function Lesson({
   let modalWidth = window.innerWidth > 1024 ? 96 : 100;
 
   useEffect(() => {
-    
     let data = [];
     let subjectVideos = selectedSubject.tests.reduce((agg, curr) => {
       return agg.concat(curr.videos);
@@ -82,23 +81,22 @@ export default withRouter(function Lesson({
     );
     const url = `${videoUrl}${videos[i].url}`;
     prepVideo(url);
-    
   };
 
   const prepVideo = (url) => {
-    if(url){
-      url = url.replace('assets', 'video');
+    if (url) {
+      url = url.replace("assets", "video");
       let videoPlayer = document.getElementById("homevideo");
       videoPlayer.oncontextmenu = () => false;
-      console.log({url})
-      videoPlayer.src = url.replace('assets', 'video');
+      console.log({ url });
+      videoPlayer.src = url.replace("assets", "video");
       videoPlayer.play();
     }
-  }
+  };
 
   const openModal = (url) => {
     if (disableClick) {
-      history.push("/subject/mathematics");
+      history.push(`/subject/${selectedSubject.id}`);
     } else {
       setopen(!open);
       seturl(url);
@@ -246,7 +244,7 @@ export default withRouter(function Lesson({
               controls
               onContextMenu={oncontextmenu}
               autoPlay={true}
-              src={`${videoUrl}${url ? url.replace("assets", "video"): url}`}
+              src={`${videoUrl}${url ? url.replace("assets", "video") : url}`}
               controlsList="nodownload"
               id="homevideo"
             >

@@ -11,7 +11,7 @@ export default function MobileCourses() {
   };
   return (
     <motion.div className="mobile-courses" style={{ padding: "30px 20px" }}>
-      <Courses onOpenModal={onOpenModal} moveToCourse={true} />
+      <Courses onOpenModal={onOpenModal} moveToCourse={true} toPreview={true} />
       <AddCourses open={open} onCloseModal={onCloseModal} />
     </motion.div>
   );

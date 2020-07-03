@@ -15,7 +15,7 @@ export default withRouter(function Studypack({ history }) {
   const context = useContext(userContext);
   const { selectedSubject, studyPacks, loading } = context;
   const back = () => {
-    history.push("/dashboard/");
+    history.push(`/preview-subject/${selectedSubject.id}`);
   };
   useEffect(() => {
     console.log(studyPacks);
@@ -24,7 +24,9 @@ export default withRouter(function Studypack({ history }) {
     <>
       {loading && <Loader />}
       <div className="studypack">
-        <Nav />
+        <div className="navwrap">
+          <Nav />
+        </div>
         <div className="banner">
           <span className="backArrow">
             <img

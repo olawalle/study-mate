@@ -149,7 +149,7 @@
       float: left;
       height: calc(100vh - (75px + 130px + 75px));
       overflow: auto;
-      &.narrow {
+      &.narrow_ {
         display: none;
       }
       .lessons-wrap {
@@ -273,13 +273,13 @@
         width: 100%;
         padding: 0;
         height: unset;
-        &.narrow {
+        &.narrow_ {
           display: block;
           .quiz-contents {
             padding: 15px;
           }
         }
-        &.big {
+        &.big_ {
           display: none;
         }
         .lessons-wrap {

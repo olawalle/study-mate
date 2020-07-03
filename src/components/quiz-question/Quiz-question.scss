@@ -286,10 +286,10 @@
     background-color: #fff;
     width: 100%;
     position: fixed;
-    top: 0;
+    top: -10px;
     left: 0;
     padding: 20px;
-    height: 100vh;
+    height: calc(100vh + 12px);
     .close {
       cursor: pointer;
       right: 15px;
@@ -297,14 +297,17 @@
       img {
         width: 20px;
         float: right;
-        margin-top: 3px;
+        margin-top: 6px;
       }
     }
     .upper {
       padding: 0;
       height: calc(100vh - 85px);
-      overflow: auto;
+      /* overflow: auto; */
       position: relative;
+      width: 100%;
+      overflow-x: hidden;
+      overflow-y: auto;
       .upper-bar {
         position: relative;
         width: 100%;
@@ -333,8 +336,8 @@
       }
       .alert {
         position: absolute;
-        top: 60vh;
-        right: -55px;
+        top: 66vh;
+        right: 0px;
         overflow: hidden;
         width: 280px;
         height: 116px;

@@ -55,6 +55,7 @@ import Terms from "./pages/Terms/Terms";
 import FAQ from "./pages/faq/FAQ";
 import Privacy from "./pages/Terms/Privacy";
 import Verify from "./pages/Verify";
+import PreviewSubject from "./pages/Subject/PreviewSubject";
 
 export default function App() {
   let history = useHistory();
@@ -120,8 +121,11 @@ export default function App() {
                 <Route path="/dashboard/">
                   <Dashboard />
                 </Route>
-                <Route path="/subject/:subject">
+                <Route path="/subject/:subject/:level">
                   <Subject />
+                </Route>
+                <Route path="/preview-subject/:subject">
+                  <PreviewSubject />
                 </Route>
                 <Route path="/studypack/:subject">
                   <Studypack />

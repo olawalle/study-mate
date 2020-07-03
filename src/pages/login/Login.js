@@ -6,6 +6,7 @@ import logo from "../../assets/images/logo.svg";
 import logo2 from "../../assets/images/logo.png";
 import dots from "../../assets/images/Dots.svg";
 import eye from "../../assets/images/eye.svg";
+import pair from "../../assets/images/pair.png";
 import { Link, withRouter } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useSnackbar } from "react-simple-snackbar";
@@ -139,7 +140,7 @@ export default withRouter(function Login(props) {
       .catch(function (err) {
         console.log({ err });
         updateLoader(false);
-        let {message: errMsg = undefined } = err.response.data;
+        let { message: errMsg = undefined } = err.response.data;
         showError(
           errMsg ? "Incorrect username or password" : "An error occured"
         );
@@ -196,8 +197,10 @@ export default withRouter(function Login(props) {
 
           <img src={dots} className="left-dot" alt="" />
           <img src={dots} className="right-dot" alt="" />
-          <div className="student"></div>
-          <div className="teacher"></div>
+
+          <img src={pair} className="pair" alt="" />
+          {/* <div className="student"></div>
+          <div className="teacher"></div> */}
         </div>
 
         {!onLogin ? (

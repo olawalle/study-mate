@@ -18,8 +18,6 @@ export default function Quiz(props) {
   const { updateStudyPackQuizes, quizzes, loading, updateLoader } = useContext(
     userContext
   );
-
-  console.log({ ust: props.usertests, ut: props.userquizzes });
   const [open, setopen] = useState(false);
   const [openSave, setopenSave] = useState(false);
   const [quizFromPack, setQuizFromPack] = useState([]);
@@ -132,7 +130,7 @@ export default function Quiz(props) {
   };
 
   const onOpenModal = (n) => {
-    if (!props.open && n === 2) return;
+    if (props.dummy || (!props.open && n === 2)) return;
     if (props.quizType === "normal") {
       console.log("is normal");
       n === 1 ? setopen(true) : setopenMobileQuiz(true);
@@ -180,20 +178,20 @@ export default function Quiz(props) {
             "Level up on the above skills and collect up to 400 Mastery points"}
         </p>
 
-        <button
+        {/* <button
           disabled={!props.quiz}
           title={
             !props.quiz
               ? "There are no questions in this quiz. Check back later"
               : "Click to take test"
           }
-          className="blue-btn big-btn"
+          className={`${props.dummy ? "tw-btn" : "blue-btn"} sm-btn`}
           onClick={() => onOpenModal(1)}
         >
           {props.usertests && props.usertests.length
             ? "Resume Quiz"
             : "Start Quiz"}
-        </button>
+        </button> */}
 
         <button
           disabled={!props.quiz}
@@ -202,7 +200,7 @@ export default function Quiz(props) {
               ? "There are no questions in this quiz. Check back later"
               : "Click to take test"
           }
-          className="blue-btn sm-btn"
+          className={`${props.dummy ? "tw-btn w100p" : "blue-btn"} sm-btn`}
           onClick={() => onOpenModal(2)}
         >
           {props.usertests && props.usertests.length
@@ -212,7 +210,11 @@ export default function Quiz(props) {
 
         <div className="patterns">
           <img src={dots} className="dots" alt="" />
-          <img src={quizPic} className="pattern1" alt="" />
+          <img
+            src={quizPic}
+            className={`pattern1 ${props.dummy ? "pull-up" : ""}`}
+            alt=""
+          />
         </div>
 
         <Modal
@@ -352,7 +354,10 @@ export default function Quiz(props) {
                     <h4>Learning points</h4>
                     <h2>80% ({(0.8 * scores.count).toFixed(2)} Points)</h2>
                   </div>
-                  <button className="tw-btn mt15" onClick={() => onCloseModal(false)}>
+                  <button
+                    className="tw-btn mt15"
+                    onClick={() => onCloseModal(false)}
+                  >
                     Done
                   </button>
 
