@@ -26,6 +26,9 @@ export default function Quiz(props) {
   const [started, setStarted] = useState(false);
   const [finishedTest, setfinishedTest] = useState(false);
   const [callback, setCallback] = useState(null);
+  const [studyUserQuizzes, setstudyUserQuizzes] = useState(null);
+  const [studyUserTests, setstudyUserTests] = useState(null);
+
   const [scores, setScore] = useState({ score: 0, percent: 0, count: 0 });
   const [hour, setHr] = useState(0);
   const [minutes, setMin] = useState(0);
@@ -83,7 +86,14 @@ export default function Quiz(props) {
     props.userquizzes.map((q) => q.mode);
 
   const userData = () => {
-    if (props.userquizzes && props.userquizzes.length) {
+    let uq = []
+    if(props.type === "study"){
+      uq = studyUserQuizzes;
+    }
+    else{
+      uq = props.userquizzes
+    }
+    if (uq && uq.length) {
       let modeNum = null;
       console.log({ selectedQuizMode });
       if (selectedQuizMode) {
@@ -95,7 +105,7 @@ export default function Quiz(props) {
           modeNum = 2;
         }
         console.log({ modeNum });
-        const data = props.userquizzes.filter((uq) => uq.mode === modeNum);
+        const data = uq.filter((uq) => uq.mode === modeNum);
         console.log({ data });
         return data;
       }
@@ -137,14 +147,18 @@ export default function Quiz(props) {
       console.log("is normal");
       n === 1 ? setopen(true) : setopenMobileQuiz(true);
     } else {
-      console.log("is quizpack");
+      console.log("is quizpack", props.quizId);
       updateLoader(true);
       authServices
         .getStudypackData(props.quizId)
         .then((res) => {
-          updateStudyPackQuizes(res.data);
+          const userTests = res.data.userTests;
+          const userQuizzes = (userTests && userTests.length) ? userTests[0].userQuizzes : [];
+          setstudyUserTests(userTests)
+          setstudyUserQuizzes(userQuizzes)
+          updateStudyPackQuizes(res.data.quizes);
           updateLoader(false);
-          if (!res.data.length) {
+          if (!res.data.quizes.length) {
             return;
           }
           n === 1 ? setopen(true) : setopenMobileQuiz(true);
@@ -173,11 +187,11 @@ export default function Quiz(props) {
       {/* {loading && <Loader />} */}
       <div className="quiz">
         <p className="quiz-heading" onClick={logg}>
-          {props.name || "Quiz 1"}
+          {props.name || "Quiz"}
         </p>
         <p className="sub-heading">
           {props.shortDescription ||
-            "Level up on the above skills and collect up to 400 Mastery points"}
+            "Level up on the above skills and collect mastery points"}
         </p>
 
         <button
@@ -190,9 +204,9 @@ export default function Quiz(props) {
           className="blue-btn big-btn"
           onClick={() => onOpenModal(1)}
         >
-          {props.usertests && props.usertests.length
-            ? "Resume Quiz"
-            : "Start Quiz"}
+          {props.userquizzes && props.userquizzes.length
+            ? "Resume Learning"
+            : "Start Learning"}
         </button>
 
         <button
@@ -205,9 +219,9 @@ export default function Quiz(props) {
           className="blue-btn sm-btn"
           onClick={() => onOpenModal(2)}
         >
-          {props.usertests && props.usertests.length
-            ? "Resume Quiz"
-            : "Start Quiz"}
+          {props.userquizzes && props.userquizzes.length
+            ? "Resume Learning"
+            : "Start Learning"}
         </button>
 
         <div className="patterns">
@@ -378,8 +392,8 @@ export default function Quiz(props) {
             <QuizQuestion
               usercourseid={props.usercourseid}
               userquizzes={userData()}
-              onSaveProgress={(callback) => setCallback(callback)}
-              usertests={props.usertests}
+              onSaveProgress={(callback) => setCallback(() => callback)}
+              usertests={props.type === "study" ? studyUserTests : props.usertests}
               selectedQuizMode={selectedQuizMode}
               onClose={onCloseModal}
               completeTest={completeTest}
@@ -583,8 +597,8 @@ export default function Quiz(props) {
               <QuizQuestion
                 usercourseid={props.usercourseid}
                 userquizzes={userData()}
-                onSaveProgress={(callback) => setCallback(callback)}
-                usertests={props.usertests}
+                onSaveProgress={(callback) => setCallback(() => callback)}
+                usertests={props.type === "study" ? studyUserTests : props.usertests}
                 selectedQuizMode={selectedQuizMode}
                 onClose={onCloseModal}
                 completeTest={completeTest}

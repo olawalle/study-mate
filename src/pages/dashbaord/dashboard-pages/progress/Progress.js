@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Select from "react-select";
 import { motion } from "framer-motion";
 
@@ -10,11 +10,15 @@ import Badges from "../../../../components/badges/Badges";
 import Links from "../../../../components/sidebar/Links";
 import Days from "../../../../components/days/Days";
 import { userContext } from "../../../../store/UserContext";
+import authServices from "../../../../services/authServices";
+import Loader from "../../../../components/loader/Loader";
 
 export default function Progress() {
   const context = useContext(userContext);
-  const { userCourses } = context;
-  const courses_ = userCourses.map((c) => {
+  const { userCourses, user, loading, updateLoader } = context;
+  console.log(userCourses)
+  
+  const courses_ = userCourses.filter(c => c.course.studyLevel === user.level).map((c) => {
     return {
       ...c,
       label: c.name,
@@ -22,31 +26,132 @@ export default function Progress() {
     };
   });
   const options = [
-    { value: "Videos", label: "Videos" },
-    { value: "Quizzes", label: "Quizzes" },
+    { value: "", label: "Activities" },
+    { value: "Video", label: "Video" },
+    { value: "Quiz", label: "Quiz" },
   ];
   const days = [
-    { value: "Monday", label: "Monday" },
-    { value: "Tuesday", label: "Tuesday" },
-    { value: "Wednesday", label: "Wednesday" },
-    { value: "Thursday", label: "Thursday" },
-    { value: "Friday", label: "Friday" },
-    { value: "Saturday", label: "Saturday" },
-    { value: "Subday", label: "Subday" },
+    { value: "", label: "Last Seven Days", rep: ""},
+    { value: "Monday", label: "Monday", rep: 1 },
+    { value: "Tuesday", label: "Tuesday", rep: 2 },
+    { value: "Wednesday", label: "Wednesday", rep: 3 },
+    { value: "Thursday", label: "Thursday", rep: 4 },
+    { value: "Friday", label: "Friday", rep: 5 },
+    { value: "Saturday", label: "Saturday", rep: 6 },
+    { value: "Sunday", label: "Sunday", rep: 0 },
   ];
   const [selectedOption, setselectedOption] = useState("");
   const [selectedOption_, setselectedOption_] = useState("");
+  const [statistics, setStatistics] = useState([]);
+  const [currentStat, setCurrentStat] = useState();
+  const [filteredStat, setFilteredStat] = useState();
+  const [pageLoaded, setPageLoaded] = useState(false);
+  const [course, setCourse] = useState();
+
+  const onCourseChange = (value) => {
+    if(value){
+      setCourse(value);
+      const thisCourse = userCourses.find(uc => uc.id === Number(value));
+      console.log(thisCourse, value, userCourses)
+      if(thisCourse){
+        const statAvailable = statistics.find(s => s.name === thisCourse.course.name);
+        console.log({statAvailable})
+        if(statAvailable){
+          setCurrentStat(statAvailable);
+          setFilteredStat(statAvailable)
+        }
+        else{
+          getStatistics(thisCourse)
+        }
+      }
+    }
+    
+  }
+
+  useEffect(() => {
+    if(!pageLoaded){
+      if(userCourses && userCourses.length){
+        const first = userCourses[0];
+        getStatistics(first)
+        setCourse(first.id)
+      }
+      setPageLoaded(true);
+    }
+  }, [pageLoaded])
+
+  const getStatistics = (userCourse) => {
+    updateLoader(true);
+    authServices
+      .getStatistics(userCourse.id)
+      .then((res) => {
+        console.log({ stats: res.data });
+        let newStat = [];
+        if(statistics.some(c => c.name == userCourse.course.name)){
+          newStat = statistics.map(s => s.name === userCourse.course.name ? {name: userCourse.course.name, ...res.data} : s);
+        }
+        else{
+          newStat = statistics.concat({name: userCourse.course.name, ...res.data});
+        }
+        setStatistics(newStat);
+        setCurrentStat({name: userCourse.course.name, ...res.data})
+        setFilteredStat({name: userCourse.course.name, ...res.data})
+        updateLoader(false);
+      })
+      .catch((err) => {
+        console.log({ err });
+        updateLoader(false);
+      });
+  };
 
   const handleChange = (selectedOption) => {
+    console.log({selectedOption})
     setselectedOption(selectedOption);
   };
   const handleChange_ = (selectedOption) => {
+    console.log({selectedOption})
     setselectedOption_(selectedOption);
   };
 
-  const handleChangeCourse = (e) => console.log(e);
+  const handleSearch = (e) => {
+    if(selectedOption || selectedOption_){
+      const selectedType = selectedOption && selectedOption.value;
+      const selectedDay = selectedOption_ && selectedOption_.rep;
+      console.log(selectedOption, selectedOption_, selectedDay, selectedType)
+      const params = {day: selectedDay, type: selectedType};
+      setFilteredStat(filtered(params))
 
+
+    }
+
+  }
+
+  const filtered = (params) => {
+    console.log({params})
+    if(!params) return currentStat;
+    else{
+      if(currentStat){
+        console.log({params})
+        if((params.day || params.day === 0) && params.type){
+          const d = currentStat.activities.filter(activity => activity.dayOfWeek === params.day && activity.testType === params.type)
+          return {...currentStat, activities: d}
+        }
+        else if(params.day || params.day === 0){
+          const d = currentStat.activities.filter(activity => activity.dayOfWeek === params.day)
+          return {...currentStat, activities: d}
+        
+        }
+        else if(params.type){
+          console.log("type", currentStat.activities)
+          const d = currentStat.activities.filter(activity => activity.testType === params.type)
+          return {...currentStat, activities: d}
+        }
+        else return currentStat
+      }
+    }
+  }
   return (
+    <>
+    {loading && <Loader />}
     <motion.div
       className="progress"
       initial={{ opacity: 0, x: "-5vw" }}
@@ -78,7 +183,7 @@ export default function Progress() {
                 styles={{ width: 120, marginTop: "-10px" }}
               />
             </div>
-            <button className="tw-btn">Search</button>
+            <button className="tw-btn" type="button" onClick={handleSearch}>Search</button>
           </div>
 
           <div className="fixed-table mt40">
@@ -87,53 +192,26 @@ export default function Progress() {
               <div className="th">Date</div>
               <div className="th">Level</div>
               <div className="th points">Points aquired</div>
-              <div className="th">Test score</div>
+              <div className="th">Taken/Module</div>
             </div>
-            {/* <div className="tbody">
-              <div className="tr">
-                <div className="td activity"> Mathematics quiz 1</div>
-                <div className="td">05/05/2020</div>
-                <div className="td">Level 1</div>
-                <div className="td points">1000</div>
-                <div className="td">12/21</div>
-              </div>
-              <div className="tr">
-                <div className="td activity"> Mathematics quiz 1</div>
-                <div className="td">05/05/2020</div>
-                <div className="td">Level 1</div>
-                <div className="td points">1000</div>
-                <div className="td">12/21</div>
-              </div>
-              <div className="tr">
-                <div className="td activity"> Mathematics quiz 1</div>
-                <div className="td">05/05/2020</div>
-                <div className="td">Level 1</div>
-                <div className="td points">1000</div>
-                <div className="td">12/21</div>
-              </div>
-              <div className="tr">
-                <div className="td activity"> Mathematics quiz 1</div>
-                <div className="td">05/05/2020</div>
-                <div className="td">Level 1</div>
-                <div className="td points">1000</div>
-                <div className="td">12/21</div>
-              </div>
-              <div className="tr">
-                <div className="td activity"> Mathematics quiz 1</div>
-                <div className="td">05/05/2020</div>
-                <div className="td">Level 1</div>
-                <div className="td points">1000</div>
-                <div className="td">12/21</div>
-              </div>
-              <div className="tr">
-                <div className="td activity"> Mathematics quiz 1</div>
-                <div className="td">05/05/2020</div>
-                <div className="td">Level 1</div>
-                <div className="td points">1000</div>
-                <div className="td">12/21</div>
-              </div>
-            </div> */}
-            <div style={{textAlign: "center", paddingTop: 5 ,fontSize: "1rem"}}>You dont have enough data to pull stats yet</div>
+            <div className="tbody">
+              {
+                filteredStat && filteredStat.activities && filteredStat.activities.length 
+                ? filteredStat.activities.map((activity, index) => (
+                  <div className="tr" key={index}>
+                    <div className="td activity">{currentStat.name} {activity.testType}</div>
+                    <div className="td">{activity.date}</div>
+                    <div className="td">Level {activity.level + 1}</div>
+                    <div className="td points">{activity.testType === "Video" ? "N/A" : activity.point}</div>
+                    <div className="td">{activity.overall}</div>
+                  </div>
+                ))
+                : <span>No statistics yet</span>
+              }
+              
+              
+            </div>
+            
           </div>
         </div>
       </div>
@@ -143,6 +221,8 @@ export default function Progress() {
             Overall Statistics
             <span className="f-right">
               <select
+                onChange={({target: {value}}) => onCourseChange(value)}
+                value={course}
                 style={{
                   width: "100px",
                   height: "30px",
@@ -151,20 +231,25 @@ export default function Progress() {
                 }}
               >
                 {courses_.map((course) => (
-                  <option key={course.name} value={course.name}>
-                    {course.name}
+                  <option style={{textTransform: "uppercase"}} key={course.id} value={course.id}>
+                    {course.course.name}
                   </option>
                 ))}
               </select>
             </span>
           </p>
-          <Statistics />
+          <Statistics 
+            first={currentStat && currentStat.percentVideo}
+            second={currentStat && currentStat.percentQuiz}
+            third={currentStat && currentStat.percentMastery} />
         </div>
         <div className="bg_white mt30">
           <p className="heading">Days learnt</p>
-          <Days />
+          <Days days={filteredStat && filteredStat.activities.map(a => a.dayOfWeek)} />
         </div>
       </div>
     </motion.div>
+    </>
+    
   );
 }
