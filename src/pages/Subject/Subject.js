@@ -258,7 +258,7 @@ export default withRouter(function Subject({ history }) {
           <div className="wide">
             <div className="progresses">
               {(usertests &&
-                usertests.length) &&
+                usertests.length) ?
                 usertests.map((utest) => {
                   return (
                     <div key={utest.id} className="progress-wrap">
@@ -274,7 +274,7 @@ export default withRouter(function Subject({ history }) {
                       </span>
                     </div>
                   );
-                })}
+                }): <span>Start quizzes to acquire points</span>}
             </div>
           </div>
         </div>

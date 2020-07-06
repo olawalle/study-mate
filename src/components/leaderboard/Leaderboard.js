@@ -7,6 +7,7 @@ import b3 from "../../assets/images/b3.svg";
 import best from "../../assets/images/Best.svg";
 import { userContext } from "../../store/UserContext";
 import authServices from "../../services/authServices";
+import { appUrl } from "../../services/urls";
 
 
 
@@ -55,7 +56,7 @@ export default function Leaderboard() {
             {leader.position > 3 && <span className="position">{leader.position}</span>}
             <img
               className="photo"
-              src={leader.userImg}
+              src={`${appUrl}${leader.userImg}`}
               alt=""
             />
             <span className="name">{leader.name}</span>

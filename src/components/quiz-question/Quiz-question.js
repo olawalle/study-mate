@@ -7,7 +7,7 @@ import Passage from "../../assets/images/Passage.svg";
 import caret from "../../assets/images/down-arrow.svg";
 import { appUrl, audioUrl } from "../../services/urls";
 import { userContext } from "../../store/UserContext";
-import beep from "../../assets/audio/beep.mp3";
+import beep from "../../assets/audio/beep1.mp3";
 
 import MathJax from "react-mathjax";
 import Parser from "../content-display/Parser";
