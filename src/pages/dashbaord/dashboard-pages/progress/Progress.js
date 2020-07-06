@@ -245,7 +245,7 @@ export default function Progress() {
         </div>
         <div className="bg_white mt30">
           <p className="heading">Days learnt</p>
-          <Days days={filteredStat && filteredStat.activities.map(a => a.dayOfWeek)} />
+          <Days days={filteredStat && filteredStat.activities && filteredStat.activities.length && filteredStat.activities.map(a => a.dayOfWeek)} />
         </div>
       </div>
     </motion.div>

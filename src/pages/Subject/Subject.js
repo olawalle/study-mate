@@ -264,7 +264,7 @@ export default withRouter(function Subject({ history }) {
                     <div key={utest.id} className="progress-wrap">
                       <ProgressBar />
                       <span>
-                        {selectedSubject.tests.find(
+                        {selectedSubject.tests && selectedSubject.tests.find(
                           (t) => t.id == utest.testId
                         ) &&
                           selectedSubject.tests.find(
