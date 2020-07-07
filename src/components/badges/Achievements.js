@@ -10,7 +10,7 @@ import coins from "../../assets/images/coins.svg";
 
 export default function Achievements({ setseeAchievements }) {
   return (
-    <div className="ach">
+    <div className="ach bordered">
       <p className="heading">
         Achievements
         <span

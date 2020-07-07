@@ -34,7 +34,7 @@ class Statistics extends Component {
 
   render() {
     return (
-      <div className="statistics" style={{ padding: "15px" }}>
+      <div className="statistics bg-bottom" style={{ padding: "15px" }}>
         <Doughnut data={this.state.data} options={this.state.options} />
         <div className="legends">
           <div className="legend vids">

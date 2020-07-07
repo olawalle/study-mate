@@ -169,7 +169,7 @@ export default function Quiz(props) {
   return (
     <>
       {/* {loading && <Loader />} */}
-      <div className="quiz">
+      <div className="quiz bordered">
         <p className="quiz-heading" onClick={logg}>
           {props.name || "Quiz 1"}
         </p>

@@ -12,6 +12,7 @@ import b2 from "../../../../assets/images/b2.svg";
 import b3 from "../../../../assets/images/b3.svg";
 import b4 from "../../../../assets/images/b4.svg";
 import b5 from "../../../../assets/images/b5.svg";
+import Characters from "../../../../assets/images/Characters.svg";
 import streak from "../../../../assets/images/streak.svg";
 import niceListerner from "../../../../assets/images/Nice-listener.svg";
 import greatListerner from "../../../../assets/images/Great-Listener.svg";
@@ -170,8 +171,8 @@ export default withRouter(function Profile({ history }) {
         </div>
       ) : (
         <div className="wide">
-          <p className="heading">Personal Information</p>
-          <div className="form">
+          <p className="heading bg-top">Personal Information</p>
+          <div className="form bg-bottom">
             <div className="half">
               <span>Full Name</span>
               <p
@@ -202,27 +203,56 @@ export default withRouter(function Profile({ history }) {
             <Achievements setseeAchievements={setseeAchievements} />
           </div>
 
-          <div className="lbd">
-            <Leaderboard />
-          </div>
+          {user.isSubscribed ? (
+            <div className="lbd">
+              <Leaderboard />
+            </div>
+          ) : (
+            <div className="lbd not-subed">
+              <p className="top">Climb to #1 spot on our Leaderboard</p>
+              <p className="btm">
+                Start here by subscribing to one of our standard packages for
+                full access to over 10,000 learning resources on our platform.
+              </p>
+              <button className="blue-btn">Subscribe Now</button>
+
+              <img src={Characters} alt="" />
+            </div>
+          )}
 
           <div className="subs">
             <div className="img">
               <img src={sub} alt="" />
             </div>
             <div className="sub-text">
-              <span className="blue--text">Active Subscription</span>
+              <span className={user.isSubscribed ? "blue--text" : "red--text"}>
+                {user.isSubscribed ? "Active" : "Inactive"} Subscription
+              </span>
               <p>
                 Your account is active. Continue learning to improve your rank
                 at the Leaderboard
               </p>
+              <button className="tw-btn">Upgrade</button>
             </div>
           </div>
         </div>
       )}
-      <div className="small">
-        <Leaderboard />
-      </div>
+      {user.isSubscribed ? (
+        <div className="small">
+          <Leaderboard />
+        </div>
+      ) : (
+        <div className="small not-subed">
+          <p className="top">Climb to #1 spot on our Leaderboard</p>
+          <p className="btm">
+            Start here by subscribing to one of our standard packages for full
+            access to over 10,000 learning resources on our platform.
+          </p>
+          <button className="blue-btn">Subscribe Now</button>
+
+          <img src={Characters} alt="" />
+        </div>
+      )}
     </motion.div>
   );
 });

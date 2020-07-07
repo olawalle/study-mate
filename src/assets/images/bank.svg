@@ -1,0 +1,28 @@
+<svg id="Bank" xmlns="http://www.w3.org/2000/svg" width="42.253" height="42.253" viewBox="0 0 42.253 42.253">
+  <path id="Path_9876" data-name="Path 9876" d="M27.584,53H5v2.914H29.5A9.481,9.481,0,0,1,27.584,53Z" transform="translate(-3.543 -16.575)" fill="#d1d3d4"/>
+  <path id="Path_9877" data-name="Path 9877" d="M28.954,57H3v2.914H35.783A9.436,9.436,0,0,1,28.954,57Z" transform="translate(-3 -17.661)" fill="#a7a9ac"/>
+  <path id="Path_9878" data-name="Path 9878" d="M24.285,29.914V27H18.457v2.914H17v10.2h1.457v2.914h5.828V40.113h1.457v-10.2Z" transform="translate(-6.801 -9.516)" fill="#d1d3d4"/>
+  <path id="Path_9879" data-name="Path 9879" d="M32.828,47.186A9.482,9.482,0,0,1,33.092,45H27v2.914h5.864C32.846,47.673,32.828,47.432,32.828,47.186Z" transform="translate(-9.516 -14.403)" fill="#a7a9ac"/>
+  <path id="Path_9880" data-name="Path 9880" d="M21.57,49H7v2.914H28.127A9.428,9.428,0,0,1,27.435,49Z" transform="translate(-4.086 -15.489)" fill="#e6e7e8"/>
+  <path id="Path_9881" data-name="Path 9881" d="M47,31v2.945c.24-.018.483-.031.729-.031a9.43,9.43,0,0,1,3.643.729V31Z" transform="translate(-14.946 -10.602)" fill="#d1e7f8"/>
+  <path id="Path_9882" data-name="Path 9882" d="M42.285,29.914V27H36.457v2.914H35v10.2h.264a9.471,9.471,0,0,1,8.478-7.254V29.914Z" transform="translate(-11.688 -9.516)" fill="#d1d3d4"/>
+  <path id="Path_9883" data-name="Path 9883" d="M45.253,17.57H3L24.156,3Z" transform="translate(-3 -3)" fill="#d1e7f8"/>
+  <path id="Path_9884" data-name="Path 9884" d="M39.4,15.976H15.86L27.647,7.86Z" transform="translate(-6.491 -4.319)" fill="#9bc9ff"/>
+  <path id="Path_9885" data-name="Path 9885" d="M21.027,25.914H44.339V23H5v2.914H21.027Z" transform="translate(-3.543 -8.43)" fill="#939598"/>
+  <path id="Path_9886" data-name="Path 9886" d="M45,29.914h7.285V27H45Z" transform="translate(-14.403 -9.516)" fill="#a7a9ac"/>
+  <path id="Path_9887" data-name="Path 9887" d="M53.941,44.469A9.471,9.471,0,0,1,44.47,53.94a9.365,9.365,0,0,1-5.311-1.632,9.471,9.471,0,1,1,14.781-7.839Z" transform="translate(-11.688 -11.686)" fill="#ffb655"/>
+  <circle id="Ellipse_327" data-name="Ellipse 327" cx="6.5" cy="6.5" r="6.5" transform="translate(26.146 26.146)" fill="#ff9811"/>
+  <path id="Path_9888" data-name="Path 9888" d="M47.729,39a6.511,6.511,0,0,0-.729.043A6.557,6.557,0,0,1,47,52.07,6.557,6.557,0,1,0,47.729,39Z" transform="translate(-14.946 -12.774)" fill="#ee8700"/>
+  <path id="Path_9889" data-name="Path 9889" d="M27,29.914h7.285V27H27Z" transform="translate(-9.516 -9.516)" fill="#a7a9ac"/>
+  <path id="Path_9890" data-name="Path 9890" d="M29,31h4.371V41.2H29Z" transform="translate(-10.059 -10.602)" fill="#d1e7f8"/>
+  <path id="Path_9891" data-name="Path 9891" d="M16.285,29.914V27H9v2.914h7.285Z" transform="translate(-4.629 -9.516)" fill="#a7a9ac"/>
+  <path id="Path_9892" data-name="Path 9892" d="M11,31h4.371V41.2H11Z" transform="translate(-5.172 -10.602)" fill="#d1e7f8"/>
+  <path id="Path_9893" data-name="Path 9893" d="M16.285,45H9v2.914h7.285Z" transform="translate(-4.629 -14.403)" fill="#a7a9ac"/>
+  <circle id="Ellipse_328" data-name="Ellipse 328" cx="1" cy="1" r="1" transform="translate(20.146 7.146)" fill="#2488ff"/>
+  <g id="Group_9708" data-name="Group 9708" transform="translate(5.828 20.398)">
+    <path id="Path_9894" data-name="Path 9894" d="M11,31h4.371v.729H11Z" transform="translate(-11 -31)" fill="#bcd0df"/>
+    <path id="Path_9895" data-name="Path 9895" d="M29,31h4.371v.729H29Z" transform="translate(-15.887 -31)" fill="#bcd0df"/>
+    <path id="Path_9896" data-name="Path 9896" d="M47,31h4.371v.729H47Z" transform="translate(-20.774 -31)" fill="#bcd0df"/>
+  </g>
+  <path id="Path_9897" data-name="Path 9897" d="M46.186,43.914h1.457a.729.729,0,0,1,.729.729.729.729,0,0,0,1.457,0,2.186,2.186,0,0,0-2.186-2.186v-.729a.729.729,0,0,0-1.457,0v.729a2.186,2.186,0,0,0,0,4.371h1.457a.729.729,0,0,1,0,1.457H46.186a.729.729,0,0,1-.729-.729.729.729,0,0,0-1.457,0,2.186,2.186,0,0,0,2.186,2.186v.729a.729.729,0,0,0,1.457,0v-.729a2.186,2.186,0,0,0,0-4.371H46.186a.729.729,0,0,1,0-1.457Z" transform="translate(-14.131 -13.317)" fill="#ff5023"/>
+</svg>

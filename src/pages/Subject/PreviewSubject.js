@@ -256,8 +256,8 @@ export default withRouter(function PreviewSubject({ history }) {
                 .filter((t, i) => i === 0) // return just 1 item from the array
                 .map((test, i) => (
                   <React.Fragment key={"lesson_" + i}>
-                    <p className="heading">Lessons</p>
-                    <div className="lessons-wrap mb30">
+                    <p className="heading bg-top">Lessons</p>
+                    <div className="lessons-wrap bg-bottom mb30">
                       <div className="lessons">
                         {test.videos.length ? (
                           test.videos.map((video, i) => (

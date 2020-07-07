@@ -5,7 +5,8 @@ import { motion } from "framer-motion";
 import "./Progress.scss";
 import Statistics from "../../../../components/statistics/Statistics";
 
-import play from "../../../../assets/images/play.svg";
+import subscribe from "../../../../assets/images/subscribe.svg";
+import disabled from "../../../../assets/images/disabled.png";
 import Badges from "../../../../components/badges/Badges";
 import Links from "../../../../components/sidebar/Links";
 import Days from "../../../../components/days/Days";
@@ -13,7 +14,7 @@ import { userContext } from "../../../../store/UserContext";
 
 export default function Progress() {
   const context = useContext(userContext);
-  const { userCourses } = context;
+  const { userCourses, user } = context;
   const courses_ = userCourses.map((c) => {
     return {
       ...c,
@@ -54,77 +55,43 @@ export default function Progress() {
       exit={{ opacity: 0, x: 0 }}
       transition={{ duration: 0.6 }}
     >
-      <div className="wide-side">
-        <p className="heading">Learning Statistics</p>
-        <div className="stats">
-          <p className="sub-heading">
-            Latest activity may take 10 mins to show below.
-          </p>
-          <div className="filters">
-            <div className="selects">
-              <Select
-                placeholder="Last 7 days"
-                value={selectedOption_}
-                onChange={handleChange_}
-                options={days}
-              />
+      {user.isSubscribed ? (
+        <div className="wide-side">
+          <p className="heading bg-top">Learning Statistics</p>
+          <div className="stats bg-bottom">
+            <p className="sub-heading">
+              Latest activity may take 10 mins to show below.
+            </p>
+            <div className="filters">
+              <div className="selects">
+                <Select
+                  placeholder="Last 7 days"
+                  value={selectedOption_}
+                  onChange={handleChange_}
+                  options={days}
+                />
+              </div>
+              <div className="selects">
+                <Select
+                  placeholder="Activities"
+                  value={selectedOption}
+                  onChange={handleChange}
+                  options={options}
+                  styles={{ width: 120, marginTop: "-10px" }}
+                />
+              </div>
+              <button className="tw-btn">Search</button>
             </div>
-            <div className="selects">
-              <Select
-                placeholder="Activities"
-                value={selectedOption}
-                onChange={handleChange}
-                options={options}
-                styles={{ width: 120, marginTop: "-10px" }}
-              />
-            </div>
-            <button className="tw-btn">Search</button>
-          </div>
 
-          <div className="fixed-table mt40">
-            <div className="tr thead">
-              <div className="th activity">Activity</div>
-              <div className="th">Date</div>
-              <div className="th">Level</div>
-              <div className="th points">Points aquired</div>
-              <div className="th">Test score</div>
-            </div>
-            {/* <div className="tbody">
-              <div className="tr">
-                <div className="td activity"> Mathematics quiz 1</div>
-                <div className="td">05/05/2020</div>
-                <div className="td">Level 1</div>
-                <div className="td points">1000</div>
-                <div className="td">12/21</div>
+            <div className="fixed-table mt40">
+              <div className="tr thead">
+                <div className="th activity">Activity</div>
+                <div className="th">Date</div>
+                <div className="th">Level</div>
+                <div className="th points">Points aquired</div>
+                <div className="th">Test score</div>
               </div>
-              <div className="tr">
-                <div className="td activity"> Mathematics quiz 1</div>
-                <div className="td">05/05/2020</div>
-                <div className="td">Level 1</div>
-                <div className="td points">1000</div>
-                <div className="td">12/21</div>
-              </div>
-              <div className="tr">
-                <div className="td activity"> Mathematics quiz 1</div>
-                <div className="td">05/05/2020</div>
-                <div className="td">Level 1</div>
-                <div className="td points">1000</div>
-                <div className="td">12/21</div>
-              </div>
-              <div className="tr">
-                <div className="td activity"> Mathematics quiz 1</div>
-                <div className="td">05/05/2020</div>
-                <div className="td">Level 1</div>
-                <div className="td points">1000</div>
-                <div className="td">12/21</div>
-              </div>
-              <div className="tr">
-                <div className="td activity"> Mathematics quiz 1</div>
-                <div className="td">05/05/2020</div>
-                <div className="td">Level 1</div>
-                <div className="td points">1000</div>
-                <div className="td">12/21</div>
-              </div>
+              {/* <div className="tbody">
               <div className="tr">
                 <div className="td activity"> Mathematics quiz 1</div>
                 <div className="td">05/05/2020</div>
@@ -133,38 +100,64 @@ export default function Progress() {
                 <div className="td">12/21</div>
               </div>
             </div> */}
-            <div style={{textAlign: "center", paddingTop: 5 ,fontSize: "1rem"}}>You dont have enough data to pull stats yet</div>
+              <div
+                style={{ textAlign: "center", paddingTop: 5, fontSize: "1rem" }}
+              >
+                You dont have enough data to pull stats yet
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="narrow-side">
-        <div className="bg_white">
-          <p className="heading">
-            Overall Statistics
-            <span className="f-right">
-              <select
-                style={{
-                  width: "100px",
-                  height: "30px",
-                  border: "1px solid #eee",
-                  marginTop: "-10px",
-                }}
-              >
-                {courses_.map((course) => (
-                  <option key={course.name} value={course.name}>
-                    {course.name}
-                  </option>
-                ))}
-              </select>
-            </span>
+      ) : (
+        <div className="wide-side sub">
+          <p className="top">
+            Get real-time analytics on your learning progress
           </p>
-          <Statistics />
+          <p className="btm">
+            Get 360 degree insights and analytics on your progress. Data such as
+            time spent on videos, correct answer streaks, coins collected and
+            general progress on lessons and tests taken are shown in easy to
+            read graphs and charts.
+          </p>
+          <button className="blue-btn">Subscribe</button>
+          <br /> <br />
+          <img src={subscribe} alt="" />
         </div>
-        <div className="bg_white mt30">
-          <p className="heading">Days learnt</p>
-          <Days />
+      )}
+      {user.isSubscribed ? (
+        <div className="narrow-side">
+          <div className="bg_white">
+            <p className="heading bg-top">
+              Overall Statistics
+              <span className="f-right">
+                <select
+                  style={{
+                    width: "100px",
+                    height: "30px",
+                    border: "1px solid #eee",
+                    marginTop: "-10px",
+                  }}
+                >
+                  {courses_.map((course) => (
+                    <option key={course.name} value={course.name}>
+                      {course.name}
+                    </option>
+                  ))}
+                </select>
+              </span>
+            </p>
+            <Statistics />
+          </div>
+          <div className="bg_white mt30 bordered">
+            <p className="heading">Days learnt</p>
+            <Days />
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="narrow-side">
+          <img className="disabled" src={disabled} alt="" />
+        </div>
+      )}
     </motion.div>
   );
 }

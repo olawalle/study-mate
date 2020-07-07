@@ -21,13 +21,19 @@
     }
   }
   .verify {
-    background-color: red;
+    background: #ff0007;
+    opacity: 0.75;
     color: #fff;
     width: 100%;
-    padding: 20px 50px;
+    padding: 0px 50px;
     z-index: 1000000000;
     transform: scale(1.05);
     font-size: 12px !important;
+    position: absolute;
+    top: -200px;
+    left: 0;
+    height: 50px;
+    line-height: 50px;
     button {
       height: 30px !important;
       border: 1px solid #fff;
@@ -36,7 +42,7 @@
       color: #fff;
       padding: 0 20px;
       position: relative;
-      top: -10px;
+      top: 10px;
       animation-name: grow;
       animation-duration: 1.5s;
       animation-iteration-count: 20;
@@ -45,6 +51,7 @@
   .wide-side {
     float: left;
     width: 70%;
+    overflow: hidden;
     .lessons-wrap {
       background-color: #fff;
       padding-bottom: 0px;
@@ -76,6 +83,29 @@
   .narrow-side {
     float: right;
     width: calc(30% - 30px);
+    .subscribe {
+      height: 335px;
+      background-color: #fff;
+      padding: 20px;
+      text-align: center;
+      .top {
+        font-size: 12px;
+        color: #000000;
+        opacity: 0.5;
+      }
+      .btm {
+        font-size: 20px;
+        color: #000000;
+        opacity: 1;
+        font-weight: 600;
+        width: 80%;
+        margin: 0 10%;
+      }
+      img {
+        width: 60%;
+        margin-top: 20px;
+      }
+    }
     .badge-wrap {
       width: 100%;
     }

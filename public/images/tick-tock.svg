@@ -1,0 +1,19 @@
+<svg id="Component_27_1" data-name="Component 27 – 1" xmlns="http://www.w3.org/2000/svg" width="113" height="113" viewBox="0 0 113 113">
+  <rect id="Rectangle_1436" data-name="Rectangle 1436" width="113" height="113" rx="10" fill="#ebfaff"/>
+  <g id="clock" transform="translate(28.429 29)">
+    <path id="Path_14357" data-name="Path 14357" d="M141.873,0,128,27.745l13.873,27.745a27.745,27.745,0,1,0,0-55.491Z" transform="translate(-114.127)" fill="#28abfa"/>
+    <path id="Path_14358" data-name="Path 14358" d="M0,27.745A27.745,27.745,0,0,0,27.745,55.491V0A27.745,27.745,0,0,0,0,27.745Z" fill="#14cfff"/>
+    <path id="Path_14359" data-name="Path 14359" d="M168.621,60,158,81.243l10.621,21.243a21.243,21.243,0,1,0,0-42.485Z" transform="translate(-140.876 -53.497)" fill="#c4f3ff"/>
+    <path id="Path_14360" data-name="Path 14360" d="M60,81.243a21.243,21.243,0,0,0,21.243,21.243V60A21.243,21.243,0,0,0,60,81.243Z" transform="translate(-53.497 -53.497)" fill="#fff"/>
+    <path id="Path_14361" data-name="Path 14361" d="M242.766,239.385l-4.6-4.6H236l2.168,4.6,2.3,2.3Z" transform="translate(-210.422 -209.341)" fill="#340d66"/>
+    <path id="Path_14362" data-name="Path 14362" d="M151.88,149.581l-2.3,2.3,11.534,11.534v-4.6Z" transform="translate(-133.369 -133.369)" fill="#373e9f"/>
+    <path id="Path_14363" data-name="Path 14363" d="M247.441,149.227l-9.273,9.273L236,163.1h2.168l11.572-11.572Z" transform="translate(-210.422 -133.054)" fill="#373e9f"/>
+    <path id="Path_14364" data-name="Path 14364" d="M213.574,239.385l2.3,2.3,2.3-2.3v-4.6Z" transform="translate(-190.427 -209.341)" fill="#3857bc"/>
+    <path id="Path_14365" data-name="Path 14365" d="M248.71,90h-1.626L246,91.626l1.084,1.626h1.626Z" transform="translate(-219.338 -80.246)" fill="#340d66"/>
+    <path id="Path_14366" data-name="Path 14366" d="M241,90h1.626v3.251H241Z" transform="translate(-214.88 -80.246)" fill="#373e9f"/>
+    <path id="Path_14367" data-name="Path 14367" d="M248.71,392h-1.626L246,393.626l1.084,1.626h1.626Z" transform="translate(-219.338 -349.515)" fill="#340d66"/>
+    <path id="Path_14368" data-name="Path 14368" d="M241,392h1.626v3.251H241Z" transform="translate(-214.88 -349.515)" fill="#373e9f"/>
+    <path id="Path_14369" data-name="Path 14369" d="M0,0H3.251V3.251H0Z" transform="translate(9.754 29.371) rotate(-90)" fill="#373e9f"/>
+    <path id="Path_14370" data-name="Path 14370" d="M0,0H3.251V3.251H0Z" transform="translate(42.485 29.371) rotate(-90)" fill="#340d66"/>
+  </g>
+</svg>

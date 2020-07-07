@@ -4,6 +4,25 @@
     float: left;
     width: 70%;
     background-color: #fff;
+    &.sub {
+      text-align: center;
+      background-color: transparent;
+      padding: 20px 40px;
+      .top {
+        font-size: 29px;
+        font-weight: 600;
+      }
+      .btm {
+        font-size: 14px;
+        line-height: 20px;
+        padding: 0 40px;
+      }
+      button {
+        padding: 0 50px;
+        border-radius: 40px;
+        margin: 20px 0;
+      }
+    }
     .stats {
       padding: 30px;
       .sub-heading {
@@ -41,6 +60,9 @@
   .narrow-side {
     float: right;
     width: calc(30% - 30px);
+    .disabled {
+      width: 100%;
+    }
   }
   .heading {
     width: 100%;

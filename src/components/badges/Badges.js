@@ -11,13 +11,13 @@ import coins from "../../assets/images/coins.svg";
 export default function Badges() {
   return (
     <div className="badges">
-      <p className="heading">
+      <p className="heading bg-top">
         Badge counts
         <span className="coins">
           <img src={coins} alt="" /> coins
         </span>
       </p>
-      <div className="medals">
+      <div className="medals bg-bottom">
         <div className="medal">
           <img src={b1} alt="" />
           <span>0</span>

@@ -29,6 +29,7 @@ export default withRouter(function Subject({ history }) {
   const [testId, settestId] = useState(0);
   const [usercourseid, setusercourseid] = useState(0);
   const [pageLoaded, setpageLoaded] = useState(false);
+  const [level, setlevel] = useState(null);
   const [links, setlinks] = useState([
     { text: "Beginner" },
     { text: "Intermediate" },
@@ -36,6 +37,7 @@ export default withRouter(function Subject({ history }) {
   ]);
 
   useEffect(() => {
+    setlevel(match.params.level);
     updateLoader(true);
     authServices
       .getUcourseWithTests(user.id, selectedSubject.id)
@@ -83,12 +85,13 @@ export default withRouter(function Subject({ history }) {
     history.push(`/preview-subject/${selectedSubject.id}`);
   };
 
-  const pickLevel = (i) => {
-    setlinkIndex(i);
+  const pickLevel = (test, i) => {
+    settestId(test.id);
+    setlevel(test.year);
   };
 
   const generateLevelTest = (id, tests) => {
-    const test = tests.find((t) => t.year === match.params.level);
+    const test = tests.find((t) => t.year === level);
     if (test) {
       const beginnerQuiz = test.quizes.filter((q) => q.level === 0);
       const intermediateQuiz = test.quizes.filter((q) => q.level === 1);
@@ -250,7 +253,7 @@ export default withRouter(function Subject({ history }) {
               selectedSubject.tests.map((test, i) => (
                 <div
                   key={test.id}
-                  onClick={() => settestId(test.id)}
+                  onClick={() => pickLevel(test, i)}
                   className={`level ${testId === test.id ? "active" : ""}`}
                 >
                   <div className="band">

@@ -21,13 +21,16 @@
     height: calc(100% - 75px);
     float: left;
     overflow: auto;
+    overflow-x: hidden;
     .mobile-title-text,
     .mobile-title {
       display: none;
     }
     .banner {
       height: 160px;
-      width: 100%;
+      width: calc(100% - 80px);
+      margin: 20px 40px;
+      border-radius: 8px;
       padding: 20px;
       position: relative;
       background-size: cover;

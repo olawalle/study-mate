@@ -94,7 +94,7 @@
   .contents {
     padding: 0px 160px;
     background-color: #fafafa;
-    height: calc(100vh - (75px + 130px + 75px));
+    height: calc(100vh - (75px + 75px));
     overflow: hidden;
     .small {
       width: 24%;
@@ -147,7 +147,7 @@
     .wide {
       width: 76%;
       float: left;
-      height: calc(100vh - (75px + 130px + 75px));
+      height: calc(100vh - (75px + 75px));
       overflow: auto;
       &.narrow_ {
         display: none;

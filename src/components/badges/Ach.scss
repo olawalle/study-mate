@@ -1,6 +1,8 @@
 .ach {
   background-color: #fff;
-  height: 165px;
+  height: 190px;
+  overflow: hidden;
+  margin-top: 30px;
   .medals {
     text-align: center;
     padding: 10px 15px;
@@ -11,8 +13,8 @@
       border-radius: 50%;
       margin: 10px 1%;
       text-align: center;
-      background-color: #fafafa;
-      border: 1px solid #f0f0f0;
+      background: #f8f8f896;
+      border: 0.5px solid #eaeaea;
       border-radius: 4px;
       padding: 12px;
       img {

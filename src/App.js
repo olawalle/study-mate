@@ -56,6 +56,7 @@ import FAQ from "./pages/faq/FAQ";
 import Privacy from "./pages/Terms/Privacy";
 import Verify from "./pages/Verify";
 import PreviewSubject from "./pages/Subject/PreviewSubject";
+import LandingPage from "./pages/Landingpage/Landingpage";
 
 export default function App() {
   let history = useHistory();
@@ -113,7 +114,7 @@ export default function App() {
                   <Login />
                 </Route>
                 <Route exact strict path="/">
-                  <Login />
+                  <LandingPage />
                 </Route>
                 <Route path="/signup">
                   <Signup />

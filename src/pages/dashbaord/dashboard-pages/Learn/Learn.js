@@ -14,6 +14,7 @@ import coins from "../../../../assets/images/coins.svg";
 import LearnIcn from "../../../../assets/images/Learn.svg";
 import Progress from "../../../../assets/images/Progress.svg";
 import Profile from "../../../../assets/images/Profile.svg";
+import Coinsystem from "../../../../assets/images/Coinsystem.svg";
 import Quiz from "../../../../components/quiz/Quiz";
 import Courses from "../../../../components/courses/Courses";
 import Lesson from "../../../../components/lesson/Lesson";
@@ -49,8 +50,7 @@ export default withRouter(function Learn({ history }) {
 
   const toSubject = () => {
     if (!userCourses.length) return;
-    console.log({ selectedSubject });
-    history.push(`/subject/${selectedSubject.id}`);
+    history.push(`/subject/${selectedSubject.name}/Beginner`);
   };
 
   const toMobileCourses = () => {
@@ -131,8 +131,8 @@ export default withRouter(function Learn({ history }) {
       )}
       {userCourses.length ? (
         <div className="wide-side">
-          <p className="heading">{selectedSubject.name}</p>
-          <div className="lessons-wrap">
+          <p className="heading bg-top">{selectedSubject.name}</p>
+          <div className="lessons-wrap bg-bottom">
             <p className="sub-heading">
               Lessons
               <button className="tw-btn f-right" onClick={toSubject}>
@@ -195,13 +195,24 @@ export default withRouter(function Learn({ history }) {
         </div>
       )}
       <div className="narrow-side">
-        <div className="badge-wrap">
-          <Badges />
-        </div>
+        {!user.isSubscribed ? (
+          <div className="subscribe bordered">
+            <p className="top">
+              Acquire coins and unlock more challenging practice resources as
+              you learn.
+            </p>
+            <p className="btm">Available to users on our Standard Plan</p>
+            <img src={Coinsystem} alt="" />
+          </div>
+        ) : (
+          <div className="badge-wrap">
+            <Badges />
+          </div>
+        )}
 
         <div className="courses">
           <p className="title mt30">Courses</p>
-          <Courses onOpenModal={onOpenModal} className="mt20" />
+          <Courses onOpenModal={onOpenModal} dontMove={true} className="mt20" />
         </div>
 
         <img src={students} className="students" alt="" />
