@@ -3,6 +3,8 @@ import Carousel from "./Carousel";
 import "./Landingpage.scss";
 import { withRouter } from "react-router-dom";
 
+import macbook from "../../assets/images/macbook.png";
+
 const LandingPage = ({ history }) => {
   const [show_nav, setshow_nav] = useState(false);
   const toAuth = (n) => {
@@ -39,7 +41,7 @@ const LandingPage = ({ history }) => {
               <a href="#">Courses</a>
             </li>
             <li className="nav-item about">
-              <a href="#">About studymate</a>
+              <a href="#">About</a>
             </li>
             <li className="nav-item" onClick={() => toAuth(1)}>
               <a>Login</a>
@@ -64,7 +66,7 @@ const LandingPage = ({ history }) => {
                 </span>
               </div>
               <div className="enroll__wrapper">
-                <button>Enroll Now</button>
+                <button onClick={() => toAuth(2)}>Enroll Now</button>
               </div>
             </div>
           </div>
@@ -145,9 +147,9 @@ const LandingPage = ({ history }) => {
       <div className="watch__video">
         <div className="ui container__">
           <div className="ui stackable grid">
-            <div className="eight wide column bg__wrapper">
+            <div className="eight wide column bg__wrapper video__background">
               <div className="justify__content">
-                <div className="video__background">
+                <div className="">
                   <div className="video__wrap">
                     <a
                       href="https://youtu.be/kP_Abl8gKyg"
@@ -177,7 +179,7 @@ const LandingPage = ({ history }) => {
                   </span>
                 </div>
                 <div className="enroll__wrapper">
-                  <button>Enroll Now</button>
+                  <button onClick={() => toAuth(2)}>Enroll Now</button>
                 </div>
               </div>
             </div>
@@ -201,15 +203,94 @@ const LandingPage = ({ history }) => {
             <div className="eight wide column"></div>
           </div>
         </div>
-        <div style={{ marginRight: 0 }} className="ui container__">
-          <Carousel />
+        <div style={{ textAlign: "center" }} className="ui container__">
+          {/* <Carousel /> */}
+          <img
+            src={macbook}
+            className="macbook"
+            style={{ width: "100%" }}
+            alt=""
+          />
         </div>
-        <div className="ui container__">
+        {/* <div className="ui container__">
           <div className="explore__section">
             <button>Explore all</button>
           </div>
-        </div>
+        </div> */}
+      </div>
 
+      <div className="subscriptions">
+        <div className="ui container__">
+          <div className="ui stackable grid">
+            <div className="six wide column">
+              <p className="top">
+                Enjoy the full benefits of our Robust learning platform
+              </p>
+              <p className="btm light">
+                To get started, select a Plan. There are over 10,000 learning
+                resources on our platform; several payment options are also
+                available.
+              </p>
+            </div>
+            <div className="five wide column">
+              <div className="bw-band band">
+                <p className="name">Free</p>
+                <p className="price">
+                  <span>N0.00</span>/month
+                </p>
+                <ul>
+                  <li>
+                    <span>Limited contents - 2 videos</span>
+                  </li>
+                  <li>
+                    <span>No points or badges or gamification features </span>
+                  </li>
+                  <li>
+                    <span>No analytics </span>
+                  </li>
+                  <li>
+                    <span>No rewards or benefits</span>
+                  </li>
+                </ul>
+
+                <button>Subscribe</button>
+              </div>
+            </div>
+            <div className="five wide column">
+              <div className="pp-band band">
+                <p className="name">Standard</p>
+                <p className="price">
+                  <span>N1,500.00</span>/month
+                </p>
+                <p className="price">
+                  <span>N4,00.00</span>/month
+                </p>
+                <p className="price">
+                  <span>N15,000.00</span>/month
+                </p>
+                <ul>
+                  <li>
+                    <span>Limited contents - 2 videos</span>
+                  </li>
+                  <li>
+                    <span>No points or badges or gamification features </span>
+                  </li>
+                  <li>
+                    <span>No analytics </span>
+                  </li>
+                  <li>
+                    <span>No rewards or benefits</span>
+                  </li>
+                </ul>
+
+                <button>Subscribe</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="carousel__section">
         <div className="package__section">
           <div className="ui container__ curvy">
             <div className="ui stackable grid">

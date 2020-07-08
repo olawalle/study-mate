@@ -60,6 +60,10 @@
   .narrow-side {
     float: right;
     width: calc(30% - 30px);
+    &.greyscale {
+      filter: grayscale(100%);
+      pointer-events: none;
+    }
     .disabled {
       width: 100%;
     }

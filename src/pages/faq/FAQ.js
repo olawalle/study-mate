@@ -90,14 +90,32 @@ export default withRouter(function FAQ({ history }) {
       <div className="edit-contents">
         <div className="banner">
           <span className="backArrow">
-            <img
-              src={backArrow}
-              height="25"
-              className="mr10"
-              alt=""
+            <svg
+              version="1.1"
+              x="0px"
+              y="0px"
+              height="15"
+              className="mr25"
+              viewBox="0 0 512.005 512.005"
               onClick={back}
-              style={{ position: "relative", top: 5, cursor: "pointer" }}
-            />
+              style={{
+                transform: "rotate(180deg)",
+                position: "relative",
+                top: "-1px",
+                cursor: "pointer",
+              }}
+            >
+              <g>
+                <g>
+                  <path
+                    fill="#ffffff"
+                    d="M388.418,240.923L153.751,6.256c-8.341-8.341-21.824-8.341-30.165,0s-8.341,21.824,0,30.165L343.17,256.005
+                      L123.586,475.589c-8.341,8.341-8.341,21.824,0,30.165c4.16,4.16,9.621,6.251,15.083,6.251c5.461,0,10.923-2.091,15.083-6.251
+                      l234.667-234.667C396.759,262.747,396.759,249.264,388.418,240.923z"
+                  />
+                </g>
+              </g>
+            </svg>
             Support
           </span>
           <span onClick={back} className="mobile-title-text">
@@ -139,7 +157,7 @@ export default withRouter(function FAQ({ history }) {
                       float: "right",
                       position: "relative",
                       right: "15px",
-                      top: "25px",
+                      top: "17px",
                       display: "inline-block",
                     }}
                     alt=""

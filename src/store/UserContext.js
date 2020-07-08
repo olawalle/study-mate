@@ -4,6 +4,7 @@ export const userContext = createContext();
 
 export default class UserContextProvider extends Component {
   state = {
+    fixBack: false,
     loading: false,
     isLoggedIn: false,
     user: {
@@ -50,6 +51,10 @@ export default class UserContextProvider extends Component {
 
   updateLoader = (loading) => {
     this.setState({ loading });
+  };
+
+  updatefixBack = (fixBack) => {
+    this.setState({ fixBack });
   };
 
   updateLoggedInStatus = (isLoggedIn) => {
@@ -133,6 +138,7 @@ export default class UserContextProvider extends Component {
       updateUserAwards,
       updateStudyPack,
       updateStudyPackQuizes,
+      updatefixBack,
     } = this;
     return (
       <userContext.Provider
@@ -149,6 +155,7 @@ export default class UserContextProvider extends Component {
           updateUserAwards,
           updateStudyPack,
           updateStudyPackQuizes,
+          updatefixBack,
         }}
       >
         {this.props.children}

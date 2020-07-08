@@ -13,17 +13,18 @@ import { userContext } from "../../store/UserContext";
 
 export default withRouter(function Studypack({ history }) {
   const context = useContext(userContext);
-  const { selectedSubject, studyPacks, loading } = context;
+  const { selectedSubject, studyPacks, loading, fixBack } = context;
   const back = () => {
     history.push(`/preview-subject/${selectedSubject.id}`);
   };
   useEffect(() => {
     console.log(studyPacks);
   }, []);
+
   return (
     <>
       {loading && <Loader />}
-      <div className="studypack">
+      <div className={`studypack ${fixBack ? "fixed" : "not-fixed"}`}>
         <div className="navwrap">
           <Nav />
         </div>

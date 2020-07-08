@@ -11,8 +11,9 @@ import Badges from "../../../../components/badges/Badges";
 import Links from "../../../../components/sidebar/Links";
 import Days from "../../../../components/days/Days";
 import { userContext } from "../../../../store/UserContext";
+import { withRouter } from "react-router-dom";
 
-export default function Progress() {
+export default withRouter(function Progress({ history }) {
   const context = useContext(userContext);
   const { userCourses, user } = context;
   const courses_ = userCourses.map((c) => {
@@ -43,6 +44,10 @@ export default function Progress() {
   };
   const handleChange_ = (selectedOption) => {
     setselectedOption_(selectedOption);
+  };
+
+  const toSub = () => {
+    history.push("/dashboard/subscribe");
   };
 
   const handleChangeCourse = (e) => console.log(e);
@@ -119,45 +124,42 @@ export default function Progress() {
             general progress on lessons and tests taken are shown in easy to
             read graphs and charts.
           </p>
-          <button className="blue-btn">Subscribe</button>
+          <button className="blue-btn" onClick={toSub}>
+            Subscribe
+          </button>
           <br /> <br />
           <img src={subscribe} alt="" />
         </div>
       )}
-      {user.isSubscribed ? (
-        <div className="narrow-side">
-          <div className="bg_white">
-            <p className="heading bg-top">
-              Overall Statistics
-              <span className="f-right">
-                <select
-                  style={{
-                    width: "100px",
-                    height: "30px",
-                    border: "1px solid #eee",
-                    marginTop: "-10px",
-                  }}
-                >
-                  {courses_.map((course) => (
-                    <option key={course.name} value={course.name}>
-                      {course.name}
-                    </option>
-                  ))}
-                </select>
-              </span>
-            </p>
-            <Statistics />
-          </div>
-          <div className="bg_white mt30 bordered">
-            <p className="heading">Days learnt</p>
-            <Days />
-          </div>
+
+      <div className={`narrow-side ${user.isSubscribed ? "" : "greyscale"}`}>
+        <div className="bg_white">
+          <p className="heading bg-top">
+            Overall Statistics
+            <span className="f-right">
+              <select
+                style={{
+                  width: "100px",
+                  height: "30px",
+                  border: "1px solid #eee",
+                  marginTop: "-10px",
+                }}
+              >
+                {courses_.map((course) => (
+                  <option key={course.name} value={course.name}>
+                    {course.name}
+                  </option>
+                ))}
+              </select>
+            </span>
+          </p>
+          <Statistics />
         </div>
-      ) : (
-        <div className="narrow-side">
-          <img className="disabled" src={disabled} alt="" />
+        <div className="bg_white mt30 bordered">
+          <p className="heading">Days learnt</p>
+          <Days />
         </div>
-      )}
+      </div>
     </motion.div>
   );
-}
+});

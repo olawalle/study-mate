@@ -15,9 +15,13 @@ import Loader from "../loader/Loader";
 import { wait } from "@testing-library/react";
 
 export default function Quiz(props) {
-  const { updateStudyPackQuizes, quizzes, loading, updateLoader } = useContext(
-    userContext
-  );
+  const {
+    updateStudyPackQuizes,
+    quizzes,
+    loading,
+    updateLoader,
+    updatefixBack,
+  } = useContext(userContext);
   const [open, setopen] = useState(false);
   const [openSave, setopenSave] = useState(false);
   const [quizFromPack, setQuizFromPack] = useState([]);
@@ -106,10 +110,12 @@ export default function Quiz(props) {
     setfinishedTest(false);
     setStarted(false);
     setopenSave(saveModal);
+    updatefixBack(false);
   };
 
   const onCloseModal_ = () => {
     setopenSave(false);
+    updatefixBack(false);
   };
 
   const completeTest = (score) => {
@@ -129,11 +135,16 @@ export default function Quiz(props) {
     }
   };
 
+  const constShowMobile = (n) => {
+    setopenMobileQuiz(n);
+    updatefixBack(true);
+  };
+
   const onOpenModal = (n) => {
     if (props.dummy || (!props.open && n === 2)) return;
     if (props.quizType === "normal") {
       console.log("is normal");
-      n === 1 ? setopen(true) : setopenMobileQuiz(true);
+      n === 1 ? setopen(true) : constShowMobile(true);
     } else {
       console.log("is quizpack");
       updateLoader(true);
@@ -145,7 +156,7 @@ export default function Quiz(props) {
           if (!res.data.length) {
             return;
           }
-          n === 1 ? setopen(true) : setopenMobileQuiz(true);
+          n === 1 ? setopen(true) : constShowMobile(true);
           setModes(
             modes.map((mod) => {
               return {
@@ -200,7 +211,7 @@ export default function Quiz(props) {
               ? "There are no questions in this quiz. Check back later"
               : "Click to take test"
           }
-          className={`${props.dummy ? "tw-btn w100p" : "blue-btn"} sm-btn`}
+          className={`${props.dummy ? "tw-btn w100p" : "blue-btn"}`}
           onClick={() => onOpenModal(2)}
         >
           {props.usertests && props.usertests.length
@@ -441,7 +452,7 @@ export default function Quiz(props) {
                         <img
                           src={close}
                           alt=""
-                          onClick={() => setopenMobileQuiz(false)}
+                          onClick={() => constShowMobile(false)}
                           className="close-mobile-quiz"
                         />
                       </span>
@@ -546,7 +557,7 @@ export default function Quiz(props) {
                         <img
                           src={close}
                           alt=""
-                          onClick={() => setopenMobileQuiz(false)}
+                          onClick={() => constShowMobile(false)}
                           className="close-mobile-quiz"
                         />
                       </span>

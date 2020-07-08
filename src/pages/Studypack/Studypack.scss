@@ -206,6 +206,10 @@
     padding: 0;
     height: auto;
     overflow: auto;
+    &.fixed {
+      height: 100vh;
+      overflow: hidden;
+    }
     .banner {
       font-size: 14px;
       padding: 20px;

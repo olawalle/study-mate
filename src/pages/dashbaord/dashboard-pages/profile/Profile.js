@@ -17,6 +17,8 @@ import streak from "../../../../assets/images/streak.svg";
 import niceListerner from "../../../../assets/images/Nice-listener.svg";
 import greatListerner from "../../../../assets/images/Great-Listener.svg";
 import scholar from "../../../../assets/images/Scholar.svg";
+import speedy from "../../../../assets/images/speedy.svg";
+import heart from "../../../../assets/images/heart.svg";
 import back from "../../../../assets/images/back.svg";
 import Achievements from "../../../../components/badges/Achievements";
 
@@ -58,14 +60,14 @@ export default withRouter(function Profile({ history }) {
       title: "Speedy",
       subText: `You answered this question in less
       than 5 seconds!`,
-      image: streak,
+      image: speedy,
       selected: false,
     },
     {
       title: "Good Sport",
       subText: `You just earned a badge for sharing
       knowledge with a friend!`,
-      image: scholar,
+      image: heart,
       selected: false,
     },
   ]);
@@ -114,6 +116,10 @@ export default withRouter(function Profile({ history }) {
     history.push("/edit-profile");
   };
 
+  const toSubscribe = () => {
+    history.push("/dashboard/subscribe");
+  };
+
   return (
     <motion.div
       className="profile"
@@ -129,7 +135,27 @@ export default withRouter(function Profile({ history }) {
             style={{ cursor: "pointer" }}
             onClick={() => setseeAchievements(false)}
           >
-            <img src={back} alt="" height="25" />
+            <svg
+              version="1.1"
+              x="0px"
+              y="0px"
+              width="12px"
+              height="12px"
+              className="mt5 mr30"
+              viewBox="0 0 512.005 512.005"
+              style={{ transform: "rotate(180deg)" }}
+            >
+              <g>
+                <g>
+                  <path
+                    fill="#10A3FF"
+                    d="M388.418,240.923L153.751,6.256c-8.341-8.341-21.824-8.341-30.165,0s-8.341,21.824,0,30.165L343.17,256.005
+                      L123.586,475.589c-8.341,8.341-8.341,21.824,0,30.165c4.16,4.16,9.621,6.251,15.083,6.251c5.461,0,10.923-2.091,15.083-6.251
+                      l234.667-234.667C396.759,262.747,396.759,249.264,388.418,240.923z"
+                  />
+                </g>
+              </g>
+            </svg>
             Achievements
           </p>
           <div className="arc-contents">
@@ -181,7 +207,7 @@ export default withRouter(function Profile({ history }) {
             </div>
             <div className="half">
               <span>Username</span>
-              <p>{user.userName}</p>
+              <p>{user.userName || "---"}</p>
             </div>
             <div className="half">
               <span>Email Address</span>
@@ -214,7 +240,9 @@ export default withRouter(function Profile({ history }) {
                 Start here by subscribing to one of our standard packages for
                 full access to over 10,000 learning resources on our platform.
               </p>
-              <button className="blue-btn">Subscribe Now</button>
+              <button className="blue-btn" onClick={toSubscribe}>
+                Subscribe Now
+              </button>
 
               <img src={Characters} alt="" />
             </div>
@@ -232,7 +260,9 @@ export default withRouter(function Profile({ history }) {
                 Your account is active. Continue learning to improve your rank
                 at the Leaderboard
               </p>
-              <button className="tw-btn">Upgrade</button>
+              <button className="tw-btn" onClick={toSubscribe}>
+                Upgrade
+              </button>
             </div>
           </div>
         </div>
@@ -248,7 +278,9 @@ export default withRouter(function Profile({ history }) {
             Start here by subscribing to one of our standard packages for full
             access to over 10,000 learning resources on our platform.
           </p>
-          <button className="blue-btn">Subscribe Now</button>
+          <button className="blue-btn" onClick={toSubscribe}>
+            Subscribe Now
+          </button>
 
           <img src={Characters} alt="" />
         </div>

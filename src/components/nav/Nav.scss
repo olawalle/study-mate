@@ -11,12 +11,25 @@
     margin-top: 17px;
     height: 44px;
   }
-  #nav-icon1 {
-    display: none;
-  }
   .user {
     cursor: pointer;
     font-size: 12px;
+    .bluee {
+      padding: 0 40px;
+      border-radius: 40px;
+      border: 1px solid #10a3ff;
+      color: #10a3ff;
+      background-color: #fff;
+      margin-right: 20px;
+    }
+    .redd {
+      border: 1px solid #ff0000;
+      color: #ff0000;
+      padding: 0 40px;
+      border-radius: 40px;
+      background-color: #fff;
+      margin-right: 20px;
+    }
     .avatar {
       display: inline-block;
       width: 30px;
@@ -57,6 +70,10 @@
     }
   }
 
+  .dropdown-wrap {
+    display: inline-block;
+  }
+
   .dropdown {
     float: right;
     width: 170px;
@@ -93,7 +110,7 @@
     }
   }
 
-  .user:hover .dropdown {
+  .dropdown-wrap:hover .dropdown {
     display: block !important;
   }
 

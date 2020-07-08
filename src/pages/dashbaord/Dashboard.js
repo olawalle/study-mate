@@ -18,6 +18,7 @@ import Loader from "../../components/loader/Loader";
 import authServices from "../../services/authServices";
 import MobileCourses from "./dashboard-pages/mobileCourses/MobileCourses";
 import UserPhoto from "../../components/user-photo/UserPhoto";
+import Subscribe from "../Subscribe/Subscribe";
 
 const Dashboard = (props) => {
   let match = useRouteMatch();
@@ -52,6 +53,13 @@ const Dashboard = (props) => {
         text: "Home",
         title: "Progress",
         largeTitle: "Progress Wall",
+      };
+    }
+    if (path === "/dashboard/subscribe") {
+      return {
+        text: "Home",
+        title: "Subscribe",
+        largeTitle: "Subscrobe",
       };
     }
     if (path === "/dashboard/") {
@@ -114,6 +122,9 @@ const Dashboard = (props) => {
               <Route path={`${match.path}profile`}>
                 <Profile />
               </Route>
+              <Route path={`${match.path}subscribe`}>
+                <Subscribe />
+              </Route>
               <Route path={`${match.path}progress`}>
                 <Progress />
               </Route>
@@ -124,6 +135,11 @@ const Dashboard = (props) => {
                 <Learn />
               </Route>
             </Switch>
+          </div>
+
+          <div className="pre-footer bordered">
+            <p>@2020 All Rights Reserved. Studymate</p>
+            <p>Powered by InfoMall Nigeria</p>
           </div>
         </div>
       </div>

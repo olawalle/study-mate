@@ -150,24 +150,25 @@
           height: 130px;
           z-index: 12323;
           background: #fff;
-          padding: 15px 20px;
+          padding: 20px;
           border-radius: 10px;
           margin-bottom: 20px;
           position: relative;
           .ing {
-            width: 25%;
+            width: 20%;
             display: inline-block;
+            text-align: center;
             img {
-              height: 85px;
+              height: 65px;
               position: absolute;
-              top: 20px;
+              top: 30px;
               left: 20px;
             }
           }
           .streak-text {
             display: inline-block;
-            width: 75%;
-            padding-left: 30px;
+            width: 80%;
+            padding-left: 40px;
             position: relative;
             top: 0px;
             .top {

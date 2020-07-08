@@ -58,6 +58,15 @@ import Verify from "./pages/Verify";
 import PreviewSubject from "./pages/Subject/PreviewSubject";
 import LandingPage from "./pages/Landingpage/Landingpage";
 
+export const PreFooter = () => {
+  return (
+    <div className="pre-footer bordered">
+      <span>@2020 All Rights Reserved. Studymate</span>
+      <span>Powered by InfoMall Nigeria</span>
+    </div>
+  );
+};
+
 export default function App() {
   let history = useHistory();
   useEffect(() => {
