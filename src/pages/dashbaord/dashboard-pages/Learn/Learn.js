@@ -71,32 +71,43 @@ export default withRouter(function Learn({ history }) {
       transition={{ duration: 0.6 }}
     >
       <div className="mobile-screen">
-        <div className="medals">
-          <div className="medal">
-            <img src={coins} alt="" />
-            <span>0</span>
+        {user.isSubscribed ? (
+          <div className="subscribe bordered">
+            <p className="top">
+              Acquire coins and unlock more challenging practice resources as
+              you learn.
+            </p>
+            <p className="btm">Available to users on our Standard Plan</p>
+            <img src={Coinsystem} alt="" />
           </div>
-          <div className="medal">
-            <img src={b1} alt="" />
-            <span>0</span>
+        ) : (
+          <div className="medals bordered">
+            <div className="medal">
+              <img src={coins} alt="" />
+              <span>0</span>
+            </div>
+            <div className="medal">
+              <img src={b1} alt="" />
+              <span>0</span>
+            </div>
+            <div className="medal">
+              <img src={b2} alt="" />
+              <span>0</span>
+            </div>
+            <div className="medal">
+              <img src={b3} alt="" />
+              <span>0</span>
+            </div>
+            <div className="medal">
+              <img src={b4} alt="" />
+              <span>0</span>
+            </div>
+            <div className="medal">
+              <img src={b5} alt="" />
+              <span>0</span>
+            </div>
           </div>
-          <div className="medal">
-            <img src={b2} alt="" />
-            <span>0</span>
-          </div>
-          <div className="medal">
-            <img src={b3} alt="" />
-            <span>0</span>
-          </div>
-          <div className="medal">
-            <img src={b4} alt="" />
-            <span>0</span>
-          </div>
-          <div className="medal">
-            <img src={b5} alt="" />
-            <span>0</span>
-          </div>
-        </div>
+        )}
         <div className="grid">
           <div className="half" onClick={toMobileCourses}>
             <img src={LearnIcn} alt="" />
@@ -126,7 +137,7 @@ export default withRouter(function Learn({ history }) {
             Please edit your profile to complete your registration within a week
             from registration.
           </span>
-          <button onClick={toEdit}>EDIT PROFILE</button>
+          <button onClick={toEdit}>VERIFY PROFILE</button>
         </div>
       )}
       {userCourses.length ? (

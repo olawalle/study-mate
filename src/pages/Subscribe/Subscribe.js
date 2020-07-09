@@ -93,10 +93,10 @@ export default function Subscribe() {
                 {plan.points && plan.points.map((point, i) => <li>{point}</li>)}
               </ul>
             </div>
-            <button className="tw-btn" onClick={() => setopen(true)}>
-              Subscribe
-            </button>
           </div>
+          <button className="tw-btn" onClick={() => setopen(true)}>
+            Subscribe
+          </button>
         </div>
       </div>
 
@@ -111,7 +111,7 @@ export default function Subscribe() {
               alt=""
             />
             <p className="sm">You will pay</p>
-            <p className="amt">2,500</p>
+            <p className="amt">N2,500</p>
             <p className="sm">Choose your payment method</p>
             <div
               onClick={() => setselected(1)}

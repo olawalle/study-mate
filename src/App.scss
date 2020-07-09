@@ -360,6 +360,10 @@ button {
     -o-transition: 0.25s ease-in-out;
     background: #0ca3ff;
   }
+  #nav-icon1.open span {
+    background-color: #fff;
+    height: 2px;
+  }
 
   #nav-icon1 span:nth-child(1) {
     top: 0px;
@@ -420,5 +424,15 @@ button {
   p {
     margin: 0;
     color: rgba(0, 0, 0, 0.377);
+  }
+
+  @media (max-width: 768px), (min-width: 768px) and (max-width: 1024px) {
+    padding: 20px 0;
+    font-size: 12px;
+    p {
+      width: 100%;
+      text-align: center;
+      line-height: 20px;
+    }
   }
 }

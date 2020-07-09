@@ -5,6 +5,8 @@ import "./Courses.scss";
 import neww from "../../assets/images/New.svg";
 import authServices from "../../services/authServices";
 import { withRouter } from "react-router-dom";
+import { useState } from "react";
+import Modal from "react-responsive-modal";
 
 export default withRouter(function Courses(props) {
   const context = useContext(userContext);
@@ -15,6 +17,18 @@ export default withRouter(function Courses(props) {
     saveSelectedSubject,
     user,
   } = context;
+  const [openLevels, setopenLevels] = useState(false);
+  const [levels, setLevels] = useState([
+    "Beginner",
+    "Intermediate",
+    "Advanced",
+  ]);
+  const [selectedIndex, setselectedIndex] = useState(null);
+
+  const onCloseLevelsModal = () => {
+    setopenLevels(false);
+  };
+
   let sortesubjects = userCourses
     .map((subject, i) => {
       return {
@@ -47,6 +61,10 @@ export default withRouter(function Courses(props) {
         saveSelectedSubject(res.data);
         updateLoader(false);
         if (props.dontMove) return;
+        if (props.fromMobile) {
+          setopenLevels(true);
+          return;
+        }
         props.moveToCourse && !props.toPreview
           ? props.history.push(`/subject/${selectedSubject.name}/Beginner`)
           : props.history.push(`/preview-subject/${selectedSubject.id}`);
@@ -55,6 +73,12 @@ export default withRouter(function Courses(props) {
         console.log({ err });
         updateLoader(false);
       });
+  };
+
+  const goToSubject = () => {
+    let i = selectedIndex;
+    let level = i === 0 ? "Beginner" : i === 1 ? "Intermediate" : "Advanced";
+    props.history.push(`/subject/${selectedSubject.name}/${level}`);
   };
 
   useEffect(() => {
@@ -93,6 +117,36 @@ export default withRouter(function Courses(props) {
       <button onClick={props.onOpenModal} className="mt25 tw-btn">
         <b>Add more courses +</b>
       </button>
+
+      <Modal
+        open={openLevels}
+        onClose={onCloseLevelsModal}
+        center
+        closeOnOverlayClick={true}
+      >
+        <div className="levels-modal">
+          <p className="blue--text">Select User Type</p>
+          <div className="levels">
+            {levels.map((level, i) => {
+              return (
+                <div
+                  onClick={() => setselectedIndex(i)}
+                  className={`level bordered ${
+                    i === selectedIndex ? "selected" : ""
+                  }`}
+                >
+                  {level}
+                </div>
+              );
+            })}
+          </div>
+          <div className="btn">
+            <button className="tw-btn" onClick={goToSubject}>
+              Start Learning
+            </button>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 });

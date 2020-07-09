@@ -578,11 +578,11 @@ export default function QuizQuestion(props) {
                   </div>
 
                   {answer && !answer.showExplanation && (
-                    <p
-                      className="feedback blue--text"
-                      onClick={() => openFeedback()}
-                    >
-                      <em>Feedback</em>
+                    <p className="feedback blue--text">
+                      <em onClick={() => openFeedback()}>Feedback</em>
+                      <em onClick={() => openPassage()} className="f-right">
+                        {passage ? "Close Passage" : "View Passage"}
+                      </em>
                     </p>
                   )}
                 </div>
@@ -727,11 +727,11 @@ export default function QuizQuestion(props) {
                 </button>
               )}
 
-              {activeQuestion && activeQuestion.passage && (
+              {/* {activeQuestion && activeQuestion.passage && (
                 <button className="blue-btn" onClick={() => openPassage()}>
                   {passage ? "Close passage" : "Open passage"}
                 </button>
-              )}
+              )} */}
             </div>
           ) : (
             <div className="footer">
@@ -772,11 +772,11 @@ export default function QuizQuestion(props) {
                   PREVIOUS
                 </button>
               )}
-              {activeQuestion && activeQuestion.passage && (
+              {/* {activeQuestion && activeQuestion.passage && (
                 <button className="blue-btn" onClick={() => openPassage()}>
                   {passage ? "Close passage" : "Open passage"}
                 </button>
-              )}
+              )} */}
             </div>
           )}
         </div>

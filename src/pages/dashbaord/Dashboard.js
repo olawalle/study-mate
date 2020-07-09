@@ -84,7 +84,7 @@ const Dashboard = (props) => {
         <div className="contents">
           <div className={`banner ${!match.isExact && "shrink"}`}>
             <p className="title_">{flowRoute().largeTitle}</p>
-            {flowRoute().text && (
+            {/* {flowRoute().text && (
               <span
                 onClick={backToDash}
                 className={`mobile-title-text ${
@@ -93,7 +93,7 @@ const Dashboard = (props) => {
               >
                 {flowRoute().text}
               </span>
-            )}
+            )} */}
             {flowRoute().title && (
               <p
                 className={`mobile-title ${

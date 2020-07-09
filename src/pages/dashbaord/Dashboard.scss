@@ -18,7 +18,7 @@
   }
   .contents {
     width: 80%;
-    height: calc(100% - 75px);
+    height: calc(100% - 65px);
     float: left;
     position: relative;
     overflow: auto;
@@ -30,7 +30,7 @@
     .banner {
       height: 160px;
       width: calc(100% - 80px);
-      margin: 20px 40px;
+      margin: 40px 40px 0px;
       border-radius: 8px;
       padding: 20px;
       position: relative;
@@ -330,15 +330,10 @@
         border: 2px solid #fff;
         &.selected {
           border: 2px solid #10a3ff;
+          border-radius: 0;
         }
         p {
           margin-top: 20px;
-        }
-      }
-
-      @media (max-width: 768px), (min-width: 768px) and (max-width: 1024px) {
-        .close {
-          display: inline;
         }
       }
     }
@@ -348,6 +343,64 @@
       border-top: 0.5px solid #ebebeb;
       button {
         padding: 0px 40px;
+      }
+    }
+    @media (max-width: 768px), (min-width: 768px) and (max-width: 1024px) {
+      height: auto;
+      .top {
+        .box {
+          padding: 12px 20px;
+          height: auto;
+          width: 100%;
+          margin: 10px 0;
+          img {
+            width: 50px;
+          }
+          p {
+            display: inline-block;
+            width: 70%;
+            position: relative;
+            top: -15px;
+            left: -20px;
+          }
+        }
+      }
+      .btm {
+        border-top: 0;
+        padding-top: 0;
+        button {
+          width: 100%;
+        }
+      }
+      .close {
+        display: inline;
+      }
+    }
+  }
+  .levels-modal {
+    padding: 30px;
+    position: relative;
+    .blue--text {
+      text-align: center;
+    }
+    .levels {
+      width: 300px;
+      margin-top: 30px;
+      .level {
+        padding: 30px 15px;
+        text-align: center;
+        border-radius: 0;
+        margin-bottom: 20px;
+        font-size: 12px;
+        &.selected {
+          border: 1px solid #10a3ff;
+        }
+      }
+    }
+    .btn {
+      text-align: right;
+      button {
+        padding: 0 20px;
       }
     }
   }
@@ -388,7 +441,7 @@
       margin: 0 !important;
       border-radius: 0 !important;
       &.shrink {
-        height: 150px !important;
+        height: 110px !important;
       }
       .title_ {
         display: none;
@@ -408,7 +461,7 @@
         display: block;
         font-size: 16px !important;
         left: 20px !important;
-        bottom: 15px !important;
+        // bottom: 15px !important;
       }
       .user-photo {
         width: 120px;
@@ -531,11 +584,36 @@
     }
     .modal-data {
       padding: 20px;
-      .subject,
+      .coming {
+        text-align: left;
+        padding-top: 10px;
+        em {
+          position: relative;
+          top: -35px;
+          left: -20px;
+        }
+      }
+      .subject {
+        // width: 49%;
+        // margin: 0 1% 10px;
+        // display: inline-block;
+        margin: 0 0 10px;
+        width: 100%;
+      }
       .class {
         width: 100%;
         margin: 0 0 10px;
       }
+
+      // .small {
+      //   width: 31.1%;
+      // }
+      // .mid {
+      //   width: calc(48%);
+      // }
+      // .wide {
+      //   width: 100%;
+      // }
     }
     .modal-footer {
       font-size: 12px;
@@ -547,6 +625,17 @@
       .right {
         width: 100%;
         padding: 30px;
+      }
+      .lets-start {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background: #fff;
+        padding: 20px;
+        left: 0;
+        button {
+          width: 100%;
+        }
       }
     }
     .quiz-quuestion {

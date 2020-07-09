@@ -15,7 +15,8 @@ export default withRouter(function Studypack({ history }) {
   const context = useContext(userContext);
   const { selectedSubject, studyPacks, loading, fixBack } = context;
   const back = () => {
-    history.push(`/preview-subject/${selectedSubject.id}`);
+    // history.push(`/preview-subject/${selectedSubject.id}`);
+    history.goBack();
   };
   useEffect(() => {
     console.log(studyPacks);
@@ -30,14 +31,32 @@ export default withRouter(function Studypack({ history }) {
         </div>
         <div className="banner">
           <span className="backArrow">
-            <img
-              src={backArrow}
-              height="25"
-              className="mr10"
-              alt=""
+            <svg
+              version="1.1"
+              x="0px"
+              y="0px"
+              height="15"
+              className="mr25"
+              viewBox="0 0 512.005 512.005"
               onClick={back}
-              style={{ position: "relative", top: 5, cursor: "pointer" }}
-            />
+              style={{
+                transform: "rotate(180deg)",
+                position: "relative",
+                top: "-1px",
+                cursor: "pointer",
+              }}
+            >
+              <g>
+                <g>
+                  <path
+                    fill="#ffffff"
+                    d="M388.418,240.923L153.751,6.256c-8.341-8.341-21.824-8.341-30.165,0s-8.341,21.824,0,30.165L343.17,256.005
+                      L123.586,475.589c-8.341,8.341-8.341,21.824,0,30.165c4.16,4.16,9.621,6.251,15.083,6.251c5.461,0,10.923-2.091,15.083-6.251
+                      l234.667-234.667C396.759,262.747,396.759,249.264,388.418,240.923z"
+                  />
+                </g>
+              </g>
+            </svg>
             Study pack
           </span>
           <span onClick={back} className="mobile-title-text">
@@ -69,18 +88,23 @@ export default withRouter(function Studypack({ history }) {
 
         <div className="contents">
           <div className="small">
-            <p className="header">Study Pack</p>
+            {/* <p className="header">Study Pack</p> */}
 
-            <span className="desc">
+            <p className="desc">
               Our Study Packs are advanced tests created to assess your
               proficiency in various subjects and to improve your learning
-              progress. <br />
-              They can be experienced in three mediums based on your preference.{" "}
-              <br />
-              <p>- Learn mode</p>
-              <p>- Time mode</p>
-              <p>- Free form mode.</p>
-            </span>
+              progress. They can be experienced in three mediums based on your
+              preference. <br /> <br />
+              <p>
+                <span className="dot"></span> Learn mode
+              </p>
+              <p>
+                <span className="dot"></span> Time mode
+              </p>
+              <p>
+                <span className="dot"></span> Free form mode.
+              </p>
+            </p>
             <img src={students} alt="" />
           </div>
           <div className="wide list">

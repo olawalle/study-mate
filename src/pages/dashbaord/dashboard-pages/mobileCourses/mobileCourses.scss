@@ -1,0 +1,12 @@
+.mobile-courses {
+  .courses-wrap {
+    height: calc(100vh - 300px);
+    position: relative;
+    .courses {
+    }
+    .tw-btn {
+      position: absolute;
+      bottom: 0;
+    }
+  }
+}

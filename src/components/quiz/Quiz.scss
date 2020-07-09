@@ -44,7 +44,9 @@
 
   @media (max-width: 768px), (min-width: 768px) and (max-width: 1024px) {
     padding: 20px;
+    margin-top: 10px;
     margin-bottom: 10px;
+    border: 0;
     .quiz-heading {
       font-size: 16px;
       font-weight: 600;
@@ -89,6 +91,18 @@
       background-image: url("../../assets/images/floater.svg");
       background-repeat: no-repeat;
       background-position: 20px 101%;
+
+      .lets-start {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background: #fff;
+        padding: 20px;
+        left: 0;
+        button {
+          width: 100%;
+        }
+      }
 
       .right {
         .header {

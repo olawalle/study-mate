@@ -2,6 +2,7 @@
 .page-wrapper {
   width: 100%;
   height: auto;
+  @import url("https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css");
 }
 
 @media screen and (min-width: 768px) {
@@ -283,11 +284,13 @@
 }
 
 @media only screen and (max-width: 720px) {
-  .page-wrapper .nav-wrapper {
+  .page-wrapper .nav {
     /* MOBILE HEADINGS */
     /* MOBILE NAVIGATION */
     /* SECTIONS */
     /* SEARCH DISABLED ON MOBILE */
+    position: fixed;
+    top: 0;
   }
   .page-wrapper .nav-wrapper .features {
     -webkit-box-orient: vertical;

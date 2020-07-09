@@ -45,6 +45,12 @@ export default function AddCourses(props) {
       return {
         ...s,
         preSelected: preSelectedCourses[s.id] ? true : false,
+        width:
+          s.name.length <= 7
+            ? 1
+            : s.name.length > 7 && s.name.length <= 12
+            ? 2
+            : 3,
       };
     });
     setsubjects_(refinedSubjects);
@@ -120,7 +126,7 @@ export default function AddCourses(props) {
     });
 
     toBeRemoved.forEach((id) => {
-      console.log({toBeRemoved})
+      console.log({ toBeRemoved });
       authServices
         .deleteUserCourse(id, user.id)
         .then((res) => {
@@ -204,8 +210,11 @@ export default function AddCourses(props) {
             ...sub,
             preSelected: !sub.preSelected,
           }
-        : { ...sub };
+        : {
+            ...sub,
+          };
     });
+    console.log({ newSubjectArr });
     setLevelSubjects(newSubjectArr);
   };
 
@@ -225,7 +234,7 @@ export default function AddCourses(props) {
           }}
         >
           <p className="main-text">Let us help you personalize your learning</p>
-          <p className="sub-text">
+          <p className="sub-text" onClick={() => console.log(levelSubjects)}>
             {step === 1
               ? "What grade are you in?"
               : "What courses can we help you learn?"}
@@ -273,7 +282,14 @@ export default function AddCourses(props) {
             {levelSubjects.map((subject, i) => {
               return (
                 <button
-                  className={`subject bg_${i + 1}`}
+                  // className={`subject bg_${i + 1}`}
+                  className={`subject bg_${(i % 17) + 2} ${
+                    subject.width === 1
+                      ? "small"
+                      : subject.width === 2
+                      ? "mid"
+                      : "wide"
+                  }`}
                   onClick={() => pickSubject(i)}
                   key={`subject-${subject.name}`}
                 >

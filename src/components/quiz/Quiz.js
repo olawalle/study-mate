@@ -345,9 +345,12 @@ export default function Quiz(props) {
                       </span>
                     </p>
                   )}
-                  <button className="tw-btn mt15" onClick={startQuiz}>
-                    Lets get started
-                  </button>
+
+                  <div className="lets-start">
+                    <button className="tw-btn" onClick={startQuiz}>
+                      Let's get started
+                    </button>
+                  </div>
                 </div>
               ) : (
                 <div className="right">
@@ -545,9 +548,11 @@ export default function Quiz(props) {
                         </span>
                       </p>
                     )}
-                    <button className="tw-btn mt15" onClick={startQuiz}>
-                      Lets get started
-                    </button>
+                    <div className="lets-start">
+                      <button className="tw-btn" onClick={startQuiz}>
+                        Let's get started
+                      </button>
+                    </div>
                   </div>
                 ) : (
                   <div className="right">

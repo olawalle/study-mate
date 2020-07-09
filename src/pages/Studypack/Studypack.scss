@@ -56,7 +56,7 @@
       }
       p {
         position: relative;
-        top: -85px;
+        top: -40px;
         font-size: 22px;
       }
     }
@@ -117,7 +117,21 @@
       }
       .desc {
         font-size: 14px;
-        line-height: 22px;
+        line-height: 20px;
+        padding-bottom: 10px;
+        p {
+          margin: 8px 0 0px;
+          .dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: #5eade4;
+            margin-right: 10px;
+            position: relative;
+            top: -4px;
+          }
+        }
       }
       .level {
         padding: 20px 0;
@@ -128,6 +142,7 @@
         width: 90%;
         float: right;
         margin: 40px 5%;
+        display: none;
       }
     }
     .wide {
@@ -214,7 +229,8 @@
       font-size: 14px;
       padding: 20px;
       background-position-x: 83%;
-      .backArrow {
+      .backArrow,
+      .back svg {
         display: none !important;
       }
       .mobile-title-text {
@@ -224,10 +240,20 @@
     .sub-banner {
       padding: 0 20px;
       z-index: 10;
+      .small {
+        line-height: 20px;
+        span {
+          font-size: 12px;
+          top: 10px;
+        }
+        p {
+          top: 5px;
+        }
+      }
     }
     .contents {
       padding: 20px;
-      height: unset;
+      height: calc(100vh - 280px);
       overflow: auto;
       .small {
         width: 100%;

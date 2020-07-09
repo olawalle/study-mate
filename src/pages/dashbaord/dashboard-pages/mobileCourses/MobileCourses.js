@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Courses from "../../../../components/courses/Courses";
 import { motion } from "framer-motion";
+import "./mobileCourses.scss";
 import AddCourses from "../../../../components/add-courses/AddCourses";
 
 export default function MobileCourses() {
@@ -11,7 +12,12 @@ export default function MobileCourses() {
   };
   return (
     <motion.div className="mobile-courses" style={{ padding: "30px 20px" }}>
-      <Courses onOpenModal={onOpenModal} moveToCourse={true} toPreview={true} />
+      <Courses
+        fromMobile={true}
+        onOpenModal={onOpenModal}
+        moveToCourse={true}
+        toPreview={true}
+      />
       <AddCourses open={open} onCloseModal={onCloseModal} />
     </motion.div>
   );

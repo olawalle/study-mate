@@ -100,11 +100,18 @@
           }
         }
       }
+      &.sub {
+        padding: 20px;
+        .btm {
+          padding: 0;
+        }
+      }
     }
     .narrow-side {
       width: 100%;
       display: block;
-      margin-top: 40px;
+      margin-top: 90px;
+      padding: 0 20px 50px 20px;
       .badge-wrap {
         display: none;
       }

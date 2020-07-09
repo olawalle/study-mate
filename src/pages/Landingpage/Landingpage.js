@@ -4,6 +4,7 @@ import "./Landingpage.scss";
 import { withRouter } from "react-router-dom";
 
 import macbook from "../../assets/images/macbook.png";
+import Nav from "../../components/nav/Nav";
 
 const LandingPage = ({ history }) => {
   const [show_nav, setshow_nav] = useState(false);
@@ -13,45 +14,7 @@ const LandingPage = ({ history }) => {
 
   return (
     <div className="page-wrapper">
-      <div className="nav-wrapper nav__wrapper">
-        <nav className="navbar">
-          <img className="desktop" src="images/logo.svg" alt="Company Logo" />
-          <img
-            className="mobile"
-            src="images/white-logo.svg"
-            alt="mobile logo"
-          />
-          <div
-            id="nav-icon1"
-            onClick={() => setshow_nav(!show_nav)}
-            className={show_nav ? "open" : ""}
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-          {/* <div className="menu-toggle" id="mobile-menu">
-            <span className="bar"></span>
-            <span className="bar"></span>
-            <span className="bar"></span>
-          </div> */}
-
-          <ul className={show_nav ? "no-search open" : "no-search"}>
-            <li className="nav-item courses">
-              <a href="#">Courses</a>
-            </li>
-            <li className="nav-item about">
-              <a href="#">About</a>
-            </li>
-            <li className="nav-item" onClick={() => toAuth(1)}>
-              <a>Login</a>
-            </li>
-            <li className="nav-item sign__up" onClick={() => toAuth(2)}>
-              <a>Sign Up</a>
-            </li>
-          </ul>
-        </nav>
-      </div>
+      <Nav />
 
       <div className="ui container__ hero__section">
         <div className="ui stackable grid">

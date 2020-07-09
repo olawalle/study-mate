@@ -31,12 +31,18 @@ export default withRouter(function Nav(props) {
     props.history.push("/dashboard/subscribe");
   };
 
+  const toAuth = (n) => {
+    n === 1 ? props.history.push("/login") : props.history.push("/signup");
+  };
+
   const toProfile = () => {
     props.history.push("/edit-profile");
   };
 
   const goTo = (to) => {
-    if (to === "courses") props.history.push("/dashboard/");
+    if (to === "home") props.history.push("/dashboard/");
+    if (to === "subjects") props.history.push("/dashboard/mobile-courses");
+    if (to === "subscribe") props.history.push("/dashboard/subscribe");
     if (to === "edit") props.history.push("/edit-profile");
     if (to === "logout") logout();
     setshow_nav(false);
@@ -114,14 +120,35 @@ export default withRouter(function Nav(props) {
       <div className={`mobilenav ${show_nav ? "open" : ""}`}>
         {/* <input type="text" placeholder="What do you want learn?" /> */}
 
-        <p onClick={() => goTo("edit")}>
+        {/* <p onClick={() => goTo("edit")}>
           <img src={edit} className="logo" alt="" />
           Edit Profile
-        </p>
-        <p onClick={() => goTo("logout")}>
-          <img src={logoutIcon} className="logo" alt="" />
-          Logout
-        </p>
+        </p> */}
+        {context.isLoggedIn && <p onClick={() => goTo("home")}>Home</p>}
+        {context.isLoggedIn && (
+          <p onClick={() => goTo("subjects")}>Select Subject</p>
+        )}
+        {context.isLoggedIn && <p onClick={() => goTo("edit")}>Edit Profile</p>}
+        {context.isLoggedIn ? (
+          <button onClick={() => goTo("subscribe")} className="tw-btn">
+            Subscribe
+          </button>
+        ) : (
+          <>
+            <button className="blue-btn" onClick={() => toAuth(1)}>
+              Login
+            </button>
+            <button className="tw-btn" onClick={() => toAuth(2)}>
+              Sign Up
+            </button>
+          </>
+        )}
+        {context.isLoggedIn && (
+          <p onClick={() => goTo("logout")}>
+            {/* <img src={logoutIcon} className="logo" alt="" /> */}
+            Logout
+          </p>
+        )}
       </div>
     </div>
   );

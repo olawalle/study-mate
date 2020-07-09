@@ -200,8 +200,12 @@
               display: block;
             }
           }
+
           button {
             padding: 0 20px;
+            background-color: #1091e7;
+            border: 0;
+            color: #fff;
           }
         }
         .bg {
@@ -234,7 +238,7 @@
       .back {
         position: absolute;
         bottom: 20px;
-        img {
+        svg {
           display: none;
         }
       }
@@ -259,7 +263,7 @@
     .contents {
       padding: 0px;
       overflow: auto;
-      height: unset;
+      // height: unset;
       .small {
         width: 100%;
         padding: 0;
@@ -272,7 +276,7 @@
       .wide {
         width: 100%;
         padding: 0;
-        height: unset;
+        height: auto;
         &.narrow_ {
           display: block;
           .quiz-contents {
@@ -286,7 +290,8 @@
           margin-bottom: 0 !important;
         }
         .pack {
-          height: 320px;
+          height: 350px;
+          margin-bottom: 40px;
           .half {
             width: 100%;
             background-image: url("../../assets/images/Advanced\ test.svg");
@@ -298,8 +303,12 @@
             p {
               margin-top: 0px;
             }
-            .tw-btn {
-              background-color: #fca702 !important;
+
+            button {
+              padding: 0 20px;
+              background-color: #fff;
+              border: 0;
+              color: #1091e7;
             }
           }
           .bg {
