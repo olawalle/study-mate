@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Studypack.scss";
 import ProgressBar from "../../components/progress-bar/ProgressBar";
 import Nav from "../../components/nav/Nav";
@@ -7,17 +7,80 @@ import Quiz from "../../components/quiz/Quiz";
 import Loader from "../../components/loader/Loader";
 import students from "../../assets/images/students.png";
 import backArrow from "../../assets/images/back.svg";
-import { withRouter } from "react-router-dom";
+import { withRouter, useParams } from "react-router-dom";
 import { userContext } from "../../store/UserContext";
+import { retrieveItem } from "../../services/ls";
+import authServices from "../../services/authServices";
 // import students from "../../assets/images/students.png";
 
 export default withRouter(function Studypack({ history }) {
+  const { subject } = useParams();
   const context = useContext(userContext);
-  const { selectedSubject, studyPacks, loading, fixBack } = context;
+  const {
+    fixBack,
+    userCourses,
+    studyPacks,
+    loading,
+    selectedSubject: { id, ...selectedSubject },
+    updateLoader,
+  } = context;
+  console.log({ userCourses, studyPacks, selectedSubject });
+
+  const [total, setTotal] = useState();
   const back = () => {
     // history.push(`/preview-subject/${selectedSubject.id}`);
     history.goBack();
   };
+
+  useEffect(() => {
+    updateLoader(true);
+    authServices
+      .getQuizCount(id)
+      .then((res) => {
+        console.log({ testes: res.data });
+        setTotal(res.data.score);
+        updateLoader(false);
+      })
+      .catch((err) => {
+        console.log({ err });
+        updateLoader(false);
+      });
+  }, [id]);
+
+  const getUserTests = (id) => {
+    const usertests = retrieveItem("usertests");
+    console.log({ usertests, id });
+    if (usertests) {
+      const ut = usertests.filter((ut) => ut.testId === id);
+      console.log({ ut });
+      return ut;
+    }
+    return [];
+  };
+
+  const getTotalScore = () => {
+    const usertests = retrieveItem("usertests");
+    let score = 0;
+    if (usertests) {
+      score = usertests.reduce((agg, cur) => {
+        agg += cur.score;
+        return agg;
+      }, 0);
+    }
+    return score;
+  };
+
+  const getCourseId = () => {
+    if (userCourses) {
+      const u = userCourses.find(
+        (uc) => uc.course.name.toLowerCase() === subject.toLowerCase()
+      );
+      if (u) {
+        return u.id;
+      }
+    }
+  };
+
   useEffect(() => {
     console.log(studyPacks);
   }, []);
@@ -66,21 +129,13 @@ export default withRouter(function Studypack({ history }) {
         <div className="sub-banner">
           <div className="small">
             <span>Possible points:</span>
-            <p>1000</p>
+            <p>{total}</p>
           </div>
           <div className="wide">
             <div className="progresses">
               <div className="progress-wrap">
                 <ProgressBar />
-                <span>Basic (400 study points)</span>
-              </div>
-              <div className="progress-wrap">
-                <ProgressBar />
-                <span>Intermediate (400 study points)</span>
-              </div>
-              <div className="progress-wrap">
-                <ProgressBar />
-                <span>Advanced (400 study points)</span>
+                <span>Accumulated Score ({getTotalScore()} study points)</span>
               </div>
             </div>
           </div>
@@ -113,6 +168,9 @@ export default withRouter(function Studypack({ history }) {
               studyPacks.map((quiz, i) => {
                 return (
                   <Quiz
+                    type="study"
+                    usercourseid={getCourseId()}
+                    userquizzes={getUserTests(quiz.id)}
                     quiz={quiz.id}
                     open={true}
                     quizId={quiz.id}

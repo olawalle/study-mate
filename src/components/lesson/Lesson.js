@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, createRef } from "react";
 import "./Lesson.scss";
 
 import play from "../../assets/images/play.svg";
@@ -13,13 +13,17 @@ import listener from "../../assets/images/Nice-listener.svg";
 import streak from "../../assets/images/streak.svg";
 import { appUrl, videoUrl, fakeVideoUrl } from "../../services/urls";
 import { userContext } from "../../store/UserContext";
+import authServices from "../../services/authServices";
 
 export default withRouter(function Lesson({
   disableClick,
   history,
   video,
   grade,
+  ...props
 }) {
+  console.log({ abc: props.usertests, def: props.uservideos });
+  const vidRef = createRef();
   const context = useContext(userContext);
   const { selectedSubject } = context;
   const videoLevel =
@@ -49,12 +53,11 @@ export default withRouter(function Lesson({
   const [showStreak, setshowStreak] = useState(false);
   const [url, seturl] = useState("");
   const [videos, setVideos] = useState([]);
+  const [userVideo, setUserVideo] = useState([]);
+  const [render, setRender] = useState(false);
+  const [initVideo, setInitVideo] = useState(false);
   const [activeVideo, setactiveVideo] = useState(null);
-  // useEffect(() => {
-  //   if(url){
-  //     prepVideo(url);
-  //   }
-  // }, [url])
+
   const oncontextmenu = (e) => e.preventDefault();
   const duration = videos.reduce((agg, vid) => {
     return agg + vid.duration;
@@ -62,7 +65,66 @@ export default withRouter(function Lesson({
 
   const timeFrame = `${Math.floor(duration / 60)}hrs ${duration % 60}mins`;
 
+  const sendUserVideoToStore = (i) => {
+    //add a user's test and then add the courses
+    //check if user answered
+    console.log("quiz commenced adding...");
+    console.log("testid", props.usertests);
+    let userTestId = 0;
+    if (props.usertests && props.usertests.length) {
+      userTestId = props.usertests[0].id;
+    }
+    if (userTestId) {
+      const currentVid = videos[i];
+      const vid = vidRef.current;
+      const vidData = {
+        duration: vid && vid.currentTime,
+        videoId: currentVid.id,
+        userTestId,
+      };
+      console.log({ one: vidData });
+      sendUserVideoToServer(vidData);
+    } else {
+      const data = {
+        userCourseId: props.usercourseid,
+        testId: video.testId,
+      };
+      console.log({ data });
+      sendUserTestToServer(data, i);
+    }
+  };
+  const sendUserTestToServer = (data, i) => {
+    authServices
+      .addUserTest(data)
+      .then((res) => {
+        const currentVid = videos[i];
+        const vid = vidRef.current;
+        const vidData = {
+          duration: vid && vid.currentTime,
+          videoId: currentVid.id,
+          userTestId: res.data.id,
+        };
+        console.log({ vidData, current: currentVid });
+        sendUserVideoToServer(vidData);
+      })
+      .catch((err) => {
+        console.log({ err });
+      });
+  };
+
+  const sendUserVideoToServer = (data) => {
+    authServices
+      .addUserVideo(data)
+      .then((res) => {
+        console.log({ uservideo: res.data });
+        setUserVideo(res.data);
+      })
+      .catch((err) => {
+        console.log({ err });
+      });
+  };
   const selectVideo = (i) => {
+    sendUserVideoToStore(i);
     if (i >= videos.length) return;
     setactiveVideo(i);
     seturl(videos[i].url);
@@ -80,17 +142,32 @@ export default withRouter(function Lesson({
       })
     );
     const url = `${videoUrl}${videos[i].url}`;
-    prepVideo(url);
+    prepVideo(url, videos[i]);
   };
 
-  const prepVideo = (url) => {
+  const prepVideo = (url, video) => {
     if (url) {
       url = url.replace("assets", "video");
-      let videoPlayer = document.getElementById("homevideo");
+      const videoPlayer = vidRef.current;
       videoPlayer.oncontextmenu = () => false;
       console.log({ url });
       videoPlayer.src = url.replace("assets", "video");
-      videoPlayer.play();
+      console.log("oncanplay", { videoPlayer });
+      if (videoPlayer && video && (props.uservideos || userVideo)) {
+        const useVideos =
+          userVideo && userVideo.length ? userVideo : props.uservideos;
+        const previousVideo = useVideos.find((uv) => uv.videoId === video.id);
+        console.log("oncanplay", {
+          video,
+          userVideo,
+          useVideos,
+          previousVideo,
+        });
+        if (previousVideo) {
+          videoPlayer.currentTime = previousVideo.duration;
+        }
+      }
+      //videoPlayer.play();
     }
   };
 
@@ -99,7 +176,18 @@ export default withRouter(function Lesson({
       history.push(`/subject/${selectedSubject.id}`);
     } else {
       setopen(!open);
-      seturl(url);
+      let turl = url;
+      if (video && (props.uservideos || userVideo)) {
+        const useVideos =
+          userVideo && userVideo.length ? userVideo : props.uservideos;
+        const previousVideo = useVideos.find((uv) => uv.videoId === video.id);
+        if (previousVideo) {
+          turl += "#t=" + previousVideo.duration;
+          console.log({ turl });
+        }
+        setUserVideo(props.uservideos);
+      }
+      seturl(turl);
     }
   };
 
@@ -242,6 +330,7 @@ export default withRouter(function Lesson({
             <video
               style={{ width: "100%", height: "calc(90vh - 90px)" }}
               controls
+              ref={vidRef}
               onContextMenu={oncontextmenu}
               autoPlay={true}
               src={`${videoUrl}${url ? url.replace("assets", "video") : url}`}

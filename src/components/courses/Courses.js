@@ -3,6 +3,9 @@ import { userContext } from "../../store/UserContext";
 
 import "./Courses.scss";
 import neww from "../../assets/images/New.svg";
+import Beginner from "../../assets/images/Beginner.svg";
+import Intermediate from "../../assets/images/Intermediate.svg";
+import Advanced from "../../assets/images/Advanced.svg";
 import authServices from "../../services/authServices";
 import { withRouter } from "react-router-dom";
 import { useState } from "react";
@@ -135,7 +138,11 @@ export default withRouter(function Courses(props) {
                     i === selectedIndex ? "selected" : ""
                   }`}
                 >
-                  {level}
+                  <img
+                    src={i === 0 ? Beginner : i === 1 ? Intermediate : Advanced}
+                    alt=""
+                  />{" "}
+                  <span>{level}</span>
                 </div>
               );
             })}

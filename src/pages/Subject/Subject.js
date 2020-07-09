@@ -12,6 +12,7 @@ import { withRouter, useRouteMatch } from "react-router-dom";
 import { userContext } from "../../store/UserContext";
 import authServices from "../../services/authServices";
 import { useEffect } from "react";
+import { saveItem } from "../../services/ls";
 // import students from "../../assets/images/students.png";
 
 export default withRouter(function Subject({ history }) {
@@ -73,6 +74,7 @@ export default withRouter(function Subject({ history }) {
         console.log(res);
         updateStudyPack(res.data.tests);
         updateLoader(false);
+        saveItem("usertests", usertests);
         history.push(`/studypack/${selectedSubject.name}`);
       })
       .catch((err) => {
@@ -117,60 +119,70 @@ export default withRouter(function Subject({ history }) {
 
       const returnCandidate = [
         {
+          level: 0,
           id: test.id,
           take: !!beginnerVideo.length,
           quizzes: beginnerQuiz,
           videos: beginnerVideo,
         },
         {
+          level: 1,
           id: test.id,
           take: !!intermediateVideo.length,
           quizzes: intermediateQuiz,
           videos: intermediateVideo,
         },
         {
+          level: 2,
           id: test.id,
           take: !!advancedVideo.length,
           quizzes: advancedQuiz,
           videos: advancedVideo,
         },
         {
+          level: 3,
           id: test.id,
           take: !!fourVideo.length,
           quizzes: fourQuiz,
           videos: fourVideo,
         },
         {
+          level: 4,
           id: test.id,
           take: !!fiveVideo.length,
           quizzes: fiveQuiz,
           videos: fiveVideo,
         },
         {
+          level: 5,
           id: test.id,
           take: !!sixVideo.length,
           quizzes: sixQuiz,
           videos: sixVideo,
         },
         {
+          level: 6,
           id: test.id,
           take: !!sevenVideo.length,
           quizzes: sevenQuiz,
           videos: sevenVideo,
         },
         {
+          level: 7,
           id: test.id,
           take: !!eightVideo.length,
           quizzes: eightQuiz,
           videos: eightVideo,
         },
         {
+          level: 8,
           id: test.id,
           take: !!nineVideo.length,
           quizzes: nineQuiz,
           videos: nineVideo,
         },
         {
+          level: 9,
           id: test.id,
           take: !!tenVideo.length,
           quizzes: tenQuiz,
@@ -183,14 +195,36 @@ export default withRouter(function Subject({ history }) {
     return [];
   };
 
-  const getPreviousQuiz = (usertest, quizzes) => {
-    if (usertest) {
+  const getPreviousQuiz = (usertest, quizzes, level) => {
+    console.log({ level });
+    if (usertest && quizzes) {
       const intersection = usertest.userQuizzes.filter((value) =>
-        quizzes.some((q) => q.id === value.quizId)
+        quizzes.some((q) => q.id === value.quizId && q.level === level)
       );
+      console.log({ quizzes, ut: usertest.userQuizzes });
       return intersection;
     }
     return [];
+  };
+
+  const getUserVideos = (data) => {
+    if (data && data.length) {
+      return data[0].userVideos;
+    }
+    return [];
+  };
+
+  const totalScore = (tests) => {
+    if (tests) {
+      const score = tests
+        .filter((t) => t.studyType === 1)
+        .reduce((agg, cur) => {
+          agg += cur.quizes.length;
+          return agg;
+        }, 0);
+      return score;
+    }
+    return 0;
   };
 
   return (
@@ -201,9 +235,9 @@ export default withRouter(function Subject({ history }) {
           <Nav />
         </div>
         <div className="banner">
-          <span onClick={toCourses} className="mobile-title-text">
+          {/* <span onClick={toCourses} className="mobile-title-text">
             Learning Levels
-          </span>
+          </span> */}
           <span className="back" style={{ textTransform: "capitalize" }}>
             <svg
               version="1.1"
@@ -241,16 +275,16 @@ export default withRouter(function Subject({ history }) {
           </div> */}
           <div className="wide">
             <div className="progresses">
-              {usertests &&
-                usertests.userTests &&
-                usertests.userTests.map((utest) => {
+              {usertests && usertests.length ? (
+                usertests.map((utest) => {
                   return (
                     <div key={utest.id} className="progress-wrap">
                       <ProgressBar />
                       <span>
-                        {selectedSubject.tests.find(
-                          (t) => t.id == utest.testId
-                        ) &&
+                        {selectedSubject.tests &&
+                          selectedSubject.tests.find(
+                            (t) => t.id == utest.testId
+                          ) &&
                           selectedSubject.tests.find(
                             (t) => t.id == utest.testId
                           ).year}
@@ -258,7 +292,10 @@ export default withRouter(function Subject({ history }) {
                       </span>
                     </div>
                   );
-                })}
+                })
+              ) : (
+                <span>Start quizzes to acquire points</span>
+              )}
             </div>
           </div>
         </div>
@@ -306,7 +343,22 @@ export default withRouter(function Subject({ history }) {
                         {test.videos.length ? (
                           test.videos.map((video, i) => (
                             <Lesson
+                              usertests={
+                                usertests && usertests.length
+                                  ? usertests.filter(
+                                      (ut) => ut.testId === test.id
+                                    )
+                                  : []
+                              }
+                              uservideos={getUserVideos(
+                                usertests &&
+                                  usertests.length &&
+                                  usertests.filter(
+                                    (ut) => ut.testId === test.id
+                                  )
+                              )}
                               key={"video" + video.id + "" + i}
+                              usercourseid={usercourseid}
                               video={video}
                               grade={linkIndex}
                               disableClick={false}
@@ -338,8 +390,10 @@ export default withRouter(function Subject({ history }) {
                         userquizzes={getPreviousQuiz(
                           usertests &&
                             usertests.find((ut) => ut.testId === test.id),
-                          test.quizzes
+                          test.quizzes,
+                          test.level
                         )}
+                        type="main"
                         usercourseid={usercourseid}
                         quizType="normal"
                         quiz={test.quizzes}

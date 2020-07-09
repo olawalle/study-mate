@@ -59,7 +59,7 @@ const Dashboard = (props) => {
       return {
         text: "Home",
         title: "Subscribe",
-        largeTitle: "Subscrobe",
+        largeTitle: "Subscribe",
       };
     }
     if (path === "/dashboard/") {

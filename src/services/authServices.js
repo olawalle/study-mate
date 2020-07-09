@@ -173,6 +173,14 @@ let addMultipleUserQuizzes = (data) => {
   });
 };
 
+let addUserVideo = (data) => {
+  return axios({
+    method: "post",
+    url: urls.userVideosUrl,
+    data,
+  });
+};
+
 let getLeaderboard = (userID) => {
   return axios({
     method: "get",
@@ -181,11 +189,45 @@ let getLeaderboard = (userID) => {
   });
 };
 
+let getStatistics = (usercourseid) => {
+  return axios({
+    method: "get",
+    url: urls.statisticsUrl + "/" + usercourseid,
+    headers: headers(),
+  });
+};
+
 let getStudypackData = (quizID) => {
   return axios({
     method: "get",
-    url: `${urls.studyPackUrl}${quizID}?child=true`,
+    url: `${urls.testWithQuizzes}${quizID}`,
     headers: headers(),
+  });
+};
+
+let getQuizCount = (courseId) => {
+  return axios({
+    method: "get",
+    url: `${urls.quizCountUrl}${courseId}`,
+    headers: headers(),
+  });
+};
+
+
+let updateUserTestData = (data, id) => {
+  return axios({
+    method: "patch",
+    url: urls.userTestUrl + "/" + id,
+    data,
+    headers: headers(),
+  });
+};
+
+let updateMultipleUserQuiz = (data) => {
+  return axios({
+    method: "put",
+    url: urls.updateMultipleUserQuizesUrl,
+    data,
   });
 };
 
@@ -220,4 +262,9 @@ export default {
   addUserTest,
   getUcourseWithTests,
   addMultipleUserQuizzes,
+  addUserVideo,
+  getStatistics,
+  updateUserTestData,
+  updateMultipleUserQuiz,
+  getQuizCount
 };

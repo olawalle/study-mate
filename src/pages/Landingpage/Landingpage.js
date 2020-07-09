@@ -20,12 +20,13 @@ const LandingPage = ({ history }) => {
         <div className="ui stackable grid">
           <div className="nine wide column">
             <div className="hero__left">
-              <div className="curved__caption">#No 1 platform for learning</div>
+              {/* <div className="curved__caption">#No 1 platform for learning</div> */}
               <h1>Your Dependable Learning Buddy</h1>
               <div className="caption__content">
                 <span className="light">
-                  Give your child a study partner that understands and
-                  communicates knowledge for excellence in exams and practice.
+                  Get access to over 1,000 Junior and Senior Secondary School
+                  video lessons on all statutory subjects with over 10,000
+                  practice questions at your convenience.
                 </span>
               </div>
               <div className="enroll__wrapper">
@@ -127,9 +128,9 @@ const LandingPage = ({ history }) => {
             </div>
             <div className="eight wide column">
               <div className="video__right">
-                <div className="curved__caption">
+                {/* <div className="curved__caption">
                   #No 1 platform for learning
-                </div>
+                </div> */}
                 <h1>Your Dependable Learning Buddy</h1>
                 <div className="caption__content light">
                   <span className="light">
@@ -152,18 +153,17 @@ const LandingPage = ({ history }) => {
       <div className="carousel__section">
         <div className="ui container__">
           <div className="ui stackable grid">
-            <div className="eight wide column">
+            <div className="t-center wide column">
               <div className="carousel__caption">
                 <h1>Browse Our Subject Catalogue</h1>
                 <div className="caption__content">
                   <span className="light">
                     Give your child a study partner that understands and
-                    communicates knowledge for excellence in exams and practice.
+                    communicates knowledge for excellence.
                   </span>
                 </div>
               </div>
             </div>
-            <div className="eight wide column"></div>
           </div>
         </div>
         <div style={{ textAlign: "center" }} className="ui container__">
@@ -203,7 +203,7 @@ const LandingPage = ({ history }) => {
                 </p>
                 <ul>
                   <li>
-                    <span>Limited contents - 2 videos</span>
+                    <span> Limited number of contents</span>
                   </li>
                   <li>
                     <span>No points or badges or gamification features </span>
@@ -216,7 +216,7 @@ const LandingPage = ({ history }) => {
                   </li>
                 </ul>
 
-                <button>Subscribe</button>
+                <button onClick={() => toAuth(1)}>Subscribe</button>
               </div>
             </div>
             <div className="five wide column">
@@ -226,27 +226,29 @@ const LandingPage = ({ history }) => {
                   <span>N1,500.00</span>/month
                 </p>
                 <p className="price">
-                  <span>N4,00.00</span>/month
+                  <span>N4,00.00</span>/Quarter
                 </p>
                 <p className="price">
-                  <span>N15,000.00</span>/month
+                  <span>N15,000.00</span>/Year
                 </p>
                 <ul>
                   <li>
-                    <span>Limited contents - 2 videos</span>
+                    <span>Full access to all contents</span>
                   </li>
                   <li>
-                    <span>No points or badges or gamification features </span>
+                    <span>
+                      Points, badges, levels, and full gamification features
+                    </span>
                   </li>
                   <li>
-                    <span>No analytics </span>
+                    <span>Learning Analytics</span>
                   </li>
                   <li>
-                    <span>No rewards or benefits</span>
+                    <span>Rewards and benefits</span>
                   </li>
                 </ul>
 
-                <button>Subscribe</button>
+                <button onClick={() => toAuth(1)}>Subscribe</button>
               </div>
             </div>
           </div>

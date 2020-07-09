@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 
-const answerBuilder = (quizId, userOptionId, correctOptionId, attempts = 0, showExplanation = false) => ({
+const answerBuilder = (quizId, userOptionId, correctOptionId, mode, attempts = 0, showExplanation = false, id = 0, dateTaken) => ({
   quizId,
   userOptionId,
   correctOptionId,
+  mode,
   attempts: attempts,
   showExplanation: showExplanation,
   alert: false,
+  id,
+  dateTaken
 });
 
 export default function useTest(previousData, quizId) {
@@ -32,8 +35,11 @@ export default function useTest(previousData, quizId) {
           current.quizId,
           current.userOption,
           current.correctOption,
+          current.mode,
           2,
-          true
+          true,
+          current.id,
+          current.dateTaken
         );
         aggregate = aggregate.concat(build);
         return aggregate;
@@ -61,14 +67,31 @@ export default function useTest(previousData, quizId) {
   const updateAnswers = () => {
     if(!answer.userOptionId) return;
     const currentAnswer = { ...answer, attempts: 2 };
+    console.log("user", {previousData, currentAnswer})
     if (previousData.some((ans) => ans.quizId === currentAnswer.quizId && ans.mode === currentAnswer.mode)) {
-      setanswersToUpdate(
-        answersToUpdate.map((ans) =>
-          ans.quizId === currentAnswer.quizId ? currentAnswer : ans
-        )
-      );
+      console.log("user to be updated")
+      if(answersToUpdate.some((ans) => ans.quizId === currentAnswer.quizId)){
+        setanswersToUpdate(
+          answersToUpdate.map((ans) =>
+            ans.quizId === currentAnswer.quizId ? currentAnswer : ans
+          )
+        );
+      }
+      else{
+        setanswersToUpdate(answersToUpdate.concat(currentAnswer));
+      }
+      
     } else {
-      setanswersToAdd(answersToAdd.concat(currentAnswer));
+      if(answersToAdd.some((ans) => ans.quizId === currentAnswer.quizId)){
+        setanswersToAdd(
+          answersToAdd.map((ans) =>
+            ans.quizId === currentAnswer.quizId ? currentAnswer : ans
+          )
+        );
+      }
+      else{
+        setanswersToAdd(answersToAdd.concat(currentAnswer));
+      }
     }
     setAnswers(upsertAnswer(currentAnswer));
   };

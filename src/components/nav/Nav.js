@@ -40,6 +40,8 @@ export default withRouter(function Nav(props) {
   };
 
   const goTo = (to) => {
+    if (to === "login") props.history.push("/login");
+    if (to === "signup") props.history.push("/signup");
     if (to === "home") props.history.push("/dashboard/");
     if (to === "subjects") props.history.push("/dashboard/mobile-courses");
     if (to === "subscribe") props.history.push("/dashboard/subscribe");
@@ -54,6 +56,18 @@ export default withRouter(function Nav(props) {
         <img src={logo} className="logo" alt="" />
       </span>
 
+      {!context.isLoggedIn && (
+        <span className="user f-right">
+          <span onClick={() => goTo("login")}>Login</span>
+          <button
+            onClick={() => goTo("signup")}
+            className="tw-btn ml30 pl20 pr20"
+            style={{ fontWeight: 400 }}
+          >
+            Sign up
+          </button>
+        </span>
+      )}
       {context.isLoggedIn && (
         <span className="user f-right">
           <button

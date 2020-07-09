@@ -7,7 +7,7 @@ import Passage from "../../assets/images/Passage.svg";
 import caret from "../../assets/images/down-arrow.svg";
 import { appUrl, audioUrl } from "../../services/urls";
 import { userContext } from "../../store/UserContext";
-import beep from "../../assets/audio/beep.mp3";
+import beep from "../../assets/audio/beep1.mp3";
 
 import MathJax from "react-mathjax";
 import Parser from "../content-display/Parser";
@@ -83,6 +83,8 @@ export default function QuizQuestion(props) {
     props.selectedQuizMode
   );
 
+  console.log(selectedQuizMode)
+
   console.log({ userAnswersToAdd, userAnswersToUpdate });
   //const qid = activeQuestion && activeQuestion.quizId;
   const uid = answer ? answer.userOptionId : 0;
@@ -126,14 +128,51 @@ export default function QuizQuestion(props) {
           userCourseId: props.usercourseid,
           testId: activeQuestion.testId,
           currentLevel: activeQuestion.level,
-          score: selectedQuizMode === "Time Mode" ? userScore : 0,
+          score: selectedQuizMode === "Free Form Mode" ? userScore : 0,
         };
         updateLoader(true);
         sendUserTestToServer(data, callback);
       }
     } else {
-      callback();
       console.log("quiz nothing to add");
+      callback();
+    }
+    if(userAnswersToUpdate.length){
+      const userTestId = props.usertests[0].id;
+      if(userTestId){
+        const data = [
+          {
+            value: userScore,
+            op: "add",
+            path: "/score",
+          },
+        ];
+        updateLoader(true);
+        authServices
+          .updateUserTestData(data, userTestId)
+          .then((res) => {
+            console.log({ usertest: res.data, mode: modeConverter() });
+
+            const data = userAnswersToAdd.map((ua) => ({
+              ...ua,
+              userOption: ua.userOptionId,
+              correctOption: ua.correctOptionId,
+              userTestId: res.data.id,
+            }));
+            updateUserQuizInServer(data, callback, false);
+          })
+          .catch((err) => {
+            console.log({ err });
+            callback();
+            updateLoader(false);
+          });
+
+        console.log("user test id", userTestId)
+      }
+      console.log({userScore});
+    } else {
+      console.log("quiz nothing to update");
+      callback();
     }
   };
 
@@ -164,6 +203,21 @@ export default function QuizQuestion(props) {
       .addMultipleUserQuizzes(data)
       .then((res) => {
         console.log({ usertest: res.data });
+        callback();
+        updateLoader(loadstate);
+      })
+      .catch((err) => {
+        console.log({ err });
+        callback();
+        updateLoader(loadstate);
+      });
+  };
+
+  const updateUserQuizInServer = (data, callback, loadstate) => {
+    authServices
+      .updateMultipleUserQuiz(data)
+      .then((res) => {
+        console.log({ usertestupdate: res.data });
         callback();
         updateLoader(loadstate);
       })
@@ -254,6 +308,7 @@ export default function QuizQuestion(props) {
       updateThisAnswer({
         quizId: activeQuestion.id,
         userOptionId: i,
+        mode: modeConverter(),
         correctOptionId: activeQuestion.answerId,
         alert: true,
       });
@@ -314,7 +369,6 @@ export default function QuizQuestion(props) {
         mode: modeConverter(),
         correctOption: activeQuestion.answerId,
         userOption: userOption,
-        mode: modeConverter(),
         correctOptionId: activeQuestion.answerId,
         alert: true,
       });
@@ -373,7 +427,7 @@ export default function QuizQuestion(props) {
       {activeQuestion && (
         <div className="quiz-quuestion">
           <span className="close">
-            <img src={close} alt="" onClick={() => onClose()} />
+            <img src={close} alt="" onClick={onClose} />
           </span>
           <div className="upper">
             <div className="upper-bar">

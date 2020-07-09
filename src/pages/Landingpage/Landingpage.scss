@@ -3,6 +3,12 @@
   width: 100%;
   height: auto;
   @import url("https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css");
+  .nav {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
 }
 
 @media screen and (min-width: 768px) {
@@ -815,11 +821,15 @@
 }
 
 .page-wrapper .bg__wrapper.video__background {
-  background-image: url("../../assets/images/video-background.png");
   min-height: 500px;
-  background-repeat: no-repeat;
-  background-size: contain;
   width: 80%;
+  padding: 40px !important;
+  .justify__content {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-image: url("../../assets/images/video-background.png");
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -853,15 +863,17 @@
 }
 
 .carousel__section .carousel__caption {
-  padding-bottom: 20%;
-  max-width: 420px;
+  text-align: center;
+  // padding-bottom: 20%;
+  max-width: 700px;
+  margin: auto;
 }
 
 .carousel__section .carousel__caption h1 {
   margin-top: 10%;
   color: #002984;
   // font-family: "Helvetica Bold";
-  text-align: left;
+  text-align: center;
   font-size: 50px;
   font-weight: 600;
 }
