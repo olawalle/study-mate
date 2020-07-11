@@ -152,7 +152,7 @@ export default function Quiz(props) {
   const onOpenModal = (n) => {
     if (props.dummy || (!props.open && n === 2)) return;
     if (props.quizType === "normal") {
-      console.log("is normal");
+      console.log("is normal", n);
       n === 1 ? setopen(true) : constShowMobile(true);
     } else {
       console.log("is quizpack", props.quizId);
@@ -203,7 +203,7 @@ export default function Quiz(props) {
             "Level up on the above skills and collect mastery points"}
         </p>
 
-        {/* <button
+        <button
           disabled={!props.quiz}
           title={
             !props.quiz
@@ -214,9 +214,9 @@ export default function Quiz(props) {
           onClick={() => onOpenModal(1)}
         >
           {props.usertests && props.usertests.length
-            ? "Resume Quiz"
-            : "Start Quiz"}
-        </button> */}
+            ? "Resume Learning"
+            : "Start Learning"}
+        </button>
 
         <button
           disabled={!props.quiz}
@@ -225,7 +225,7 @@ export default function Quiz(props) {
               ? "There are no questions in this quiz. Check back later"
               : "Click to take test"
           }
-          className={`${props.dummy ? "tw-btn w100p" : "blue-btn"}`}
+          className={`${props.dummy ? "tw-btn w100p" : "blue-btn"} big-btn`}
           onClick={() => onOpenModal(2)}
         >
           {props.userquizzes && props.userquizzes.length

@@ -59,7 +59,6 @@ export default withRouter(function Subject({ history }) {
         console.log({ err });
         updateLoader(false);
       });
-    console.log(selectedSubject);
   }, [pageLoaded]);
 
   const back = () => {
@@ -196,12 +195,10 @@ export default withRouter(function Subject({ history }) {
   };
 
   const getPreviousQuiz = (usertest, quizzes, level) => {
-    console.log({ level });
     if (usertest && quizzes) {
       const intersection = usertest.userQuizzes.filter((value) =>
         quizzes.some((q) => q.id === value.quizId && q.level === level)
       );
-      console.log({ quizzes, ut: usertest.userQuizzes });
       return intersection;
     }
     return [];

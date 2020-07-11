@@ -8,6 +8,7 @@
     top: 0;
     left: 0;
     width: 100%;
+    box-shadow: none !important;
   }
 }
 
@@ -73,6 +74,9 @@
 }
 
 @media screen and (max-width: 768px) {
+  .page-wrapper .nav {
+    box-shadow: 0px 3px 6px #0000000d !important;
+  }
   .page-wrapper .nav-wrapper h1 {
     letter-spacing: 1px !important;
     line-height: 1.1 !important;
@@ -1036,6 +1040,8 @@
     font-weight: 600;
     line-height: 40px;
     padding-right: 30px;
+    color: #002984;
+    margin-top: 100px;
   }
   .btm {
     font-size: 20px;
@@ -1114,6 +1120,7 @@
       font-size: 28px;
       font-weight: 600;
       line-height: 34px;
+      margin-top: 0;
     }
     .btm {
       font-size: 20px;

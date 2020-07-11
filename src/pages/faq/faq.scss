@@ -42,7 +42,6 @@
   }
   .contents {
     padding: 60px 300px;
-    text-align: center;
     .title {
       font-size: 30px;
       font-weight: 600;
@@ -67,17 +66,20 @@
     }
     .submit {
       //   float: left;
-      // padding: 0 100px;
+      padding: 0 30px;
       font-weight: 600;
       margin-top: 20px;
-      border-radius: 8px;
+      // border-radius: 8px;
       margin-bottom: 50px;
-      width: 100%;
+      // width: 100%;
     }
     .sub {
       font-size: 14px;
       padding: 0 80px;
       margin-bottom: 50px;
+    }
+    .questions {
+      text-align: center;
     }
     .accordion {
       width: 100%;

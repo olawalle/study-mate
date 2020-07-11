@@ -162,7 +162,7 @@
         p {
           display: inline-block;
           font-size: 16px;
-          margin-left: 50px;
+          margin: 1em 0 1em 50px;
           // margin-bottom: 30px;
           width: calc(100% - (25px + 60px));
         }
@@ -297,7 +297,7 @@
       img {
         width: 20px;
         float: right;
-        margin-top: 6px;
+        margin-top: -5px;
       }
     }
     .upper {

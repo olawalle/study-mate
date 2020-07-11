@@ -16,10 +16,10 @@
   .blue-btn {
     padding: 10px 20px;
     &.sm-btn {
-      display: none;
+      display: block;
     }
     &.big-btn {
-      display: block;
+      display: none;
     }
   }
   .patterns {
@@ -29,13 +29,13 @@
       height: 50px;
       position: absolute;
       right: 153px;
-      top: -30px;
+      top: -60px;
     }
     .pattern1 {
       height: 100px;
       position: absolute;
       right: 42px;
-      top: -60px;
+      top: -100px;
     }
   }
   .mobile-quiz {
@@ -56,10 +56,10 @@
     }
     .blue-btn {
       &.sm-btn {
-        display: block;
+        display: none;
       }
       &.big-btn {
-        display: none;
+        display: block;
       }
     }
     .patterns {

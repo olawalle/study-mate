@@ -83,9 +83,6 @@ export default function QuizQuestion(props) {
     props.selectedQuizMode
   );
 
-  console.log(selectedQuizMode)
-
-  console.log({ userAnswersToAdd, userAnswersToUpdate });
   //const qid = activeQuestion && activeQuestion.quizId;
   const uid = answer ? answer.userOptionId : 0;
 
@@ -137,9 +134,9 @@ export default function QuizQuestion(props) {
       console.log("quiz nothing to add");
       callback();
     }
-    if(userAnswersToUpdate.length){
+    if (userAnswersToUpdate.length) {
       const userTestId = props.usertests[0].id;
-      if(userTestId){
+      if (userTestId) {
         const data = [
           {
             value: userScore,
@@ -167,9 +164,9 @@ export default function QuizQuestion(props) {
             updateLoader(false);
           });
 
-        console.log("user test id", userTestId)
+        console.log("user test id", userTestId);
       }
-      console.log({userScore});
+      console.log({ userScore });
     } else {
       console.log("quiz nothing to update");
       callback();

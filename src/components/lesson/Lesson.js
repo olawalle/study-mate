@@ -22,7 +22,6 @@ export default withRouter(function Lesson({
   grade,
   ...props
 }) {
-  console.log({ abc: props.usertests, def: props.uservideos });
   const vidRef = createRef();
   const context = useContext(userContext);
   const { selectedSubject } = context;
@@ -173,7 +172,7 @@ export default withRouter(function Lesson({
 
   const openModal = (url) => {
     if (disableClick) {
-      history.push(`/subject/${selectedSubject.id}`);
+      history.push(`/subject/${selectedSubject.name}/Beginner`);
     } else {
       setopen(!open);
       let turl = url;

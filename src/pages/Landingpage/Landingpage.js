@@ -226,10 +226,10 @@ const LandingPage = ({ history }) => {
                   <span>N1,500.00</span>/month
                 </p>
                 <p className="price">
-                  <span>N4,00.00</span>/Quarter
+                  <span>N4,00.00</span>/3months
                 </p>
                 <p className="price">
-                  <span>N15,000.00</span>/Year
+                  <span>N15,000.00</span>/yearly
                 </p>
                 <ul>
                   <li>
