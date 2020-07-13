@@ -30,6 +30,9 @@ export const videosUrl = `${baseUrl}videos`;
 export const filesUrl = `${baseUrl}files/upload`;
 export const statisticsUrl = `${baseUrl}usercourses/statistics`;
 export const quizCountUrl = `${baseUrl}quizes/count/`;
+export const feedbackUrl = `${baseUrl}feedbacks`;
+export const subscriptionUrl = `${baseUrl}subscriptions`;
+export const userSubUrl = `${baseUrl}usersubscriptions`;
 
 export const addMultipleUserQuizesUrl = `${baseUrl}userquizzes/multiple`;
 export const updateMultipleUserQuizesUrl = `${baseUrl}userquizzes`;

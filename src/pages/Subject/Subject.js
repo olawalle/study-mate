@@ -19,6 +19,7 @@ export default withRouter(function Subject({ history }) {
   let match = useRouteMatch();
   const context = useContext(userContext);
   const {
+    fixBack,
     selectedSubject,
     updateLoader,
     updateStudyPack,
@@ -51,6 +52,7 @@ export default withRouter(function Subject({ history }) {
             : 0;
         settestId(defaultTestId);
         setusercourseid(res.data.id);
+        console.log({ usertest: res.data.userTests });
         setusertests(res.data.userTests);
         updateLoader(false);
         setpageLoaded(true);
@@ -92,7 +94,7 @@ export default withRouter(function Subject({ history }) {
   };
 
   const generateLevelTest = (id, tests) => {
-    const test = tests.find((t) => t.year === level);
+    const test = tests.find((t) => t.id === id);
     if (test) {
       const beginnerQuiz = test.quizes.filter((q) => q.level === 0);
       const intermediateQuiz = test.quizes.filter((q) => q.level === 1);
@@ -224,17 +226,27 @@ export default withRouter(function Subject({ history }) {
     return 0;
   };
 
+  const getTrailingScores = () => {
+    if (usertests && selectedSubject && selectedSubject.tests) {
+      const intersection = usertests.filter((u) =>
+        selectedSubject.tests.map((t) => t.id).includes(u.testId)
+      );
+      return intersection;
+    }
+    return [];
+  };
+
   return (
     <>
       {loading && <Loader />}
-      <div className="subject">
+      <div className={`subject ${fixBack ? "fixed" : "not-fixed"}`}>
         <div className="nav-wrap">
           <Nav />
         </div>
         <div className="banner">
           {/* <span onClick={toCourses} className="mobile-title-text">
-            Learning Levels
-          </span> */}
+                    Learning Levels
+                    </span> */}
           <span className="back" style={{ textTransform: "capitalize" }}>
             <svg
               version="1.1"
@@ -266,14 +278,14 @@ export default withRouter(function Subject({ history }) {
           </span>
         </div>
         <div className="sub-banner">
-          {/* <div className="small">
+          <div className="small">
             <span>Possible points:</span>
-            <p>1000</p>
-          </div> */}
+            <p>10</p>
+          </div>
           <div className="wide">
             <div className="progresses">
-              {usertests && usertests.length ? (
-                usertests.map((utest) => {
+              {getTrailingScores().length ? (
+                getTrailingScores().map((utest) => {
                   return (
                     <div key={utest.id} className="progress-wrap">
                       <ProgressBar />
@@ -291,7 +303,7 @@ export default withRouter(function Subject({ history }) {
                   );
                 })
               ) : (
-                <span className="pl20">Start quizzes to acquire points</span>
+                <span>Start quizzes to acquire points</span>
               )}
             </div>
           </div>
