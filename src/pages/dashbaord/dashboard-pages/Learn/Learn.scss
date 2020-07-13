@@ -1,282 +1,334 @@
 .learn {
-  height: calc(100vh - 275px);
-  // overflow-y: hidden;
-  padding: 0 20px;
-  .mobile-screen {
-    display: none;
-  }
-  .heading {
-    width: 100%;
-    font-size: 14px;
-    font-weight: 600;
-    border-bottom: 1px solid #eee;
-    padding: 20px 30px;
-    margin: 0;
-    background-color: #fff;
-    text-transform: capitalize;
-    span {
-      font-size: 10px;
-      color: #c2c2c2;
-      font-weight: 300;
-    }
-  }
-  .verify {
-    background: #ff0007;
-    opacity: 0.75;
-    color: #fff;
-    width: 100%;
-    padding: 0px 50px;
-    z-index: 1000000000;
-    transform: scale(1.05);
-    font-size: 12px !important;
-    position: absolute;
-    top: -180px;
-    left: 0;
-    height: 50px;
-    line-height: 50px;
-    button {
-      height: 30px !important;
-      border: 1px solid #fff;
-      float: right;
-      background-color: red;
-      color: #fff;
-      padding: 0 20px;
-      position: relative;
-      top: 10px;
-      animation-name: grow;
-      animation-duration: 1.5s;
-      animation-iteration-count: 20;
-    }
-  }
-  .wide-side {
-    float: left;
-    width: 70%;
-    overflow: hidden;
-    .lessons-wrap {
-      background-color: #fff;
-      padding-bottom: 0px;
-      .lessons {
-        height: 195px;
-        overflow: hidden;
-        margin-top: 0;
-      }
-      .sub-heading {
-        font-size: 14px;
-        margin-top: 0;
-        color: #aaaaaa;
-        padding: 30px;
-        margin-bottom: 0;
-        button {
-          padding: 12px 20px;
-          margin-top: -10px;
-        }
-      }
-      .lessons {
-        // height: 200px;
-        // overflow: auto;
-      }
-    }
-    .quizzes {
-      background-color: #fff;
-    }
-  }
-  .narrow-side {
-    float: right;
-    width: calc(30% - 30px);
-    .subscribe {
-      height: 335px;
-      background-color: #fff;
-      padding: 20px;
-      text-align: center;
-      .top {
-        font-size: 12px;
-        color: #000000;
-        opacity: 0.5;
-      }
-      .btm {
-        font-size: 20px;
-        color: #000000;
-        opacity: 1;
-        font-weight: 600;
-        width: 80%;
-        margin: 0 10%;
-      }
-      img {
-        width: 60%;
-        margin-top: 20px;
-      }
-    }
-    .badge-wrap {
-      width: 100%;
-    }
-    .students {
-      display: none;
-    }
-  }
+    height: calc(100vh - 275px);
+    // overflow-y: hidden;
+    padding: 0 20px;
 
-  @media (max-width: 768px), (min-width: 768px) and (max-width: 1024px) {
-    overflow: unset;
-    height: auto;
     .mobile-screen {
-      display: block;
-      height: 530px;
-      position: relative;
-      .medals {
-        text-align: center;
-        padding: 25px 15px;
-        display: block;
-        margin-top: 20px;
-        .medal {
-          display: inline-block;
-          width: calc(100% / 6);
-          height: 30px;
-          margin: 10px 0;
-          text-align: center;
-          img {
-            height: 24px;
-            position: relative;
-            top: 2px;
-          }
-          span {
-            display: block;
-            position: relative;
-            top: 5px;
-            font-size: 12px;
-          }
-        }
-      }
-      .grid {
-        height: 330px;
-        overflow: hidden;
-        padding: 10px 0;
-        margin-top: 30px;
-        color: #fff;
-        .half {
-          float: left;
-          width: 48.5%;
-          height: 100%;
-          border-radius: 5px;
-          background-image: linear-gradient(#1099f5, #02318a);
-          position: relative;
-          span {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            font-weight: 600;
-            p {
-              margin: 2px 0 0 !important;
-            }
-          }
-          img {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            width: 25px;
-          }
-        }
-        .halff {
-          float: right;
-          width: 48.5%;
-          height: 100%;
-          .qtr {
-            width: 100%;
-            height: 48%;
-            margin-bottom: 8%;
-            border-radius: 5px;
-            position: relative;
-            &.tt {
-              background-color: #11a3ff;
-            }
-            &.bb {
-              background-color: #ffa701;
-            }
-            span {
-              position: absolute;
-              bottom: 20px;
-              left: 20px;
-              font-weight: 600;
-            }
-            img {
-              position: absolute;
-              top: 20px;
-              left: 20px;
-              width: 25px;
-            }
-          }
-        }
-      }
-      .foot {
-        width: 60%;
-        margin: 0px 20%;
-        font-size: 10px;
-        position: absolute;
-        bottom: 20px;
-        text-align: center;
-        color: #b1b1b1;
-      }
+        display: none;
     }
-    .wide-side {
-      width: 100%;
-      display: none;
-      .lessons-wrap {
-        .lessons {
-          height: auto;
+
+    .heading {
+        width: 100%;
+        font-size: 14px;
+        font-weight: 600;
+        border-bottom: 1px solid #eee;
+        padding: 20px 30px;
+        margin: 0;
+        background-color: #fff;
+        text-transform: capitalize;
+
+        span {
+            font-size: 10px;
+            color: #c2c2c2;
+            font-weight: 300;
         }
-      }
     }
-    .narrow-side {
-      padding: 20px;
-      width: 100%;
-      display: none;
-      .students {
-        display: block;
-        width: 90%;
-        margin: 30px auto;
-      }
-    }
+
     .verify {
-      // position: absolute;
-      top: -220px;
-      transform: scale(1);
-      width: 100%;
-      // height: 57px !important;
-      padding: 15px !important;
-      border-radius: 0px;
-      opacity: 0.88;
-      height: auto;
-      line-height: unset;
-      span {
-        display: inline-block;
-        width: 55%;
-        font-size: 13px;
-      }
-      button {
-        margin-top: -3px;
-        top: 5px !important;
-        padding: 0 10px;
-        border-radius: 0px;
+        background: #ff0007;
+        opacity: 0.75;
+        color: #fff;
+        width: 100%;
+        padding: 0px 50px;
+        z-index: 1000000000;
+        transform: scale(1.05);
         font-size: 12px !important;
-        height: 45px !important;
-      }
-    }
-    .subscribe {
-      position: relative;
-      margin-top: 20px;
-      p {
-        width: 65%;
-        color: #7c7c7c;
-        &.btm {
-          display: none;
-        }
-      }
-      img {
         position: absolute;
-        top: 15px;
-        right: 30px;
-        width: 80px;
-      }
+        top: -180px;
+        left: 0;
+        height: 50px;
+        line-height: 50px;
+
+        button {
+            height: 30px !important;
+            border: 1px solid #fff;
+            float: right;
+            background-color: red;
+            color: #fff;
+            padding: 0 20px;
+            position: relative;
+            top: 10px;
+            animation-name: grow;
+            animation-duration: 1.5s;
+            animation-iteration-count: 20;
+        }
     }
-  }
+
+    .wide-side {
+        float: left;
+        width: 70%;
+        overflow: hidden;
+
+        .lessons-wrap {
+            background-color: #fff;
+            padding-bottom: 0px;
+
+            .lessons {
+                height: 195px;
+                overflow: hidden;
+                margin-top: 0;
+            }
+
+            .sub-heading {
+                font-size: 14px;
+                margin-top: 0;
+                color: #aaaaaa;
+                padding: 30px;
+                margin-bottom: 0;
+
+                button {
+                    padding: 12px 20px;
+                    margin-top: -10px;
+                }
+            }
+
+            .lessons {
+                // height: 200px;
+                // overflow: auto;
+            }
+        }
+
+        .quizzes {
+            background-color: #fff;
+        }
+
+        .quizzes:hover {
+            background-color: #fafafa;
+            cursor: pointer;
+        }
+    }
+
+    .narrow-side {
+        float: right;
+        width: calc(30% - 30px);
+
+        .subscribe {
+            height: 335px;
+            background-color: #fff;
+            padding: 20px;
+            text-align: center;
+
+            .top {
+                font-size: 12px;
+                color: #000000;
+                opacity: 0.5;
+            }
+
+            .btm {
+                font-size: 20px;
+                color: #000000;
+                opacity: 1;
+                font-weight: 600;
+                width: 80%;
+                margin: 0 10%;
+            }
+
+            img {
+                width: 60%;
+                margin-top: 20px;
+            }
+        }
+
+        .badge-wrap {
+            width: 100%;
+        }
+
+        .students {
+            display: none;
+        }
+    }
+
+    @media (max-width: 768px), (min-width: 768px) and (max-width: 1024px) {
+        overflow: unset;
+        height: auto;
+
+        .mobile-screen {
+            display: block;
+            height: 530px;
+            position: relative;
+
+            .medals {
+                text-align: center;
+                padding: 25px 15px;
+                display: block;
+                margin-top: 20px;
+
+                .medal {
+                    display: inline-block;
+                    width: calc(100% / 6);
+                    height: 30px;
+                    margin: 10px 0;
+                    text-align: center;
+
+                    img {
+                        height: 24px;
+                        position: relative;
+                        top: 2px;
+                    }
+
+                    span {
+                        display: block;
+                        position: relative;
+                        top: 5px;
+                        font-size: 12px;
+                    }
+                }
+            }
+
+            .grid {
+                height: 330px;
+                overflow: hidden;
+                padding: 10px 0;
+                margin-top: 30px;
+                color: #fff;
+
+                .half {
+                    float: left;
+                    width: 48.5%;
+                    height: 100%;
+                    border-radius: 5px;
+                    background-image: linear-gradient(#1099f5, #02318a);
+                    position: relative;
+
+                    span {
+                        position: absolute;
+                        bottom: 20px;
+                        left: 20px;
+                        font-weight: 600;
+
+                        p {
+                            margin: 2px 0 0 !important;
+                        }
+                    }
+
+                    img {
+                        position: absolute;
+                        top: 20px;
+                        left: 20px;
+                        width: 25px;
+                    }
+                }
+
+                .halff {
+                    float: right;
+                    width: 48.5%;
+                    height: 100%;
+
+                    .qtr {
+                        width: 100%;
+                        height: 48%;
+                        margin-bottom: 8%;
+                        border-radius: 5px;
+                        position: relative;
+
+                        &.tt {
+                            background-color: #11a3ff;
+                        }
+
+                        &.bb {
+                            background-color: #ffa701;
+                        }
+
+                        span {
+                            position: absolute;
+                            bottom: 20px;
+                            left: 20px;
+                            font-weight: 600;
+                        }
+
+                        img {
+                            position: absolute;
+                            top: 20px;
+                            left: 20px;
+                            width: 25px;
+                        }
+                    }
+                }
+            }
+
+            .foot {
+                width: 60%;
+                margin: 0px 20%;
+                font-size: 10px;
+                position: absolute;
+                bottom: 20px;
+                text-align: center;
+                color: #b1b1b1;
+            }
+        }
+
+        .wide-side {
+            width: 100%;
+            display: none;
+
+            .lessons-wrap {
+                .lessons {
+                    height: auto;
+                }
+            }
+        }
+
+        .narrow-side {
+            padding: 20px;
+            width: 100%;
+            display: none;
+
+            .students {
+                display: block;
+                width: 90%;
+                margin: 30px auto;
+            }
+        }
+
+        .verify {
+            // position: absolute;
+            top: -220px;
+            transform: scale(1);
+            width: 100%;
+            // height: 57px !important;
+            padding: 15px !important;
+            border-radius: 0px;
+            opacity: 0.88;
+            height: auto;
+            line-height: unset;
+
+            span {
+                display: inline-block;
+                width: 55%;
+                font-size: 13px;
+            }
+
+            button {
+                margin-top: -3px;
+                top: 5px !important;
+                padding: 0 10px;
+                border-radius: 0px;
+                font-size: 12px !important;
+                height: 45px !important;
+            }
+        }
+
+        .subscribe {
+            position: relative;
+            margin-top: 20px;
+
+            p {
+                width: 65%;
+                color: #7c7c7c;
+
+                &.btm {
+                    display: none;
+                }
+            }
+
+            img {
+                position: absolute;
+                top: 15px;
+                right: 30px;
+                width: 80px;
+            }
+        }
+    }
 }
 
 @keyframes grow {
