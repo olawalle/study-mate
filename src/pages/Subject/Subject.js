@@ -291,7 +291,7 @@ export default withRouter(function Subject({ history }) {
                   );
                 })
               ) : (
-                <span>Start quizzes to acquire points</span>
+                <span className="pl20">Start quizzes to acquire points</span>
               )}
             </div>
           </div>

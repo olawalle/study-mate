@@ -157,7 +157,7 @@ export default withRouter(function FAQ({ history }) {
                       float: "right",
                       position: "relative",
                       right: "15px",
-                      top: "17px",
+                      top: "12px",
                       display: "inline-block",
                     }}
                     alt=""

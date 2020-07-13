@@ -143,7 +143,7 @@ export default withRouter(function Terms({ history }) {
           <p>
             Your access to and use of the Service is also conditioned on Your
             acceptance of and compliance with the Privacy Policy of the Company.
-            Our Privacy Policy describes Our policies and procedures on the
+            Our Privacy Policy describes our policies and procedures on the
             collection, use and disclosure of Your personal information when You
             use the Application or the Website and tells You about Your privacy
             rights and how the law protects You. Please read Our Privacy Policy
@@ -173,23 +173,24 @@ export default withRouter(function Terms({ history }) {
             fee. When this happens, you are required to make payment for the
             service, otherwise you will lose access to the portal. We may
             suspend Your access immediately to the use of the service. Upon
-            suspension, Your right to our the Service will cease immediately,
-            until you have paid to use our service.
+            suspension, Your right to the Service will cease immediately, until
+            you have made payment to subscribe to any of our subscription plans.
           </p>
           <p className="x-big">Termination</p>
           <p>
             We may terminate or suspend Your access immediately, without prior
             notice or liability, for any reason whatsoever, including without
-            limitation if You breach these Terms and Conditions. Upon
-            termination, Your right to use our Service will cease immediately.
+            limitation, if You breach these Terms and Conditions. Upon
+            termination, Your right to use our Service will cease immediately,
+            until you have paid to use our service.
           </p>
           <p className="x-big">Limitation of Liability</p>
           <p>
             Notwithstanding any damages that You might incur, the entire
             liability of the Company and any of its suppliers under any
-            provision of this Terms and Your exclusive remedy for all of the
+            provision of these Terms and Your exclusive remedy for all of the
             foregoing shall be limited to the amount actually paid by You
-            through the Service To the maximum extent permitted by applicable
+            through the Service to the maximum extent permitted by applicable
             law, in no event shall the Company or its suppliers be liable for
             any special, incidental, indirect, or consequential damages
             whatsoever (including, but not limited to, damages for loss of
@@ -207,25 +208,25 @@ export default withRouter(function Terms({ history }) {
             The Service is provided to You "AS IS" and "AS AVAILABLE" and with
             all faults and defects without warranty of any kind. To the maximum
             extent permitted under applicable law, the Company, on its own
-            behalf and on behalf of its Affiliates and its and their respective
-            licensors and service providers, expressly disclaims all warranties,
-            whether express, implied, statutory or otherwise, with respect to
-            the Service, including all implied warranties of merchantability,
-            fitness for a particular purpose, title and non-infringement, and
-            warranties that may arise out of course of dealing, course of
-            performance, usage or trade practice. Without limitation to the
-            foregoing, the Company provides no warranty or undertaking, and
-            makes no representation of any kind that the Service will meet Your
-            requirements, achieve any intended results, be compatible or work
-            with any other software, applications, systems or services, operate
-            without interruption, meet any performance or reliability standards
-            or be error free or that any errors or defects can or will be
-            corrected.
+            behalf and on behalf of its Affiliates and its partners and their
+            respective licensors and service providers, expressly disclaims all
+            warranties whether express, implied, statutory or otherwise, with
+            respect to the Service, including all implied warranties of
+            merchantability, fitness for a particular purpose, title and
+            non-infringement, and warranties that may arise out of course of
+            dealing, course of performance, usage or trade practice. Without
+            limitation to the foregoing, the Company provides no warranty or
+            undertaking, and makes no representation of any kind that the
+            Service will meet Your requirements, achieve any intended results,
+            be compatible or work with any other software, applications, systems
+            or services, operate without interruption, meet any performance or
+            reliability standards or be error free or that any errors or defects
+            can or will be corrected.
           </p>
           <p>
             Without limiting the foregoing, neither the Company nor any of the
             company's provider makes any representation or warranty of any kind,
-            express or implied: (i) as to the operation or availability of the
+            expressed or implied: (i) as to the operation or availability of the
             Service, or the information, content, and materials or products
             included thereon; (ii) that the Service will be uninterrupted or
             error-free; (iii) as to the accuracy, reliability, or currency of
@@ -238,14 +239,14 @@ export default withRouter(function Terms({ history }) {
             Some jurisdictions do not allow the exclusion of certain types of
             warranties or limitations on applicable statutory rights of a
             consumer, so some or all of the above exclusions and limitations may
-            not apply to You. But in such a case the exclusions and limitations
+            not apply to You. But in such a case, the exclusions and limitations
             set forth in this section shall be applied to the greatest extent
             enforceable under applicable law.
           </p>
           <p className="x-big">Governing Law</p>
           <p>
             The laws of the Country, excluding its conflicts of law rules, shall
-            govern this Terms and Your use of the Service. Your use of the
+            govern these Terms and Your use of the Service. Your use of the
             Application may also be subject to other local, state, national, or
             international laws.
           </p>
@@ -257,15 +258,17 @@ export default withRouter(function Terms({ history }) {
           </p>
           <p className="x-big">Severability and Waiver</p>
           <p className="big"> Severability</p>
-          If any provision of these Terms is held to be unenforceable or
-          invalid, such provision will be changed and interpreted to accomplish
-          the objectives of such provision to the greatest extent possible under
-          applicable law and the remaining provisions will continue in full
-          force and effect.
+          <p>
+            If any provision of these Terms is held to be unenforceable or
+            invalid, such provision will be changed and interpreted to
+            accomplish the objectives of such provision to the greatest extent
+            possible under applicable law and the remaining provisions will
+            continue in full force and effect.
+          </p>
           <p className="big"> Waiver </p>
           <p>
             Except as provided herein, the failure to exercise a right or to
-            require performance of an obligation under this Terms shall not
+            require performance of an obligation under these Terms shall not
             effect a party's ability to exercise such right or require such
             performance at any time thereafter nor shall be the waiver of a
             breach constitute a waiver of any subsequent breach.
@@ -280,7 +283,7 @@ export default withRouter(function Terms({ history }) {
           <p className="x-big">Changes to These Terms and Conditions</p>
           <p>
             We reserve the right, at Our sole discretion, to modify or replace
-            these Terms at any time. If a revision is material we will make
+            these Terms at any time. If a revision is material, we will make
             reasonable efforts to provide at least 15 days' notice prior to any
             new terms taking effect. What constitutes a material change will be
             determined at Our sole discretion.

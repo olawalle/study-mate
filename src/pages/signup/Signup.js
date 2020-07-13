@@ -110,7 +110,11 @@ export default withRouter(function Signup(props) {
       .catch((err) => {
         console.log({ err });
         updateLoader(false);
-        showError(err.response.data.message);
+        showError(
+          err.response
+            ? err.response.data.message
+            : "An error occured. Please try again"
+        );
       });
   };
 

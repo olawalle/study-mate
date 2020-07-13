@@ -314,7 +314,8 @@ export default withRouter(function PreviewSubject({ history }) {
                       Our Study Packs are test questions created for advanced
                       Senior Secondary levels. They are simulated for exam
                       purposes and further learning.
-                    </p>
+                    </p>{" "}
+                    <br />
                     <p style={{ fontSize: 12 }}>
                       Note: The Lesson Packs above must have been completed
                       before proceeding to the Study Packs.
@@ -411,7 +412,8 @@ export default withRouter(function PreviewSubject({ history }) {
                       Our Study Packs are test questions created for advanced
                       Senior Secondary levels. They are simulated for exam
                       purposes and further learning.
-                    </p>
+                    </p>{" "}
+                    <br />
                     <p style={{ fontSize: 12 }}>
                       Note: The Lesson Packs above must have been completed
                       before proceeding to the Study Packs.

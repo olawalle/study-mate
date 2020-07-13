@@ -138,7 +138,7 @@ const Dashboard = (props) => {
           </div>
 
           <div className="pre-footer bordered">
-            <p>@2020 All Rights Reserved. Studymate</p>
+            <p>Copyright ©️ 2020 InfoMall Ltd. All rights reserved.</p>
             <p>Powered by InfoMall Nigeria</p>
           </div>
         </div>

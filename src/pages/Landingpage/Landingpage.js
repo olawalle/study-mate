@@ -47,7 +47,7 @@ const LandingPage = ({ history }) => {
       </div>
       <div className="ui container__ inhome__tutor">
         <div className="caption__header">
-          <h1>The Trusted Name Name for In-Home Tutoring</h1>
+          <h1>The Trusted Name for In-home Tutoring</h1>
         </div>
         <div className="ui stackable grid boxes">
           <div className="four wide column">
@@ -69,7 +69,7 @@ const LandingPage = ({ history }) => {
               <div className="icon__image">
                 <img src="images/tick-tock.svg" />
               </div>
-              <h2>24 Hours Acess</h2>
+              <h2>24 Hours Access</h2>
               <div className="caption">
                 <span className="light">
                   Content and test questions are available 24-hours a day, 7
@@ -131,15 +131,15 @@ const LandingPage = ({ history }) => {
                 {/* <div className="curved__caption">
                   #No 1 platform for learning
                 </div> */}
-                <h1>Your Dependable Learning Buddy</h1>
+                <h1>The Study Mate You Need</h1>
                 <div className="caption__content light">
                   <span className="light">
                     Parents want to give their ward the best education possible.
-                    StudyMate enables each student assimilate lessons that may
-                    not have been well taught in class. With over 1,000 lessons
-                    and 10,000 test questions and solutions to test
-                    comprehension, accompanied by progress trackers, the
-                    student's genius will be unlocked. Enroll!!
+                    StudyMate enhances each student’s ability to assimilate
+                    lessons that may not have been well taught in class. With
+                    over 1,000 lessons and 10,000 test questions and solutions
+                    to aid comprehension, accompanied with progress trackers,
+                    every student would love study time!
                   </span>
                 </div>
                 <div className="enroll__wrapper">
@@ -226,7 +226,7 @@ const LandingPage = ({ history }) => {
                   <span>N1,500.00</span>/month
                 </p>
                 <p className="price">
-                  <span>N4,00.00</span>/3months
+                  <span>N4,000.00</span>/3months
                 </p>
                 <p className="price">
                   <span>N15,000.00</span>/yearly
@@ -284,7 +284,7 @@ const LandingPage = ({ history }) => {
               <div className="caption">
                 <span className="light">
                   Give your child a study partner that understands and
-                  communicates knowledge for excellence in exams and practice.
+                  communicates knowledge for excellence.
                 </span>
               </div>
             </div>
@@ -302,7 +302,6 @@ const LandingPage = ({ history }) => {
                 <div className="eight wide mobile four wide computer column">
                   <h3>Community</h3>
                   <div className="content">
-                    <a href="#">Help</a>
                     <a href="#">Support</a>
                     <a href="#">Sign Up</a>
                     <a href="#">Login In</a>
@@ -323,11 +322,11 @@ const LandingPage = ({ history }) => {
                       <img src="images/Twitter.png" alt="twitter" />
                       Twitter
                     </a>
-                    <a href="#">
+                    <a href="https://www.instagram.com/studymate_ng/">
                       <img src="images/Instagram.png" alt="instagram" />
                       Instagram
                     </a>
-                    <a href="#">
+                    <a href="https://m.facebook.com/studymateng/">
                       <img src="images/Facebook.svg" />
                       Facebook
                     </a>

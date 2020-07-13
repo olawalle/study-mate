@@ -59,9 +59,12 @@ export default withRouter(function Privacy({ history }) {
             This Privacy Policy describes our policies and procedures on the
             collection, use and disclosure of Your information when You use the
             Service and tells You about Your privacy rights and how the law
-            protects You. We use Your personal data to provide and improve the
-            Service. By using the Service, You agree to the collection and use
-            of information in accordance with this Privacy Policy.
+            protects You.{" "}
+          </p>
+          <p>
+            We use Your personal data to provide and improve the Service. By
+            using the Service, You agree to the collection and use of
+            information in accordance with this Privacy Policy.
           </p>
           <p className="x-big">Interpretation and Definitions</p>
           <p className="big">Interpretation</p>
@@ -69,8 +72,9 @@ export default withRouter(function Privacy({ history }) {
             The words of which the initial letter is capitalized have meanings
             defined under the following conditions. The following definitions
             shall have the same meaning regardless of whether they appear in
-            singular or in plural. Definitions
+            singular or in plural.
           </p>
+          <p className="big">Definitions</p>
           <p>For the purposes of this Privacy Policy:</p>
           <ul>
             <li>
@@ -172,27 +176,43 @@ export default withRouter(function Privacy({ history }) {
             address (e.g. IP address), browser type, browser version, the pages
             of our Service that You visit, the time and date of Your visit, the
             time spent on those pages, unique device identifiers and other
-            diagnostic data. When You access the Service by or through a mobile
-            device, We may collect certain information automatically, including,
-            but not limited to, the type of mobile device You use, Your mobile
-            device unique ID, the IP address of Your mobile device, Your mobile
-            operating system, the type of mobile Internet browser You use,
-            unique device identifiers and other diagnostic data. We may also
-            collect information that Your browser sends whenever You visit our
-            Service or when You access the Service by or through a mobile
-            device. <b>Tracking Technologies and Cookies</b>
+            diagnostic data.
           </p>
+          <p>
+            {" "}
+            When You access the Service by or through a mobile device, We may
+            collect certain information automatically, including, but not
+            limited to, the type of mobile device You use, Your mobile device
+            unique ID, the IP address of Your mobile device, Your mobile
+            operating system, the type of mobile Internet browser You use,
+            unique device identifiers and other diagnostic data.
+          </p>
+          <p>
+            {" "}
+            We may also collect information that Your browser sends whenever You
+            visit our Service or when You access the Service by or through a
+            mobile device.
+          </p>
+          <b className="big">Tracking Technologies and Cookies</b>
+          <br />
+          <br />
           <p>
             We use Cookies and similar tracking technologies to track the
             activity on Our Service and store certain information. Tracking
             technologies used are beacons, tags, and scripts to collect and
-            track information and to improve and analyze Our Service. You can
-            instruct Your browser to refuse all Cookies or to indicate when a
-            Cookie is being sent. However, if You do not accept Cookies, You may
-            not be able to use some parts of our Service. Cookies can be
-            "Persistent" or "Session" Cookies. Persistent Cookies remain on your
-            personal computer or mobile device when You go offline, while
-            Session Cookies are deleted as soon as You close your web browser.
+            track information and to improve and analyze Our Service.
+          </p>
+          <p>
+            {" "}
+            You can instruct Your browser to refuse all Cookies or to indicate
+            when a Cookie is being sent. However, if You do not accept Cookies,
+            You may not be able to use some parts of our Service.
+          </p>
+          <p>
+            Cookies can be "Persistent" or "Session" Cookies. Persistent Cookies
+            remain on your personal computer or mobile device when You go
+            offline, while Session Cookies are deleted as soon as You close your
+            web browser.
           </p>
           <p>
             We use both session and persistent Cookies for the purposes set out
@@ -201,28 +221,31 @@ export default withRouter(function Privacy({ history }) {
           <ul>
             <li>
               <b>Necessary / Essential Cookies</b> <br />
-              Type: Session Cookies Administered by: Us Purpose: These Cookies
-              are essential to provide You with services available through the
-              Website and to enable You to use some of its features. They help
-              to authenticate users and prevent fraudulent use of user accounts.
-              Without these Cookies, the services that You have asked for cannot
-              be provided, and We only use these Cookies to provide You with
-              those services.
+              Type: Session Cookies <br />
+              Administered by: Us <br />
+              Purpose: These Cookies are essential to provide You with services
+              available through the Website and to enable You to use some of its
+              features. They help to authenticate users and prevent fraudulent
+              use of user accounts. Without these Cookies, the services that You
+              have asked for cannot be provided, and We only use these Cookies
+              to provide You with those services.
             </li>
             <li>
               <b>Cookies Policy / Notice Acceptance Cookies</b> <br />
-              Type: Persistent Cookies Administered by: Us Purpose: These
-              Cookies identify if users have accepted the use of cookies on the
-              Website.
+              Type: Persistent Cookies <br />
+              Administered by: Us <br />
+              Purpose: These Cookies identify if users have accepted the use of
+              cookies on the Website.
             </li>
             <li>
               <b>Functionality Cookies</b> <br />
-              Type: Persistent Cookies Administered by: Us Purpose: These
-              Cookies allow us to remember choices You make when You use the
-              Website, such as remembering your login details or language
-              preference. The purpose of these Cookies is to provide You with a
-              more personal experience and to avoid You having to re-enter your
-              preferences every time You use the Website.
+              Type: Persistent Cookies <br />
+              Administered by: Us <br />
+              Purpose: These Cookies allow us to remember choices You make when
+              You use the Website, such as remembering your login details or
+              language preference. The purpose of these Cookies is to provide
+              You with a more personal experience and to avoid You having to
+              re-enter your preferences every time You use the Website.
             </li>
           </ul>
           <p>
@@ -234,55 +257,57 @@ export default withRouter(function Privacy({ history }) {
           <p>The Company may use Personal Data for the following purposes:</p>
           <ul>
             <li>
-              To provide and maintain our Service, including to monitor the
-              usage of our Service.
+              <b>To provide and maintain our Service</b>, including to monitor
+              the usage of our Service.
             </li>
             <li>
-              To manage Your Account: to manage Your registration as a user of
-              the Service. The Personal Data You provide can give You access to
-              different functionalities of the Service that are available to You
-              as a registered user.
+              <b>To manage Your Account</b>: to manage Your registration as a
+              user of the Service. The Personal Data You provide can give You
+              access to different functionalities of the Service that are
+              available to You as a registered user.
             </li>
             <li>
-              For the performance of a contract: the development, compliance and
-              undertaking of the purchase contract for the products, items or
-              services You have purchased or of any other contract with Us
-              through the Service.
+              <b>For the performance of a contract</b>: the development,
+              compliance and undertaking of the purchase contract for the
+              products, items or services You have purchased or of any other
+              contract with Us through the Service.
             </li>
             <li>
-              To contact You: To contact You by email, telephone calls, SMS, or
-              other equivalent forms of electronic communication, such as a
-              mobile application's push notifications regarding updates or
+              <b>To contact You:</b> To contact You by email, telephone calls,
+              SMS, or other equivalent forms of electronic communication, such
+              as a mobile application's push notifications regarding updates or
               informative communications related to the functionalities,
               products or contracted services, including the security updates,
               when necessary or reasonable for their implementation.
             </li>
             <li>
-              To provide You with news, special offers and general information
-              about other goods, services and events which we offer that are
-              similar to those that you have already purchased or enquired about
-              unless You have opted not to receive such information.
+              <b>To provide You</b> with news, special offers and general
+              information about other goods, services and events which we offer
+              that are similar to those that you have already purchased or
+              enquired about unless You have opted not to receive such
+              information.
             </li>
             <li>
-              To manage Your requests: To attend and manage Your requests to Us.
+              <b>To manage Your requests</b>: To attend and manage Your requests
+              to Us.
             </li>
             <p>
               We may share your personal information in the following
               situations:
             </p>
             <li>
-              With Service Providers: We may share Your personal information
-              with Service Providers to monitor and analyze the use of our
-              Service, to contact You.
+              <b>With Service Providers</b>: We may share Your personal
+              information with Service Providers to monitor and analyze the use
+              of our Service, to contact You.
             </li>
             <li>
-              For Business transfers: We may share or transfer Your personal
-              information in connection with, or during negotiations of, any
-              merger, sale of Company assets, financing, or acquisition of all
-              or a portion of our business to another company.
+              <b>For Business transfers</b>: We may share or transfer Your
+              personal information in connection with, or during negotiations
+              of, any merger, sale of Company assets, financing, or acquisition
+              of all or a portion of our business to another company.
             </li>
             <li>
-              With Affiliates: We may share Your information with Our
+              <b>With Affiliates</b>: We may share Your information with Our
               affiliates, in which case we will require those affiliates to
               honor this Privacy Policy. Affiliates include Our parent company
               and any other subsidiaries, joint venture partners or other
@@ -290,20 +315,20 @@ export default withRouter(function Privacy({ history }) {
               Us.
             </li>
             <li>
-              With Business partners: We may share Your information with Our
-              business partners to offer You certain products, services or
+              <b>With Business partners</b>: We may share Your information with
+              Our business partners to offer You certain products, services or
               promotions.
             </li>
             <li>
-              With other users: when You share personal information or otherwise
-              interact in the public areas with other users, such information
-              may be viewed by all users and may be publicly distributed
-              outside. If You interact with other users or register through a
-              Third-Party Social Media Service, Your contacts on the Third-Party
-              Social Media Service may see Your name, profile, pictures and
-              description of Your activity. Similarly, other users will be able
-              to view descriptions of Your activity, communicate with You and
-              view Your profile.
+              <b>With other users</b>: When You share personal information or
+              otherwise interact in the public areas with other users, such
+              information may be viewed by all users and may be publicly
+              distributed outside. If You interact with other users or register
+              through a Third-Party Social Media Service, Your contacts on the
+              Third-Party Social Media Service may see Your name, profile,
+              pictures and description of Your activity. Similarly, other users
+              will be able to view descriptions of Your activity, communicate
+              with You and view Your profile.
             </li>
           </ul>
           <p className="big">Retention of Your Personal Data</p>
@@ -367,6 +392,7 @@ export default withRouter(function Privacy({ history }) {
             Protect the personal safety of Users of the Service or the public
           </li>
           <li>Protect against legal liability</li>
+          <br /> <br />
           <p className="x-big">Security of Your Personal Data</p>
           <p>
             The security of Your Personal Data is important to Us, but remember
