@@ -20,11 +20,6 @@ export default function useTest(previousData, quizId) {
   const [componentLoaded, setcomponentLoaded] = useState(false);
 
   useEffect(() => {
-    // console.log({quizId})
-    setThisAnswer(quizId);
-  }, [quizId]);
-
-  useEffect(() => {
     // console.log(previousData)
     if(previousData && previousData.length){
       const prepareUserData =
@@ -46,8 +41,8 @@ export default function useTest(previousData, quizId) {
       }, []);
     setcomponentLoaded(true);
     console.log({prepareUserData, previousData})
-    setAnswers(prepareUserData);
-    setAnswer(prepareUserData[0])
+        setAnswers(prepareUserData);
+        setThisAnswer(quizId)
     }
     
   }, [componentLoaded]);

@@ -229,7 +229,8 @@ export default withRouter(function Subject({ history }) {
   const getTrailingScores = () => {
     if (usertests && selectedSubject && selectedSubject.tests) {
       const intersection = usertests.filter((u) =>
-        selectedSubject.tests.map((t) => t.id).includes(u.testId)
+          selectedSubject.tests.map((t) => t.id).includes(u.testId)
+          && (u.userQuizzes && u.userQuizzes.length)
       );
       return intersection;
     }
