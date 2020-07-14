@@ -82,27 +82,30 @@ export default withRouter(function Progress({ history }) {
     }, [pageLoaded])
 
     const getStatistics = (userCourse) => {
-        updateLoader(true);
-        authServices
-            .getStatistics(userCourse.id)
-            .then((res) => {
-                console.log({ stats: res.data });
-                let newStat = [];
-                if (statistics.some(c => c.name == userCourse.course.name)) {
-                    newStat = statistics.map(s => s.name === userCourse.course.name ? { name: userCourse.course.name, ...res.data } : s);
-                }
-                else {
-                    newStat = statistics.concat({ name: userCourse.course.name, ...res.data });
-                }
-                setStatistics(newStat);
-                setCurrentStat({ name: userCourse.course.name, ...res.data })
-                setFilteredStat({ name: userCourse.course.name, ...res.data })
-                updateLoader(false);
-            })
-            .catch((err) => {
-                console.log({ err });
-                updateLoader(false);
-            });
+        if (user.isSubscribed) {
+            updateLoader(true);
+            authServices
+                .getStatistics(userCourse.id)
+                .then((res) => {
+                    console.log({ stats: res.data });
+                    let newStat = [];
+                    if (statistics.some(c => c.name == userCourse.course.name)) {
+                        newStat = statistics.map(s => s.name === userCourse.course.name ? { name: userCourse.course.name, ...res.data } : s);
+                    }
+                    else {
+                        newStat = statistics.concat({ name: userCourse.course.name, ...res.data });
+                    }
+                    setStatistics(newStat);
+                    setCurrentStat({ name: userCourse.course.name, ...res.data })
+                    setFilteredStat({ name: userCourse.course.name, ...res.data })
+                    updateLoader(false);
+                })
+                .catch((err) => {
+                    console.log({ err });
+                    updateLoader(false);
+                });
+        }
+        
     };
 
     const handleChange = (selectedOption) => {

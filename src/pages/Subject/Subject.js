@@ -281,7 +281,7 @@ export default withRouter(function Subject({ history }) {
                 <div className="sub-banner">
                     <div className="small">
                         <span>Possible points:</span>
-                        <p>10</p>
+                        <p>{totalScore(selectedSubject.tests)}</p>
                     </div>
                     <div className="wide">
                         <div className="progresses">

@@ -50,7 +50,7 @@ export default function Leaderboard() {
                 <div className="people">
 
                     {leaderBoards.map((leader, index) => (
-                        <>
+                        <React.Fragment key={`leader-${index}`}>
                             {leader.id === id && <p className="my">My position</p>}
                             <div className={`person ${getClass(index, leader.id)}`}>
                                 {leader.position <= 3 && <img src={getImage(leader.position)} alt="" />}
@@ -66,7 +66,7 @@ export default function Leaderboard() {
                                 {leader.position === 1 && <img src={best} className="best" alt="" />}
                                 
                             </div>
-                        </>
+                        </React.Fragment>
 
                     ))}
 

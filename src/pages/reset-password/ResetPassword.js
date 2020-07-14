@@ -29,6 +29,7 @@ export default function ResetPassword() {
     const location = useLocation();
     const history = useHistory();
     const { code = undefined } = queryparams(location.search) || {};
+    console.log(code)
     const [password, setpassword] = useState("");
     const [confirmPassword, setconfirmPassword] = useState("");
     const [email, setEmail] = useState("");
@@ -88,6 +89,10 @@ export default function ResetPassword() {
 
     const resetPassword = (e, email, newPassword, confirmNewPassword) => {
         e.preventDefault();
+        if (!code) {
+            handleSnack("You are making an invalid request to us", 5000);
+            return;
+        }
         const data = { email, newPassword, confirmNewPassword }
         setLoading(true);
         authServices
