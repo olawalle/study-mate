@@ -1,0 +1,100 @@
+.subscribe {
+  padding: 20px 20px;
+}
+
+.subscribe .wide {
+  width: 60%;
+}
+
+.subscribe .wide .types {
+  padding: 30px;
+  background-color: #fff;
+  margin-bottom: 30px;
+}
+
+.subscribe .wide .types p {
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.subscribe .wide .grey {
+  background: #fafafa;
+  border: 0.5px solid #d1cdcd38 !important;
+  border-radius: 8px;
+  min-height: 300px;
+  padding: 30px;
+  text-align: center;
+}
+
+.subscribe .wide .grey .bordered {
+  min-height: 170px;
+  padding: 20px;
+  background: #ffffff;
+  border: 0.5px solid #a7a7a755;
+}
+
+.subscribe .wide .grey .bordered .img {
+  width: 20%;
+  display: inline-block;
+  text-align: center;
+  color: #002984;
+}
+
+.subscribe .wide .grey .bordered .img p {
+  font-size: 20px;
+  margin-top: 5px;
+  font-weight: 600;
+}
+
+.subscribe .wide .grey .bordered .list {
+  width: 80%;
+  display: inline-block;
+  padding-left: 10px;
+  text-align: center;
+}
+
+.subscribe .wide .grey .bordered .list p {
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 0;
+  text-align: left;
+}
+
+.subscribe .wide .grey .bordered .list ul {
+  padding-left: 14px;
+  text-align: left;
+}
+
+.subscribe .wide .grey .bordered .list ul li {
+  margin-bottom: 4px;
+  color: #707070;
+}
+
+.subscribe .wide .grey button {
+  margin: 30px auto 0;
+  padding: 0 30px;
+}
+
+@media (max-width: 768px), (min-width: 768px) and (max-width: 1024px) {
+  .subscribe {
+    padding: 20px;
+  }
+  .subscribe .wide {
+    width: 100%;
+  }
+  .subscribe .wide .grey .bordered .img {
+    width: 100%;
+  }
+  .subscribe .wide .grey .bordered .list {
+    margin-top: 10px;
+    width: 100%;
+  }
+  .subscribe .wide .grey .bordered .list p {
+    text-align: center;
+  }
+  .subscribe .wide .grey .bordered .list button {
+    margin-top: 10px;
+  }
+}
+/*# sourceMappingURL=Subscribe.css.map */

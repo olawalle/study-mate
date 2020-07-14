@@ -1,0 +1,268 @@
+.edit {
+  padding: 0px;
+  background-color: #fafafa;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.edit .nav {
+  position: fixed;
+  top: 0;
+}
+
+.edit .edit-contents {
+  height: calc(100vh - 65px);
+  overflow: auto;
+  margin-top: 65px;
+}
+
+.edit .banner {
+  height: 130px;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 0 160px;
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #fff;
+  background-image: url("../../../../assets/images/dash.svg");
+  position: relative;
+}
+
+.edit .banner .backArrow {
+  position: absolute;
+  bottom: 30px;
+}
+
+.edit .banner .mobile-title-text {
+  font-size: 12px;
+  padding: 10px 25px;
+  background-color: #5eade4;
+  color: #fff;
+  position: absolute;
+  bottom: 15px;
+  left: 20px;
+  border-radius: 25px;
+  display: none;
+}
+
+.edit .contents {
+  padding: 40px 160px;
+}
+
+.edit .contents .user-top {
+  display: none;
+}
+
+.edit .heading {
+  width: 100%;
+  font-size: 14px;
+  font-weight: 600;
+  border-bottom: 1px solid #eee;
+  padding: 20px 30px;
+  margin: 0;
+  background-color: #fff;
+}
+
+.edit .wide {
+  float: left;
+  width: 70%;
+  background-color: #fff;
+}
+
+.edit .wide .form {
+  margin-bottom: 30px;
+  padding: 30px;
+}
+
+.edit .wide .form .inp-wrap {
+  width: 100%;
+  position: relative;
+  display: inline-block;
+}
+
+.edit .wide .form .inp-wrap img {
+  position: absolute;
+  top: 42px;
+  right: 20px;
+  cursor: pointer;
+  height: 15px;
+}
+
+.edit .wide .form .inp-wrap .alert {
+  font-size: 10px;
+  color: #fa0000;
+  position: absolute;
+  top: 42px;
+  right: 20px;
+  cursor: pointer;
+}
+
+.edit .wide .form .left {
+  width: 49%;
+  float: left;
+}
+
+.edit .wide .form .right {
+  width: 49%;
+  float: right;
+}
+
+.edit .wide .form .label {
+  color: #000;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.edit .wide .form input {
+  background: #f8f8f8;
+  height: 50px;
+  border: 0;
+  width: 100%;
+  padding: 0 20px;
+  margin-top: 5px;
+  margin-bottom: 25px;
+  font-size: 14px;
+}
+
+.edit .wide .form input:focus {
+  outline: none;
+  border: 1px solid #eee;
+}
+
+.edit .wide .form .forgot {
+  float: right;
+  font-size: 12px;
+  position: relative;
+  top: -5px;
+}
+
+.edit .wide .form .main-btn {
+  height: 60px;
+  width: 100%;
+  font-weight: 600;
+}
+
+.edit .wide .form .no-acct a {
+  font-size: 12px;
+  position: relative;
+  top: 10px;
+  cursor: pointer;
+}
+
+.edit .wide .form button {
+  padding: 0 30px;
+}
+
+.edit .wide button {
+  border-radius: 10px;
+}
+
+.edit .small {
+  float: right;
+  width: calc(30% - 30px);
+}
+
+.edit .small .switches {
+  background-color: #fff;
+  padding: 25px;
+}
+
+.edit .small .switches p {
+  font-size: 12px;
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+.edit .small .switches p span {
+  float: right;
+}
+
+.edit .small .switches button {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+}
+
+@media (max-width: 768px), (min-width: 768px) and (max-width: 1024px) {
+  .edit {
+    padding: 0;
+    height: auto;
+    overflow: auto;
+    height: 100vh;
+  }
+  .edit .edit-contents {
+    padding-top: 0;
+    padding-bottom: 20px;
+  }
+  .edit .banner {
+    font-size: 14px;
+    padding: 20px;
+    background-position-x: 83%;
+  }
+  .edit .banner .backArrow {
+    display: none !important;
+  }
+  .edit .banner .mobile-title-text {
+    display: block !important;
+  }
+  .edit .contents {
+    padding: 40px 0px;
+    height: calc(100vh - (150px + 65px));
+  }
+  .edit .wide {
+    width: 100%;
+    display: block;
+  }
+  .edit .wide .form .left,
+  .edit .wide .form .right {
+    width: 100%;
+  }
+  .edit .small {
+    width: 100%;
+    display: block;
+    margin-top: 30px;
+  }
+  .edit .user-top {
+    display: block !important;
+  }
+  .edit .user-btm {
+    display: none !important;
+  }
+}
+
+.edit .user-photo {
+  width: 120px;
+  height: 120px;
+  background-color: #10a3ff;
+  border-radius: 50%;
+  margin: 0 auto;
+  text-align: center;
+  line-height: 100px;
+  position: relative;
+  margin-bottom: 40px;
+  border: 1px soldi #10a3ff;
+}
+
+.edit .user-photo .edit_ {
+  position: absolute;
+  right: -5px;
+  top: -5px;
+  background-color: #fff;
+  text-align: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  -webkit-box-shadow: 0px 3px 6px #00000029;
+          box-shadow: 0px 3px 6px #00000029;
+}
+
+.edit .user-photo .edit_ img {
+  height: 20px;
+  position: relative;
+  top: -14px;
+}
+/*# sourceMappingURL=Edit.css.map */

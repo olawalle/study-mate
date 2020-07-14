@@ -1,0 +1,40 @@
+.lesson-wrap video::-internal-media-controls-download-button {
+  display: none;
+}
+
+.lesson-wrap video::-webkit-media-controls-enclosure {
+  overflow: hidden;
+}
+
+.lesson-wrap video::-webkit-media-controls-panel {
+  width: calc(100% + 30px);
+}
+
+.lesson-wrap .lesson {
+  padding: 1px 25px;
+  cursor: pointer;
+  color: #232325;
+}
+
+.lesson-wrap .lesson:hover {
+  background-color: #fafafa;
+}
+
+.lesson-wrap .lesson p {
+  margin: 7px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lesson-wrap .lesson p span {
+  position: relative;
+  top: -6px;
+}
+
+@media (max-width: 768px), (min-width: 768px) and (max-width: 1024px) {
+  .lesson-wrap .lesson p {
+    margin: 7px 0;
+  }
+}
+/*# sourceMappingURL=Lesson.css.map */

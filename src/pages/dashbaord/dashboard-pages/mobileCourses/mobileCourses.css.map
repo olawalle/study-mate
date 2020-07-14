@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AACE,eADa,CACb,aAAa,CAAC;EACZ,MAAM,EAAE,mBAAmB;EAC3B,QAAQ,EAAE,QAAQ;CAOnB;;AAVH,AAMI,eANW,CACb,aAAa,CAKX,OAAO,CAAC;EACN,QAAQ,EAAE,QAAQ;EAClB,MAAM,EAAE,CAAC;CACV",
+    "sources": [
+        "mobileCourses.scss"
+    ],
+    "names": [],
+    "file": "mobileCourses.css"
+}

@@ -1,0 +1,136 @@
+.progress {
+  padding: 0 20px;
+}
+
+.progress .wide-side {
+  float: left;
+  width: 70%;
+  background-color: #fff;
+}
+
+.progress .wide-side.sub {
+  text-align: center;
+  background-color: transparent;
+  padding: 20px 40px;
+}
+
+.progress .wide-side.sub .top {
+  font-size: 29px;
+  font-weight: 600;
+}
+
+.progress .wide-side.sub .btm {
+  font-size: 14px;
+  line-height: 20px;
+  padding: 0 40px;
+}
+
+.progress .wide-side.sub button {
+  padding: 0 50px;
+  border-radius: 40px;
+  margin: 20px 0;
+}
+
+.progress .wide-side .stats {
+  padding: 30px;
+}
+
+.progress .wide-side .stats .sub-heading {
+  font-size: 12px;
+  margin-top: 0;
+}
+
+.progress .wide-side .stats .filters .selects {
+  display: inline-block;
+  width: 35%;
+  margin-right: 20px;
+}
+
+.progress .wide-side .stats .filters .css-1pahdxg-control {
+  height: 42px !important;
+  min-height: 42px !important;
+  width: 100%;
+  border-radius: 0;
+}
+
+.progress .wide-side .stats .filters .css-yk16xz-control {
+  border: 1px solid #eee;
+  height: 42px !important;
+  min-height: 42px !important;
+  background: #fff;
+  width: 100%;
+  border-radius: 0;
+}
+
+.progress .wide-side .stats .filters button {
+  float: right;
+  width: 23%;
+  height: 40px;
+}
+
+.progress .narrow-side {
+  float: right;
+  width: calc(30% - 30px);
+}
+
+.progress .narrow-side.greyscale {
+  -webkit-filter: grayscale(100%);
+          filter: grayscale(100%);
+  pointer-events: none;
+}
+
+.progress .narrow-side .disabled {
+  width: 100%;
+}
+
+.progress .heading {
+  width: 100%;
+  font-size: 14px;
+  font-weight: 600;
+  border-bottom: 1px solid #eee;
+  padding: 20px;
+  margin: 0;
+}
+
+.progress .heading span {
+  font-size: 12px;
+  color: #c2c2c2;
+  font-weight: 300;
+}
+
+@media (max-width: 768px), (min-width: 768px) and (max-width: 1024px) {
+  .progress {
+    padding: 0 !important;
+  }
+  .progress .wide-side {
+    width: 100%;
+    display: block;
+  }
+  .progress .wide-side .stats .filters {
+    margin-bottom: 85px;
+  }
+  .progress .wide-side .stats .filters .selects {
+    width: 100%;
+    margin: 10px 0 0 0;
+  }
+  .progress .wide-side .stats .filters button {
+    margin-top: 10px;
+    width: 100%;
+  }
+  .progress .wide-side.sub {
+    padding: 20px;
+  }
+  .progress .wide-side.sub .btm {
+    padding: 0;
+  }
+  .progress .narrow-side {
+    width: 100%;
+    display: block;
+    margin-top: 90px;
+    padding: 0 20px 50px 20px;
+  }
+  .progress .narrow-side .badge-wrap {
+    display: none;
+  }
+}
+/*# sourceMappingURL=Progress.css.map */

@@ -1,0 +1,97 @@
+.courses-wrap {
+  position: relative;
+}
+
+.courses-wrap .courses {
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  overflow: auto;
+}
+
+.courses-wrap .courses .title {
+  width: 100%;
+}
+
+.courses-wrap .courses .course {
+  font-size: 12px;
+  text-align: center;
+  margin: 0 0 15px;
+  padding: 15px;
+  cursor: pointer;
+}
+
+.courses-wrap .courses .course.greyed {
+  -webkit-filter: grayscale(100%);
+          filter: grayscale(100%);
+  opacity: 0.5;
+}
+
+.courses-wrap .courses .flex-grid-thirds {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-flow: wrap;
+      flex-flow: wrap;
+}
+
+.courses-wrap .courses .flex-grid-thirds p {
+  width: 100%;
+  text-align: left;
+}
+
+.courses-wrap .courses .flex-grid-thirds .course {
+  font-size: 12px;
+  color: #fff !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  padding-right: 7.5px !important;
+  padding-left: 7.5px !important;
+  height: 40px;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  line-height: 40px;
+  margin: 4px 2px;
+  position: relative;
+}
+
+.courses-wrap .courses .flex-grid-thirds .course:hover {
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.courses-wrap .courses .flex-grid-thirds .course .new {
+  position: absolute;
+  top: 19%;
+  right: -15px;
+  width: 25px;
+  z-index: 10;
+}
+
+.courses-wrap .courses .flex-grid-thirds .small {
+  width: 31.1%;
+}
+
+.courses-wrap .courses .flex-grid-thirds .mid {
+  width: calc(48%);
+}
+
+.courses-wrap .courses .flex-grid-thirds .wide {
+  width: 100%;
+}
+
+.courses-wrap .tw-btn {
+  padding: 0 15px;
+  width: 100%;
+  display: block;
+  position: absolute;
+}
+
+@media (max-width: 768px), (min-width: 768px) and (max-width: 1024px) {
+  .courses-wrap .courses {
+    max-height: unset !important;
+  }
+}
+/*# sourceMappingURL=Courses.css.map */
