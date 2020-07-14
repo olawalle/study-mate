@@ -5,11 +5,24 @@ import { withRouter } from "react-router-dom";
 
 import macbook from "../../assets/images/macbook.png";
 import Nav from "../../components/nav/Nav";
+import { googleAuthUrl } from "../../services/urls";
 
 const LandingPage = ({ history }) => {
   const [show_nav, setshow_nav] = useState(false);
   const toAuth = (n) => {
     n === 1 ? history.push("/login") : history.push("/signup");
+  };
+
+  const goto = (to) => {
+    if (to === "terms") {
+      history.push("/terms");
+    }
+    if (to === "privacy") {
+      history.push("/privacy");
+    }
+    if (to === "faq") {
+      history.push("/faq");
+    }
   };
 
   return (
@@ -310,9 +323,9 @@ const LandingPage = ({ history }) => {
                 <div className="eight wide mobile four wide computer column">
                   <h3>Legal</h3>
                   <div className="content">
-                    <a href="#">Terms of Use</a>
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Q&A</a>
+                    <a onClick={() => goto("terms")}>Terms of Use</a>
+                    <a onClick={() => goto("privacy")}>Privacy Policy</a>
+                    <a onClick={() => goto("faq")}>Q&A</a>
                   </div>
                 </div>
                 <div className="eight wide mobile four wide computer column">

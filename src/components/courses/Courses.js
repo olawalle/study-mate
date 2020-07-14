@@ -10,6 +10,7 @@ import authServices from "../../services/authServices";
 import { withRouter } from "react-router-dom";
 import { useState } from "react";
 import Modal from "react-responsive-modal";
+import { useSnackbar } from "react-simple-snackbar";
 
 export default withRouter(function Courses(props) {
   const context = useContext(userContext);
@@ -27,6 +28,10 @@ export default withRouter(function Courses(props) {
     "Advanced",
   ]);
   const [selectedIndex, setselectedIndex] = useState(null);
+  const options = {
+    position: "top-right",
+  };
+  const [openSnackbar, closeSnackbar] = useSnackbar(options);
 
   const onCloseLevelsModal = () => {
     setopenLevels(false);
@@ -56,7 +61,12 @@ export default withRouter(function Courses(props) {
       return 0;
     });
 
-  const selectCourse = (course) => {
+  const selectCourse = (course, i) => {
+    if (i > 1 && !user.isSubscribed) {
+      openSnackbar("Please subscribe to access this subject", 50000);
+      props.history.push("/dashboard/subscribe");
+      return;
+    }
     updateLoader(true);
     authServices
       .getSubjectQuiz(course.courseId)
@@ -87,7 +97,7 @@ export default withRouter(function Courses(props) {
   useEffect(() => {
     sortesubjects.length &&
       !selectedSubject.name &&
-      selectCourse(sortesubjects[0]);
+      selectCourse(sortesubjects[0], 0);
   }, []);
 
   return (
@@ -98,7 +108,7 @@ export default withRouter(function Courses(props) {
             return (
               <div
                 key={course.name + i}
-                onClick={() => selectCourse(course)}
+                onClick={() => selectCourse(course, i)}
                 style={{ textTransform: "uppercase" }}
                 className={`bg_${(i % 17) + 2}
                 ${i > 1 && !user.isSubscribed ? "greyed" : ""}
@@ -128,6 +138,7 @@ export default withRouter(function Courses(props) {
               return (
                 <div
                   onClick={() => setselectedIndex(i)}
+                  key={`level${i}`}
                   className={`level bordered ${
                     i === selectedIndex ? "selected" : ""
                   }`}

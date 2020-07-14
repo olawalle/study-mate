@@ -19,9 +19,9 @@
       cursor: pointer;
       &.greyed {
         filter: grayscale(100%);
-        pointer-events: none;
+        // pointer-events: none;
         opacity: 0.5;
-        cursor: not-allowed !important;
+        // cursor: not-allowed !important;
       }
     }
 
