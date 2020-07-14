@@ -59,7 +59,7 @@ export default withRouter(function FAQ({ history }) {
   ]);
 
   const back = () => {
-    history.push("/edit-profile/");
+    history.goBack();
   };
 
   const openFaq = (i) => {

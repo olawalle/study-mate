@@ -1,5 +1,6 @@
 // contral file to hold all endpoint urls
-export const appUrl = "http://infomall-001-site1.etempurl.com/";
+export const appUrl =
+  "https://cors-anywhere.herokuapp.com/http://infomall-001-site1.etempurl.com/";
 export const audioUrl = "http://content-qc.studymate.ng/";
 export const videoUrl = "http://content-qc.studymate.ng/";
 export const baseUrl = `${appUrl}api/`;
