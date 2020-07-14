@@ -63,7 +63,8 @@ export default function Leaderboard() {
                                 <span className="name">{leader.name}</span>
 
                                 <span className="points">{leader.score} pts.</span>
-                                <img src={best} className="best" alt="" />
+                                {leader.position === 1 && <img src={best} className="best" alt="" />}
+                                
                             </div>
                         </>
 

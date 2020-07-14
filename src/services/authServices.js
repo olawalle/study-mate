@@ -224,10 +224,10 @@ let getSubscriptions = () => {
     });
 };
 
-let getStudypackData = (quizID) => {
+let getStudypackData = (quizID, uid) => {
     return axios({
         method: "get",
-        url: `${urls.testWithQuizzes}${quizID}`,
+        url: `${urls.testWithQuizzes}${quizID}/user/${uid}`,
         headers: headers(),
     });
 };

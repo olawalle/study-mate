@@ -20,6 +20,7 @@ export default function Quiz(props) {
         quizzes,
         loading,
         updateLoader,
+        user: {id},
         updatefixBack,
     } = useContext(userContext);
     const [open, setopen] = useState(false);
@@ -158,11 +159,11 @@ export default function Quiz(props) {
             console.log("is quizpack", props.quizId);
             updateLoader(true);
             authServices
-                .getStudypackData(props.quizId)
+                .getStudypackData(props.quizId, id)
                 .then((res) => {
                     const userTests = res.data.userTests;
-                    const userQuizzes =
-                        userTests && userTests.length ? userTests[0].userQuizzes : [];
+                    const userQuizzes = (userTests && userTests.length) ? userTests[0].userQuizzes : [];
+                    console.log({ userQuizzes })
                     setstudyUserTests(userTests);
                     setstudyUserQuizzes(userQuizzes);
                     updateStudyPackQuizes(res.data.quizes);
