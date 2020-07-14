@@ -77,6 +77,67 @@ export default withRouter(function Login(props) {
             });
     }, []);
 
+    const handleSnack = (message, duration = 10000) => {
+        openSnackbar(
+            message,
+            duration
+        );
+    }
+
+    const handleInvalidModel = (model) => {
+        const build = Object.entries(model).reduce((aggregate, [key, value]) => {
+            aggregate = aggregate.concat(value)
+            return aggregate;
+        }, []).join(' ')
+        return build
+    }
+
+    const handleError = (err) => {
+        const { status, data } = typeof (err) === "object" && err.response || {};
+        if (!status) {
+            handleSnack("An unknown error occured at this time. Please try again", 4000);
+            return;
+        }
+        if (status === 404) {
+            handleSnack("user not found in our logs. First timer?")
+        }
+        else if (status === 500) {
+            handleSnack("This is an issue from us. Please feel free to report this issue.")
+        }
+        else {
+            const { errors, message } = data;
+            if (message) {
+                handleSnack(message);
+            }
+            if (errors) {
+                console.log({errors})
+                const buildmessage = handleInvalidModel(errors)
+                handleSnack(buildmessage);
+            }
+        }
+    }
+
+    const generateCode = () => {
+        updateLoader(true);
+        const data = {email, validate: false}
+        authServices
+            .generateCode(data)
+            .then((res) => {
+                // setmodal(true);
+                openSnackbar(
+                    "Please check your email address for instructions.",
+                    10000
+                );
+                updateLoader(false);
+                setemail(true);
+            })
+            .catch((err) => {
+                handleError(err);
+                console.log({ err });
+                updateLoader(false);
+            });
+    }
+
     const showError = (err) => {
         openSnackbar(err, 5000);
     };
@@ -143,10 +204,7 @@ export default withRouter(function Login(props) {
             .catch(function (err) {
                 console.log({ err });
                 updateLoader(false);
-                let { message: { data: errMsg = undefined } } = err.response;
-                showError(
-                    errMsg ? "Incorrect username or password" : "An error occured"
-                );
+                handleError(err);
             });
     };
 
@@ -220,7 +278,7 @@ export default withRouter(function Login(props) {
                                         type="text"
                                         onChange={(e) => setemail(e.target.value)}
                                     />
-                                    <button className="main-btn mt30" onClick={forgotPwrd}>
+                                    <button className="main-btn mt30" onClick={generateCode}>
                                         Continue
                   </button>
                                 </>
@@ -321,13 +379,13 @@ export default withRouter(function Login(props) {
                                     />
                                 </div>
 
-                                {/*<span
+                                <span
                 className="forgot blue--text"
                 onClick={() => setonLogin(false)}
                 style={{ cursor: "pointer" }}
               >
                 Forgot password?
-              </span>*/}
+              </span>
                                 {/*<Recaptcha
                                     sitekey="6LfT3rAZAAAAAKjll4jNPXLdXvc7r_90-Jm7rY3V"
                                     verifyCallback={() => setHasCaptcha(true)}

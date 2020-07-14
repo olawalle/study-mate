@@ -25,19 +25,30 @@ let login = (data) => {
 let generateCode = (data) => {
     return axios({
         method: "post",
-        url: urls.getCodeUrl + "?email=" + data.email + "&validate=true",
+        url: urls.getCodeUrl + "?email=" + data.email + "&validate="+data.validate,
         headers: headers(),
     });
 };
+
+
 
 let verifyEmail = (data) => {
     return axios({
         method: "put",
         url: urls.verifyEmailUrl + "?code=" + data.code,
         data,
+        headers: headers()
     });
 };
 
+let forgotPassword = (data, code) => {
+    return axios({
+        method: "put",
+        url: urls.forgotPasswordUrl + "?code=" + code,
+        data,
+        headers: headers()
+    });
+};
 let googleLogin = (data) => {
     return axios({
         method: "post",
@@ -296,5 +307,6 @@ export default {
     getQuizCount,
     postFeedback,
     getSubscriptions,
-    activateUserSub
+    activateUserSub,
+    forgotPassword
 };

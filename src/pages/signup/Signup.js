@@ -58,6 +58,46 @@ export default withRouter(function Signup(props) {
         openSnackbar(err, 5000);
     };
 
+    const handleSnack = (message, duration = 10000) => {
+        openSnackbar(
+            message,
+            duration
+        );
+    }
+
+    const handleInvalidModel = (model) => {
+        const build = Object.entries(model).reduce((aggregate, [key, value]) => {
+            aggregate = aggregate.concat(value)
+            return aggregate;
+        }, []).join(' ')
+        return build
+    }
+
+    const handleError = (err) => {
+        const { status, data } = typeof (err) === "object" && err.response || {};
+        if (!status) {
+            handleSnack("An unknown error occured at this time. Please try again", 4000);
+            return;
+        }
+        if (status === 404) {
+            handleSnack("user not found in our logs. First timer?")
+        }
+        else if (status === 500) {
+            handleSnack("This is an issue from us. Please feel free to report this issue.")
+        }
+        else {
+            const { errors, message } = data;
+            if (message) {
+                handleSnack(message);
+            }
+            if (errors) {
+                console.log({ errors })
+                const buildmessage = handleInvalidModel(errors)
+                handleSnack(buildmessage);
+            }
+        }
+    }
+
     const submit = (payload) => {
         if (!payload && (!surName || !firstName || !email || !password)) {
             sethasError(true);
@@ -113,11 +153,7 @@ export default withRouter(function Signup(props) {
             .catch((err) => {
                 console.log({ err });
                 updateLoader(false);
-                showError(
-                    err.response
-                        ? err.response.data.message
-                        : "An error occured. Please try again"
-                );
+                handleError(err)
             });
     };
 

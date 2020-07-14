@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  HashRouter,
-  withRouter,
-  useHistory,
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    HashRouter,
+    withRouter,
+    useHistory,
 } from "react-router-dom";
 import UserContextProvider from "./store/UserContext";
 import { motion, AnimatePresence } from "framer-motion";
@@ -57,106 +57,110 @@ import Privacy from "./pages/Terms/Privacy";
 import Verify from "./pages/Verify";
 import PreviewSubject from "./pages/Subject/PreviewSubject";
 import LandingPage from "./pages/Landingpage/Landingpage";
+import ResetPassword from "./pages/reset-password/ResetPassword";
 
 export const PreFooter = () => {
-  return (
-    <div className="pre-footer bordered">
-      <span>@2020 All Rights Reserved. Studymate</span>
-      <span>Powered by InfoMall Nigeria</span>
-    </div>
-  );
+    return (
+        <div className="pre-footer bordered">
+            <span>@2020 All Rights Reserved. Studymate</span>
+            <span>Powered by InfoMall Nigeria</span>
+        </div>
+    );
 };
 
 export default function App() {
-  let history = useHistory();
-  useEffect(() => {
-    // let token = localStorage.getItem("studymate-token");
-    // !token && history.push("/login");
+    let history = useHistory();
+    useEffect(() => {
+        // let token = localStorage.getItem("studymate-token");
+        // !token && history.push("/login");
 
-    // preload images to reduce weird image load lag after components mount
-    const imagesToBePreloaded = [
-      play,
-      Learn,
-      Progress,
-      Profile,
-      userIcon,
-      logo,
-      edit,
-      logoutIcon,
-      caret,
-      students,
-      editIcon,
-      coins,
-      trophy,
-      Badge1,
-      Badge2,
-      Medal,
-      dots,
-      facebook,
-      google,
-      twitter,
-      quizPic,
-      flex,
-      flex2,
-      flex3,
-      logo2,
-      bg1,
-      bg2,
-      student,
-      teacher,
-    ];
-    imagesToBePreloaded.forEach((image) => {
-      new Image().src = image;
-    });
-  }, []);
-  return (
-    <HashRouter>
-      <SnackbarProvider>
-        <div className="App">
-          <UserContextProvider>
-            <AnimatePresence exitBeforeEnter>
-              <Switch match>
-                <Route path="/verifyemail">
-                  <Verify />
-                </Route>
-                <Route path="/login">
-                  <Login />
-                </Route>
-                <Route exact strict path="/">
-                  <LandingPage />
-                </Route>
-                <Route path="/signup">
-                  <Signup />
-                </Route>
-                <Route path="/dashboard/">
-                  <Dashboard />
-                </Route>
-                <Route path="/subject/:subject/:level">
-                  <Subject />
-                </Route>
-                <Route path="/preview-subject/:subject">
-                  <PreviewSubject />
-                </Route>
-                <Route path="/studypack/:subject">
-                  <Studypack />
-                </Route>
-                <Route path={`/edit-profile`}>
-                  <EditProfile />
-                </Route>
-                <Route path={`/terms`}>
-                  <Terms />
-                </Route>
-                <Route path={`/privacy`}>
-                  <Privacy />
-                </Route>
-                <Route path={`/faq`}>
-                  <FAQ />
-                </Route>
-              </Switch>
-            </AnimatePresence>
-          </UserContextProvider>
-        </div>
-      </SnackbarProvider>
-    </HashRouter>
-  );
+        // preload images to reduce weird image load lag after components mount
+        const imagesToBePreloaded = [
+            play,
+            Learn,
+            Progress,
+            Profile,
+            userIcon,
+            logo,
+            edit,
+            logoutIcon,
+            caret,
+            students,
+            editIcon,
+            coins,
+            trophy,
+            Badge1,
+            Badge2,
+            Medal,
+            dots,
+            facebook,
+            google,
+            twitter,
+            quizPic,
+            flex,
+            flex2,
+            flex3,
+            logo2,
+            bg1,
+            bg2,
+            student,
+            teacher,
+        ];
+        imagesToBePreloaded.forEach((image) => {
+            new Image().src = image;
+        });
+    }, []);
+    return (
+        <HashRouter>
+            <SnackbarProvider>
+                <div className="App">
+                    <UserContextProvider>
+                        <AnimatePresence exitBeforeEnter>
+                            <Switch match>
+                                <Route path="/verifyemail">
+                                    <Verify />
+                                </Route>
+                                <Route path="/login">
+                                    <Login />
+                                </Route>
+                                <Route path="/forgotpassword">
+                                    <ResetPassword />
+                                </Route>
+                                <Route exact strict path="/">
+                                    <LandingPage />
+                                </Route>
+                                <Route path="/signup">
+                                    <Signup />
+                                </Route>
+                                <Route path="/dashboard/">
+                                    <Dashboard />
+                                </Route>
+                                <Route path="/subject/:subject/:level">
+                                    <Subject />
+                                </Route>
+                                <Route path="/preview-subject/:subject">
+                                    <PreviewSubject />
+                                </Route>
+                                <Route path="/studypack/:subject">
+                                    <Studypack />
+                                </Route>
+                                <Route path={`/edit-profile`}>
+                                    <EditProfile />
+                                </Route>
+                                <Route path={`/terms`}>
+                                    <Terms />
+                                </Route>
+                                <Route path={`/privacy`}>
+                                    <Privacy />
+                                </Route>
+                                <Route path={`/faq`}>
+                                    <FAQ />
+                                </Route>
+                            </Switch>
+                        </AnimatePresence>
+                    </UserContextProvider>
+                </div>
+            </SnackbarProvider>
+        </HashRouter>
+    );
 }

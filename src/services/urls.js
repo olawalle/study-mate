@@ -10,6 +10,7 @@ export const authUrl = `${baseUrl}Account/login`;
 export const userUrl = `${baseUrl}Account/user`;
 export const getCodeUrl = `${baseUrl}Account/generatecode`;
 export const verifyEmailUrl = `${baseUrl}Account/verifyemail`;
+export const forgotPasswordUrl = `${baseUrl}Account/forgotpassword`;
 export const currentUserUrl = `${baseUrl}Account/getcurrentuser`;
 export const googleAuthUrl = `${baseUrl}Account/auth/google`;
 export const courseUrl = `${baseUrl}courses`;
