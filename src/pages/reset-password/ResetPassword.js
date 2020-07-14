@@ -7,48 +7,25 @@ import logo2 from "../../assets/images/logo.png";
 import dots from "../../assets/images/Dots.svg";
 import eye from "../../assets/images/eye.svg";
 import pair from "../../assets/images/pair.png";
-import { Link, withRouter } from "react-router-dom";
+import { Link, withRouter, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useSnackbar } from "react-simple-snackbar";
-
-import TwitterLogin from "react-twitter-auth";
-import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
-import { GoogleLogin } from "react-google-login";
 
 import authServices from "../../services/authServices";
 import Loader from "../../components/loader/Loader";
 
-import * as config from "../../config.json";
-import Reaptcha from "reaptcha";
-import * as Recaptcha from "react-recaptcha";
-
-export default withRouter(function Login(props) {
-    const context = useContext(userContext);
-    const [email, setemail] = useState("");
-    const [hasError, sethasError] = useState(false);
+export default function ResetPassword(props) {
+    const location = useLocation();
+    const { code } = location.search;
     const [password, setpassword] = useState("");
+    const [confirmPassword, setconfirmPassword] = useState("");
     const [viewPwrd, setViewPwrd] = useState(false);
-    const [onLogin, setonLogin] = useState(true);
-    const [sentEmail, setSentEmail] = useState(false);
     const options = {
         position: "top-right",
     };
     const [openSnackbar, closeSnackbar] = useSnackbar(options);
 
-    const {
-        updateLoader,
-        updateUser,
-        updateLoggedInStatus,
-        updateUserCourses,
-        updateAwards,
-        updateSubjects,
-        loading,
-        awards,
-        pageTransitions,
-    } = context;
-
     const pwrdType = viewPwrd ? "text" : "password";
-    const [hasCaptcha, setHasCaptcha] = useState(false);
 
     useEffect(() => {
         authServices
@@ -338,7 +315,7 @@ export default withRouter(function Login(props) {
 
                                 <span className="no-acct">
                                     <Link to="/signup">
-                                        Donâ€™t have a StudyMate account?{" "}
+                                        Don’t have a StudyMate account?{" "}
                                         <span className="blue--text">Create an Account</span>
                                     </Link>
                                 </span>
@@ -352,4 +329,4 @@ export default withRouter(function Login(props) {
             </motion.div>
         </>
     );
-});
+};

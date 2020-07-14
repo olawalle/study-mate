@@ -137,7 +137,7 @@ export default withRouter(function Terms({ history }) {
           <p>
             The Company does permit those under 18 to use the Service as it is
             an educational content for learners of all ages. Our Privacy Policy
-            is clear on how we treat your data You can see our Privacy Policy
+            is clear on how we treat your data. You can see our Privacy Policy
             for more.
           </p>
           <p>
@@ -210,7 +210,7 @@ export default withRouter(function Terms({ history }) {
             extent permitted under applicable law, the Company, on its own
             behalf and on behalf of its Affiliates and its partners and their
             respective licensors and service providers, expressly disclaims all
-            warranties whether express, implied, statutory or otherwise, with
+            warranties whether expressed, implied, statutory or otherwise, with
             respect to the Service, including all implied warranties of
             merchantability, fitness for a particular purpose, title and
             non-infringement, and warranties that may arise out of course of
@@ -290,8 +290,8 @@ export default withRouter(function Terms({ history }) {
           </p>
           <p>
             By continuing to access or use Our Service after those revisions
-            become effective, You agree to be bound by the revised terms. If You
-            do not agree to the new terms, in whole or in part, please stop
+            become effective, You agree to be bound by the revised Terms. If You
+            do not agree to the new Terms, in whole or in part, please stop
             using the website and the Service.
           </p>
           <p className="x-big">Contact Us</p>

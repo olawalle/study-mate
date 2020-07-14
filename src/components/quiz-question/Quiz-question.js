@@ -5,7 +5,7 @@ import close from "../../assets/images/close.svg";
 import streak from "../../assets/images/repeat.svg";
 import Passage from "../../assets/images/Passage.svg";
 import caret from "../../assets/images/down-arrow.svg";
-import { appUrl, audioUrl } from "../../services/urls";
+import { appUrl, audioUrl, imgUrl } from "../../services/urls";
 import { userContext } from "../../store/UserContext";
 import beep from "../../assets/audio/beep1.mp3";
 
@@ -44,6 +44,8 @@ export default function QuizQuestion(props) {
     const { selectedQuizMode, questions } = props;
     let activeQuestion = questions[currentQuestion];
 
+    console.log({ questions })
+
     const getThisTestForUser = () => {
         if (props.usertests) {
             const data = props.usertests.find(
@@ -53,7 +55,6 @@ export default function QuizQuestion(props) {
         }
         return [];
     };
-    console.log({ dataIn: props.userquizzes });
     const {
         userScore,
         updateThisAnswer,
@@ -83,7 +84,10 @@ export default function QuizQuestion(props) {
         props.userquizzes || [],
         activeQuestion && activeQuestion.id,
         props.selectedQuizMode
-    );
+        );
+
+
+    console.log({ dataIn: props.userquizzes, userAnswers, answer, userAnswersCount });
 
     //const qid = activeQuestion && activeQuestion.quizId;
     const uid = answer ? answer.userOptionId : 0;
@@ -303,7 +307,9 @@ export default function QuizQuestion(props) {
     const pickAnswerOne = (i) => {
         setuserOption(i);
         setoptionSelected(true);
+        console.log("ready", selectedQuizMode)
         if (selectedQuizMode !== "Learn Mode") {
+            console.log("ready to sub")
             updateThisAnswer({
                 quizId: activeQuestion.id,
                 userOptionId: i,
@@ -424,9 +430,8 @@ export default function QuizQuestion(props) {
     const setImageUrl = (str) => {
         if (!str) return;
         return str
-            .replace(`<img src='assets`, `<img src='${appUrl}/assets`)
-            .replace(`<img src="assets`, `<img src="${appUrl}/assets`)
-            .replace("\\", "/");
+            .replace(`<img src='assets\\`, `<br/><img src='${imgUrl}/assets/`)
+            .replace(`<img src="assets\\`, `<br/><img src="${imgUrl}/assets/`)
     };
 
     if (duration <= 0 && selectedQuizMode === "Time Mode") {
@@ -512,7 +517,7 @@ export default function QuizQuestion(props) {
                                 <div className="content content_">
                                     <Parser
                                         isMathJax={activeQuestion.isQuestionMathJax}
-                                        question={activeQuestion.section}
+                                        question={setImageUrl(activeQuestion.section)}
                                     />
                                 </div>
                                 <div className="passage passage_" id="passage">
@@ -525,7 +530,7 @@ export default function QuizQuestion(props) {
                                         <Parser
                                             className="question"
                                             isMathJax={activeQuestion.isQuestionMathJax}
-                                            question={activeQuestion.question}
+                                            question={setImageUrl(activeQuestion.question)}
                                         />
 
                                         <div className="questions">
@@ -582,7 +587,7 @@ export default function QuizQuestion(props) {
                                                                 className=""
                                                                 inline={true}
                                                                 isMathJax={option.isMathJax}
-                                                                question={option.content}
+                                                                question={setImageUrl(option.content)}
                                                             />
                                                             <br />
                                                             {answer &&
@@ -606,7 +611,7 @@ export default function QuizQuestion(props) {
                                                                                     activeQuestion.answerUrl &&
                                                                                     activeQuestion.answerUrl.includes("\\(")
                                                                                 }
-                                                                                question={activeQuestion.answerUrl}
+                                                                            question={setImageUrl(activeQuestion.answerUrl)}
                                                                             />
                                                                         </p>
                                                                         <audio controls controlsList="nodownload">
@@ -652,9 +657,14 @@ export default function QuizQuestion(props) {
                                         {answer && !answer.showExplanation && (
                                             <p className="feedback blue--text">
                                                 <em onClick={() => openFeedback()}>Feedback</em>
-                                                <em onClick={() => openPassage()} className="f-right">
-                                                    {passage ? "Close Passage" : "View Passage"}
-                                                </em>
+                                                {
+                                                    activeQuestion.passage
+                                                    && 
+                                                    <em onClick={() => openPassage()} className="f-right">
+                                                        {passage ? "Close Passage" : "View Passage"}
+                                                    </em>
+                                                }
+                                                
                                             </p>
                                         )}
                                     </div>
@@ -711,13 +721,40 @@ export default function QuizQuestion(props) {
 
                     {activeQuestion.isFirstSection && !readInstructions ? (
                         <div className="footer">
+                            
                             <b
                                 style={{
                                     position: "relative",
                                     top: 13,
                                 }}
                             >
+                                {currentQuestion > 0 && (
+                                    <img
+                                        src={caret}
+                                        width="12"
+                                        alt=""
+                                        style={{
+                                            transform: "rotate(90deg)",
+                                            marginRight: "10px",
+                                            cursor: "pointer",
+                                        }}
+                                        onClick={prevQuestion}
+                                    />
+                                )}
                                 {currentQuestion + 1} of {questions.length}
+                                {currentQuestion < questions.length - 1 && (
+                                    <img
+                                        src={caret}
+                                        width="12"
+                                        alt=""
+                                        style={{
+                                            transform: "rotate(-90deg)",
+                                            marginLeft: "10px",
+                                            cursor: "pointer",
+                                        }}
+                                        onClick={nextQuestion}
+                                    />
+                                )}
                             </b>
 
                             <button

@@ -27,7 +27,8 @@ export default function useLearn(previousData, quizId){
         lockThisAnswer,
         ...rest} = useTest(previousData, quizId)
 
-        const updateThisAnswer = (extras) => {
+    const updateThisAnswer = (extras) => {
+        console.log({extras})
             const thisanswer = {...answer, ...extras, attempts: answer.attempts + 1};
             rest.updateThisAnswer(thisanswer);
         }

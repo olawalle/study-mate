@@ -5,7 +5,7 @@ import editIcon from "../../assets/images/edit.svg";
 import authServices from "../../services/authServices";
 import { userContext } from "../../store/UserContext";
 import Loader from "../../components/loader/Loader";
-import { appUrl } from "../../services/urls";
+import { appUrl, imgUrl } from "../../services/urls";
 import { useSnackbar } from "react-simple-snackbar";
 
 export default function UserPhoto() {
@@ -82,8 +82,8 @@ export default function UserPhoto() {
       <div
         className="user-photo"
         style={{
-          position: "relative",
-          backgroundImage: `url("${appUrl}${userPic}")`,
+            position: "relative",
+            backgroundImage: `url("${imgUrl}${userPic}")`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}

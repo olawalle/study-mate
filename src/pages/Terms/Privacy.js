@@ -257,17 +257,17 @@ export default withRouter(function Privacy({ history }) {
           <p>The Company may use Personal Data for the following purposes:</p>
           <ul>
             <li>
-              <b>To provide and maintain our Service</b>, including to monitor
-              the usage of our Service.
+              <b>To provide and maintain Our Service</b>, including to monitor
+              the usage of Our Service.
             </li>
             <li>
-              <b>To manage Your Account</b>: to manage Your registration as a
+              <b>To manage Your Account</b>: To manage Your registration as a
               user of the Service. The Personal Data You provide can give You
               access to different functionalities of the Service that are
               available to You as a registered user.
             </li>
             <li>
-              <b>For the performance of a contract</b>: the development,
+              <b>For the performance of a contract</b>: The development,
               compliance and undertaking of the purchase contract for the
               products, items or services You have purchased or of any other
               contract with Us through the Service.
@@ -336,8 +336,8 @@ export default withRouter(function Privacy({ history }) {
             The Company will retain Your Personal Data only for as long as is
             necessary for the purposes set out in this Privacy Policy. We will
             retain and use Your Personal Data to the extent necessary to comply
-            with our legal obligations (for example, if we are required to
-            retain your data to comply with applicable laws), resolve disputes,
+            with our legal obligations (for example, if We are required to
+            retain Yyour data to comply with applicable laws), resolve disputes,
             and enforce our legal agreements and policies. The Company will also
             retain Usage Data for internal analysis purposes. Usage Data is
             generally retained for a shorter period of time, except when this
@@ -404,11 +404,11 @@ export default withRouter(function Privacy({ history }) {
           <p className="x-big">Links to Other Websites</p>
           <p>
             Our Service may contain links to other websites that are not
-            operated by Us. If You click on a third party link, You will be
+            operated by Us. If You click on a third-party link, You will be
             directed to that third party's site. We strongly advise You to
             review the Privacy Policy of every site You visit. We have no
-            control over and assume no responsibility for the content, privacy
-            policies or practices of any third party sites or services.
+            control over and assume no responsibility for the content, Privacy
+            Policies or practices of any third-party sites or services.
           </p>
           <p className="x-big">Changes to this Privacy Policy</p>
           <p>

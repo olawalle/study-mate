@@ -29,9 +29,8 @@ export default withRouter(function Verify({ history }) {
       .then((res) => {
         console.log(res);
         openSnackbar("Email verified successfully", 5000);
-        updateLoader(false);
-        let token = localStorage.getItem("studymate-token");
-        token ? history.push("/dashboard") : history.push("/login");
+          updateLoader(false);
+          history.push("/login");
       })
       .catch((err) => {
         console.log({ err });

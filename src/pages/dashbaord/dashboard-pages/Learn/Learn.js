@@ -36,11 +36,16 @@ export default withRouter(function Learn({ history }) {
   } = context;
 
   const [open, setopen] = useState(false);
-  const [verified, setverified] = useState(true);
+    const [verified, setverified] = useState(true);
+    const [pageLoaded, setPageLoaded] = useState(false)
 
-  useEffect(() => {
-    !userCourses.length && setopen(true);
-  }, []);
+    useEffect(() => {
+        console.log({ userCourses })
+        if (pageLoaded) {
+            !userCourses.length && setopen(true);
+        }
+        setPageLoaded(true)
+  }, [pageLoaded]);
 
   const onOpenModal = () => {
     setopen(true);

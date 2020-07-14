@@ -46,7 +46,7 @@ export default function RavePay({
         handleResponse(success)
     };
     const raveProps = {
-        pay_button_text: "Continue",
+        pay_button_text: "Subscribe",
         class: "rave__button",
         payment_method: "card",
         customer_email,

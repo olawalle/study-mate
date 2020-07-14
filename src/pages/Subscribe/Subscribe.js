@@ -141,9 +141,14 @@ export default function Subscribe() {
                             <HtmlParser question={(currentPlan && currentPlan.description) ? currentPlan.description : ""} inline={true} />
                         </div>
                     </div>
-                    <button className="tw-btn" onClick={() => setopen(true)}>
+                    <div className="btm">
+                        <RavePay userId={user.id} subId={currentPlan.id} amount={currentPlan.amount} handleResponse={handleResponse}
+                            customer_email={user.email} customer_phone={user.phoneNumber ? user.phoneNumber : "+2348118505335"} />
+                        {/*<button className="tw-btn">Continue</button>*/}
+                    </div>
+                    {/*<button className="tw-btn" onClick={() => setopen(true)}>
                         Subscribe
-          </button>
+          </button>*/}
                 </div>
             </div>
 
@@ -175,11 +180,7 @@ export default function Subscribe() {
                             <p className="sm">Bank Transfer</p>
                         </div>
                     </div>
-                    <div className="btm">
-                        <RavePay userId={user.id} subId={currentPlan.id} amount={currentPlan.amount} handleResponse={handleResponse}
-                            customer_email={user.email} customer_phone={user.phoneNumber ? user.phoneNumber : "+2348118505335"} />
-                            {/*<button className="tw-btn">Continue</button>*/}
-                    </div>
+                    
                 </div>
             </Modal>
 
