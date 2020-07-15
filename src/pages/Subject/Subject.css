@@ -1,0 +1,353 @@
+.subject {
+  height: 100vh;
+}
+
+.subject .banner {
+  height: 130px;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 0 160px;
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #fff;
+  background-image: url("../../assets/images/Banner.svg");
+  position: relative;
+}
+
+.subject .banner .mobile-title-text {
+  font-size: 12px;
+  padding: 10px 25px;
+  background-color: #5eade4;
+  color: #fff;
+  position: absolute;
+  bottom: 45px;
+  left: 20px;
+  border-radius: 25px;
+  display: none;
+}
+
+.subject .banner .back {
+  position: absolute;
+  bottom: 30px;
+}
+
+.subject .sub-banner {
+  height: 75px;
+  line-height: 75px;
+  background: #ffffff;
+  -webkit-box-shadow: 0px 3px 6px #0000000d;
+          box-shadow: 0px 3px 6px #0000000d;
+  padding: 0 160px;
+  overflow: hidden;
+  position: relative;
+  z-index: 100;
+}
+
+.subject .sub-banner .small {
+  width: 24%;
+  float: left;
+  border-right: 1px solid #eee;
+}
+
+.subject .sub-banner .small span {
+  font-size: 14px;
+  position: relative;
+  top: -10px;
+}
+
+.subject .sub-banner .small p {
+  position: relative;
+  top: -40px;
+  font-size: 22px;
+}
+
+.subject .sub-banner .wide {
+  width: 70%;
+  float: left;
+  white-space: nowrap;
+  overflow: hidden;
+  height: 80px;
+  border-right: 1px solid #eee;
+}
+
+.subject .sub-banner .wide .progresses {
+  overflow-x: auto;
+  overflow-y: hidden;
+  height: 92px;
+}
+
+.subject .sub-banner .wide .progress-wrap {
+  width: 550px;
+  display: inline-block;
+  padding: 25px 30px;
+}
+
+.subject .sub-banner .wide .progress-wrap span {
+  color: #353535;
+  font-size: 13px;
+  top: -25px;
+  position: relative;
+}
+
+.subject .heading {
+  width: 100%;
+  font-size: 14px;
+  font-weight: 600;
+  border-bottom: 1px solid #eee;
+  padding: 20px 30px;
+  margin: 30px 0 0;
+  background-color: #fff;
+}
+
+.subject .heading span {
+  font-size: 10px;
+  color: #c2c2c2;
+  font-weight: 300;
+}
+
+.subject .contents {
+  padding: 0px 160px;
+  background-color: #fafafa;
+  height: calc(100vh - (75px + 75px));
+  overflow: hidden;
+}
+
+.subject .contents .small {
+  width: 24%;
+  float: left;
+  padding-right: 70px;
+  padding-top: 30px;
+}
+
+.subject .contents .small .header {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.subject .contents .small .level {
+  padding: 15px 0;
+  font-size: 12px;
+  font-weight: 600;
+  position: relative;
+  cursor: pointer;
+}
+
+.subject .contents .small .level span {
+  padding-left: 50px;
+}
+
+.subject .contents .small .level .band {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#0d92ed), to(#02358f));
+  background-image: linear-gradient(#0d92ed, #02358f);
+  text-align: center;
+  display: inline-block;
+  position: absolute;
+  left: 20px;
+}
+
+.subject .contents .small .level .band .inner {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin: 3px;
+  background-color: #fff;
+}
+
+.subject .contents .small .level.active {
+  color: #fff;
+  background-color: #0097f5;
+  border-radius: 10px;
+}
+
+.subject .contents .small img {
+  width: 90%;
+  float: left;
+  margin-top: 40px;
+}
+
+.subject .contents .wide {
+  width: 76%;
+  float: left;
+  height: calc(100vh - (75px + 75px));
+  overflow: auto;
+}
+
+.subject .contents .wide.narrow_ {
+  display: none;
+}
+
+.subject .contents .wide .lessons-wrap {
+  background-color: #fff;
+  padding-bottom: 20px;
+}
+
+.subject .contents .wide .lessons-wrap .sub-heading {
+  font-size: 14px;
+  margin-top: 0;
+  color: #aaaaaa;
+  padding: 30px;
+}
+
+.subject .contents .wide .lessons-wrap .sub-heading button {
+  padding: 12px 20px;
+  margin-top: -10px;
+}
+
+.subject .contents .wide .pack {
+  height: 500px;
+  margin-top: 100px;
+}
+
+.subject .contents .wide .pack .half {
+  width: 50%;
+  float: left;
+  height: 100%;
+  padding: 30px;
+  background-color: #fff;
+}
+
+.subject .contents .wide .pack .half .title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 85px;
+}
+
+.subject .contents .wide .pack .half .desc {
+  font-size: 14px;
+  font-weight: 18px;
+  line-height: 20px;
+}
+
+.subject .contents .wide .pack .half .duration {
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: 600;
+  margin: 40px 0;
+}
+
+.subject .contents .wide .pack .half .duration span {
+  display: block;
+}
+
+.subject .contents .wide .pack .half button {
+  padding: 0 20px;
+  background-color: #1091e7;
+  border: 0;
+  color: #fff;
+}
+
+.subject .contents .wide .pack .bg {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url("../../assets/images/Advanced test.svg");
+}
+
+.subject .contents .quiz {
+  background-color: #fff;
+}
+
+@media (max-width: 768px), (min-width: 768px) and (max-width: 1024px) {
+  .subject {
+    padding: 0;
+    height: auto;
+  }
+  .subject .sub-banner {
+    padding: 0 20px;
+    z-index: 10;
+  }
+  .subject .sub-banner .small {
+    line-height: 20px;
+    width: 30%;
+  }
+  .subject .sub-banner .small span {
+    font-size: 12px;
+    top: 10px;
+  }
+  .subject .sub-banner .small p {
+    top: 5px;
+  }
+  .subject .nav-wrap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1200;
+    width: 100%;
+  }
+  .subject .banner {
+    font-size: 14px;
+    padding: 20px;
+    background-position-x: 83%;
+    margin-top: 65px;
+  }
+  .subject .banner .back {
+    position: absolute;
+    bottom: 20px;
+  }
+  .subject .banner .back svg {
+    display: none;
+  }
+  .subject .banner .mobile-title-text {
+    display: block;
+  }
+  .subject .contents {
+    padding: 0px;
+    overflow: auto;
+  }
+  .subject .contents .small {
+    width: 100%;
+    padding: 0;
+    display: none;
+  }
+  .subject .contents .small img {
+    width: 60%;
+    margin: 30px 20%;
+  }
+  .subject .contents .wide {
+    width: 100%;
+    padding: 0;
+    height: auto;
+  }
+  .subject .contents .wide.narrow_ {
+    display: block;
+  }
+  .subject .contents .wide.narrow_ .quiz-contents {
+    padding: 15px;
+  }
+  .subject .contents .wide.big_ {
+    display: none;
+  }
+  .subject .contents .wide .lessons-wrap {
+    margin-bottom: 0 !important;
+  }
+  .subject .contents .wide .pack {
+    height: 350px;
+    margin-bottom: 40px;
+  }
+  .subject .contents .wide .pack .half {
+    width: 100%;
+    background-image: url("../../assets/images/Advanced test.svg");
+    color: #fff;
+    background-size: cover;
+    background-position-x: 73%;
+    background-position-y: 0px;
+    height: 560px;
+  }
+  .subject .contents .wide .pack .half p {
+    margin-top: 0px;
+  }
+  .subject .contents .wide .pack .half button {
+    padding: 0 20px;
+    background-color: #fff;
+    border: 0;
+    color: #1091e7;
+  }
+  .subject .contents .wide .pack .bg {
+    display: none;
+  }
+}
+/*# sourceMappingURL=Subject.css.map */

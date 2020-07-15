@@ -1,0 +1,316 @@
+.studypack {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.studypack .navwrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 120;
+}
+
+.studypack .banner {
+  height: 130px;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 0 160px;
+  margin: 65px 0 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #fff;
+  background-image: url("../../assets/images/Banner.svg");
+  position: relative;
+}
+
+.studypack .banner .backArrow {
+  position: absolute;
+  bottom: 30px;
+}
+
+.studypack .banner .mobile-title-text {
+  font-size: 12px;
+  padding: 10px 25px;
+  background-color: #5eade4;
+  color: #fff;
+  position: absolute;
+  bottom: 15px;
+  left: 20px;
+  border-radius: 25px;
+  display: none;
+}
+
+.studypack .sub-banner {
+  height: 75px;
+  line-height: 75px;
+  background: #ffffff;
+  -webkit-box-shadow: 0px 3px 6px #0000000d;
+          box-shadow: 0px 3px 6px #0000000d;
+  padding: 0 160px;
+  overflow: hidden;
+  position: relative;
+  z-index: 100;
+}
+
+.studypack .sub-banner .small {
+  width: 30%;
+  float: left;
+  border-right: 1px solid #eee;
+}
+
+.studypack .sub-banner .small span {
+  font-size: 14px;
+  position: relative;
+  top: -10px;
+}
+
+.studypack .sub-banner .small p {
+  position: relative;
+  top: -40px;
+  font-size: 22px;
+}
+
+.studypack .sub-banner .wide {
+  width: 70%;
+  float: left;
+  white-space: nowrap;
+  overflow: hidden;
+  height: 80px;
+  border-right: 1px solid #eee;
+}
+
+.studypack .sub-banner .wide .progresses {
+  overflow-x: auto;
+  overflow-y: hidden;
+  height: 92px;
+}
+
+.studypack .sub-banner .wide .progress-wrap {
+  width: 550px;
+  display: inline-block;
+  padding: 25px 30px;
+}
+
+.studypack .sub-banner .wide .progress-wrap span {
+  color: #353535;
+  font-size: 13px;
+  top: -25px;
+  position: relative;
+}
+
+.studypack .heading {
+  width: 100%;
+  font-size: 14px;
+  font-weight: 600;
+  border-bottom: 1px solid #eee;
+  padding: 20px 30px;
+  margin: 30px 0 0;
+  background-color: #fff;
+}
+
+.studypack .heading span {
+  font-size: 10px;
+  color: #c2c2c2;
+  font-weight: 300;
+}
+
+.studypack .contents {
+  padding: 0px 160px;
+  background-color: #fafafa;
+  min-height: 500px;
+  overflow: auto;
+}
+
+.studypack .contents .small {
+  width: 30%;
+  float: left;
+  padding-right: 70px;
+  padding-top: 30px;
+  position: relative;
+}
+
+.studypack .contents .small .header {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.studypack .contents .small .desc {
+  font-size: 14px;
+  line-height: 20px;
+  padding-bottom: 10px;
+}
+
+.studypack .contents .small .desc p {
+  margin: 8px 0 0px;
+}
+
+.studypack .contents .small .desc p .dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #5eade4;
+  margin-right: 10px;
+  position: relative;
+  top: -4px;
+}
+
+.studypack .contents .small .level {
+  padding: 20px 0;
+  font-size: 14px;
+  border-bottom: 1px solid #eee;
+}
+
+.studypack .contents .small img {
+  width: 90%;
+  float: right;
+  margin: 40px 5%;
+  display: none;
+}
+
+.studypack .contents .wide {
+  width: 70%;
+  float: left;
+  height: calc(100vh - (115px + 130px + 75px));
+  overflow: auto;
+}
+
+.studypack .contents .wide .lessons-wrap {
+  background-color: #fff;
+  padding-bottom: 20px;
+}
+
+.studypack .contents .wide .lessons-wrap .sub-heading {
+  font-size: 14px;
+  margin-top: 0;
+  color: #aaaaaa;
+  padding: 30px;
+}
+
+.studypack .contents .wide .lessons-wrap .sub-heading button {
+  padding: 12px 20px;
+  margin-top: -10px;
+}
+
+.studypack .contents .wide .pack {
+  height: 500px;
+  margin-top: 100px;
+}
+
+.studypack .contents .wide .pack .half {
+  width: 50%;
+  float: left;
+  height: 100%;
+  padding: 40px;
+  background-color: #fff;
+}
+
+.studypack .contents .wide .pack .half p {
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 70px;
+}
+
+.studypack .contents .wide .pack .half .desc {
+  font-size: 14px;
+  font-weight: 18px;
+  line-height: 20px;
+}
+
+.studypack .contents .wide .pack .half .duration {
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: 600;
+  margin: 20px 0 40px;
+}
+
+.studypack .contents .wide .pack .half .duration span {
+  display: block;
+}
+
+.studypack .contents .wide .pack .half button {
+  padding: 12px 20px;
+}
+
+.studypack .contents .wide .pack .bg {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url("../../assets/images/Advanced test.svg");
+}
+
+.studypack .contents .list {
+  padding-top: 30px;
+}
+
+.studypack .contents .quiz {
+  background-color: #fff;
+}
+
+@media (max-width: 768px), (min-width: 768px) and (max-width: 1024px) {
+  .studypack {
+    padding: 0;
+    height: auto;
+    overflow: auto;
+  }
+  .studypack.fixed {
+    height: 100vh;
+    overflow: hidden;
+  }
+  .studypack .banner {
+    font-size: 14px;
+    padding: 20px;
+    background-position-x: 83%;
+  }
+  .studypack .banner .backArrow,
+  .studypack .banner .back svg {
+    display: none !important;
+  }
+  .studypack .banner .mobile-title-text {
+    display: block !important;
+  }
+  .studypack .sub-banner {
+    padding: 0 20px;
+    z-index: 10;
+  }
+  .studypack .sub-banner .small {
+    line-height: 20px;
+  }
+  .studypack .sub-banner .small span {
+    font-size: 12px;
+    top: 10px;
+  }
+  .studypack .sub-banner .small p {
+    top: 5px;
+  }
+  .studypack .contents {
+    padding: 20px;
+    height: calc(100vh - 280px);
+    overflow: auto;
+  }
+  .studypack .contents .small {
+    width: 100%;
+    padding: 0;
+  }
+  .studypack .contents .small img {
+    width: 60%;
+    margin: 30px 20%;
+  }
+  .studypack .contents .wide {
+    width: 100%;
+    padding: 0;
+    height: auto;
+  }
+  .studypack .contents .wide .pack {
+    height: 320px;
+  }
+  .studypack .contents .wide .pack .half {
+    width: 100%;
+  }
+  .studypack .contents .wide .pack .half p {
+    margin-top: 0px;
+  }
+}
+/*# sourceMappingURL=Studypack.css.map */

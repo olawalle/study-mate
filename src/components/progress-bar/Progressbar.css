@@ -1,0 +1,25 @@
+.progress-bar {
+  height: 15px;
+  background: #f8f8f8;
+  width: 100%;
+  border-radius: 40px;
+  overflow: hidden;
+}
+
+.progress-bar .indicator {
+  height: 15px;
+  background: #10a3ff;
+  border-radius: 40px;
+  -webkit-transition: linear all 0.3s;
+  transition: linear all 0.3s;
+}
+
+@media (max-width: 768px), (min-width: 768px) and (max-width: 1024px) {
+  .progress-bar {
+    height: 10px;
+  }
+  .progress-bar .indicator {
+    height: 10px;
+  }
+}
+/*# sourceMappingURL=Progressbar.css.map */
