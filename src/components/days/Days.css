@@ -1,0 +1,32 @@
+.days {
+  padding: 20px;
+}
+
+.days .day {
+  width: calc(100% / 7);
+  text-align: center;
+  display: inline-block;
+}
+
+.days .day .ball {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid #dbdbdb;
+  margin: auto;
+}
+
+.days .day .ball.present {
+  background-color: #0097f5;
+  border: 1px solid #0097f5;
+}
+
+.days .day span {
+  font-size: 10px;
+  color: #b3b3b3;
+}
+
+.days .day span.came {
+  color: #383838;
+}
+/*# sourceMappingURL=Days.css.map */

@@ -1,0 +1,223 @@
+.login {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+}
+
+.login .left-side {
+  width: 57%;
+  float: left;
+  background-image: url("../../assets/images/Login Background.svg");
+  background-position-y: -8px;
+  background-position-y: 0px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  text-align: center;
+  position: relative;
+}
+
+.login .left-side .heading {
+  font-size: 36px;
+  font-weight: 600;
+  color: #fff;
+  margin-top: 150px;
+}
+
+.login .left-side .pair {
+  width: 60%;
+  position: relative;
+  top: 245px;
+  left: 0px;
+}
+
+.login .left-side .right-dot {
+  position: absolute;
+  top: 207px;
+  right: 120px;
+  width: 100px;
+}
+
+.login .left-side .left-dot {
+  position: absolute;
+  top: 477px;
+  left: 120px;
+  width: 100px;
+}
+
+.login .right-side {
+  width: 43%;
+  float: left;
+  padding: 70px 80px;
+  overflow: auto;
+  height: 100vh;
+}
+
+.login .right-side .mobileLogo {
+  display: none;
+}
+
+.login .right-side .welcome {
+  font-size: 24px;
+  text-align: left;
+  color: #000000;
+  font-weight: 600;
+}
+
+.login .right-side .buttons {
+  border-bottom: 0.5px solid #bdbdbd;
+  padding-bottom: 40px;
+}
+
+.login .right-side .buttons button {
+  width: 31%;
+  height: 33px;
+  line-height: 35px;
+  font-size: 12px !important;
+  overflow: hidden;
+  text-align: center;
+  background-color: #fff;
+}
+
+.login .right-side .buttons button img {
+  height: 40px;
+  position: relative;
+  top: 2px;
+}
+
+.login .right-side .buttons button span {
+  position: relative;
+  top: -3px;
+  left: 4px;
+  font-weight: 600;
+}
+
+.login .right-side .buttons button.tw {
+  margin: 0 3%;
+}
+
+.login .right-side .buttons .fb {
+  background-size: cover;
+  background-position: center;
+  background-image: url("../../assets/images/fb.svg");
+}
+
+.login .right-side .buttons .tw {
+  background-size: cover;
+  background-position: center;
+  background-image: url("../../assets/images/tw.svg");
+}
+
+.login .right-side .buttons .gg {
+  border: 0.30000001192092896px solid #d8d8d8;
+  background-size: cover;
+  background-position: center;
+  background-image: url("../../assets/images/gg.svg");
+}
+
+.login .right-side .or {
+  margin-top: -10px;
+  text-align: center;
+}
+
+.login .right-side .or span {
+  background-color: #fff;
+  padding: 0 35px;
+}
+
+.login .right-side .form {
+  padding-top: 30px;
+  margin-bottom: 80px;
+}
+
+.login .right-side .form .label {
+  font-weight: 600;
+  color: #000;
+  font-size: 12px;
+}
+
+.login .right-side .form input {
+  background: #f8f8f8;
+  height: 50px;
+  border: 0;
+  width: 100%;
+  padding: 0 20px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.login .right-side .form input:focus {
+  outline: none;
+  border: 1px solid #eee;
+}
+
+.login .right-side .form .forgot {
+  float: right;
+  font-size: 12px;
+  position: relative;
+  top: -5px;
+}
+
+.login .right-side .form .main-btn {
+  height: 50px;
+  width: 100%;
+  font-weight: 600;
+}
+
+.login .right-side .form .no-acct a {
+  font-size: 12px;
+  position: relative;
+  top: 10px;
+  cursor: pointer;
+}
+
+.login .right-side .cc {
+  color: rgba(0, 0, 0, 0.438);
+  font-size: 12px;
+  max-width: 250px;
+  line-height: 16px;
+  margin-top: 100px;
+}
+
+@media (max-width: 768px), (min-width: 768px) and (max-width: 1024px) {
+  .login {
+    overflow: auto !important;
+  }
+  .login .left-side {
+    display: none;
+  }
+  .login .right-side {
+    width: 100%;
+    padding: 160px 20px 20px;
+    position: relative;
+    overflow: auto !important;
+  }
+  .login .right-side .mobileLogo {
+    display: block;
+    position: absolute;
+    top: 30px;
+    left: 20px;
+  }
+  .login .right-side .mobileLogo img {
+    height: 30px;
+    display: inline-block;
+  }
+  .login .right-side .welcome {
+    font-size: 20px;
+  }
+  .login .right-side .buttons {
+    padding-bottom: 40px;
+  }
+  .login .right-side .buttons button img {
+    height: 13px;
+    position: relative;
+    top: 0px;
+  }
+  .login .right-side .form input {
+    margin-bottom: 15px;
+  }
+}
+/*# sourceMappingURL=Login.css.map */

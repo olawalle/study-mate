@@ -1,0 +1,823 @@
+.dashboard {
+  background: #fafafa;
+  height: 100vh;
+  position: absolute;
+  width: 100%;
+  top: 0;
+}
+
+.dashboard .mobile-photo,
+.dashboard .user-details_,
+.dashboard .medals_ {
+  display: none;
+}
+
+.dashboard .links-wrap {
+  display: none;
+}
+
+.dashboard .side {
+  width: 20%;
+  float: left;
+}
+
+.dashboard .contents {
+  width: 80%;
+  height: calc(100% - 65px);
+  float: left;
+  position: relative;
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+.dashboard .contents .mobile-title-text,
+.dashboard .contents .mobile-title {
+  display: none;
+}
+
+.dashboard .contents .banner {
+  height: 160px;
+  width: calc(100% - 80px);
+  margin: 40px 40px 0px;
+  border-radius: 8px;
+  padding: 20px;
+  position: relative;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url("../../assets/images/dash.svg");
+  background-position-x: 80%;
+}
+
+.dashboard .contents .banner p {
+  font-size: 20px;
+  font-weight: 600;
+  color: #ffff;
+  position: absolute;
+  bottom: 5px;
+  left: 40px;
+}
+
+.dashboard .contents .main-content {
+  padding: 20px;
+  padding-bottom: 254px;
+  min-height: calc(100vh - 200px);
+}
+
+.dashboard .none {
+  display: none !important;
+}
+
+.react-responsive-modal-modal {
+  padding: 0 !important;
+  max-width: 100% !important;
+}
+
+.react-responsive-modal-modal .banner {
+  height: 200px;
+  width: 100%;
+  color: #fff;
+  text-align: center;
+  padding: 80px;
+  background-position-x: 0px;
+  background-size: 101%;
+  background-repeat: no-repeat;
+}
+
+.react-responsive-modal-modal .banner .main-text {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 0;
+  margin-top: 53px;
+}
+
+.react-responsive-modal-modal .banner .sub-text {
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+.react-responsive-modal-modal .modal-data {
+  padding: 40px;
+  background-color: #fafafa;
+  height: 350px;
+  overflow: auto;
+  text-align: center;
+}
+
+.react-responsive-modal-modal .modal-data .class {
+  width: 220px;
+  height: 50px;
+  border-radius: 5px;
+  border: 0;
+  color: #fff;
+  margin: 0 10px;
+}
+
+.react-responsive-modal-modal .modal-data .class input {
+  margin-right: 5px;
+  border: 0;
+}
+
+.react-responsive-modal-modal .modal-data .subject {
+  padding: 0px 50px;
+  margin: 0 15px 15px 0;
+  border-radius: 5px;
+  border: 0;
+  color: #fff;
+  position: relative;
+  text-transform: uppercase;
+}
+
+.react-responsive-modal-modal .modal-data .subject input {
+  margin-right: 5px;
+  border: 0;
+  border: 1px solid #fff;
+  background-color: transparent;
+  position: absolute;
+  left: 18px;
+  top: 12px;
+}
+
+.react-responsive-modal-modal .modal-data .coming {
+  background: #f5f5f5;
+  padding: 20px;
+  margin-top: 50px;
+}
+
+.react-responsive-modal-modal .modal-data .coming em {
+  color: #8a8a8a;
+}
+
+.react-responsive-modal-modal .modal-footer {
+  border-top: 1px solid #e2e2e2;
+  background-color: #fafafa;
+  width: 100%;
+  height: 80px;
+  text-align: right;
+  padding: 30px;
+}
+
+.react-responsive-modal-modal .modal-footer button {
+  padding: 0 20px;
+  height: 40px;
+  position: relative;
+  top: -10px;
+}
+
+.react-responsive-modal-modal .quiz-modal .left {
+  width: 50%;
+  height: 700px;
+  float: left;
+  background-size: cover;
+}
+
+.react-responsive-modal-modal .quiz-modal .left1 {
+  background-image: url("../../assets/images/Test Introduction.svg");
+  background-position-x: 64%;
+}
+
+.react-responsive-modal-modal .quiz-modal .left2 {
+  background-image: url("../../assets/images/review.svg");
+}
+
+.react-responsive-modal-modal .quiz-modal .right {
+  width: 50%;
+  float: left;
+  padding: 100px 50px;
+}
+
+.react-responsive-modal-modal .quiz-modal .right .header {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.react-responsive-modal-modal .quiz-modal .right .desc {
+  font-size: 14px;
+  width: 70%;
+}
+
+.react-responsive-modal-modal .quiz-modal .right .duration {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.react-responsive-modal-modal .quiz-modal .right .duration .span {
+  display: block;
+}
+
+.react-responsive-modal-modal .quiz-modal .right .radios span {
+  font-size: 14px;
+  display: block;
+  padding: 15px 0;
+  cursor: pointer;
+}
+
+.react-responsive-modal-modal .quiz-modal .right .radios span input {
+  -webkit-transform: scale(1.5);
+          transform: scale(1.5);
+  margin-right: 12px;
+}
+
+.react-responsive-modal-modal .quiz-modal .right .radios span .blue--text {
+  font-size: 14px;
+  width: 60%;
+  margin: 10px 30px 0;
+}
+
+.react-responsive-modal-modal .quiz-modal .right .radios span .blue--text p {
+  line-height: 16px;
+}
+
+.react-responsive-modal-modal .quiz-modal .right .radios span .blue--text div {
+  display: inline-block;
+  width: 75px;
+  padding: 10px 0 0 0;
+  color: #bbbbbb;
+  margin-right: 10px;
+  text-align: center;
+}
+
+.react-responsive-modal-modal .quiz-modal .right .radios span .blue--text div span {
+  padding: 3px 6px;
+}
+
+.react-responsive-modal-modal .quiz-modal .right .radios span .blue--text div input {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  width: 100%;
+  height: 50px;
+  text-align: center;
+  border: 1px solid #eee;
+}
+
+.react-responsive-modal-modal .quiz-modal .right .scores h4 {
+  font-size: 12px;
+}
+
+.react-responsive-modal-modal .quiz-modal .right .scores h2 {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.react-responsive-modal-modal .quiz-modal .right .btm {
+  border-top: 1px solid #eee;
+  text-align: center;
+  height: 100px;
+  width: 50%;
+  padding: 30px 0;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.react-responsive-modal-modal .quiz-modal .right .btm button {
+  padding: 0 10px !important;
+  width: 28%;
+  margin: 0 5px;
+}
+
+.react-responsive-modal-modal .quiz-modal .right .btm button img {
+  height: 15px;
+  position: relative;
+  top: 2px;
+}
+
+.react-responsive-modal-modal .quiz-modal .right .btm .share {
+  position: absolute;
+  top: -25px;
+  width: 100%;
+}
+
+.react-responsive-modal-modal .quiz-modal .right .btm .share span {
+  background-color: #fff;
+  padding: 5px 10px;
+}
+
+.react-responsive-modal-modal .quiz-modal .right button {
+  padding: 0 30px;
+}
+
+.react-responsive-modal-modal .video-modal {
+  width: 100%;
+  height: 90vh;
+  position: relative;
+}
+
+.react-responsive-modal-modal .video-modal .videos {
+  display: inline-block;
+  width: 30%;
+  border-right: 1px solid #eee;
+  height: 100%;
+  position: absolute;
+  top: 0;
+}
+
+.react-responsive-modal-modal .video-modal .frame {
+  width: 70%;
+  height: 100%;
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.react-responsive-modal-modal .video-modal .streak {
+  position: absolute;
+  bottom: 110px;
+  right: 40px;
+  overflow: hidden;
+  width: 300px;
+  height: 130px;
+  z-index: 12323;
+  background: #fff;
+  padding: 15px 25px;
+  border-radius: 10px;
+}
+
+.react-responsive-modal-modal .video-modal .streak .streak-text {
+  display: inline-block;
+  width: 60%;
+  padding-left: 20px;
+  position: relative;
+  top: -10px;
+}
+
+.react-responsive-modal-modal .subscribe-modal .top {
+  padding: 50px 30px;
+  text-align: center;
+}
+
+.react-responsive-modal-modal .subscribe-modal .top .close {
+  display: none;
+}
+
+.react-responsive-modal-modal .subscribe-modal .top .sm {
+  font-size: 12px;
+  color: #000000;
+}
+
+.react-responsive-modal-modal .subscribe-modal .top .amt {
+  color: #10a3ff;
+  font-size: 50px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  margin-top: -20px;
+}
+
+.react-responsive-modal-modal .subscribe-modal .top .box {
+  height: 272px;
+  background: #ffffff;
+  -webkit-box-shadow: 3px 12px 32px #0000000d;
+          box-shadow: 3px 12px 32px #0000000d;
+  border-radius: 5px;
+  opacity: 1;
+  display: inline-block;
+  margin: 0 20px;
+  padding: 80px;
+  margin-top: 20px;
+  cursor: pointer;
+  border: 2px solid #fff;
+}
+
+.react-responsive-modal-modal .subscribe-modal .top .box.selected {
+  border: 2px solid #10a3ff;
+  border-radius: 0;
+}
+
+.react-responsive-modal-modal .subscribe-modal .top .box p {
+  margin-top: 20px;
+}
+
+.react-responsive-modal-modal .subscribe-modal .btm {
+  text-align: center;
+  padding: 30px 40px;
+  border-top: 0.5px solid #ebebeb;
+}
+
+.react-responsive-modal-modal .subscribe-modal .btm button {
+  padding: 0px 40px;
+}
+
+@media (max-width: 768px), (min-width: 768px) and (max-width: 1024px) {
+  .react-responsive-modal-modal .subscribe-modal {
+    height: auto;
+  }
+  .react-responsive-modal-modal .subscribe-modal .top .box {
+    padding: 12px 20px;
+    height: auto;
+    width: 100%;
+    margin: 10px 0;
+  }
+  .react-responsive-modal-modal .subscribe-modal .top .box img {
+    width: 50px;
+  }
+  .react-responsive-modal-modal .subscribe-modal .top .box p {
+    display: inline-block;
+    width: 70%;
+    position: relative;
+    top: -15px;
+    left: -20px;
+  }
+  .react-responsive-modal-modal .subscribe-modal .btm {
+    border-top: 0;
+    padding-top: 0;
+  }
+  .react-responsive-modal-modal .subscribe-modal .btm button {
+    width: 100%;
+  }
+  .react-responsive-modal-modal .subscribe-modal .close {
+    display: inline;
+  }
+}
+
+.react-responsive-modal-modal .levels-modal {
+  padding: 30px;
+  position: relative;
+}
+
+.react-responsive-modal-modal .levels-modal .blue--text {
+  text-align: center;
+  font-size: 16px;
+}
+
+.react-responsive-modal-modal .levels-modal .levels {
+  width: 300px;
+  margin-top: 30px;
+}
+
+.react-responsive-modal-modal .levels-modal .levels .level {
+  padding: 30px 15px;
+  text-align: center;
+  border-radius: 0;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.react-responsive-modal-modal .levels-modal .levels .level.selected {
+  border: 1px solid #10a3ff;
+}
+
+.react-responsive-modal-modal .levels-modal .levels .level img {
+  float: left;
+  position: relative;
+  top: -15px;
+  left: 15px;
+}
+
+.react-responsive-modal-modal .levels-modal .levels .level span {
+  margin-left: -30px;
+}
+
+.react-responsive-modal-modal .levels-modal .btn {
+  text-align: center;
+}
+
+.react-responsive-modal-modal .levels-modal .btn button {
+  padding: 0 40px;
+}
+
+.react-responsive-modal-closeButton {
+  top: -45px !important;
+  right: -25px !important;
+}
+
+.react-responsive-modal-closeButton svg {
+  fill: #fff;
+}
+
+@media (max-width: 768px), (min-width: 768px) and (max-width: 1024px) {
+  .react-responsive-modal-closeButton {
+    right: -5px !important;
+  }
+}
+
+@media (max-width: 768px), (min-width: 768px) and (max-width: 1024px) {
+  .links-wrap {
+    display: block !important;
+    width: 100%;
+    background-color: #fff;
+    padding: 0 20px;
+    margin-bottom: 25px;
+  }
+  .side {
+    width: 0;
+    display: none;
+  }
+  .contents {
+    width: 100% !important;
+  }
+  .contents .banner {
+    height: 200px !important;
+    text-align: center;
+    background-position-x: 50% !important;
+    -webkit-transition: linear all 0.25s;
+    transition: linear all 0.25s;
+    width: 100% !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+  }
+  .contents .banner.shrink {
+    height: 110px !important;
+  }
+  .contents .banner .title_ {
+    display: none;
+  }
+  .contents .banner .mobile-title-text {
+    display: block;
+    font-size: 12px;
+    padding: 10px 25px;
+    background-color: #5eade4;
+    color: #fff;
+    position: absolute;
+    bottom: 45px;
+    left: 20px;
+    border-radius: 25px;
+  }
+  .contents .banner .mobile-title {
+    display: block;
+    font-size: 16px !important;
+    left: 20px !important;
+  }
+  .contents .banner .user-photo {
+    width: 120px;
+    height: 120px;
+    background-color: #10a3ff;
+    border-radius: 50%;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 100px;
+    position: relative;
+    display: block !important;
+  }
+  .contents .banner .user-photo .usericon {
+    height: 83%;
+    margin: 12px auto;
+  }
+  .contents .banner .user-photo .edit_ {
+    position: absolute;
+    right: -5px;
+    top: -5px;
+    background-color: #fff;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    overflow: hidden;
+    -webkit-box-shadow: 0px 3px 6px #00000029;
+            box-shadow: 0px 3px 6px #00000029;
+  }
+  .contents .banner .user-photo .edit_ img {
+    height: 10px;
+    position: relative;
+    top: -22px;
+    height: 15px !important;
+  }
+  .contents .banner .mobile-photo {
+    display: block !important;
+  }
+  .contents .banner .user-details_ {
+    font-size: 15px !important;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 0px !important;
+    margin-top: 5px;
+    display: block !important;
+    color: #fff;
+    position: unset !important;
+  }
+  .contents .banner .user-details_ span {
+    display: block;
+    font-size: 12px !important;
+    font-weight: 300;
+    padding-top: 4px;
+  }
+  .contents .banner .medals_ {
+    text-align: center;
+    margin-top: 0px;
+    display: block !important;
+  }
+  .contents .banner .medals_ .medal {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin: 10px;
+    text-align: center;
+  }
+  .contents .banner .medals_ .medal img {
+    height: 10px;
+    position: relative;
+    top: 2px;
+  }
+  .contents .banner .medals_ .medal span {
+    display: block;
+    position: relative;
+    top: 8px;
+    font-size: 12px;
+    color: #fff;
+  }
+  .contents .banner .medals_ .b1 {
+    background: #e6e6e6;
+  }
+  .contents .banner .medals_ .b2 {
+    background: #a172fd;
+  }
+  .contents .banner .medals_ .b3 {
+    background: #d45fc1;
+  }
+  .contents .banner .medals_ .b4 {
+    background: #3a93d3;
+  }
+  .contents .banner .medals_ .b5 {
+    background: #b90b10;
+  }
+  .contents .main-content {
+    padding: 0px !important;
+  }
+  .react-responsive-modal-modal .banner {
+    height: 200px;
+    width: 100%;
+    color: #fff;
+    text-align: center;
+    padding: 30px;
+    background-position-x: 0px;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  .react-responsive-modal-modal .banner .main-text {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 0;
+    margin-top: 53px;
+  }
+  .react-responsive-modal-modal .banner .sub-text {
+    font-size: 16px;
+    margin-top: 5px;
+  }
+  .react-responsive-modal-modal .modal-data {
+    padding: 20px;
+  }
+  .react-responsive-modal-modal .modal-data .coming {
+    text-align: left;
+    padding-top: 10px;
+  }
+  .react-responsive-modal-modal .modal-data .coming em {
+    position: relative;
+    top: -35px;
+    left: -20px;
+  }
+  .react-responsive-modal-modal .modal-data .subject {
+    margin: 0 0 10px;
+    width: 100%;
+  }
+  .react-responsive-modal-modal .modal-data .class {
+    width: 100%;
+    margin: 0 0 10px;
+  }
+  .react-responsive-modal-modal .modal-footer {
+    font-size: 12px;
+  }
+  .react-responsive-modal-modal .quiz-modal .left {
+    display: none;
+  }
+  .react-responsive-modal-modal .quiz-modal .right {
+    width: 100%;
+    padding: 30px;
+  }
+  .react-responsive-modal-modal .quiz-modal .lets-start {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #fff;
+    padding: 20px;
+    left: 0;
+  }
+  .react-responsive-modal-modal .quiz-modal .lets-start button {
+    width: 100%;
+  }
+  .react-responsive-modal-modal .quiz-quuestion .upper {
+    padding: 20px;
+    overflow: auto;
+  }
+  .react-responsive-modal-modal .quiz-quuestion .upper .instruction .time {
+    width: 20px;
+    position: absolute;
+    right: 50px;
+    top: -30px;
+    min-width: 210px;
+    cursor: pointer;
+    font-size: 36px;
+    background-color: #f8f8f8;
+    text-align: center;
+    padding: 5px;
+  }
+  .react-responsive-modal-modal .quiz-quuestion .upper .content {
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  .react-responsive-modal-modal .quiz-quuestion .upper .content .answer p {
+    margin-left: 25px;
+  }
+  .react-responsive-modal-modal .quiz-quuestion .upper .content .question {
+    font-size: 15px;
+    line-height: 21px;
+  }
+  .react-responsive-modal-modal .quiz-quuestion .upper .passage {
+    display: block;
+    width: 100%;
+    padding: 20px;
+    height: auto;
+    padding-bottom: 120px;
+    background: #f0f0f0;
+    border: 1px solid #b9b9b9;
+    margin-top: 20px;
+  }
+  .react-responsive-modal-modal .quiz-quuestion .footer {
+    width: 100%;
+    background: #fff;
+    padding: 20px;
+    height: 80px;
+    font-size: 12px;
+  }
+  .react-responsive-modal-modal .quiz-quuestion .footer button {
+    padding: 0 12px;
+  }
+  .react-responsive-modal-modal .video-modal .videos {
+    display: inline-block;
+    width: 0% !important;
+    border-right: 1px solid #eee;
+    height: 100%;
+    position: absolute;
+    top: 0;
+  }
+  .react-responsive-modal-modal .video-modal .frame {
+    width: 100% !important;
+    height: 100%;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  .react-responsive-modal-modal .video-modal .streak {
+    right: 10px;
+    width: 200px !important;
+    padding: 12px;
+  }
+  .react-responsive-modal-modal .video-modal .streak img {
+    width: 40px;
+  }
+  .react-responsive-modal-modal .video-modal .streak .top {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 20px 0 0;
+  }
+  .react-responsive-modal-overlay {
+    padding: 0 !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  .quiz-modal .right .radios span .blue--text {
+    width: 90% !important;
+  }
+  .quiz-modal .right .radios span .blue--text div {
+    width: 60px;
+  }
+  .quiz-quuestion .upper .passage {
+    position: relative !important;
+    width: 100% !important;
+    margin: 0 !important;
+    top: -20px !important;
+    padding-bottom: 20px !important;
+    margin-bottom: 60px !important;
+  }
+  .quiz-quuestion .upper .instruction {
+    margin-top: 25px;
+  }
+  .quiz-quuestion .upper .instruction .time {
+    position: absolute;
+    right: unset !important;
+    top: -35px !important;
+    width: 120px !important;
+    min-width: 120px !important;
+    cursor: pointer;
+    font-size: 18px !important;
+    background-color: #f8f8f8;
+    text-align: center;
+    padding: 5px;
+    left: 0 !important;
+  }
+  .video-modal .streak .streak-text {
+    width: 75% !important;
+  }
+  .video-modal .videos {
+    display: none !important;
+  }
+  .video-modal .frame {
+    width: 100%;
+  }
+  .video-modal .frame .video-name {
+    font-size: 12px;
+  }
+}
+/*# sourceMappingURL=Dashboard.css.map */

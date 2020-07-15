@@ -1,0 +1,420 @@
+.profile {
+  padding: 0 20px;
+}
+
+.profile .heading {
+  width: 100%;
+  font-size: 14px;
+  font-weight: 600;
+  border-bottom: 1px solid #eee;
+  padding: 20px;
+  margin: 0;
+  background-color: #fff;
+}
+
+.profile .wide {
+  float: left;
+  width: 66%;
+}
+
+.profile .wide .form {
+  margin-bottom: 40px;
+  padding: 20px;
+  background-color: #fff;
+  min-height: 200px;
+}
+
+.profile .wide .form .half {
+  width: 50%;
+  display: inline-block;
+}
+
+.profile .wide .form .half span {
+  font-size: 12px;
+  color: rgba(80, 77, 77, 0.582);
+}
+
+.profile .wide .form .half p {
+  font-size: 14px;
+  margin: 5px 0 30px;
+  color: #2b2d30;
+}
+
+.profile .wide .form .blue-btn {
+  padding: 0 30px;
+  border-radius: 6px;
+  float: left;
+}
+
+.profile .wide .badgess {
+  width: 48%;
+  margin: 0;
+  display: inline-block;
+  background-color: #fafafa;
+  height: 150px;
+  position: relative;
+  top: -35px;
+}
+
+.profile .wide .subs {
+  float: right;
+  padding: 12px 30px;
+  height: 190px;
+  width: 48%;
+  background-color: #ecf7ff;
+}
+
+.profile .wide .subs .img {
+  width: 30%;
+  float: left;
+}
+
+.profile .wide .subs .img img {
+  width: 100%;
+  margin-top: 15px;
+}
+
+.profile .wide .subs .sub-text {
+  width: 70%;
+  float: right;
+  position: relative;
+  padding-left: 20px;
+  left: -0px;
+}
+
+.profile .wide .subs .sub-text span {
+  font-size: 24px;
+  font-weight: 500;
+  position: relative;
+  line-height: 24px;
+  top: 5px;
+}
+
+.profile .wide .subs .sub-text p {
+  font-size: 10px;
+  color: #5a5a5a;
+  font-weight: 300;
+  margin-top: 15px;
+}
+
+.profile .wide .subs .sub-text button {
+  padding: 0 30px;
+  border-radius: 20px;
+}
+
+.profile .lbd {
+  display: none;
+}
+
+.profile .achs {
+  background-color: #fafafa !important;
+  height: calc(100vh - (180px + 75px));
+  overflow: auto;
+}
+
+.profile .achs .arc-contents {
+  padding: 0px 60px;
+}
+
+.profile .achs .arc-contents .trophies {
+  border-bottom: 1px solid #eee;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-flow: wrap;
+      flex-flow: wrap;
+}
+
+.profile .achs .arc-contents .trophies .trophy {
+  width: 20%;
+  text-align: center;
+  padding-top: 20px;
+  cursor: pointer;
+}
+
+.profile .achs .arc-contents .trophies .trophy img {
+  width: 50px;
+}
+
+.profile .achs .arc-contents .trophies .trophy p {
+  margin-top: 5px;
+  font-size: 12px;
+}
+
+.profile .achs .arc-contents .trophies .trophy.left {
+  text-align: left !important;
+}
+
+.profile .achs .arc-contents .trophies .trophy.right {
+  text-align: right !important;
+}
+
+.profile .achs .arc-contents .trophies .trophy.inactive {
+  opacity: 0.35;
+}
+
+.profile .achs .arc-contents .trophies .trophy:hover {
+  opacity: 1;
+}
+
+.profile .achs .arc-contents .tro-desc {
+  font-size: 12px;
+  line-height: 22px;
+  font-weight: 200;
+}
+
+.profile .achs .arc-contents .possibles {
+  font-size: 16px;
+  margin-top: 45px;
+  font-weight: 600;
+}
+
+.profile .achs .arc-contents .streaks {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-flow: wrap;
+      flex-flow: wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-bottom: 50px;
+}
+
+.profile .achs .arc-contents .streaks .streak {
+  border: 1px solid #eee;
+  overflow: hidden;
+  width: 48.5%;
+  height: 130px;
+  z-index: 12323;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.profile .achs .arc-contents .streaks .streak .ing {
+  width: 20%;
+  display: inline-block;
+  text-align: center;
+}
+
+.profile .achs .arc-contents .streaks .streak .ing img {
+  height: 65px;
+  position: absolute;
+  top: 30px;
+  left: 20px;
+}
+
+.profile .achs .arc-contents .streaks .streak .streak-text {
+  display: inline-block;
+  width: 80%;
+  padding-left: 40px;
+  position: relative;
+  top: 0px;
+}
+
+.profile .achs .arc-contents .streaks .streak .streak-text .top {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.profile .small {
+  float: right;
+  width: calc(33% - 30px);
+}
+
+.profile .small .switches {
+  background-color: #fff;
+  padding: 25px;
+}
+
+.profile .small .switches p {
+  font-size: 12px;
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+.profile .small .switches p span {
+  float: right;
+}
+
+.profile .small .switches button {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+}
+
+.profile .not-subed {
+  background-color: #fcf5ea;
+  padding: 40px 20px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.profile .not-subed .top {
+  font-size: 24px;
+  font-weight: 600;
+  padding: 0 20px;
+}
+
+.profile .not-subed .btm {
+  font-size: 14px;
+  padding: 0 20px;
+}
+
+.profile .not-subed button {
+  padding: 0 30px;
+  border-radius: 20px;
+  background-color: transparent;
+}
+
+.profile .not-subed button:hover {
+  color: #10a3ff;
+  border: 1px solid #10a3ff;
+}
+
+.profile .not-subed img {
+  width: 80%;
+  margin-top: 12px;
+}
+
+@media (max-width: 768px), (min-width: 768px) and (max-width: 1024px) {
+  .profile {
+    padding: 0 !important;
+    overflow-x: hidden !important;
+    height: calc(100vh - (65px + 160px));
+  }
+  .profile .wide {
+    width: 100%;
+    display: block;
+  }
+  .profile .wide .badgess {
+    width: 100%;
+    margin: 0;
+  }
+  .profile .wide .subs {
+    display: inline-block;
+    padding: 12px 30px;
+    height: 160px;
+    width: 100%;
+    margin-left: 0%;
+    margin-top: 30px;
+    height: 210px;
+  }
+  .profile .wide .subs .img {
+    width: 30%;
+    float: left;
+    text-align: center;
+  }
+  .profile .wide .subs .img img {
+    width: 90%;
+    margin: 0;
+  }
+  .profile .wide .subs .sub-text {
+    width: 70%;
+  }
+  .profile .wide .subs .sub-text p {
+    font-size: 12px;
+  }
+  .profile .lbd {
+    display: block !important;
+    padding-bottom: 100px;
+  }
+  .profile .small {
+    width: 100%;
+    display: none !important;
+    margin-top: 30px;
+  }
+  .profile .badgess {
+    margin: 50px 0 !important;
+  }
+  .profile .achs {
+    background-color: #fafafa !important;
+    height: auto;
+    overflow: auto;
+  }
+  .profile .achs .arc-contents {
+    padding: 0 20px;
+  }
+  .profile .achs .arc-contents .trophies {
+    border-bottom: 1px solid #eee;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: wrap;
+        flex-flow: wrap;
+    margin: 0 -15px;
+  }
+  .profile .achs .arc-contents .trophies .trophy {
+    width: 20%;
+    text-align: center;
+    padding-top: 20px;
+    cursor: pointer;
+  }
+  .profile .achs .arc-contents .trophies .trophy img {
+    height: 30px;
+  }
+  .profile .achs .arc-contents .trophies .trophy p {
+    margin-top: 5px;
+    font-size: 11px;
+  }
+  .profile .achs .arc-contents .trophies .trophy.left {
+    text-align: left !important;
+  }
+  .profile .achs .arc-contents .trophies .trophy.right {
+    text-align: right !important;
+  }
+  .profile .achs .arc-contents .trophies .trophy.inactive {
+    opacity: 0.35;
+  }
+  .profile .achs .arc-contents .trophies .trophy:hover {
+    opacity: 1;
+  }
+  .profile .achs .arc-contents .tro-desc {
+    font-size: 12px;
+    line-height: 22px;
+    font-weight: 200;
+  }
+  .profile .achs .arc-contents .possibles {
+    font-size: 16px;
+    margin-top: 45px;
+    font-weight: 600;
+  }
+  .profile .achs .arc-contents .streaks {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: wrap;
+        flex-flow: wrap;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    margin-bottom: 50px;
+  }
+  .profile .achs .arc-contents .streaks .streak {
+    border: 1px solid #eee;
+    overflow: hidden;
+    width: 100%;
+    height: 130px;
+  }
+  .profile .achs .arc-contents .streaks .streak .ing {
+    width: 25%;
+    display: inline-block;
+  }
+  .profile .achs .arc-contents .streaks .streak .ing img {
+    height: 85px;
+  }
+  .profile .achs .arc-contents .streaks .streak .streak-text {
+    display: inline-block;
+    width: 75%;
+    padding-left: 30px;
+    position: relative;
+    top: -10px;
+  }
+  .profile .achs .arc-contents .streaks .streak .streak-text .top {
+    font-weight: 600;
+  }
+}
+/*# sourceMappingURL=Profile.css.map */

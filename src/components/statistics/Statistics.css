@@ -1,0 +1,38 @@
+.statistics .legends {
+  padding-top: 20px;
+}
+
+.statistics .legends .legend {
+  display: inline-block;
+  width: 25%;
+}
+
+.statistics .legends .legend p {
+  color: #acacac;
+  font-size: 12px;
+  margin-bottom: 5px;
+  padding-right: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.statistics .legends .legend p span {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  position: relative;
+  left: 0px;
+  top: -1px;
+}
+
+.statistics .legends .legend span {
+  color: #000;
+  font-size: 20px;
+}
+
+.statistics .legends .vids {
+  width: 50%;
+}
+/*# sourceMappingURL=Statistics.css.map */
