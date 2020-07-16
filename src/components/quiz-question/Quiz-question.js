@@ -14,12 +14,56 @@ import Parser from "../content-display/Parser";
 import useStudy from "../../custom-hooks/usestudy";
 import authServices from "../../services/authServices";
 import Loader from "../loader/Loader";
+import { useSnackbar } from "react-simple-snackbar";
 
 export default function QuizQuestion(props) {
     const { loading, updateLoader, user } = useContext(userContext);
     let hr = props.time ? parseFloat(props.time.hour) * 60 : 0;
     let min = parseFloat(props.time.minutes);
     let duration_ = (hr + min) * 60;
+
+    const snackOptions = {
+        position: "top-right",
+    };
+    const [openSnackbar, closeSnackbar] = useSnackbar(snackOptions);
+    const handleSnack = (message, duration = 5000) => {
+        openSnackbar(
+            message,
+            duration
+        );
+    }
+    const handleInvalidModel = (model) => {
+        const build = Object.entries(model).reduce((aggregate, [key, value]) => {
+            aggregate = aggregate.concat(value)
+            return aggregate;
+        }, []).join(' ')
+        return build
+    }
+
+    const handleError = (err) => {
+        const { status, data } = typeof (err) === "object" && err.response || {};
+        if (!status) {
+            handleSnack("An unknown error occured at this time. Please try again", 4000);
+            return;
+        }
+        if (status === 404) {
+            handleSnack("user not found in our logs. First timer?")
+        }
+        else if (status === 500) {
+            handleSnack("This is an issue from us. Please feel free to report this issue.")
+        }
+        else {
+            const { errors, message } = data;
+            if (message) {
+                handleSnack(message);
+            }
+            if (errors) {
+                console.log({ errors })
+                const buildmessage = handleInvalidModel(errors)
+                handleSnack(buildmessage);
+            }
+        }
+    }
 
     const [passage, setpassage] = useState(false);
     const [beepSound, setBeepSound] = useState(true);
@@ -110,73 +154,76 @@ export default function QuizQuestion(props) {
     const sendUserAnswersToStore = (callback) => {
         //add a user's test and then add the courses
         //check if user answered
-        if (userAnswersToAdd.length) {
-            console.log("quiz commenced adding...");
-            let userTestId = 0;
-            if (props.usertests && props.usertests.length) {
-                userTestId = props.usertests[0].id;
-            }
-            if (userTestId) {
-                const addAnswers = userAnswersToAdd.map((ua) => ({
-                    ...ua,
-                    userOption: ua.userOptionId,
-                    mode: modeConverter(),
-                    correctOption: ua.correctOptionId,
-                    userTestId,
-                }));
-                updateLoader(true);
-                sendUserQuizToServer(addAnswers, callback, false);
+        if (user.isSubscribed) {
+            if (userAnswersToAdd.length) {
+                console.log("quiz commenced adding...");
+                let userTestId = 0;
+                if (props.usertests && props.usertests.length) {
+                    userTestId = props.usertests[0].id;
+                }
+                if (userTestId) {
+                    const addAnswers = userAnswersToAdd.map((ua) => ({
+                        ...ua,
+                        userOption: ua.userOptionId,
+                        mode: modeConverter(),
+                        correctOption: ua.correctOptionId,
+                        userTestId,
+                    }));
+                    updateLoader(true);
+                    sendUserQuizToServer(addAnswers, callback, false);
+                } else {
+                    const data = {
+                        userCourseId: props.usercourseid,
+                        testId: activeQuestion.testId,
+                        currentLevel: activeQuestion.level,
+                        score: selectedQuizMode === "Free Form Mode" ? userScore : 0,
+                    };
+                    updateLoader(true);
+                    sendUserTestToServer(data, callback);
+                }
             } else {
-                const data = {
-                    userCourseId: props.usercourseid,
-                    testId: activeQuestion.testId,
-                    currentLevel: activeQuestion.level,
-                    score: selectedQuizMode === "Free Form Mode" ? userScore : 0,
-                };
-                updateLoader(true);
-                sendUserTestToServer(data, callback);
+                console.log("quiz nothing to add");
+                callback();
             }
-        } else {
-            console.log("quiz nothing to add");
-            callback();
-        }
-        if (userAnswersToUpdate.length) {
-            const userTestId = props.usertests[0].id;
-            if (userTestId) {
-                const data = [
-                    {
-                        value: userScore,
-                        op: "add",
-                        path: "/score",
-                    },
-                ];
-                updateLoader(true);
-                authServices
-                    .updateUserTestData(data, userTestId)
-                    .then((res) => {
-                        console.log({ usertest: res.data, mode: modeConverter() });
+            if (userAnswersToUpdate.length) {
+                const userTestId = props.usertests[0].id;
+                if (userTestId) {
+                    const data = [
+                        {
+                            value: userScore,
+                            op: "add",
+                            path: "/score",
+                        },
+                    ];
+                    updateLoader(true);
+                    authServices
+                        .updateUserTestData(data, userTestId)
+                        .then((res) => {
+                            console.log({ usertest: res.data, mode: modeConverter() });
 
-                        const data = userAnswersToAdd.map((ua) => ({
-                            ...ua,
-                            userOption: ua.userOptionId,
-                            correctOption: ua.correctOptionId,
-                            userTestId: res.data.id,
-                        }));
-                        updateUserQuizInServer(data, callback, false);
-                    })
-                    .catch((err) => {
-                        console.log({ err });
-                        callback();
-                        updateLoader(false);
-                    });
+                            const data = userAnswersToAdd.map((ua) => ({
+                                ...ua,
+                                userOption: ua.userOptionId,
+                                correctOption: ua.correctOptionId,
+                                userTestId: res.data.id,
+                            }));
+                            updateUserQuizInServer(data, callback, false);
+                        })
+                        .catch((err) => {
+                            console.log({ err });
+                            callback();
+                            updateLoader(false);
+                        });
 
-                console.log("user test id", userTestId);
+                    console.log("user test id", userTestId);
+                }
+                console.log({ userScore });
+            } else {
+                console.log("quiz nothing to update");
+                callback();
             }
-            console.log({ userScore });
-        } else {
-            console.log("quiz nothing to update");
-            callback();
         }
+        
     };
 
     const sendUserTestToServer = (data, callback) => {
@@ -417,11 +464,13 @@ export default function QuizQuestion(props) {
                 .postFeedback(feedbackData)
                 .then((res) => {
                     console.log({ feedback: res.data });
+                    handleSnack("Feedback successfully sent.")
                     setFeedback(false)
                     updateLoader(false);
                 })
                 .catch((err) => {
                     console.log({ err });
+                    handleError(err)
                     updateLoader(false);
                 });
         }

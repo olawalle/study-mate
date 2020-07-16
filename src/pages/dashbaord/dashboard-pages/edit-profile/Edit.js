@@ -110,6 +110,10 @@ export default withRouter(function EditProfile({ history }) {
     // };
 
     const onCloseModal = () => setmodal(false);
+    const onChange = (value) => {
+        if (username) return;
+        else setusername(value)
+    }
 
     const updateUserData = () => {
         let obj = {
@@ -211,7 +215,9 @@ export default withRouter(function EditProfile({ history }) {
                                 <input
                                     type="text"
                                     defaultValue={username}
-                                    readOnly={true}
+                                    value={username}
+                                    readOnly={!!username}
+                                    onChange={({ target: { value } }) => onChange(value)}
                                 />
                                 <img src={edit} alt="" />
                             </div>

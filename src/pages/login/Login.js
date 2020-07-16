@@ -324,12 +324,7 @@ export default withRouter(function Login(props) {
                                 <img src={logo2} alt="" />
                             </div>
 
-                            <p
-                                className="welcome mt50"
-                                onClick={() => showError("Incorrect email or username")}
-                            >
-                                Good to see you again!
-            </p>
+                            <p className="welcome mt50">Good to see you again!</p>
 
                             <div className="buttons">
                                 <FacebookLogin

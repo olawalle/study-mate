@@ -124,14 +124,15 @@ export default withRouter(function Profile({ history }) {
         const address = user.location;
         const state = user.state;
         let location = "";
+        console.log({ address, state })
         if (address) {
-            location += address
+            location += `${address ? address : ''}`
         }
         if (location) {
             location += `${state ? ',' : ''} ${state ? state : ''}`;
         }
         else {
-            location += state;
+            location += `${ state ? state : '' }`;
         }
         return location;
     }

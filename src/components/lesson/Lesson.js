@@ -24,7 +24,7 @@ export default withRouter(function Lesson({
 }) {
     const vidRef = createRef();
     const context = useContext(userContext);
-    const { selectedSubject } = context;
+    const { selectedSubject, user } = context;
     const videoLevel =
         grade === 0 ? "Beginner" : grade === 1 ? "Intermediate" : "Advanced";
     let modalWidth = window.innerWidth > 1024 ? 96 : 100;
@@ -65,30 +65,33 @@ export default withRouter(function Lesson({
     const sendUserVideoToStore = (i) => {
         //add a user's test and then add the courses
         //check if user answered
-        console.log("quiz commenced adding...");
-        console.log("testid", props.usertests);
-        let userTestId = 0;
-        if (props.usertests && props.usertests.length) {
-            userTestId = props.usertests[0].id;
+        if (user.isSubscribed) {
+            console.log("quiz commenced adding...");
+            console.log("testid", props.usertests);
+            let userTestId = 0;
+            if (props.usertests && props.usertests.length) {
+                userTestId = props.usertests[0].id;
+            }
+            if (userTestId) {
+                const currentVid = videos[i];
+                const vid = vidRef.current;
+                const vidData = {
+                    duration: vid && vid.currentTime,
+                    videoId: currentVid.id,
+                    userTestId,
+                };
+                console.log({ one: vidData });
+                sendUserVideoToServer(vidData);
+            } else {
+                const data = {
+                    userCourseId: props.usercourseid,
+                    testId: video.testId,
+                };
+                console.log({ data });
+                sendUserTestToServer(data, i);
+            }
         }
-        if (userTestId) {
-            const currentVid = videos[i];
-            const vid = vidRef.current;
-            const vidData = {
-                duration: vid && vid.currentTime,
-                videoId: currentVid.id,
-                userTestId,
-            };
-            console.log({ one: vidData });
-            sendUserVideoToServer(vidData);
-        } else {
-            const data = {
-                userCourseId: props.usercourseid,
-                testId: video.testId,
-            };
-            console.log({ data });
-            sendUserTestToServer(data, i);
-        }
+        
     };
     const sendUserTestToServer = (data, i) => {
         authServices

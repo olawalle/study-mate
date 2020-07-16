@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Rave from "react-flutterwave-rave";
+import Rave, { VerifyTransaction } from "react-flutterwave-rave";
 import authServices from "../../services/authServices";
 
 export default function RavePay({
@@ -12,34 +12,34 @@ export default function RavePay({
 }) {
     const [success, setSuccess] = useState(false)
     const callback = (response) => {
-        //VerifyTransaction({ live: true, txref: response.tx.txRef, SECKEY: "FLWSECK-0f9d880638d7ac2f1ce36421781c806c-X" })
-        //    .then(function (resp) {
-        //        authServices
-        //            .activateUserSub({ subId, userId })
-        //            .then((res) => {
-        //                console.log({ usersub: res.data });
-        //                handleResponse(true)
-        //            })
-        //            .catch((err) => {
-        //                console.log({ err });
-        //                handleResponse(false)
-        //            });
-        //    })
-        //    .catch(function (error) {
-        //        console.log(error);
-        //        handleResponse(true)
-        //    });
-        console.log({response})
-        authServices
-            .activateUserSub({ subId, userId })
-            .then((res) => {
-                console.log({ usersub: res.data });
-                setSuccess(true)
+        VerifyTransaction({ live: true, txref: response.tx.txRef, SECKEY: "FLWSECK-ec881f62a9ec29788819bcfe9a8972d3-X" })
+            .then(function (resp) {
+                authServices
+                    .activateUserSub({ subId, userId })
+                    .then((res) => {
+                        console.log({ usersub: res.data });
+                        setSuccess(true)
+                    })
+                    .catch((err) => {
+                        console.log({ err });
+                        setSuccess(false)
+                    });
             })
-            .catch((err) => {
-                console.log({ err });
+            .catch(function (error) {
+                console.log(error);
                 setSuccess(false)
             });
+        console.log({response})
+        //authServices
+        //    .activateUserSub({ subId, userId })
+        //    .then((res) => {
+        //        console.log({ usersub: res.data });
+        //        setSuccess(true)
+        //    })
+        //    .catch((err) => {
+        //        console.log({ err });
+        //        setSuccess(false)
+        //    });
     };
     const onclose = (state = false) => {
         console.log("user closed");
@@ -52,7 +52,7 @@ export default function RavePay({
         customer_email,
         customer_phone,
         amount: "" + amount + "",
-        ravePubKey: "FLWPUBK-1d4c9f3f90d9b73a0ca5a18852cd04df-X",
+        ravePubKey: "FLWPUBK-0d1f67d88f088393c1f7cfafd807e6e8-X",
         callback,
         onclose,
     };
