@@ -20,7 +20,7 @@ export default function Subscribe() {
     const history = useHistory();
     const [currentPlans, setCurrentPlans] = useState([]);
     const [currentPlan, setCurrentPlan] = useState({});
-    const [showResponse, setShowResponse] = useState({open: false, success: false});
+    const [showResponse, setShowResponse] = useState({open: false, success: false, message: ""});
     const { loading, updateLoader, user, ...context } = useContext(userContext);
 
     const logout = () => {
@@ -110,9 +110,9 @@ export default function Subscribe() {
         console.log(ind);
     };
 
-    const handleResponse = (success) => {
+    const handleResponse = (success, message) => {
         setopen(false);
-        setShowResponse({ open: true, success });
+        setShowResponse({ open: true, success, message });
     }
 
     return (
@@ -142,7 +142,7 @@ export default function Subscribe() {
                         </div>
                     </div>
                     <div className="btm">
-                        <RavePay userId={user.id} subId={currentPlan.id} amount={currentPlan.amount} handleResponse={handleResponse}
+                        <RavePay userId={user.id} subId={currentPlan.id} amount={currentPlan.amount} handleResponse={(status, message) => handleResponse(status, message)}
                             customer_email={user.email} customer_phone={user.phoneNumber ? user.phoneNumber : "+2348118505335"} />
                         {/*<button className="tw-btn">Continue</button>*/}
                     </div>
@@ -191,7 +191,7 @@ export default function Subscribe() {
                             showResponse.success ?
                                 <>
                                     <p className="sm">Thank you for your subscription</p>
-                                    <p className="sm">You are now subscribed for our {currentPlan.name} plan.</p>
+                                    <p className="sm">{showResponse.message && showResponse.message || `You are now subscribed for our ${currentPlan.name} plan.`}</p>
                                     <p className="sm">Please log back in.</p>
                                 </>
                                 : <p>Please an error occured, do try again</p>

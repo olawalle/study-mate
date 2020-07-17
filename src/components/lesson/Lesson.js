@@ -74,9 +74,9 @@ export default withRouter(function Lesson({
             }
             if (userTestId) {
                 const currentVid = videos[i];
-                const vid = vidRef.current;
+                const vid = document.getElementById("homevideo");
                 const vidData = {
-                    duration: vid && vid.currentTime,
+                    duration: vid && vid.currentTime || 0,
                     videoId: currentVid.id,
                     userTestId,
                 };
@@ -98,13 +98,12 @@ export default withRouter(function Lesson({
             .addUserTest(data)
             .then((res) => {
                 const currentVid = videos[i];
-                const vid = vidRef.current;
+                const vid = document.getElementById("homevideo");
                 const vidData = {
-                    duration: vid && vid.currentTime,
+                    duration: vid && vid.currentTime || 0,
                     videoId: currentVid.id,
                     userTestId: res.data.id,
                 };
-                console.log({ vidData, current: currentVid });
                 sendUserVideoToServer(vidData);
             })
             .catch((err) => {
@@ -116,7 +115,6 @@ export default withRouter(function Lesson({
         authServices
             .addUserVideo(data)
             .then((res) => {
-                console.log({ uservideo: res.data });
                 setUserVideo(res.data);
             })
             .catch((err) => {
@@ -148,7 +146,7 @@ export default withRouter(function Lesson({
     const prepVideo = (url, video) => {
         if (url) {
             url = url.replace("assets", "video");
-            const videoPlayer = vidRef.current;
+            const videoPlayer = document.getElementById("homevideo");
             videoPlayer.oncontextmenu = () => false;
             console.log({ url });
             videoPlayer.src = url.replace("assets", "video");
