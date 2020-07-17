@@ -171,8 +171,8 @@ const LandingPage = ({ history }) => {
                 <h1>Browse Our Subject Catalogue</h1>
                 <div className="caption__content">
                   <span className="light">
-                    Give your child a study partner that understands and
-                    communicates knowledge for excellence.
+                    With StudyMate, all subjects become favourites! Let us help
+                    you unlock your inner genius!
                   </span>
                 </div>
               </div>
@@ -296,8 +296,8 @@ const LandingPage = ({ history }) => {
               </div>
               <div className="caption">
                 <span className="light">
-                  Give your child a study partner that understands and
-                  communicates knowledge for excellence.
+                  With StudyMate, all subjects become favourites! Let us help
+                  you unlock your inner genius!
                 </span>
               </div>
             </div>
