@@ -73,6 +73,9 @@
       padding: 12px 25px;
       border-radius: 10px;
       border: 1px solid #dddddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       .badge {
         width: 70px;
         position: relative;
@@ -202,7 +205,7 @@
     .passage {
       width: 40%;
       display: inline-block;
-      padding: 20px 40px;
+      padding: 20px 40px 40px 40px;
       position: absolute;
       top: 100px;
       line-height: 26px;
@@ -406,4 +409,8 @@
       }
     }
   }
+}
+
+.lh-1 {
+  line-height: 1.4;
 }

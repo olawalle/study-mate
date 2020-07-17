@@ -71,11 +71,13 @@
 
 .leaderboard .people .person img {
   height: 22px;
+  max-width: 22px;
+  width: 100%;
   margin-right: 10px;
 }
 
 .leaderboard .people .person .position {
-  padding: 15px;
+  padding: 15px 15px 15px 0px !important;
   text-align: center;
   font-size: 12px;
   font-weight: 600;

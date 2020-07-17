@@ -41,6 +41,10 @@
   text-align: left;
 }
 
+.courses-wrap .courses .flex-grid-thirds .min__width {
+  min-width: 120px;
+}
+
 .courses-wrap .courses .flex-grid-thirds .course {
   font-size: 12px;
   color: #fff !important;
