@@ -110,7 +110,7 @@ export default withRouter(function Courses(props) {
                 key={course.name + i}
                 onClick={() => selectCourse(course, i)}
                 style={{ textTransform: "uppercase" }}
-                className={`bg_${(i % 17) + 2}
+                className={`min__width bg_${(i % 17) + 2}
                 ${i > 1 && !user.isSubscribed ? "greyed" : ""}
                 course pLR`}
               >
