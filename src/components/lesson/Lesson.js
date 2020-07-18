@@ -25,8 +25,7 @@ export default withRouter(function Lesson({
     const vidRef = createRef();
     const context = useContext(userContext);
     const { selectedSubject, user } = context;
-    const videoLevel =
-        grade === 0 ? "Beginner" : grade === 1 ? "Intermediate" : "Advanced";
+    const videoLevel = props.name;
     let modalWidth = window.innerWidth > 1024 ? 96 : 100;
 
     useEffect(() => {

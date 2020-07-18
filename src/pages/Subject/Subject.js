@@ -31,6 +31,7 @@ export default withRouter(function Subject({ history }) {
     const [testId, settestId] = useState(0);
     const [usercourseid, setusercourseid] = useState(0);
     const [pageLoaded, setpageLoaded] = useState(false);
+    const [name, setname] = useState("");
     const [level, setlevel] = useState(null);
     const [links, setlinks] = useState([
         { text: "Beginner" },
@@ -45,12 +46,19 @@ export default withRouter(function Subject({ history }) {
             .getUcourseWithTests(user.id, selectedSubject.id)
             .then((res) => {
                 const defaultTestId =
-                    selectedSubject &&
+                    (selectedSubject &&
                         selectedSubject.tests &&
-                        selectedSubject.tests.length
+                        selectedSubject.tests.length)
                         ? selectedSubject.tests[0].id
                         : 0;
+                const defaultName =
+                    (selectedSubject &&
+                        selectedSubject.tests &&
+                        selectedSubject.tests.length)
+                        ? selectedSubject.tests[0].name
+                        : "Beginner";
                 settestId(defaultTestId);
+                setname(defaultName)
                 setusercourseid(res.data.id);
                 console.log({ usertest: res.data.userTests });
                 setusertests(res.data.userTests);
@@ -89,6 +97,7 @@ export default withRouter(function Subject({ history }) {
     };
 
     const pickLevel = (test, i) => {
+        setname(test.year)
         settestId(test.id);
         setlevel(test.year);
     };
@@ -122,6 +131,7 @@ export default withRouter(function Subject({ history }) {
                 {
                     level: 0,
                     id: test.id,
+                    name: test.year,
                     take: !!beginnerVideo.length,
                     quizzes: beginnerQuiz,
                     videos: beginnerVideo,
@@ -129,6 +139,7 @@ export default withRouter(function Subject({ history }) {
                 {
                     level: 1,
                     id: test.id,
+                    name: test.year,
                     take: !!intermediateVideo.length,
                     quizzes: intermediateQuiz,
                     videos: intermediateVideo,
@@ -136,6 +147,7 @@ export default withRouter(function Subject({ history }) {
                 {
                     level: 2,
                     id: test.id,
+                    name: test.year,
                     take: !!advancedVideo.length,
                     quizzes: advancedQuiz,
                     videos: advancedVideo,
@@ -143,6 +155,7 @@ export default withRouter(function Subject({ history }) {
                 {
                     level: 3,
                     id: test.id,
+                    name: test.year,
                     take: !!fourVideo.length,
                     quizzes: fourQuiz,
                     videos: fourVideo,
@@ -150,6 +163,7 @@ export default withRouter(function Subject({ history }) {
                 {
                     level: 4,
                     id: test.id,
+                    name: test.year,
                     take: !!fiveVideo.length,
                     quizzes: fiveQuiz,
                     videos: fiveVideo,
@@ -157,6 +171,7 @@ export default withRouter(function Subject({ history }) {
                 {
                     level: 5,
                     id: test.id,
+                    name: test.year,
                     take: !!sixVideo.length,
                     quizzes: sixQuiz,
                     videos: sixVideo,
@@ -164,6 +179,7 @@ export default withRouter(function Subject({ history }) {
                 {
                     level: 6,
                     id: test.id,
+                    name: test.year,
                     take: !!sevenVideo.length,
                     quizzes: sevenQuiz,
                     videos: sevenVideo,
@@ -171,6 +187,7 @@ export default withRouter(function Subject({ history }) {
                 {
                     level: 7,
                     id: test.id,
+                    name: test.year,
                     take: !!eightVideo.length,
                     quizzes: eightQuiz,
                     videos: eightVideo,
@@ -178,6 +195,7 @@ export default withRouter(function Subject({ history }) {
                 {
                     level: 8,
                     id: test.id,
+                    name: test.year,
                     take: !!nineVideo.length,
                     quizzes: nineQuiz,
                     videos: nineVideo,
@@ -185,6 +203,7 @@ export default withRouter(function Subject({ history }) {
                 {
                     level: 9,
                     id: test.id,
+                    name: test.year,
                     take: !!tenVideo.length,
                     quizzes: tenQuiz,
                     videos: tenVideo,
@@ -354,6 +373,7 @@ export default withRouter(function Subject({ history }) {
                                                 {test.videos.length ? (
                                                     test.videos.map((video, i) => (
                                                         <Lesson
+                                                            name={name}
                                                             usertests={
                                                                 usertests && usertests.length
                                                                     ? usertests.filter(
