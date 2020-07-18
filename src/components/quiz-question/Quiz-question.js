@@ -39,6 +39,12 @@ export default function QuizQuestion(props) {
         return build;
     };
 
+    if (window.location.hash.includes("studypack/")) {
+        window.onbeforeunload = function (e) {
+            return "Are you sure?";
+        };
+    }
+
     const handleError = (err) => {
         const { status, data } = (typeof err === "object" && err.response) || {};
         if (!status) {
