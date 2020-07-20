@@ -2,7 +2,7 @@
 export const appUrl = "https://infomall-001-site1.etempurl.com/";
 export const imgUrl = "https://infomall-001-site1.etempurl.com/";
 export const audioUrl = "https://content-qc.studymate.ng/";
-export const videoUrl = "https://content-qc.studymate.ng/";
+export const videoUrl = "http://content-qc.studymate.ng/";
 export const baseUrl = `${appUrl}api/`;
 export const fakeVideoUrl = `https://cors-anywhere.herokuapp.com/http://content-qc.studymate.ng/`;
 export const registerUrl = `${baseUrl}Account/register`;

@@ -1,5 +1,6 @@
 import React, { createContext, Component } from "react";
 import axios from "axios";
+import * as JwtDecode from "jwt-decode";
 export const userContext = createContext();
 
 export default class UserContextProvider extends Component {
@@ -38,13 +39,18 @@ export default class UserContextProvider extends Component {
     }, 1000);
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.state !== prevState) {
-      // Whatever storage mechanism you end up deciding to use.
-      localStorage.setItem("parentValueKey", JSON.stringify(this.state));
-    } else {
-      localStorage.setItem("parentValueKey", JSON.stringify(prevState));
-    }
+    componentDidUpdate(prevProps, prevState) {
+        if (this.state !== prevState) {
+            // Whatever storage mechanism you end up deciding to use.
+            console.log("not equal", this.state.isLoggedIn)
+            localStorage.setItem("parentValueKey", JSON.stringify(this.state));
+            
+        } else {
+            console.log("equal", this.state.isLoggedIn)
+            localStorage.setItem("parentValueKey", JSON.stringify(prevState));
+            
+        }
+        
   }
 
   saveSelectedSubject = (selectedSubject) => this.setState({ selectedSubject });
@@ -85,7 +91,18 @@ export default class UserContextProvider extends Component {
     this.setState({
       userCourses: fullCourses,
     });
-  };
+    };
+
+    getUser = () => {
+        if (localStorage) {
+            const token = localStorage.getItem("studymate-token");
+            if (token) {
+                const decoded = JwtDecode(token);
+                return decoded;
+            }
+        }
+        return {}
+    }
 
   updateAwards = (awards) => this.setState({ awards });
 
@@ -139,11 +156,12 @@ export default class UserContextProvider extends Component {
       updateStudyPack,
       updateStudyPackQuizes,
       updatefixBack,
-    } = this;
+      } = this;
+      const modState = { ...this.state, user: { ...this.state.user, ...this.getUser() } }
     return (
       <userContext.Provider
-        value={{
-          ...this.state,
+            value={{
+                ...modState,
           updateLoader,
           updateUser,
           updateLoggedInStatus,

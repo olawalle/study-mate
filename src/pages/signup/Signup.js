@@ -131,6 +131,7 @@ export default withRouter(function Signup(props) {
                 authServices
                     .getUserCourses(user.token, user.id)
                     .then((res) => {
+                        console.log({ res: res.data.userCourses })
                         let user_courses = res.data.userCourses;
                         let sievedCourses = Object.values(
                             user_courses.reduce((agg, curr) => {

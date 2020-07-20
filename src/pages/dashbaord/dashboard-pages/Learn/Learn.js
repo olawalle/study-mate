@@ -25,217 +25,229 @@ import authServices from "../../../../services/authServices";
 import AddCourses from "../../../../components/add-courses/AddCourses";
 
 export default withRouter(function Learn({ history }) {
-  const context = useContext(userContext);
-  const {
-    userCourses,
-    subjects,
-    user,
-    updateUserCourses,
-    selectedSubject,
-    updateLoader,
-  } = context;
+    const context = useContext(userContext);
+    const {
+        userCourses,
+        subjects,
+        user,
+        updateUserCourses,
+        selectedSubject,
+        updateLoader,
+    } = context;
 
-  const [open, setopen] = useState(false);
+    console.log({ selectedSubject })
+    const [open, setopen] = useState(false);
     const [verified, setverified] = useState(true);
     const [pageLoaded, setPageLoaded] = useState(false)
 
     useEffect(() => {
         console.log({ userCourses })
         if (pageLoaded) {
-            !userCourses.length && setopen(true);
+            if (!userCourses.length || user.level === 0) {
+                setopen(true);
+            }
         }
         setPageLoaded(true)
-  }, [pageLoaded]);
+    }, [pageLoaded]);
 
-  const onOpenModal = () => {
-    setopen(true);
-  };
+    const onOpenModal = () => {
+        setopen(true);
+    };
 
-  const onCloseModal = () => setopen(false);
+    const onCloseModal = () => setopen(false);
 
-  const toSubject = () => {
-    if (!userCourses.length) return;
-    history.push(`/subject/${selectedSubject.name}/Beginner`);
-  };
+    const toSubject = () => {
+        if (!userCourses.length) return;
+        history.push(`/subject/${selectedSubject.name}/Beginner`);
+    };
 
-  const toMobileCourses = () => {
-    history.push("/dashboard/mobile-courses");
-  };
+    const toMobileCourses = () => {
+        history.push("/dashboard/mobile-courses");
+    };
 
-  const toEdit = () => history.push("/edit-profile");
+    const allowedCourses = [
+        "CREATIVE AND CULTURAL ART",
+        "Mathematics",
+        "Further Mathematics",
+        "Chemistry"
+    ]
 
-  const toProgress = () => history.push("/dashboard/progress");
-  const toProfile = () => history.push("/dashboard/profile");
 
-  return (
-    <motion.div
-      className="learn"
-      initial={{ opacity: 0, x: "-5vw" }}
-      animate={{ opacity: 1, x: "0vw" }}
-      exit={{ opacity: 0, x: 0 }}
-      transition={{ duration: 0.6 }}
-    >
-      <div className="mobile-screen">
-        {user.isSubscribed ? (
-          <div className="subscribe bordered">
-            <p className="top">
-              Acquire coins and unlock more challenging practice resources as
-              you learn.
-            </p>
-            <p className="btm">Available to users on our Standard Plan</p>
-            <img src={Coinsystem} alt="" />
-          </div>
-        ) : (
-          <div className="medals bordered">
-            <div className="medal">
-              <img src={coins} alt="" />
-              <span>0</span>
-            </div>
-            <div className="medal">
-              <img src={b1} alt="" />
-              <span>0</span>
-            </div>
-            <div className="medal">
-              <img src={b2} alt="" />
-              <span>0</span>
-            </div>
-            <div className="medal">
-              <img src={b3} alt="" />
-              <span>0</span>
-            </div>
-            <div className="medal">
-              <img src={b4} alt="" />
-              <span>0</span>
-            </div>
-            <div className="medal">
-              <img src={b5} alt="" />
-              <span>0</span>
-            </div>
-          </div>
-        )}
-        <div className="grid">
-          <div className="half" onClick={toMobileCourses}>
-            <img src={LearnIcn} alt="" />
-            <span>
-              Start
-              <p>Learning</p>
-            </span>
-          </div>
-          <div className="halff">
-            <div className="qtr tt" onClick={toProgress}>
-              <img src={Progress} alt="" />
-              <span>Progress</span>
-            </div>
-            <div className="qtr bb" onClick={toProfile}>
-              <img src={Profile} alt="" />
-              <span>My Profile</span>
-            </div>
-          </div>
-        </div>
-        <p className="foot">
-          2020 All right reserved. StudyMate. Powered by infomal Nigeria
-        </p>
-      </div>
-      {!user.isVerified && (
-        <div className="verify">
-          <span>
-            Please edit your profile to complete your registration within a week
-            from registration.
-          </span>
-          <button onClick={toEdit}>VERIFY PROFILE</button>
-        </div>
-      )}
-      {userCourses.length ? (
-        <div className="wide-side">
-          <p className="heading bg-top">{selectedSubject.name}</p>
-          <div className="lessons-wrap bg-bottom">
-            <p className="sub-heading">
-              Lessons
-              <button className="tw-btn f-right" onClick={toSubject}>
-                Start learning
-              </button>
-            </p>
 
-            <div className="lessons">
-              {selectedSubject &&
-              selectedSubject.tests &&
-              selectedSubject.tests.length ? (
-                selectedSubject.tests[0].videos
-                  .filter((v, i) => i < 4)
-                  .map((video, i) => (
-                    <Lesson
-                      key={`lesson${i}`}
-                      video={video}
-                      disableClick={true}
-                    />
-                  ))
-              ) : (
-                <p
-                  className="blue--text"
-                  style={{
-                    paddingTop: "30px",
-                    textAlign: "center",
-                  }}
-                >
-                  {userCourses.length
-                    ? "There are currently no videos in this study pack. Kindly check back later"
-                    : "Select a course to get started."}
-                </p>
-              )}
-            </div>
-          </div>
+    const toEdit = () => history.push("/edit-profile");
+    const toProgress = () => history.push("/dashboard/progress");
+    const toProfile = () => history.push("/dashboard/profile");
 
-          <div className="quizzes mt30" onClick={toSubject}>
-            {(selectedSubject &&
-            selectedSubject.tests &&
-            selectedSubject.tests.length &&
-            selectedSubject.tests[0].quizes) ? (
-              <Quiz
-                open={false}
-                quiz={selectedSubject.quizzes}
-                quizType="normal"
-              />
-            ) : null}
-          </div>
-        </div>
-      ) : (
-        <div
-          className="wide-side"
-          style={{
-            background: "#fff",
-            height: 400,
-            textAlign: "center",
-            paddingTop: 130,
-          }}
+
+    return (
+        <motion.div
+            className="learn"
+            initial={{ opacity: 0, x: "-5vw" }}
+            animate={{ opacity: 1, x: "0vw" }}
+            exit={{ opacity: 0, x: 0 }}
+            transition={{ duration: 0.6 }}
         >
-          <p className="blue--text">Select a course to start learning</p>
-        </div>
-      )}
-      <div className="narrow-side">
-        {!user.isSubscribed ? (
-          <div className="subscribe bordered">
-            <p className="top">
-              Acquire coins and unlock more challenging practice resources as
-              you learn.
+            <div className="mobile-screen">
+                {user.isSubscribed ? (
+                    <div className="subscribe bordered">
+                        <p className="top">
+                            Acquire coins and unlock more challenging practice resources as
+                            you learn.
             </p>
-            <p className="btm">Available to users on our Standard Plan</p>
-            <img src={Coinsystem} alt="" />
-          </div>
-        ) : (
-          <div className="badge-wrap">
-            <Badges />
-          </div>
-        )}
+                        <p className="btm">Available to users on our Standard Plan</p>
+                        <img src={Coinsystem} alt="" />
+                    </div>
+                ) : (
+                        <div className="medals bordered">
+                            <div className="medal">
+                                <img src={coins} alt="" />
+                                <span>0</span>
+                            </div>
+                            <div className="medal">
+                                <img src={b1} alt="" />
+                                <span>0</span>
+                            </div>
+                            <div className="medal">
+                                <img src={b2} alt="" />
+                                <span>0</span>
+                            </div>
+                            <div className="medal">
+                                <img src={b3} alt="" />
+                                <span>0</span>
+                            </div>
+                            <div className="medal">
+                                <img src={b4} alt="" />
+                                <span>0</span>
+                            </div>
+                            <div className="medal">
+                                <img src={b5} alt="" />
+                                <span>0</span>
+                            </div>
+                        </div>
+                    )}
+                <div className="grid">
+                    <div className="half" onClick={toMobileCourses}>
+                        <img src={LearnIcn} alt="" />
+                        <span>
+                            Start
+              <p>Learning</p>
+                        </span>
+                    </div>
+                    <div className="halff">
+                        <div className="qtr tt" onClick={toProgress}>
+                            <img src={Progress} alt="" />
+                            <span>Progress</span>
+                        </div>
+                        <div className="qtr bb" onClick={toProfile}>
+                            <img src={Profile} alt="" />
+                            <span>My Profile</span>
+                        </div>
+                    </div>
+                </div>
+                <p className="foot">
+                    2020 All right reserved. StudyMate. Powered by infomal Nigeria
+        </p>
+            </div>
+            {!user.isVerified && (
+                <div className="verify">
+                    <span>
+                        Please edit your profile to complete your registration within a week
+                        from registration.
+          </span>
+                    <button onClick={toEdit}>VERIFY PROFILE</button>
+                </div>
+            )}
+            {userCourses.length ? (
+                <div className="wide-side">
+                    <p style={{ textTransform: "uppercase" }} className="heading bg-top">{selectedSubject.name}</p>
+                    <div className="lessons-wrap bg-bottom">
+                        <p className="sub-heading">
+                            Lessons
+              <button className="tw-btn f-right" onClick={toSubject}>
+                                Start learning
+              </button>
+                        </p>
 
-        <div className="courses">
-          <p className="title mt30">Courses</p>
-          <Courses onOpenModal={onOpenModal} dontMove={true} className="mt20" />
-        </div>
+                        <div className="lessons">
+                            {selectedSubject &&
+                                selectedSubject.tests &&
+                                selectedSubject.tests.length ? (
+                                    selectedSubject.tests[0].videos
+                                        .filter((v, i) => i < 4)
+                                        .map((video, i) => (
+                                            <Lesson
+                                                key={`lesson${i}`}
+                                                video={video}
+                                                disableClick={true}
+                                            />
+                                        ))
+                                ) : (
+                                    <p
+                                        className="blue--text"
+                                        style={{
+                                            paddingTop: "30px",
+                                            textAlign: "center",
+                                        }}
+                                    >
+                                        {userCourses.length
+                                            ? "There are currently no videos in this study pack. Kindly check back later"
+                                            : "Select a course to get started."}
+                                    </p>
+                                )}
+                        </div>
+                    </div>
 
-        <img src={students} className="students" alt="" />
+                    <div className="quizzes mt30" onClick={toSubject}>
+                        {(selectedSubject &&
+                            selectedSubject.tests &&
+                            selectedSubject.tests.length &&
+                            selectedSubject.tests[0].quizes.length) ? (
+                                <Quiz
+                                    open={false}
+                                    quiz={selectedSubject.quizzes}
+                                    quizType="normal"
+                                />
+                            ) : null}
+                    </div>
+                </div>
+            ) : (
+                    <div
+                        className="wide-side"
+                        style={{
+                            background: "#fff",
+                            height: 400,
+                            textAlign: "center",
+                            paddingTop: 130,
+                        }}
+                    >
+                        <p className="blue--text">Select a course to start learning</p>
+                    </div>
+                )}
+            <div className="narrow-side">
+                {!user.isSubscribed ? (
+                    <div className="subscribe bordered">
+                        <p className="top">
+                            Acquire coins and unlock more challenging practice resources as
+                            you learn.
+            </p>
+                        <p className="btm">Available to users on our Standard Plan</p>
+                        <img src={Coinsystem} alt="" />
+                    </div>
+                ) : (
+                        <div className="badge-wrap">
+                            <Badges />
+                        </div>
+                    )}
 
-        <AddCourses open={open} onCloseModal={onCloseModal} />
-      </div>
-    </motion.div>
-  );
+                <div className="courses">
+                    <p className="title mt30">Courses</p>
+                    <Courses onOpenModal={onOpenModal} dontMove={true} className="mt20" />
+                </div>
+
+                <img src={students} className="students" alt="" />
+
+                <AddCourses open={open} onCloseModal={onCloseModal} />
+            </div>
+        </motion.div>
+    );
 });

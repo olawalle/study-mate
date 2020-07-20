@@ -289,17 +289,17 @@ export default function AddCourses(props) {
                       : subject.width === 2
                       ? "mid"
                       : "wide"
-                  }`}
-                  onClick={() => pickSubject(i)}
+                          }`}
+                      onClick={() => pickSubject(i)}
                   key={`subject-${subject.name}`}
                 >
                   <input
                     type="checkbox"
                     name=""
                     id=""
-                    style={{ transform: "scale(1.02)" }}
+                          style={{ transform: "scale(1.02)" }}
                     checked={subject.preSelected}
-                    onChange={() => pickSubject(i)}
+                    onChange={user.isSubscribed ? () => pickSubject(i) : () => { }}
                   />
                   {subject.name}
                 </button>

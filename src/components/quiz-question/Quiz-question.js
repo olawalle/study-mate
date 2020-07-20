@@ -8,6 +8,7 @@ import caret from "../../assets/images/down-arrow.svg";
 import { appUrl, audioUrl, imgUrl } from "../../services/urls";
 import { userContext } from "../../store/UserContext";
 import beep from "../../assets/audio/beep1.mp3";
+import * as ls from "../../services/ls";
 
 import MathJax from "react-mathjax";
 import Parser from "../content-display/Parser";
@@ -462,9 +463,12 @@ export default function QuizQuestion(props) {
         beepSound &&
         !lockState
     ) {
-        const snd = new Audio(beep);
-        snd.play();
-        setBeepSound(false);
+        const playSound = ls.retrieveItem("playSound");
+        if (playSound || playSound === null) {
+            const snd = new Audio(beep);
+            snd.play();
+            setBeepSound(false);
+        }
     }
 
     const viewExplanation = () => {
@@ -503,6 +507,8 @@ export default function QuizQuestion(props) {
         if (!str) return;
         console.log({ str })
         return str
+            .replace('&lt;br /&gt;', '<br />')
+            .replace('&lt;br/&gt;', '<br />')
             .replace(`<img`, `<br/><img`)
             .replace(`src='assets\\`, `src='${imgUrl}/assets/`)
             .replace(`src="assets\\`, `src="${imgUrl}/assets/`);

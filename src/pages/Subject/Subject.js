@@ -75,6 +75,10 @@ export default withRouter(function Subject({ history }) {
         history.push("/dashboard/");
     };
 
+    const onSubscribe = () => {
+        history.push("/dashboard/subscribe");
+    }
+
     const gotoPacks = () => {
         updateLoader(true);
         authServices
@@ -104,6 +108,22 @@ export default withRouter(function Subject({ history }) {
 
     const generateLevelTest = (id, tests) => {
         const test = tests.find((t) => t.id === id);
+        //disable one disables the first portion of the video level
+        const disableOne = () => {
+            //check if the current test has a year called beginner
+            const result = (!(test && test.year.toLowerCase() === "beginner") && (user && !user.isSubscribed));
+            //if it does, set the disabled property to false
+            return result;
+        }
+        //disable all disables other portion of the video level even the remaining for beginner
+        //it is used in combination with disableone
+        const disableAll = () => {
+            console.log(user.isSubscribed)
+            //check if the current test has a year that is not beginner
+            const result = ((test && test.year.toLowerCase() !== "beginner" || (test && test.year.toLowerCase() === "beginner") ) && (user && !user.isSubscribed));
+            //if it does, set the disabled property to false
+            return result;
+        }
         if (test) {
             const beginnerQuiz = test.quizes.filter((q) => q.level === 0);
             const intermediateQuiz = test.quizes.filter((q) => q.level === 1);
@@ -130,6 +150,7 @@ export default withRouter(function Subject({ history }) {
             const returnCandidate = [
                 {
                     level: 0,
+                    disable: disableOne(),
                     id: test.id,
                     name: test.year,
                     take: !!beginnerVideo.length,
@@ -139,6 +160,7 @@ export default withRouter(function Subject({ history }) {
                 {
                     level: 1,
                     id: test.id,
+                    disable: disableOne() || disableAll(),
                     name: test.year,
                     take: !!intermediateVideo.length,
                     quizzes: intermediateQuiz,
@@ -147,6 +169,7 @@ export default withRouter(function Subject({ history }) {
                 {
                     level: 2,
                     id: test.id,
+                    disable: disableOne() || disableAll(),
                     name: test.year,
                     take: !!advancedVideo.length,
                     quizzes: advancedQuiz,
@@ -155,6 +178,7 @@ export default withRouter(function Subject({ history }) {
                 {
                     level: 3,
                     id: test.id,
+                    disable: disableOne() || disableAll(),
                     name: test.year,
                     take: !!fourVideo.length,
                     quizzes: fourQuiz,
@@ -163,6 +187,7 @@ export default withRouter(function Subject({ history }) {
                 {
                     level: 4,
                     id: test.id,
+                    disable: disableOne() || disableAll(),
                     name: test.year,
                     take: !!fiveVideo.length,
                     quizzes: fiveQuiz,
@@ -171,6 +196,7 @@ export default withRouter(function Subject({ history }) {
                 {
                     level: 5,
                     id: test.id,
+                    disable: disableOne() || disableAll(),
                     name: test.year,
                     take: !!sixVideo.length,
                     quizzes: sixQuiz,
@@ -179,6 +205,7 @@ export default withRouter(function Subject({ history }) {
                 {
                     level: 6,
                     id: test.id,
+                    disable: disableOne() || disableAll(),
                     name: test.year,
                     take: !!sevenVideo.length,
                     quizzes: sevenQuiz,
@@ -187,6 +214,7 @@ export default withRouter(function Subject({ history }) {
                 {
                     level: 7,
                     id: test.id,
+                    disable: disableOne() || disableAll(),
                     name: test.year,
                     take: !!eightVideo.length,
                     quizzes: eightQuiz,
@@ -195,6 +223,7 @@ export default withRouter(function Subject({ history }) {
                 {
                     level: 8,
                     id: test.id,
+                    disable: disableOne() || disableAll(),
                     name: test.year,
                     take: !!nineVideo.length,
                     quizzes: nineQuiz,
@@ -203,12 +232,14 @@ export default withRouter(function Subject({ history }) {
                 {
                     level: 9,
                     id: test.id,
+                    disable: disableOne() || disableAll(),
                     name: test.year,
                     take: !!tenVideo.length,
                     quizzes: tenQuiz,
                     videos: tenVideo,
                 },
             ];
+            console.log({ returnCandidate, one: disableOne(), all: disableAll() })
 
             return returnCandidate.filter((r) => r.take);
         }
@@ -367,13 +398,14 @@ export default withRouter(function Subject({ history }) {
                             generateLevelTest(testId, selectedSubject.tests).map(
                                 (test, i) => (
                                     <React.Fragment key={"lesson_" + i}>
-                                        <p className="heading">Lessons</p>
+                                        <p className="heading">Lesson Pack {i + 1}</p>
                                         <div className="lessons-wrap mb30">
                                             <div className="lessons">
                                                 {test.videos.length ? (
                                                     test.videos.map((video, i) => (
                                                         <Lesson
                                                             name={name}
+                                                            disable={test.disable}
                                                             usertests={
                                                                 usertests && usertests.length
                                                                     ? usertests.filter(
@@ -413,6 +445,7 @@ export default withRouter(function Subject({ history }) {
                                         {test.quizzes.length ? (
                                             <Quiz
                                                 open={true}
+                                                disable={test.disable}
                                                 usertests={
                                                     usertests && usertests.length
                                                         ? usertests.filter((ut) => ut.testId === test.id)
@@ -430,10 +463,35 @@ export default withRouter(function Subject({ history }) {
                                                 quiz={test.quizzes}
                                             />
                                         ) : null}
+                                        
+                                        
+                                        
                                     </React.Fragment>
                                 )
                             )}
-
+                        <div className="mobile-screen lesson-padding">
+                            <div className="courses-wrap">
+                                <div className="courses">
+                                    <div className="flex-grid-thirds">
+                                        {selectedSubject &&
+                                            selectedSubject.tests &&
+                                            selectedSubject.tests.map((test, i) => (
+                                                <div
+                                                    key={test.id}
+                                                    onClick={() => pickLevel(test, i)}
+                                                    style={{ textTransform: "uppercase" }}
+                                                    className={
+                                                        `min__width bg_level course pLR level 
+                                                                        ${testId === test.id ? "active" : ""}`
+                                                    }
+                                                >
+                                                    <span>{test.year}</span>
+                                                </div>
+                                            ))}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         {selectedSubject.hasStudyPack && (
                             <div className="pack">
                                 <div className="half">
@@ -457,7 +515,9 @@ export default withRouter(function Subject({ history }) {
                                     <div className="duration">
                                         <span>Approximately 12 Study packs</span>
                                     </div>
-                                    <button onClick={gotoPacks} className="btn">
+                                    <button onClick={user.isSubscribed ? gotoPacks : onSubscribe}
+                                        title={user.isSubscribed ? "Click to see advanced questions" : "You need to be subscribed to view this."}
+                                        className={`btn ${!user.isSubscribed ? "greyed" : ""}`}>
                                         Lets get started
                   </button>
                                 </div>

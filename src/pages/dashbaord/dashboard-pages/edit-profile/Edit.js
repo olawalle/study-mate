@@ -16,6 +16,8 @@ import authServices from "../../../../services/authServices";
 import Modal from "react-responsive-modal";
 import Loader from "../../../../components/loader/Loader";
 import { useSnackbar } from "react-simple-snackbar";
+import * as ls from "../../../../services/ls";
+
 
 export default withRouter(function EditProfile({ history }) {
     const context = useContext(userContext);
@@ -34,25 +36,43 @@ export default withRouter(function EditProfile({ history }) {
     const { user, loading, updateLoader, updateUser } = context;
 
     useEffect(() => {
-        console.log(user);
+        const ps = ls.retrieveItem("playSound");
+        if (ps !== null && ps !== undefined) {
+            setchecked(ps);
+        } else {
+            setchecked(true)
+        }
         setfullname(`${user.firstName} ${user.surName}`);
-        setemail(user.email);
-        setphone(user.phoneNumber);
-        setlocation(user.location);
-        setuserstate(user.state);
+        setemail(user.email || '');
+        setphone(user.phoneNumber || '');
+        setlocation(user.location || '');
+        setuserstate(user.state || '');
         let dob = user.dob;
         let reshapedDob = dob ? dob.split("T")[0] : "";
         setdateOfBirth(reshapedDob);
-        setusername(user.userName);
+        setusername(user.userName || '');
     }, []);
 
     const [checked, setchecked] = useState(true);
+    const [haptic, setHaptic] = useState(true);
+    const [motive, setMotive] = useState(true);
     const options = {
         position: "top-right",
     };
     const [openSnackbar, closeSnackbar] = useSnackbar(options);
 
     const handleChange = () => { };
+    const handleHapticChange = (value) => {
+        setHaptic(value)
+    };
+    const handleMotiveChange = (value) => {
+        setMotive(value)
+    };
+    const handleSoundChange = (value) => {
+        setchecked(value)
+        console.log(checked);
+        ls.saveItem("playSound", value);
+    };
 
     const back = () => {
         history.push("/dashboard/profile");
@@ -111,8 +131,7 @@ export default withRouter(function EditProfile({ history }) {
 
     const onCloseModal = () => setmodal(false);
     const onChange = (value) => {
-        if (username) return;
-        else setusername(value)
+        setusername(value)
     }
 
     const updateUserData = () => {
@@ -214,9 +233,7 @@ export default withRouter(function EditProfile({ history }) {
                                 <span className="label">Create Username</span>
                                 <input
                                     type="text"
-                                    defaultValue={username}
                                     value={username}
-                                    readOnly={!!username}
                                     onChange={({ target: { value } }) => onChange(value)}
                                 />
                                 <img src={edit} alt="" />
@@ -293,7 +310,7 @@ export default withRouter(function EditProfile({ history }) {
                                 <span>
                                     <Switch
                                         checked={checked}
-                                        onChange={handleChange}
+                                        onChange={handleSoundChange}
                                         onColor="#86d3ff"
                                         onHandleColor="#2693e6"
                                         uncheckedIcon={false}
@@ -308,8 +325,8 @@ export default withRouter(function EditProfile({ history }) {
                                 Haptic feedback{" "}
                                 <span>
                                     <Switch
-                                        checked={checked}
-                                        onChange={handleChange}
+                                        checked={haptic}
+                                        onChange={handleHapticChange}
                                         onColor="#86d3ff"
                                         onHandleColor="#2693e6"
                                         uncheckedIcon={false}
@@ -324,8 +341,8 @@ export default withRouter(function EditProfile({ history }) {
                                 Motivational messages{" "}
                                 <span>
                                     <Switch
-                                        checked={checked}
-                                        onChange={handleChange}
+                                        checked={motive}
+                                        onChange={handleMotiveChange}
                                         onColor="#86d3ff"
                                         onHandleColor="#2693e6"
                                         uncheckedIcon={false}

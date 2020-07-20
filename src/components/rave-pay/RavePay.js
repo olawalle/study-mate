@@ -20,13 +20,11 @@ export default function RavePay({
                 authServices
                     .activateUserSub({ subId, userId })
                     .then((res) => {
-                        ref.current.onclose(true);
-                        console.log({ usersub: res.data });
+                        setSuccess(true)
                     })
                     .catch((err) => {
                         console.log({ err });
-                        ref.current.onclose(true);
-                        handleResponse(success, "Your payment was successful but we could not subscribe you at the moment. Please notify us.");
+                        setSuccess(false)
                     });
             })
             .catch(function (error) {

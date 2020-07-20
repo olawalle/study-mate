@@ -188,9 +188,15 @@ export default withRouter(function Lesson({
         }
     };
 
+    const onSubscribe = () => {
+        history.push("/dashboard/subscribe");
+    }
+
     return (
         <div className="lesson-wrap">
-            <div className="lesson" onClick={() => openModal(video.url)}>
+            <div className={`lesson ${props.disable ? "greyed" : ""}`}
+                title={props.disable ? "You need to subscribe to view this" : "Please click to watch"}
+                onClick={props.disable ? onSubscribe : () => openModal(video.url)}>
                 <p>
                     <img src={play} width="20" className="mr15 mt5" alt="" />
                     <span style={{ fontSize: 12 }}>{video.name}</span>

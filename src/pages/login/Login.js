@@ -182,24 +182,6 @@ export default withRouter(function Login(props) {
                         updateLoader(false);
                         showError("An error occured. Please try again");
                     });
-
-                authServices
-                    .getUserAward(user.id)
-                    .then((res) => {
-                        // console.log(res);
-                    })
-                    .catch((err) => {
-                        console.log({ err });
-                    });
-
-                authServices
-                    .getLeaderboard(user.id, awards[0].id)
-                    .then((res) => {
-                        // console.log(res);
-                    })
-                    .catch((err) => {
-                        console.log({ err });
-                    });
             })
             .catch(function (err) {
                 console.log({ err });

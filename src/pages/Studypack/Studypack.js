@@ -7,14 +7,14 @@ import Quiz from "../../components/quiz/Quiz";
 import Loader from "../../components/loader/Loader";
 import students from "../../assets/images/students.png";
 import backArrow from "../../assets/images/back.svg";
-import { withRouter, useParams } from "react-router-dom";
+import { withRouter, useParams, useLocation } from "react-router-dom";
 import { userContext } from "../../store/UserContext";
 import { retrieveItem } from "../../services/ls";
 import authServices from "../../services/authServices";
 // import students from "../../assets/images/students.png";
 
 export default withRouter(function Studypack({ history }) {
-  const { subject } = useParams();
+    const { subject } = useParams();
   const context = useContext(userContext);
   const {
     fixBack,
@@ -106,8 +106,8 @@ export default withRouter(function Studypack({ history }) {
         <div className="navwrap">
           <Nav />
         </div>
-        <div className="banner">
-          <span className="backArrow">
+              <div className="banner">
+                  <span className="backArrow" style={{ textTransform: "uppercase" }}>
             <svg
               version="1.1"
               x="0px"
@@ -134,7 +134,7 @@ export default withRouter(function Studypack({ history }) {
                 </g>
               </g>
             </svg>
-            Study pack
+                      {subject} Study pack
           </span>
           <span onClick={back} className="mobile-title-text">
             HOME

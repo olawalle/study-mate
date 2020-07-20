@@ -129,7 +129,7 @@ const LandingPage = ({ history }) => {
                 <div className="">
                   <div className="video__wrap">
                     <a
-                      href="https://youtu.be/kP_Abl8gKyg"
+                      href="https://youtu.be/fUTMoIiKpWk"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -296,8 +296,7 @@ const LandingPage = ({ history }) => {
               </div>
               <div className="caption">
                 <span className="light">
-                  With StudyMate, all subjects become favourites! Let us help
-                  you unlock your inner genius!
+                  Give your child a study partner that understands and communicates knowledge for excellence.
                 </span>
               </div>
             </div>

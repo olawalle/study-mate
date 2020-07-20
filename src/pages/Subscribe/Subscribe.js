@@ -16,7 +16,7 @@ import HtmlParser from "../../components/content-display/HtmlParser";
 import RavePay from "../../components/rave-pay/RavePay";
 import { useHistory } from "react-router-dom";
 
-export default function Subscribe() {
+export default function Subscribe(props) {
     const history = useHistory();
     const [currentPlans, setCurrentPlans] = useState([]);
     const [currentPlan, setCurrentPlan] = useState({});
