@@ -58,7 +58,6 @@
   width: 20px;
   position: absolute;
   right: 50px;
-  top: -20px;
   min-width: 210px;
   cursor: pointer;
   font-size: 36px;
@@ -301,6 +300,7 @@
 
 .quiz-quuestion .footer {
   position: absolute;
+  z-index: 9999999;
   bottom: 0;
   border-top: 1px solid #eee;
   padding: 18px 50px;
@@ -343,7 +343,6 @@
   .quiz-quuestion .close {
     cursor: pointer;
     right: 15px;
-    top: 15px;
   }
   .quiz-quuestion .close img {
     width: 20px;
@@ -366,6 +365,9 @@
   }
   .quiz-quuestion .upper .instruction {
     margin-top: 50px;
+  }
+  .quiz-quuestion .upper .instruction .time {
+    top: 0 !important;
   }
   .quiz-quuestion .upper .content {
     width: 100%;

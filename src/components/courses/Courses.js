@@ -19,7 +19,9 @@ export default withRouter(function Courses(props) {
   const {
     userCourses,
     testId_,
+    fixBack,
     updateTestId,
+    updatefixBack,
     updateLoader,
     selectedSubject: { id: selectedSubId, ...selectedSubject },
     saveSelectedSubject,
@@ -45,6 +47,11 @@ export default withRouter(function Courses(props) {
   };
   const [openSnackbar, closeSnackbar] = useSnackbar(options);
 
+  useEffect(() => {
+    if (openLevels == true) {
+      updatefixBack(false);
+    }
+  }, [fixBack]);
   useEffect(() => {
     setlevel(match.params.level);
     updateLoader(true);
