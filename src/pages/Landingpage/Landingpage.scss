@@ -436,6 +436,7 @@
 
 .page-wrapper .hero__section .wrap__tutor .wrap__image img {
   max-width: 100%;
+  float: right;
 }
 
 .page-wrapper .hero__section .hero__left {
@@ -452,7 +453,7 @@
 
 @media screen and (min-width: 1600px) {
   .page-wrapper .hero__section .hero__left {
-    max-width: 600px;
+    max-width: 650px;
   }
 }
 
@@ -487,7 +488,7 @@
 .page-wrapper .hero__section .hero__left h1 {
   margin-top: 6%;
   color: #002984;
-  // font-family: "Helvetica Bold";
+  font-family: "Monsterrat bold";
   text-align: left;
   font-size: 50px;
 }
@@ -530,7 +531,7 @@
   font-weight: 600;
   font-size: 16px;
   height: unset !important;
-  // font-family: "Helvetica Bold";
+  font-family: "Monsterrat bold";
 }
 
 .page-wrapper .ui.grid > .column:not(.row) {
@@ -538,12 +539,12 @@
 }
 
 .page-wrapper .inhome__tutor {
-  margin-top: 12%;
-  margin-bottom: 10%;
+  margin-top: 10%;
+  margin-bottom: 5%;
 }
 
 .page-wrapper .inhome__tutor .caption__header h1 {
-  // font-family: "Helvetica Bold";
+  font-family: "Monsterrat bold";
   color: #002984;
   margin-bottom: 1em;
   text-align: center;
@@ -613,7 +614,7 @@
 
 .page-wrapper .inhome__tutor .boxes .box h2 {
   text-align: left;
-  // font-family: "Helvetica Bold";
+  font-family: "Monsterrat bold";
 }
 
 .page-wrapper .inhome__tutor .boxes .box .caption span {
@@ -624,11 +625,11 @@
 }
 
 .page-wrapper .watch__video {
-  margin-bottom: 3em;
+  margin-bottom: 1em;
   background: rgba(16, 163, 255, 0.04) 0% 0% no-repeat padding-box;
   margin-top: 3em;
-  padding-top: 10em;
-  padding-bottom: 10em;
+  padding-top: 4em;
+  padding-bottom: 5em;
 }
 
 .page-wrapper .watch__video .video__wrap {
@@ -686,7 +687,7 @@
 .page-wrapper .watch__video .video__right h1 {
   margin-top: 10px;
   color: #002984;
-  // font-family: "Helvetica Bold";
+  font-family: "Monsterrat bold";
   text-align: left;
   margin-right: 100px;
   font-size: 50px;
@@ -751,7 +752,7 @@
 
 .page-wrapper .footer__section .footer__links h3 {
   color: white;
-  // font-family: "Helvetica Bold";
+  font-family: "Monsterrat bold";
   padding-bottom: 2em;
   font-size: 16px;
   font-weight: 600;
@@ -876,7 +877,7 @@
 .carousel__section .carousel__caption h1 {
   margin-top: 10%;
   color: #002984;
-  // font-family: "Helvetica Bold";
+  font-family: "Monsterrat bold";
   text-align: center;
   font-size: 50px;
   font-weight: 600;
@@ -960,7 +961,7 @@
   text-align: left;
   margin-bottom: 0;
   font-size: 28px;
-  // font-family: "Helvetica Bold";
+  font-family: "Monsterrat bold";
 }
 
 .carousel__section .owl-carousel .item .box .available__courses {
@@ -1033,8 +1034,8 @@
 .subscriptions {
   background: rgba(16, 163, 255, 0.04) 0% 0% no-repeat padding-box;
   margin-top: 3em;
-  padding-top: 10em;
-  padding-bottom: 10em;
+  padding-top: 5em;
+  padding-bottom: 5em;
   .top {
     font-size: 34px;
     font-weight: 600;
@@ -1042,6 +1043,7 @@
     padding-right: 30px;
     color: #002984;
     margin-top: 100px;
+    font-family: "Monsterrat bold";
   }
   .btm {
     font-size: 20px;
@@ -1067,6 +1069,7 @@
         font-size: 30px;
         font-weight: 600;
         padding-right: 4px;
+        font-family: "Monsterrat bold";
       }
     }
     ul {
@@ -1227,7 +1230,7 @@
 
 .package__section .ten h1 {
   text-align: left;
-  // font-family: "Helvetica Bold";
+  font-family: "Monsterrat bold";
   color: white;
 }
 
@@ -1283,8 +1286,8 @@
 }
 
 .container__ {
-  margin-left: 180px;
-  margin-right: 180px;
+  margin-left: 80px;
+  margin-right: 80px;
 }
 
 @media screen and (max-width: 600px) {
@@ -1294,3 +1297,7 @@
   }
 }
 /*# sourceMappingURL=style.css.map */
+
+.login__ {
+  font-family: "Monsterrat bold";
+}

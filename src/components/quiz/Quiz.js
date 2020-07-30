@@ -53,7 +53,7 @@ export default function Quiz(props) {
   };
 
   useEffect(() => {
-    if (open == true) {
+    if (open == false) {
       updatefixBack(false);
     }
   }, [fixBack]);

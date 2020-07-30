@@ -51,7 +51,11 @@ export default withRouter(function Subject({ history }) {
   ]);
 
   useEffect(() => {
-    if (openLevels == true) {
+    updatefixBack(false);
+  }, []);
+
+  useEffect(() => {
+    if (openLevels == false) {
       updatefixBack(false);
     }
   }, [fixBack]);
@@ -71,26 +75,30 @@ export default withRouter(function Subject({ history }) {
           selectedSubject &&
           selectedSubject.tests &&
           selectedSubject.tests.length
-            ? selectedSubject.tests[0].name
+            ? selectedSubject.tests[testId].name
             : "Beginner";
-        settestId(testId_);
+        settestId(defaultTestId);
         setname(defaultName);
         setusercourseid(res.data.id);
         console.log({ usertest: res.data.userTests });
         setusertests(res.data.userTests);
         updateLoader(false);
         setpageLoaded(true);
+        console.log("default test id", defaultTestId);
       })
       .catch((err) => {
         console.log({ err });
         updateLoader(false);
       });
-  }, [pageLoaded, testId_]);
+  }, []);
 
   console.log("selected sub", selectedSubject);
 
   const back = () => {
     history.push("/dashboard/");
+  };
+  const back__ = () => {
+    history.push("/dashboard/mobile-courses");
   };
 
   const onSubscribe = () => {
@@ -121,10 +129,12 @@ export default withRouter(function Subject({ history }) {
 
   const pickLevel = (test, i) => {
     setname(test.year);
+    settestId(test.id);
     updateTestId(test.id);
     setlevel(test.year);
   };
 
+  console.log("selected id", testId);
   const pickLevel__ = (test, j) => {
     setname(test.year);
     settestId(test.id);
@@ -324,7 +334,7 @@ export default withRouter(function Subject({ history }) {
 
   const onCloseLevelsModal = () => {
     setopenLevels(false);
-    back();
+    back__();
   };
   const goToSubject = () => {
     let i = selectedIndex;

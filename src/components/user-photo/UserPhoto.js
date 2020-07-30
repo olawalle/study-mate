@@ -82,8 +82,8 @@ export default function UserPhoto() {
       <div
         className="user-photo"
         style={{
-            position: "relative",
-            backgroundImage: `url("${imgUrl}${userPic}")`,
+          position: "relative",
+          backgroundImage: `url("${imgUrl}${userPic}")`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -96,13 +96,17 @@ export default function UserPhoto() {
             alt=""
           />
         )}
-        <div className="edit_" onClick={toProfile}>
-          <img
-            src={editIcon}
-            style={{ height: "20px", margin: "10px auto" }}
-            alt=""
-          />
-        </div>
+
+        {!userPic && (
+          <div className="edit_" onClick={toProfile}>
+            <img
+              src={editIcon}
+              style={{ height: "20px", margin: "10px auto" }}
+              alt=""
+            />
+          </div>
+        )}
+
         <input
           type="file"
           style={{
