@@ -58,7 +58,7 @@ export default withRouter(function Nav(props) {
 
             {!context.isLoggedIn && (
                 <span className="user f-right">
-                    <span onClick={() => goTo("login")}>Login</span>
+                    <span className="login__" onClick={() => goTo("login")}>Login</span>
                     <button
                         onClick={() => goTo("signup")}
                         className="tw-btn ml30 pl20 pr20"

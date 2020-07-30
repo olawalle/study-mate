@@ -33,7 +33,7 @@
       bottom: 15px;
       left: 20px;
       border-radius: 25px;
-      display: none;
+      //display: none;
     }
   }
   .sub-banner {
@@ -153,6 +153,7 @@
       .lessons-wrap {
         background-color: #fff;
         padding-bottom: 20px;
+
         .lessons {
         }
         .sub-heading {
@@ -163,6 +164,7 @@
           button {
             padding: 12px 20px;
             margin-top: -10px;
+            // border-radius: 7px !important;
           }
         }
         .lessons {
@@ -231,10 +233,10 @@
       background-position-x: 83%;
       .backArrow,
       .back svg {
-        display: none !important;
+        //display: none !important;
       }
       .mobile-title-text {
-        display: block !important;
+        display: none !important;
       }
     }
     .sub-banner {
@@ -253,7 +255,7 @@
     }
     .contents {
       padding: 20px;
-      height: calc(100vh - 280px);
+      //height: calc(100vh - 280px);
       overflow: auto;
       .small {
         width: 100%;
