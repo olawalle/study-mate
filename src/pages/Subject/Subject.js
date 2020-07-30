@@ -561,7 +561,7 @@ export default withRouter(function Subject({ history }) {
               )}
 
             {/* comment out levels (beginner, intermediate, advanced) on mobile screen  */}
-            <div className="mobile-screen lesson-padding">
+            {/* <div className="mobile-screen lesson-padding">
               <div className="courses-wrap">
                 <div className="courses">
                   <div className="flex-grid-thirds">
@@ -586,7 +586,7 @@ export default withRouter(function Subject({ history }) {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
             {selectedSubject.hasStudyPack && (
               <div className="pack">
                 <div className="half">
