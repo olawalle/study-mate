@@ -27,6 +27,7 @@ export default withRouter(function Subject({ history }) {
     updateLoader,
     updateStudyPack,
     loading,
+    updatefixBack,
     user,
   } = context;
   const [usertests, setusertests] = useState(null);
@@ -49,6 +50,11 @@ export default withRouter(function Subject({ history }) {
     "Advanced",
   ]);
 
+  useEffect(() => {
+    if (openLevels == true) {
+      updatefixBack(false);
+    }
+  }, [fixBack]);
   useEffect(() => {
     setlevel(match.params.level);
     updateLoader(true);

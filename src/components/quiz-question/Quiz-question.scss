@@ -1,5 +1,6 @@
 .quiz-quuestion {
   position: relative;
+
   .custom-img {
     -webkit-transition: all 1s ease; /* Safari and Chrome */
     -moz-transition: all 1s ease; /* Firefox */
@@ -25,6 +26,7 @@
     right: 20px;
     top: 24px;
     z-index: 100;
+
     img {
       width: 20px;
       float: right;
@@ -36,23 +38,26 @@
       cursor: pointer;
     }
   }
+
   .upper {
     padding: 30px 40px;
     height: 720px;
     position: relative;
+
     .upper-bar {
       position: relative;
       width: 98%;
     }
+
     .instruction {
       color: rgba(45, 47, 57, 0.76);
       font-size: 16px;
       margin-bottom: 18px;
+
       .time {
         width: 20px;
         position: absolute;
         right: 50px;
-        top: -20px;
         min-width: 210px;
         cursor: pointer;
         font-size: 36px;
@@ -61,6 +66,7 @@
         padding: 5px;
       }
     }
+
     .alert {
       position: absolute;
       top: 455px;
@@ -76,23 +82,27 @@
       display: flex;
       align-items: center;
       justify-content: center;
+
       .badge {
         width: 70px;
         position: relative;
         top: -10px;
       }
+
       .streak-text {
         display: inline-block;
         width: 76%;
         padding-left: 16px;
         position: relative;
         top: -10px;
+
         .top {
           font-weight: 600;
           position: relative;
           top: 5px;
           margin-bottom: 10px;
           color: #000;
+
           .ex {
             width: 10px;
             float: right;
@@ -101,24 +111,29 @@
             right: -5px;
             cursor: pointer;
           }
+
           p {
             font-size: 14px;
           }
         }
+
         .blue--text {
           cursor: pointer;
         }
       }
     }
+
     .content {
       width: 60%;
       display: inline-block;
       height: 555px;
       overflow: auto;
+
       .questions {
         // max-height: 440px;
         // overflow: auto;
       }
+
       .question {
         font-size: 17px;
         line-height: 28px;
@@ -126,18 +141,22 @@
         padding-bottom: 30px;
         padding: 10px 0 30px;
         border-bottom: 1px solid #eee;
+
         img {
           width: 120px;
         }
       }
+
       .answer {
         min-height: 50px;
         cursor: pointer;
         font-size: 12px;
         position: relative;
+
         &:hover {
           background-color: #fafafa;
         }
+
         .label {
           display: inline-block;
           width: 25px;
@@ -152,6 +171,7 @@
           top: 13px;
           line-height: 25px !important;
         }
+
         .caveat {
           margin: 0;
           position: relative;
@@ -162,6 +182,7 @@
           font-weight: 600;
           width: 80%;
         }
+
         p {
           display: inline-block;
           font-size: 16px;
@@ -170,30 +191,38 @@
           width: calc(100% - (25px + 60px));
         }
       }
+
       .correct {
         color: #14ac00 !important;
+
         .label {
           background-color: #14ac00 !important;
           color: #fff;
         }
       }
+
       .lock:hover {
         cursor: not-allowed;
       }
+
       .wrong {
         color: #b40505 !important;
+
         .label {
           background-color: #b40505 !important;
           color: #fff;
         }
       }
+
       .correct_ {
         color: #10a3ff;
+
         .label {
           background-color: #10a3ff;
           color: #fff;
         }
       }
+
       .feedback {
         padding: 20px 0 30px;
         border-top: 1px solid #eee;
@@ -202,6 +231,7 @@
         cursor: pointer;
       }
     }
+
     .passage {
       width: 40%;
       display: inline-block;
@@ -215,6 +245,7 @@
       text-align: justify;
       margin-bottom: 40px;
     }
+
     .formm {
       background: #fafafa;
       border: 0.5px solid #7070701f;
@@ -224,23 +255,28 @@
       margin: 0 5%;
       width: 30%;
       text-align: left;
+
       .top {
         font-style: 16px;
         font-weight: 600;
         margin: 0;
       }
+
       .sub {
         font-size: 14px;
       }
+
       .radio {
         display: block;
         margin-bottom: 15px;
         font-size: 14px;
+
         input {
           transform: scale(1.4);
           margin-right: 15px;
         }
       }
+
       textarea {
         border: 0.5px solid #7070701f;
         width: 100%;
@@ -248,9 +284,11 @@
         height: 70px;
         margin-bottom: 10px;
       }
+
       button {
         padding: 0 30px !important;
       }
+
       .cancel {
         position: relative;
         top: -0px;
@@ -260,26 +298,32 @@
       }
     }
   }
+
   .footer {
     position: absolute;
+    z-index: 9999999;
     bottom: 0;
     border-top: 1px solid #eee;
     padding: 18px 50px;
     height: 80px;
     width: 100%;
     background-color: #fff;
+
     button {
       float: right;
       padding: 0 30px;
     }
   }
+
   .passage_,
   .content_ {
     width: 50% !important;
     font-size: 36px;
+
     div {
       padding-top: 30px;
     }
+
     img {
       width: 100%;
     }
@@ -293,16 +337,18 @@
     left: 0;
     padding: 20px;
     height: calc(100vh + 12px);
+
     .close {
       cursor: pointer;
       right: 15px;
-      top: 15px;
+
       img {
         width: 20px;
         float: right;
         margin-top: -5px;
       }
     }
+
     .upper {
       padding: 0;
       height: calc(100vh - 85px);
@@ -311,32 +357,44 @@
       width: 100%;
       overflow-x: hidden;
       overflow-y: auto;
+
       .upper-bar {
         position: relative;
         width: 100%;
         margin-top: -40px;
       }
+
       .instruction {
         margin-top: 50px;
+
+        .time {
+          top: 0 !important;
+        }
       }
+
       .content {
         width: 100%;
         height: auto;
         padding-top: 10px;
+
         .questions {
           overflow-x: hidden;
           overflow-y: auto;
         }
+
         .question {
           color: #000;
         }
+
         .answer {
           color: #000;
+
           p {
             width: 87%;
           }
         }
       }
+
       .alert {
         position: absolute;
         top: 66vh;
@@ -349,38 +407,45 @@
         padding: 20px;
         border-radius: 10px;
         border: 1px solid #dddddd;
+
         .badge {
           width: 51px;
           display: inline-block;
           // position: relative;
           top: 10px;
         }
+
         .streak-text {
           display: inline-block;
           width: 94%;
           padding-left: 63px;
           top: -70px;
           color: #000;
+
           .top {
             .ex {
               right: -10px;
             }
           }
+
           p {
             font-size: 12px;
           }
         }
       }
     }
+
     .passage {
       height: auto;
       max-height: unset !important;
       padding: 12px !important;
     }
+
     .passage_,
     .content_ {
       width: 100% !important;
       font-size: 36px;
+
       div {
         color: #000;
         padding: 50px 0;
@@ -389,10 +454,12 @@
         line-height: 30px;
         text-align: center;
       }
+
       img {
         width: 100%;
       }
     }
+
     .footer {
       position: absolute;
       bottom: 0;
@@ -400,9 +467,11 @@
       color: #000;
       padding: 15px;
       height: 110px;
+
       b {
         font-size: 12px;
       }
+
       button {
         padding: 0 12px;
         font-size: 14px !important;

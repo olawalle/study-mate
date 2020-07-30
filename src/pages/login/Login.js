@@ -7,7 +7,7 @@ import logo2 from "../../assets/images/logo.png";
 import dots from "../../assets/images/Dots.svg";
 import eye from "../../assets/images/eye.svg";
 import pair from "../../assets/images/pair.png";
-import { Link, withRouter } from "react-router-dom";
+import { Link, withRouter, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useSnackbar } from "react-simple-snackbar";
 
@@ -33,6 +33,8 @@ export default withRouter(function Login(props) {
     const options = {
         position: "top-right",
     };
+    const route = useLocation();
+    console.log("route is :", route);
     const [openSnackbar, closeSnackbar] = useSnackbar(options);
 
     const {
@@ -171,10 +173,18 @@ export default withRouter(function Login(props) {
                                 return agg;
                             }, {})
                         );
+                        console.log("user seived courses", sievedCourses.length);
                         updateUserCourses(sievedCourses);
                         updateLoader(false);
                         setTimeout(() => {
-                            props.history.push("/dashboard");
+                            if (route.search) {
+                                const rest = route.search.split('=')[1];
+                                props.history.push(rest);
+                            }
+                            else {
+                                props.history.push("/dashboard");
+                            }
+                            
                         }, 500);
                     })
                     .catch((err) => {
@@ -233,9 +243,10 @@ export default withRouter(function Login(props) {
             >
                 <div className="left-side">
                     <img
+                        onClick={() => props.history.push('/')}
                         src={logo}
                         alt=""
-                        style={{ width: 170, position: "absolute", top: 50, left: 50 }}
+                        style={{ width: 170, position: "absolute", top: 50, left: 50, cursor: 'pointer' }}
                     />
 
                     <img src={dots} className="left-dot" alt="" />
@@ -303,7 +314,7 @@ export default withRouter(function Login(props) {
                 ) : (
                         <div className="right-side">
                             <div className="mobileLogo">
-                                <img src={logo2} alt="" />
+                                <img onClick={() => props.history.push('/')} src={logo2} alt="" />
                             </div>
 
                             <p className="welcome mt50">Good to see you again!</p>
@@ -334,6 +345,7 @@ export default withRouter(function Login(props) {
                             <div className="form">
                                 <span className="label">Email Address</span>
                                 <input
+                                    autoComplete="email"
                                     className={hasError && !email ? "has-error" : ""}
                                     type="text"
                                     onChange={(e) => setemail(e.target.value)}
@@ -343,6 +355,7 @@ export default withRouter(function Login(props) {
                                 <div className="inp-wrap">
                                     <span className="label">Password</span>
                                     <input
+                                        autoComplete="current-password"
                                         className={hasError && !password ? "has-error" : ""}
                                         type={pwrdType}
                                         onChange={(e) => setpassword(e.target.value)}
@@ -372,7 +385,7 @@ export default withRouter(function Login(props) {
               </button>
 
                                 <span className="no-acct">
-                                    <Link to="/signup">
+                                    <Link to={`/signup${route.search}`}>
                                         Don’t have a StudyMate account?{" "}
                                         <span className="blue--text">Create an Account</span>
                                     </Link>

@@ -31,6 +31,10 @@ export default withRouter(function Nav(props) {
         props.history.push("/dashboard/subscribe");
     };
 
+    const toHome = () => {
+        props.history.push('/');
+    }
+
     const toAuth = (n) => {
         n === 1 ? props.history.push("/login") : props.history.push("/signup");
     };
@@ -53,7 +57,7 @@ export default withRouter(function Nav(props) {
     return (
         <div className="nav">
             <span className="logo">
-                <img src={logo} className="logo" alt="" />
+                <img onClick={toHome} src={logo} className="logo c-pointer" alt="" />
             </span>
 
             {!context.isLoggedIn && (
