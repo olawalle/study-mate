@@ -243,9 +243,10 @@ export default withRouter(function Login(props) {
             >
                 <div className="left-side">
                     <img
+                        onClick={() => props.history.push('/')}
                         src={logo}
                         alt=""
-                        style={{ width: 170, position: "absolute", top: 50, left: 50 }}
+                        style={{ width: 170, position: "absolute", top: 50, left: 50, cursor: 'pointer' }}
                     />
 
                     <img src={dots} className="left-dot" alt="" />
@@ -313,7 +314,7 @@ export default withRouter(function Login(props) {
                 ) : (
                         <div className="right-side">
                             <div className="mobileLogo">
-                                <img src={logo2} alt="" />
+                                <img onClick={() => props.history.push('/')} src={logo2} alt="" />
                             </div>
 
                             <p className="welcome mt50">Good to see you again!</p>

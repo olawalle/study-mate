@@ -199,9 +199,11 @@ export default withRouter(function Signup(props) {
             >
                 <div className="left-side">
                     <img
+                        onClick={() => props.history.push('/')}
                         src={logo}
                         alt=""
-                        style={{ width: 170, position: "absolute", top: 60, left: 100 }}
+                        className='c-pointer'
+                        style={{ width: 170, position: "absolute", top: 60, left: 100, cursor: 'pointer', zIndex: 200 }}
                     />
                     <Carousel
                         showArrows={false}
@@ -243,7 +245,7 @@ export default withRouter(function Signup(props) {
 
                 <div className="right-side">
                     <div className="mobileLogo">
-                        <img src={logo2} alt="" />
+                        <img onClick={() => props.history.push('/')} src={logo2} alt="" />
                     </div>
 
                     <p className="welcome mt50">Sign up to StudyMate</p>

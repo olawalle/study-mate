@@ -11,7 +11,10 @@ const LandingPage = ({ history }) => {
   const [show_nav, setshow_nav] = useState(false);
   const toAuth = (n) => {
     n === 1 ? history.push("/login") : history.push("/signup");
-  };
+    };
+    const toSub = () => {
+        history.push("/dashboard/subscribe");
+    };
 
   const goto = (to) => {
     if (to === "terms") {
@@ -229,7 +232,7 @@ const LandingPage = ({ history }) => {
                   </li>
                 </ul>
 
-                <button onClick={() => toAuth(1)}>Subscribe</button>
+                <button onClick={() => history.push('/dashboard')}>Subscribe</button>
               </div>
             </div>
             <div className="five wide column">
@@ -261,7 +264,7 @@ const LandingPage = ({ history }) => {
                   </li>
                 </ul>
 
-                <button onClick={() => toAuth(1)}>Subscribe</button>
+                <button onClick={toSub}>Subscribe</button>
               </div>
             </div>
           </div>

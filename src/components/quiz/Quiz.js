@@ -260,7 +260,7 @@ export default function Quiz(props) {
                     showCloseIcon={false}
                     closeOnOverlayClick={false}
                 >
-                    {!started ? (
+                    {(!started && !openMobileQuiz) ? (
                         <div className="quiz-modal">
                             <div className={`left ${finishedTest ? "left2" : "left1"}`}>
                                 .
