@@ -145,6 +145,7 @@ export default withRouter(function Courses(props) {
 
   const selectCourse = (course, i) => {
     console.log({ course });
+    updateTestId(0);
     if (!isCourseAllowed(course) && !user.isSubscribed) {
       openSnackbar("Please subscribe to access this subject", 50000);
       props.history.push("/dashboard/subscribe");
