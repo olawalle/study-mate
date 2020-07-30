@@ -16,12 +16,14 @@ export default withRouter(function Courses(props) {
     const context = useContext(userContext);
     const {
         userCourses,
+        updateCounter,
         updateLoader,
         selectedSubject: { id: selectedSubId, ...selectedSubject },
         saveSelectedSubject,
         user,
     } = context;
     console.log({ ucs: userCourses })
+    const ucsLength = userCourses.length;
     const [openLevels, setopenLevels] = useState(false);
     const [levels, setLevels] = useState([
         "Beginner",
@@ -97,6 +99,7 @@ export default withRouter(function Courses(props) {
         authServices
             .getSubjectQuiz(course.courseId)
             .then((res) => {
+                console.log("res is ", res)
                 saveSelectedSubject(res.data);
                 updateLoader(false);
                 if (props.dontMove) return;
@@ -115,15 +118,18 @@ export default withRouter(function Courses(props) {
     };
 
     const setDefaultCourseItem = () => {
+        console.log("sorted area one", sortesubjects);
         if (
             sortesubjects.length &&
             !selectedSubject.name) {
+            console.log("sorted area", sortesubjects);
             if (user.isSubscribed) {
                 selectCourse(sortesubjects[0], 0)
             } else {
                 const sub = sortesubjects.filter(s => isCourseAllowed(s))
+                console.log("sub is: ", sub)
                 if (sub.length) {
-                    selectCourse(sub[0], 0)
+                    selectCourse(sub[0], 0);
                 }
             }
         }
@@ -137,7 +143,7 @@ export default withRouter(function Courses(props) {
 
     useEffect(() => {
         setDefaultCourseItem();
-    }, [selectedSubId]);
+    }, [selectedSubId, ucsLength]);
 
     return (
         <div className="courses-wrap">

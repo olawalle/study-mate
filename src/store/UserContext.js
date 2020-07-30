@@ -8,6 +8,7 @@ export default class UserContextProvider extends Component {
     fixBack: false,
     loading: false,
     isLoggedIn: false,
+    stateCounter: 0,
     user: {
       email: "",
       firstName: "",
@@ -57,7 +58,11 @@ export default class UserContextProvider extends Component {
 
   updateLoader = (loading) => {
     this.setState({ loading });
-  };
+    };
+
+    updateCounter = () => {
+        this.setState({ stateCounter: this.state.stateCounter++ });
+    };
 
   updatefixBack = (fixBack) => {
     this.setState({ fixBack });
@@ -143,7 +148,8 @@ export default class UserContextProvider extends Component {
   };
 
   render() {
-    const {
+      const {
+          updateCounter,
       updateUser,
       updateLoader,
       updateLoggedInStatus,
@@ -163,7 +169,8 @@ export default class UserContextProvider extends Component {
             value={{
                 ...modState,
           updateLoader,
-          updateUser,
+                updateUser,
+                updateCounter,
           updateLoggedInStatus,
           logout,
           updateSubjects,

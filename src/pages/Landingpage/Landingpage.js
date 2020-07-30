@@ -276,7 +276,7 @@ const LandingPage = ({ history }) => {
                 <img src="images/package.svg" alt="studypack" />
               </div>
               <div className="ten wide column">
-                <h5>Be the first to know when we launch the product</h5>
+                              {/*<h5>Be the first to know when we launch the product</h5>*/}
                 <h1>Subscribe to our newsletter for updates</h1>
                 <div className="ui action input">
                   <input type="text" placeholder="Enter email address" />

@@ -3,10 +3,22 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { HashRouter, BrowserRouter as Router } from 'react-router-dom';
+import UserContextProvider from './store/UserContext';
+import SnackbarProvider from "react-simple-snackbar";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
+    <React.StrictMode>
+        <Router>
+            <SnackbarProvider>
+                <div className="App">
+                    <UserContextProvider>
+                        <App />
+                    </UserContextProvider>
+                </div>
+            </SnackbarProvider>
+        </Router>
+    
   </React.StrictMode>,
   document.getElementById('root')
 );

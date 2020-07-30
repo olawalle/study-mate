@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import {
     BrowserRouter as Router,
     Switch,
@@ -7,8 +7,11 @@ import {
     HashRouter,
     withRouter,
     useHistory,
+    Redirect,
+    useParams,
+    useLocation,
 } from "react-router-dom";
-import UserContextProvider from "./store/UserContext";
+import UserContextProvider, { userContext } from "./store/UserContext";
 import { motion, AnimatePresence } from "framer-motion";
 import "./App.scss";
 import SnackbarProvider from "react-simple-snackbar";
@@ -70,6 +73,11 @@ export const PreFooter = () => {
 
 export default function App() {
     let history = useHistory();
+    let route = useLocation();
+    console.log("route is", route);
+    const {
+        user, isLoggedIn
+    } = useContext(userContext);
     useEffect(() => {
         // let token = localStorage.getItem("studymate-token");
         // !token && history.push("/login");
@@ -110,57 +118,92 @@ export default function App() {
             new Image().src = image;
         });
     }, []);
+
+    const redirectPath = `/login?redirect=${route.pathname}`;
     return (
-        <HashRouter>
-            <SnackbarProvider>
-                <div className="App">
-                    <UserContextProvider>
-                        <AnimatePresence exitBeforeEnter>
-                            <Switch match>
-                                <Route path="/verifyemail">
-                                    <Verify />
-                                </Route>
-                                <Route path="/login">
-                                    <Login />
-                                </Route>
-                                <Route path="/forgotpassword">
-                                    <ResetPassword />
-                                </Route>
-                                <Route exact strict path="/">
-                                    <LandingPage />
-                                </Route>
-                                <Route path="/signup">
-                                    <Signup />
-                                </Route>
-                                <Route path="/dashboard/">
-                                    <Dashboard />
-                                </Route>
-                                <Route path="/subject/:subject/:level">
-                                    <Subject />
-                                </Route>
-                                <Route path="/preview-subject/:subject">
-                                    <PreviewSubject />
-                                </Route>
-                                <Route path="/studypack/:subject">
-                                    <Studypack />
-                                </Route>
-                                <Route path={`/edit-profile`}>
-                                    <EditProfile />
-                                </Route>
-                                <Route path={`/terms`}>
-                                    <Terms />
-                                </Route>
-                                <Route path={`/privacy`}>
-                                    <Privacy />
-                                </Route>
-                                <Route path={`/faq`}>
-                                    <FAQ />
-                                </Route>
-                            </Switch>
-                        </AnimatePresence>
-                    </UserContextProvider>
-                </div>
-            </SnackbarProvider>
-        </HashRouter>
+        <AnimatePresence exitBeforeEnter>
+            <Switch match>
+
+                <Route path="/verifyemail">
+                    {
+                        user && isLoggedIn
+                            ? <Verify />
+                            : <Redirect to={redirectPath} />
+                    }
+                </Route>
+                <Route path="/login">
+                    {
+                        user && isLoggedIn
+                            ? <Redirect to='/dashboard' />
+                            : <Login />
+                    }
+                </Route>
+                <Route path="/forgotpassword">
+                    {
+                        user && isLoggedIn
+                            ? <Redirect to='/dashboard' />
+                            : <ResetPassword />
+                    }
+
+                </Route>
+                <Route exact strict path="/">
+                    {
+                        user && isLoggedIn
+                            ? <Redirect to='/dashboard' />
+                            : <LandingPage />
+                    }
+                </Route>
+                <Route path="/signup">
+                    {
+                        user && isLoggedIn
+                            ? <Redirect to={redirectPath} />
+                            : <Signup />
+                    }
+
+                </Route>
+                <Route path="/dashboard/">
+                    {
+                        user && isLoggedIn
+                            ? <Dashboard />
+                            : <Redirect to={redirectPath} />
+                    }
+
+                </Route>
+                <Route path="/subject/:subject/:level">
+                    {
+                        user && isLoggedIn
+                            ? <Subject />
+                            : <Redirect to={redirectPath} />
+                    }
+
+                </Route>
+                <Route path="/preview-subject/:subject">
+                    <PreviewSubject />
+                </Route>
+                <Route path="/studypack/:subject">
+                    {
+                        user && isLoggedIn
+                            ? <Studypack />
+                            : <Redirect to={redirectPath} />
+                    }
+                </Route>
+                <Route path={`/edit-profile`}>
+                    {
+                        user && isLoggedIn
+                            ? <EditProfile />
+                            : <Redirect to={redirectPath} />
+                    }
+                </Route>
+                <Route path={`/terms`}>
+                    <Terms />
+                </Route>
+                <Route path={`/privacy`}>
+                    <Privacy />
+                </Route>
+                <Route path={`/faq`}>
+                    <FAQ />
+                </Route>
+            </Switch>
+        </AnimatePresence>
     );
 }
