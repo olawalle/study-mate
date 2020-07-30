@@ -42,7 +42,9 @@
 }
 
 .courses-wrap .courses .flex-grid-thirds .min__width {
-  min-width: 120px;
+  min-width: -webkit-fit-content;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
 }
 
 .courses-wrap .courses .flex-grid-thirds .course {
@@ -59,6 +61,7 @@
   line-height: 40px;
   margin: 4px 2px;
   position: relative;
+  border-radius: 7px;
 }
 
 .courses-wrap .courses .flex-grid-thirds .course:hover {

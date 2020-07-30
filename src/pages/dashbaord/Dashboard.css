@@ -453,7 +453,7 @@
 }
 
 .react-responsive-modal-modal .levels-modal .levels .level.selected {
-  border: 1px solid #10a3ff;
+  border: 3px solid #10a3ff;
 }
 
 .react-responsive-modal-modal .levels-modal .levels .level img {
@@ -465,6 +465,7 @@
 
 .react-responsive-modal-modal .levels-modal .levels .level span {
   margin-left: -30px;
+  font-size: 16px;
 }
 
 .react-responsive-modal-modal .levels-modal .btn {

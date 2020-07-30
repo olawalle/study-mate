@@ -6,6 +6,7 @@ export const userContext = createContext();
 export default class UserContextProvider extends Component {
   state = {
     fixBack: false,
+    testId_: 0,
     loading: false,
     isLoggedIn: false,
     stateCounter: 0,
@@ -40,18 +41,15 @@ export default class UserContextProvider extends Component {
     }, 1000);
   }
 
-    componentDidUpdate(prevProps, prevState) {
-        if (this.state !== prevState) {
-            // Whatever storage mechanism you end up deciding to use.
-            console.log("not equal", this.state.isLoggedIn)
-            localStorage.setItem("parentValueKey", JSON.stringify(this.state));
-            
-        } else {
-            console.log("equal", this.state.isLoggedIn)
-            localStorage.setItem("parentValueKey", JSON.stringify(prevState));
-            
-        }
-        
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state !== prevState) {
+      // Whatever storage mechanism you end up deciding to use.
+      console.log("not equal", this.state.isLoggedIn);
+      localStorage.setItem("parentValueKey", JSON.stringify(this.state));
+    } else {
+      console.log("equal", this.state.isLoggedIn);
+      localStorage.setItem("parentValueKey", JSON.stringify(prevState));
+    }
   }
 
   saveSelectedSubject = (selectedSubject) => this.setState({ selectedSubject });
@@ -63,6 +61,10 @@ export default class UserContextProvider extends Component {
     updateCounter = () => {
         this.setState({ stateCounter: this.state.stateCounter++ });
     };
+
+  updateTestId = (testId_) => {
+    this.setState({ testId_ });
+  };
 
   updatefixBack = (fixBack) => {
     this.setState({ fixBack });
@@ -96,18 +98,18 @@ export default class UserContextProvider extends Component {
     this.setState({
       userCourses: fullCourses,
     });
-    };
+  };
 
-    getUser = () => {
-        if (localStorage) {
-            const token = localStorage.getItem("studymate-token");
-            if (token) {
-                const decoded = JwtDecode(token);
-                return decoded;
-            }
-        }
-        return {}
+  getUser = () => {
+    if (localStorage) {
+      const token = localStorage.getItem("studymate-token");
+      if (token) {
+        const decoded = JwtDecode(token);
+        return decoded;
+      }
     }
+    return {};
+  };
 
   updateAwards = (awards) => this.setState({ awards });
 
@@ -154,6 +156,7 @@ export default class UserContextProvider extends Component {
       updateLoader,
       updateLoggedInStatus,
       logout,
+      updateTestId,
       updateSubjects,
       saveSelectedSubject,
       updateUserCourses,
@@ -162,17 +165,21 @@ export default class UserContextProvider extends Component {
       updateStudyPack,
       updateStudyPackQuizes,
       updatefixBack,
-      } = this;
-      const modState = { ...this.state, user: { ...this.state.user, ...this.getUser() } }
+    } = this;
+    const modState = {
+      ...this.state,
+      user: { ...this.state.user, ...this.getUser() },
+    };
     return (
       <userContext.Provider
-            value={{
-                ...modState,
+        value={{
+          ...modState,
           updateLoader,
                 updateUser,
                 updateCounter,
           updateLoggedInStatus,
           logout,
+          updateTestId,
           updateSubjects,
           updateUserCourses,
           saveSelectedSubject,

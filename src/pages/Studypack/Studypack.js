@@ -14,10 +14,11 @@ import authServices from "../../services/authServices";
 // import students from "../../assets/images/students.png";
 
 export default withRouter(function Studypack({ history }) {
-    const { subject } = useParams();
+  const { subject } = useParams();
   const context = useContext(userContext);
   const {
     fixBack,
+    updatefixBack,
     userCourses,
     studyPacks,
     loading,
@@ -33,6 +34,7 @@ export default withRouter(function Studypack({ history }) {
   };
 
   useEffect(() => {
+    updatefixBack(false);
     updateLoader(true);
     authServices
       .getQuizCount(id)
@@ -99,6 +101,8 @@ export default withRouter(function Studypack({ history }) {
     console.log(studyPacks);
   }, []);
 
+  console.log("fixback", fixBack);
+
   return (
     <>
       {loading && <Loader />}
@@ -106,8 +110,8 @@ export default withRouter(function Studypack({ history }) {
         <div className="navwrap">
           <Nav />
         </div>
-              <div className="banner">
-                  <span className="backArrow" style={{ textTransform: "uppercase" }}>
+        <div className="banner">
+          <span className="backArrow" style={{ textTransform: "uppercase" }}>
             <svg
               version="1.1"
               x="0px"
@@ -134,11 +138,11 @@ export default withRouter(function Studypack({ history }) {
                 </g>
               </g>
             </svg>
-                      {subject} Study pack
+            {subject} Study pack
           </span>
-          <span onClick={back} className="mobile-title-text">
+          {/* <span onClick={back} className="mobile-title-text">
             HOME
-          </span>
+          </span> */}
         </div>
         <div className="sub-banner">
           <div className="small">

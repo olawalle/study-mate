@@ -15,12 +15,6 @@
           box-shadow: none !important;
 }
 
-@media screen and (min-width: 768px) {
-  .page-wrapper {
-    padding-top: 40px;
-  }
-}
-
 @media screen and (min-width: 1300px) {
   .page-wrapper {
     font-size: 18px;

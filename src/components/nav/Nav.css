@@ -20,6 +20,12 @@
   font-size: 12px;
 }
 
+@media screen and (min-width: 1200px) {
+  .nav .user .login__ {
+    font-size: 16px !important;
+  }
+}
+
 .nav .user .bluee {
   padding: 0 40px;
   border-radius: 40px;

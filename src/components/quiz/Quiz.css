@@ -3,6 +3,12 @@
   margin-bottom: 20px;
 }
 
+.quiz.greyed {
+  -webkit-filter: grayscale(100%);
+          filter: grayscale(100%);
+  opacity: 0.5;
+}
+
 .quiz .quiz-heading {
   font-size: 18px;
   margin-top: 0px;

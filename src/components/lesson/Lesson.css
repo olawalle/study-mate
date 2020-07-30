@@ -10,6 +10,12 @@
   width: calc(100% + 30px);
 }
 
+.lesson-wrap .greyed {
+  -webkit-filter: grayscale(100%);
+          filter: grayscale(100%);
+  opacity: 0.5;
+}
+
 .lesson-wrap .lesson {
   padding: 1px 25px;
   cursor: pointer;
