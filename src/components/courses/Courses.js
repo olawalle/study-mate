@@ -48,7 +48,7 @@ export default withRouter(function Courses(props) {
   const [openSnackbar, closeSnackbar] = useSnackbar(options);
 
   useEffect(() => {
-    if (openLevels == true) {
+    if (openLevels == false) {
       updatefixBack(false);
     }
   }, [fixBack]);

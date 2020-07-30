@@ -35,6 +35,10 @@ export default withRouter(function Studypack({ history }) {
 
   useEffect(() => {
     updatefixBack(false);
+  }, []);
+
+  useEffect(() => {
+    updatefixBack(false);
     updateLoader(true);
     authServices
       .getQuizCount(id)

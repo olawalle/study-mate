@@ -51,7 +51,11 @@ export default withRouter(function Subject({ history }) {
   ]);
 
   useEffect(() => {
-    if (openLevels == true) {
+    updatefixBack(false);
+  }, []);
+
+  useEffect(() => {
+    if (openLevels == false) {
       updatefixBack(false);
     }
   }, [fixBack]);
@@ -71,9 +75,9 @@ export default withRouter(function Subject({ history }) {
           selectedSubject &&
           selectedSubject.tests &&
           selectedSubject.tests.length
-            ? selectedSubject.tests[0].name
+            ? selectedSubject.tests[testId_].name
             : "Beginner";
-        settestId(testId_);
+        settestId(defaultTestId);
         setname(defaultName);
         setusercourseid(res.data.id);
         console.log({ usertest: res.data.userTests });
@@ -85,12 +89,15 @@ export default withRouter(function Subject({ history }) {
         console.log({ err });
         updateLoader(false);
       });
-  }, [pageLoaded, testId_]);
+  }, [pageLoaded]);
 
   console.log("selected sub", selectedSubject);
 
   const back = () => {
     history.push("/dashboard/");
+  };
+  const back__ = () => {
+    history.push("/dashboard/mobile-courses");
   };
 
   const onSubscribe = () => {
@@ -121,6 +128,7 @@ export default withRouter(function Subject({ history }) {
 
   const pickLevel = (test, i) => {
     setname(test.year);
+    settestId(test.id);
     updateTestId(test.id);
     setlevel(test.year);
   };
@@ -324,7 +332,7 @@ export default withRouter(function Subject({ history }) {
 
   const onCloseLevelsModal = () => {
     setopenLevels(false);
-    back();
+    back__();
   };
   const goToSubject = () => {
     let i = selectedIndex;
@@ -469,7 +477,7 @@ export default withRouter(function Subject({ history }) {
                 <div
                   key={test.id}
                   onClick={() => pickLevel(test, i)}
-                  className={`level ${testId === test.id ? "active" : ""}`}
+                  className={`level ${testId_ === test.id ? "active" : ""}`}
                 >
                   <div className="band">
                     <div className="inner"></div>

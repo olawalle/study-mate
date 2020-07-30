@@ -1,15 +1,15 @@
 import React, { useEffect, useContext } from "react";
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link,
-    HashRouter,
-    withRouter,
-    useHistory,
-    Redirect,
-    useParams,
-    useLocation,
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  HashRouter,
+  withRouter,
+  useHistory,
+  Redirect,
+  useParams,
+  useLocation,
 } from "react-router-dom";
 import UserContextProvider, { userContext } from "./store/UserContext";
 import { motion, AnimatePresence } from "framer-motion";
@@ -63,147 +63,112 @@ import LandingPage from "./pages/Landingpage/Landingpage";
 import ResetPassword from "./pages/reset-password/ResetPassword";
 
 export const PreFooter = () => {
-    return (
-        <div className="pre-footer bordered">
-            <span>@2020 All Rights Reserved. Studymate</span>
-            <span>Powered by InfoMall Nigeria</span>
-        </div>
-    );
+  return (
+    <div className="pre-footer bordered">
+      <span>@2020 All Rights Reserved. Studymate</span>
+      <span>Powered by InfoMall Nigeria</span>
+    </div>
+  );
 };
 
 export default function App() {
-    let history = useHistory();
-    let route = useLocation();
-    console.log("route is", route);
-    const {
-        user, isLoggedIn
-    } = useContext(userContext);
-    useEffect(() => {
-        // let token = localStorage.getItem("studymate-token");
-        // !token && history.push("/login");
+  let history = useHistory();
+  let route = useLocation();
+  console.log("route is", route);
+  const { user, isLoggedIn } = useContext(userContext);
+  useEffect(() => {
+    // let token = localStorage.getItem("studymate-token");
+    // !token && history.push("/login");
 
-        // preload images to reduce weird image load lag after components mount
-        const imagesToBePreloaded = [
-            play,
-            Learn,
-            Progress,
-            Profile,
-            userIcon,
-            logo,
-            edit,
-            logoutIcon,
-            caret,
-            students,
-            editIcon,
-            coins,
-            trophy,
-            Badge1,
-            Badge2,
-            Medal,
-            dots,
-            facebook,
-            google,
-            twitter,
-            quizPic,
-            flex,
-            flex2,
-            flex3,
-            logo2,
-            bg1,
-            bg2,
-            student,
-            teacher,
-        ];
-        imagesToBePreloaded.forEach((image) => {
-            new Image().src = image;
-        });
-    }, []);
+    // preload images to reduce weird image load lag after components mount
+    const imagesToBePreloaded = [
+      play,
+      Learn,
+      Progress,
+      Profile,
+      userIcon,
+      logo,
+      edit,
+      logoutIcon,
+      caret,
+      students,
+      editIcon,
+      coins,
+      trophy,
+      Badge1,
+      Badge2,
+      Medal,
+      dots,
+      facebook,
+      google,
+      twitter,
+      quizPic,
+      flex,
+      flex2,
+      flex3,
+      logo2,
+      bg1,
+      bg2,
+      student,
+      teacher,
+    ];
+    imagesToBePreloaded.forEach((image) => {
+      new Image().src = image;
+    });
+  }, []);
 
-    const redirectPath = `/login?redirect=${route.pathname}`;
-    return (
-        <AnimatePresence exitBeforeEnter>
-            <Switch match>
-
-                <Route path="/verifyemail">
-                    {
-                        user && isLoggedIn
-                            ? <Verify />
-                            : <Redirect to={redirectPath} />
-                    }
-                </Route>
-                <Route path="/login">
-                    {
-                        user && isLoggedIn
-                            ? <Redirect to='/dashboard' />
-                            : <Login />
-                    }
-                </Route>
-                <Route path="/forgotpassword">
-                    {
-                        user && isLoggedIn
-                            ? <Redirect to='/dashboard' />
-                            : <ResetPassword />
-                    }
-
-                </Route>
-                <Route exact strict path="/">
-                    {
-                        user && isLoggedIn
-                            ? <Redirect to='/dashboard' />
-                            : <LandingPage />
-                    }
-                </Route>
-                <Route path="/signup">
-                    {
-                        user && isLoggedIn
-                            ? <Redirect to={redirectPath} />
-                            : <Signup />
-                    }
-
-                </Route>
-                <Route path="/dashboard/">
-                    {
-                        user && isLoggedIn
-                            ? <Dashboard />
-                            : <Redirect to={redirectPath} />
-                    }
-
-                </Route>
-                <Route path="/subject/:subject/:level">
-                    {
-                        user && isLoggedIn
-                            ? <Subject />
-                            : <Redirect to={redirectPath} />
-                    }
-
-                </Route>
-                <Route path="/preview-subject/:subject">
-                    <PreviewSubject />
-                </Route>
-                <Route path="/studypack/:subject">
-                    {
-                        user && isLoggedIn
-                            ? <Studypack />
-                            : <Redirect to={redirectPath} />
-                    }
-                </Route>
-                <Route path={`/edit-profile`}>
-                    {
-                        user && isLoggedIn
-                            ? <EditProfile />
-                            : <Redirect to={redirectPath} />
-                    }
-                </Route>
-                <Route path={`/terms`}>
-                    <Terms />
-                </Route>
-                <Route path={`/privacy`}>
-                    <Privacy />
-                </Route>
-                <Route path={`/faq`}>
-                    <FAQ />
-                </Route>
-            </Switch>
-        </AnimatePresence>
-    );
+  const redirectPath = `/login?redirect=${route.pathname}`;
+  return (
+    <AnimatePresence exitBeforeEnter>
+      <Switch match>
+        <Route path="/verifyemail">
+          {user && isLoggedIn ? <Verify /> : <Redirect to={redirectPath} />}
+        </Route>
+        <Route path="/login">
+          {user && isLoggedIn ? <Redirect to="/dashboard" /> : <Login />}
+        </Route>
+        <Route path="/forgotpassword">
+          {user && isLoggedIn ? (
+            <Redirect to="/dashboard" />
+          ) : (
+            <ResetPassword />
+          )}
+        </Route>
+        <Route exact strict path="/">
+          {user && isLoggedIn ? <Redirect to="/dashboard" /> : <LandingPage />}
+        </Route>
+        <Route path="/signup">
+          {user && isLoggedIn ? <Redirect to={redirectPath} /> : <Signup />}
+        </Route>
+        <Route path="/dashboard/">
+          {user && isLoggedIn ? <Dashboard /> : <Redirect to={redirectPath} />}
+        </Route>
+        <Route path="/subject/:subject/:level">
+          {user && isLoggedIn ? <Subject /> : <Redirect to={redirectPath} />}
+        </Route>
+        <Route path="/preview-subject/:subject">
+          <PreviewSubject />
+        </Route>
+        <Route path="/studypack/:subject">
+          {user && isLoggedIn ? <Studypack /> : <Redirect to={redirectPath} />}
+        </Route>
+        <Route path={`/edit-profile`}>
+          {user && isLoggedIn ? (
+            <EditProfile />
+          ) : (
+            <Redirect to={redirectPath} />
+          )}
+        </Route>
+        <Route path={`/terms`}>
+          <Terms />
+        </Route>
+        <Route path={`/privacy`}>
+          <Privacy />
+        </Route>
+        <Route path={`/faq`}>
+          <FAQ />
+        </Route>
+      </Switch>
+    </AnimatePresence>
+  );
 }
