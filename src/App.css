@@ -10847,6 +10847,11 @@
   src: url("./assets/fonts/Helvetica.ttc");
 }
 
+@font-face {
+  font-family: "Monsterrat bold";
+  src: url("./assets/fonts/Montserrat-Black.otf");
+}
+
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;

@@ -50,6 +50,10 @@
         margin: 4px 2px;
         position: relative;
         border-radius: 7px;
+
+        @media screen and (max-width: 768px) {
+          font-size: 15px;
+        }
         &:hover {
           font-weight: 600;
           cursor: pointer;

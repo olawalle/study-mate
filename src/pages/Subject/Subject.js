@@ -75,7 +75,7 @@ export default withRouter(function Subject({ history }) {
           selectedSubject &&
           selectedSubject.tests &&
           selectedSubject.tests.length
-            ? selectedSubject.tests[testId_].name
+            ? selectedSubject.tests[testId].name
             : "Beginner";
         settestId(defaultTestId);
         setname(defaultName);
@@ -84,12 +84,13 @@ export default withRouter(function Subject({ history }) {
         setusertests(res.data.userTests);
         updateLoader(false);
         setpageLoaded(true);
+        console.log("default test id", defaultTestId);
       })
       .catch((err) => {
         console.log({ err });
         updateLoader(false);
       });
-  }, [pageLoaded]);
+  }, []);
 
   console.log("selected sub", selectedSubject);
 
@@ -133,6 +134,7 @@ export default withRouter(function Subject({ history }) {
     setlevel(test.year);
   };
 
+  console.log("selected id", testId);
   const pickLevel__ = (test, j) => {
     setname(test.year);
     settestId(test.id);
@@ -477,7 +479,7 @@ export default withRouter(function Subject({ history }) {
                 <div
                   key={test.id}
                   onClick={() => pickLevel(test, i)}
-                  className={`level ${testId_ === test.id ? "active" : ""}`}
+                  className={`level ${testId === test.id ? "active" : ""}`}
                 >
                   <div className="band">
                     <div className="inner"></div>

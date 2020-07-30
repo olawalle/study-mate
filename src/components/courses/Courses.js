@@ -82,7 +82,7 @@ export default withRouter(function Courses(props) {
         console.log({ err });
         updateLoader(false);
       });
-  }, [level]);
+  }, [pageLoaded]);
 
   const onCloseLevelsModal = () => {
     setopenLevels(false);
@@ -187,6 +187,7 @@ export default withRouter(function Courses(props) {
   const pickLevel__ = (test, j) => {
     setname(test.year);
     updateTestId(test.id);
+    settestId(test.id);
     setlevel(test.year);
     setselectedIndex(j);
   };
@@ -200,8 +201,6 @@ export default withRouter(function Courses(props) {
   useEffect(() => {
     setDefaultCourseItem();
   }, [selectedSubId]);
-
-  console.log("selected sub", selectedSubject);
 
   return (
     <div className="courses-wrap">

@@ -64,6 +64,12 @@
   border-radius: 7px;
 }
 
+@media screen and (max-width: 768px) {
+  .courses-wrap .courses .flex-grid-thirds .course {
+    font-size: 15px;
+  }
+}
+
 .courses-wrap .courses .flex-grid-thirds .course:hover {
   font-weight: 600;
   cursor: pointer;
