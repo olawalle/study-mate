@@ -533,9 +533,10 @@ export default function QuizQuestion(props) {
             {loading && <Loader />}
             {activeQuestion && (
                 <div className="quiz-quuestion">
-                    <span className="close">
-                        <img src={close} alt="" onClick={onClose} />
-                    </span>
+                        <span className="close">
+                            <img src={close} alt="" onClick={onClose} />
+                        </span>
+                    
                     <div className="upper">
                         <div className="upper-bar">
                             {

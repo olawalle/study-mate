@@ -30,6 +30,7 @@ export default withRouter(function Learn({ history }) {
         userCourses,
         subjects,
         user,
+        stateCount,
         updateUserCourses,
         selectedSubject,
         updateLoader,
@@ -39,16 +40,24 @@ export default withRouter(function Learn({ history }) {
     const [open, setopen] = useState(false);
     const [verified, setverified] = useState(true);
     const [pageLoaded, setPageLoaded] = useState(false)
+    const selectedCourseLength = selectedSubject.length;
+    const ucLength = userCourses.length;
+
 
     useEffect(() => {
         console.log({ userCourses })
         if (pageLoaded) {
+            console.log("user courses is: ", userCourses.length, user.level)
             if (!userCourses.length || user.level === 0) {
                 setopen(true);
             }
+            else {
+                setopen(false);
+            }
+            
         }
-        setPageLoaded(true)
-    }, [pageLoaded]);
+        setPageLoaded(true);
+    }, [ucLength]);
 
     const onOpenModal = () => {
         setopen(true);

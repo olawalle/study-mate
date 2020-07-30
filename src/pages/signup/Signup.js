@@ -4,7 +4,7 @@ import { useSnackbar } from "react-simple-snackbar";
 import "./Signup.scss";
 
 import eye from "../../assets/images/eye.svg";
-import { Link, withRouter } from "react-router-dom";
+import { Link, withRouter, useLocation } from "react-router-dom";
 import { Carousel } from "react-responsive-carousel";
 import { motion } from "framer-motion";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -39,6 +39,7 @@ export default withRouter(function Signup(props) {
     const options = {
         position: "top-right",
     };
+    const route = useLocation();
     const [openSnackbar, closeSnackbar] = useSnackbar(options);
     const [hasCaptcha, setHasCaptcha] = useState(false);
 
@@ -142,7 +143,13 @@ export default withRouter(function Signup(props) {
                         updateUserCourses(sievedCourses);
                         updateLoader(false);
                         setTimeout(() => {
-                            props.history.push("/dashboard");
+                            if (route.search) {
+                                const rest = route.search.split('=')[1];
+                                props.history.push(rest);
+                            }
+                            else {
+                                props.history.push("/dashboard");
+                            }
                         }, 500);
                     })
                     .catch((err) => {
@@ -192,9 +199,11 @@ export default withRouter(function Signup(props) {
             >
                 <div className="left-side">
                     <img
+                        onClick={() => props.history.push('/')}
                         src={logo}
                         alt=""
-                        style={{ width: 170, position: "absolute", top: 60, left: 100 }}
+                        className='c-pointer'
+                        style={{ width: 170, position: "absolute", top: 60, left: 100, cursor: 'pointer', zIndex: 200 }}
                     />
                     <Carousel
                         showArrows={false}
@@ -236,7 +245,7 @@ export default withRouter(function Signup(props) {
 
                 <div className="right-side">
                     <div className="mobileLogo">
-                        <img src={logo2} alt="" />
+                        <img onClick={() => props.history.push('/')} src={logo2} alt="" />
                     </div>
 
                     <p className="welcome mt50">Sign up to StudyMate</p>
@@ -270,6 +279,7 @@ export default withRouter(function Signup(props) {
                         <div className="half">
                             <span className="label">First Name</span>
                             <input
+                                autoComplete="first name"
                                 className={hasError && !firstName ? "has-error" : ""}
                                 type="text"
                                 onChange={(e) => setfirstName(e.target.value)}
@@ -278,6 +288,7 @@ export default withRouter(function Signup(props) {
                         <div className="half f-right">
                             <span className="label">Last Name</span>
                             <input
+                                autoComplete="last name"
                                 className={hasError && !surName ? "has-error" : ""}
                                 type="text"
                                 onChange={(e) => setsurName(e.target.value)}
@@ -286,21 +297,24 @@ export default withRouter(function Signup(props) {
 
                         <span className="label">Email Address</span>
                         <input
+                            autoComplete="email"
                             className={hasError && !email ? "has-error" : ""}
-                            type="text"
+                            type="email"
                             onChange={(e) => setemail(e.target.value)}
                         />
 
                         <span className="label">Phone Number</span>
                         <input
+                            autoComplete="tel"
                             className={hasError && !phoneNumber ? "has-error" : ""}
-                            type="text"
+                            type="tel"
                             onChange={(e) => setPhone(e.target.value)}
                         />
 
                         <div className="inp-wrap">
                             <span className="label">Password</span>
                             <input
+                                autoComplete="new-password"
                                 className={hasError && !password ? "has-error" : ""}
                                 type={pwrdType}
                                 onChange={(e) => setpassword(e.target.value)}
@@ -334,7 +348,7 @@ export default withRouter(function Signup(props) {
             </button>
 
                         <span className="no-acct">
-                            <Link to="/login">
+                            <Link to={`/login${route.search}`}>
                                 Have an account? <span className="blue--text">Login</span>
                             </Link>
                         </span>

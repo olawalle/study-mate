@@ -25,7 +25,9 @@ export default function AddCourses(props) {
   const [step, setStep] = useState(1);
   const [loader, setloader] = useState(false);
   const [junior, setjunior] = useState(false);
-  const [senior, setsenior] = useState(false);
+    const [senior, setsenior] = useState(false);
+
+    console.log("my subjects is", subjects);
   const options = {
     position: "top-right",
   };
@@ -36,6 +38,8 @@ export default function AddCourses(props) {
     agg[curr.courseId] = curr;
     return agg;
   }, {});
+
+    const ucLength = userCourses.length;
 
   useEffect(() => {
     setjunior(user.level === 3);
@@ -61,7 +65,7 @@ export default function AddCourses(props) {
     );
     setLevelSubjects(levelCourses);
     setStep(user.level ? 2 : 1);
-  }, []);
+  }, [ucLength]);
 
   const pickLevel = (n) => {
     updateLevel(n);

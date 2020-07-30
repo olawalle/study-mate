@@ -9,6 +9,7 @@ export default class UserContextProvider extends Component {
     testId_: 0,
     loading: false,
     isLoggedIn: false,
+    stateCounter: 0,
     user: {
       email: "",
       firstName: "",
@@ -55,7 +56,11 @@ export default class UserContextProvider extends Component {
 
   updateLoader = (loading) => {
     this.setState({ loading });
-  };
+    };
+
+    updateCounter = () => {
+        this.setState({ stateCounter: this.state.stateCounter++ });
+    };
 
   updateTestId = (testId_) => {
     this.setState({ testId_ });
@@ -145,7 +150,8 @@ export default class UserContextProvider extends Component {
   };
 
   render() {
-    const {
+      const {
+          updateCounter,
       updateUser,
       updateLoader,
       updateLoggedInStatus,
@@ -169,7 +175,8 @@ export default class UserContextProvider extends Component {
         value={{
           ...modState,
           updateLoader,
-          updateUser,
+                updateUser,
+                updateCounter,
           updateLoggedInStatus,
           logout,
           updateTestId,
