@@ -7,6 +7,8 @@ import { HashRouter, BrowserRouter as Router } from 'react-router-dom';
 import UserContextProvider from './store/UserContext';
 import SnackbarProvider from "react-simple-snackbar";
 
+
+
 ReactDOM.render(
     <React.StrictMode>
         <Router>

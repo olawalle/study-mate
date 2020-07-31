@@ -1,15 +1,16 @@
 /* BASIC SETUP */
 .page-wrapper {
-  width: 100%;
-  height: auto;
-  @import url("https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css");
-  .nav {
-    position: sticky;
-    top: 0;
-    left: 0;
     width: 100%;
-    box-shadow: none !important;
-  }
+    height: auto;
+    @import url("https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css");
+
+    .nav {
+        position: sticky;
+        top: 0;
+        left: 0;
+        width: 100%;
+        box-shadow: none !important;
+    }
 }
 
 // @media screen and (min-width: 768px) {
@@ -759,7 +760,7 @@
 }
 
 .page-wrapper .footer__section .footer__links .content a {
-  font-family: helvetica-light !important;
+  font-family: helvetica, sans-serif;
   font-size: 14px;
   display: block;
   margin-bottom: 1em;
