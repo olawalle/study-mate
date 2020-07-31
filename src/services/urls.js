@@ -1,11 +1,11 @@
 // contral file to hold all endpoint urls
 export const appUrl =
-  "https://fierce-shore-33740.herokuapp.com/https://infomall-001-site1.etempurl.com/";
+  "https://infomall-001-site1.etempurl.com/";
 export const imgUrl = "https://infomall-001-site1.etempurl.com/";
 export const audioUrl = "https://content-qc.studymate.ng/";
 export const videoUrl = "http://content-qc.studymate.ng/";
 export const baseUrl = `${appUrl}api/`;
-export const fakeVideoUrl = `https://cors-anywhere.herokuapp.com/http://content-qc.studymate.ng/`;
+export const fakeVideoUrl = `http://content-qc.studymate.ng/`;
 export const registerUrl = `${baseUrl}Account/register`;
 export const authUrl = `${baseUrl}Account/login`;
 export const userUrl = `${baseUrl}Account/user`;
