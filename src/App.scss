@@ -1,8 +1,13 @@
-@import "./margins_padding.sass";
+@import "../margins_padding.sass";
 
 @font-face {
   font-family: helvetica;
   src: url("./assets/fonts/Helvetica.ttc");
+}
+
+@font-face {
+  font-family: "Monsterrat bold";
+  src: url("./assets/fonts/Montserrat-Black.otf");
 }
 
 // @font-face {

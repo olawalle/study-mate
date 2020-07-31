@@ -11,10 +11,10 @@ const LandingPage = ({ history }) => {
   const [show_nav, setshow_nav] = useState(false);
   const toAuth = (n) => {
     n === 1 ? history.push("/login") : history.push("/signup");
-    };
-    const toSub = () => {
-        history.push("/dashboard/subscribe");
-    };
+  };
+  const toSub = () => {
+    history.push("/dashboard/subscribe");
+  };
 
   const goto = (to) => {
     if (to === "terms") {
@@ -232,7 +232,9 @@ const LandingPage = ({ history }) => {
                   </li>
                 </ul>
 
-                <button onClick={() => history.push('/dashboard')}>Subscribe</button>
+                <button onClick={() => history.push("/dashboard")}>
+                  Subscribe
+                </button>
               </div>
             </div>
             <div className="five wide column">
@@ -279,7 +281,7 @@ const LandingPage = ({ history }) => {
                 <img src="images/package.svg" alt="studypack" />
               </div>
               <div className="ten wide column">
-                              {/*<h5>Be the first to know when we launch the product</h5>*/}
+                {/*<h5>Be the first to know when we launch the product</h5>*/}
                 <h1>Subscribe to our newsletter for updates</h1>
                 <div className="ui action input">
                   <input type="text" placeholder="Enter email address" />
@@ -299,7 +301,8 @@ const LandingPage = ({ history }) => {
               </div>
               <div className="caption">
                 <span className="light">
-                  Give your child a study partner that understands and communicates knowledge for excellence.
+                  Give your child a study partner that understands and
+                  communicates knowledge for excellence.
                 </span>
               </div>
             </div>

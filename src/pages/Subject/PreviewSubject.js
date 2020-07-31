@@ -21,6 +21,7 @@ export default withRouter(function PreviewSubject({ history }) {
     updateLoader,
     updateStudyPack,
     loading,
+    testId_,
     user,
   } = context;
   const [usertests, setusertests] = useState(null);

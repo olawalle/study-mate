@@ -1,5 +1,6 @@
 .quiz-quuestion {
   position: relative;
+  overflow: hidden;
 
   .custom-img {
     -webkit-transition: all 1s ease; /* Safari and Chrome */
@@ -312,6 +313,9 @@
     button {
       float: right;
       padding: 0 30px;
+      @media screen and (min-width: 1200px) {
+        margin-right: 40px !important;
+      }
     }
   }
 
@@ -335,7 +339,7 @@
     position: fixed;
     top: -10px;
     left: 0;
-    padding: 20px;
+    padding: 15px;
     height: calc(100vh + 12px);
 
     .close {
@@ -351,7 +355,7 @@
 
     .upper {
       padding: 0;
-      height: calc(100vh - 85px);
+      height: 100vh;
       /* overflow: auto; */
       position: relative;
       width: 100%;
@@ -419,7 +423,7 @@
           display: inline-block;
           width: 94%;
           padding-left: 63px;
-          top: -70px;
+          top: 0px;
           color: #000;
 
           .top {
@@ -461,12 +465,12 @@
     }
 
     .footer {
-      position: absolute;
+      position: fixed;
       bottom: 0;
       left: 0;
       color: #000;
       padding: 15px;
-      height: 110px;
+      height: 80px;
 
       b {
         font-size: 12px;

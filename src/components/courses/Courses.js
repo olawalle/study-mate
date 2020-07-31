@@ -48,7 +48,7 @@ export default withRouter(function Courses(props) {
   const [openSnackbar, closeSnackbar] = useSnackbar(options);
 
   useEffect(() => {
-    if (openLevels == true) {
+    if (openLevels == false) {
       updatefixBack(false);
     }
   }, [fixBack]);
@@ -82,7 +82,7 @@ export default withRouter(function Courses(props) {
         console.log({ err });
         updateLoader(false);
       });
-  }, [level]);
+  }, [pageLoaded]);
 
   const onCloseLevelsModal = () => {
     setopenLevels(false);
@@ -145,6 +145,7 @@ export default withRouter(function Courses(props) {
 
   const selectCourse = (course, i) => {
     console.log({ course });
+    updateTestId(0);
     if (!isCourseAllowed(course) && !user.isSubscribed) {
       openSnackbar("Please subscribe to access this subject", 50000);
       props.history.push("/dashboard/subscribe");
@@ -187,6 +188,7 @@ export default withRouter(function Courses(props) {
   const pickLevel__ = (test, j) => {
     setname(test.year);
     updateTestId(test.id);
+    settestId(test.id);
     setlevel(test.year);
     setselectedIndex(j);
   };
@@ -200,8 +202,6 @@ export default withRouter(function Courses(props) {
   useEffect(() => {
     setDefaultCourseItem();
   }, [selectedSubId]);
-
-  console.log("selected sub", selectedSubject);
 
   return (
     <div className="courses-wrap">
