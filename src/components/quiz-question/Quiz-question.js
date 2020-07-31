@@ -9,7 +9,6 @@ import { appUrl, audioUrl, imgUrl } from "../../services/urls";
 import { userContext } from "../../store/UserContext";
 import beep from "../../assets/audio/beep1.mp3";
 import * as ls from "../../services/ls";
-
 import MathJax from "react-mathjax";
 import Parser from "../content-display/Parser";
 import useStudy from "../../custom-hooks/usestudy";
@@ -216,7 +215,6 @@ export default function QuizQuestion(props) {
                         .updateUserTestData(data, userTestId)
                         .then((res) => {
                             console.log({ usertest: res.data, mode: modeConverter() });
-
                             const data = userAnswersToAdd.map((ua) => ({
                                 ...ua,
                                 userOption: ua.userOptionId,

@@ -214,8 +214,7 @@ export default function Quiz(props) {
           {props.name || "Quiz"}
         </p>
         <p className="sub-heading">
-          {props.shortDescription ||
-            "Level up on the above skills and collect mastery points"}
+          {props.shortDescription || "Level up on the above skills and collect mastery points"}
         </p>
 
         <button
