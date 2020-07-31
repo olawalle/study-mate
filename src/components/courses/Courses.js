@@ -34,7 +34,8 @@ export default withRouter(function Courses(props) {
   const [usertests, setusertests] = useState(null);
   const [name, setname] = useState("");
   const [testId, settestId] = useState(testId_);
-  const [level, setlevel] = useState(null);
+    const [level, setlevel] = useState(null);
+    const ucs = userCourses.length;
   const [levels, setLevels] = useState([
     "Beginner",
     "Intermediate",
@@ -52,6 +53,7 @@ export default withRouter(function Courses(props) {
       updatefixBack(false);
     }
   }, [fixBack]);
+
   useEffect(() => {
     setlevel(match.params.level);
     updateLoader(true);
@@ -201,7 +203,7 @@ export default withRouter(function Courses(props) {
 
   useEffect(() => {
     setDefaultCourseItem();
-  }, [selectedSubId]);
+  }, [selectedSubId, ucs]);
 
   return (
     <div className="courses-wrap">

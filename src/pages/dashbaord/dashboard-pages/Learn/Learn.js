@@ -43,9 +43,10 @@ export default withRouter(function Learn({ history }) {
     const selectedCourseLength = selectedSubject.length;
     const ucLength = userCourses.length;
 
+    console.log("this is user courses selected: ",selectedSubject)
 
     useEffect(() => {
-        console.log({ userCourses })
+        console.log("usercourses is", { userCourses }, selectedSubject)
         if (pageLoaded) {
             console.log("user courses is: ", userCourses.length, user.level)
             if (!userCourses.length || user.level === 0) {
@@ -53,8 +54,7 @@ export default withRouter(function Learn({ history }) {
             }
             else {
                 setopen(false);
-            }
-            
+            } 
         }
         setPageLoaded(true);
     }, [ucLength]);
