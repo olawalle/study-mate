@@ -341,7 +341,9 @@
     left: 0;
     padding: 15px;
     height: calc(100vh + 12px);
-
+    .custom-img{
+        width: 100% !important;
+    }
     .close {
       cursor: pointer;
       right: 15px;
