@@ -717,7 +717,7 @@
 }
 
 .page-wrapper .footer__section .footer__links .content a {
-  font-family: helvetica-light !important;
+  font-family: helvetica, sans-serif;
   font-size: 14px;
   display: block;
   margin-bottom: 1em;
@@ -1237,8 +1237,15 @@
 }
 
 .container__ {
-  margin-left: 80px;
-  margin-right: 80px;
+  margin-left: 180px;
+  margin-right: 180px;
+}
+
+@media screen and (max-width: 1600px) and (min-width: 1400px) {
+  .container__ {
+    margin-left: 120px;
+    margin-left: 120px;
+  }
 }
 
 @media screen and (max-width: 600px) {
