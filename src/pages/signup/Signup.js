@@ -66,6 +66,53 @@ export default withRouter(function Signup(props) {
         );
     }
 
+    const successLoginAction = (res) => {
+        console.log(res);
+        let user = res.data;
+        updateUser(user);
+        updateLoggedInStatus(true);
+        setsurName("");
+        setfirstName("");
+        setPhone("");
+        setemail("");
+        setpassword("");
+        localStorage.setItem("studymate-token", user.token);
+        authServices
+            .getUserCourses(user.token, user.id)
+            .then((res) => {
+                console.log({ res: res.data.userCourses })
+                let user_courses = res.data.userCourses;
+                let sievedCourses = Object.values(
+                    user_courses.reduce((agg, curr) => {
+                        agg[curr.courseId] = curr;
+                        return agg;
+                    }, {})
+                );
+                updateUserCourses(sievedCourses);
+                updateLoader(false);
+                setTimeout(() => {
+                    if (route.search) {
+                        const rest = route.search.split('=')[1];
+                        props.history.push(rest);
+                    }
+                    else {
+                        props.history.push("/dashboard");
+                    }
+                }, 500);
+            })
+            .catch((err) => {
+                console.log({ err });
+                updateLoader(false);
+                showError("An error occured. Please try again");
+            });
+    }
+
+    const failedLoginAction = (err) => {
+        console.log({ err });
+        updateLoader(false);
+        handleError(err);
+    }
+
     const handleInvalidModel = (model) => {
         const build = Object.entries(model).reduce((aggregate, [key, value]) => {
             aggregate = aggregate.concat(value)
@@ -119,49 +166,10 @@ export default withRouter(function Signup(props) {
         authServices
             .signup(data)
             .then((res) => {
-                console.log(res);
-                let user = res.data;
-                updateUser(user);
-                updateLoggedInStatus(true);
-                setsurName("");
-                setfirstName("");
-                setPhone("");
-                setemail("");
-                setpassword("");
-                localStorage.setItem("studymate-token", user.token);
-                authServices
-                    .getUserCourses(user.token, user.id)
-                    .then((res) => {
-                        console.log({ res: res.data.userCourses })
-                        let user_courses = res.data.userCourses;
-                        let sievedCourses = Object.values(
-                            user_courses.reduce((agg, curr) => {
-                                agg[curr.courseId] = curr;
-                                return agg;
-                            }, {})
-                        );
-                        updateUserCourses(sievedCourses);
-                        updateLoader(false);
-                        setTimeout(() => {
-                            if (route.search) {
-                                const rest = route.search.split('=')[1];
-                                props.history.push(rest);
-                            }
-                            else {
-                                props.history.push("/dashboard");
-                            }
-                        }, 500);
-                    })
-                    .catch((err) => {
-                        console.log({ err });
-                        updateLoader(false);
-                        showError("An error occured. Please try again");
-                    });
+                successLoginAction(res);
             })
             .catch((err) => {
-                console.log({ err });
-                updateLoader(false);
-                handleError(err)
+                failedLoginAction(err);
             });
     };
 
@@ -181,6 +189,18 @@ export default withRouter(function Signup(props) {
 
     const googleResponse = (e) => {
         console.log(e);
+        let data = {
+            idToken: e.tokenId,
+            role: 0,
+        };
+        authServices
+            .googleLogin(data)
+            .then((res) => {
+                successLoginAction(res);
+            })
+            .catch((err) => {
+                failedLoginAction(err);
+            });
     };
 
     const onFailure = (error) => {
@@ -268,7 +288,7 @@ export default withRouter(function Signup(props) {
                             onSuccess={googleResponse}
                             onFailure={onFailure}
                             render={(renderProps) => (
-                                <button onClick={renderProps.onClick} disabled="disabled" className="gg"></button>
+                                <button onClick={renderProps.onClick} className="gg"></button>
                             )}
                         />
                     </div>

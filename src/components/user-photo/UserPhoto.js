@@ -33,7 +33,16 @@ export default function UserPhoto() {
       .catch((err) => {
         console.log(err);
       });
-  };
+    };
+
+    const userImage = () => {
+        if (userPic) {
+            console.log("image", userPic)
+            if (userPic.indexOf('http') >= 0) return userPic;
+            return `${imgUrl}${userPic}`;
+        }
+
+    } 
 
   const toProfile = (e) => {
     updateLoader(true);
@@ -83,13 +92,13 @@ export default function UserPhoto() {
         className="user-photo"
         style={{
           position: "relative",
-          backgroundImage: `url("${imgUrl}${userPic}")`,
+          backgroundImage: `url("${userImage()}")`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
         title="change profile photo"
       >
-        {!userPic && (
+        {!userImage() && (
           <img
             src={userIcon}
             style={{ height: "85%", margin: " 12px auto" }}
@@ -97,7 +106,7 @@ export default function UserPhoto() {
           />
         )}
 
-        {!userPic && (
+        {!userImage() && (
           <div className="edit_" onClick={toProfile}>
             <img
               src={editIcon}

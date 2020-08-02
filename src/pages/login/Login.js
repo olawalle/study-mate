@@ -144,6 +144,48 @@ export default withRouter(function Login(props) {
         openSnackbar(err, 5000);
     };
 
+    const successLoginAction = (res) => {
+        let user = res.data;
+        localStorage.setItem("studymate-token", user.token);
+        updateUser(user);
+        updateLoggedInStatus(true);
+        authServices
+            .getUserCourses(user.token, user.id)
+            .then((res) => {
+                console.log({ res });
+                let user_courses = res.data.userCourses;
+                let sievedCourses = Object.values(
+                    user_courses.reduce((agg, curr) => {
+                        agg[curr.courseId] = curr;
+                        return agg;
+                    }, {})
+                );
+                console.log("user seived courses", sievedCourses.length);
+                updateUserCourses(sievedCourses);
+                updateLoader(false);
+                setTimeout(() => {
+                    if (route.search) {
+                        const rest = route.search.split('=')[1];
+                        props.history.push(rest);
+                    }
+                    else {
+                        props.history.push("/dashboard");
+                    }
+
+                }, 500);
+            })
+            .catch((err) => {
+                console.log({ err });
+                updateLoader(false);
+                showError("An error occured. Please try again");
+            });
+    }
+
+    const failedLoginAction = (err) => {
+        console.log({ err });
+        updateLoader(false);
+        handleError(err);
+    }
     const login = () => {
         if (!email || !password) {
             sethasError(true);
@@ -158,45 +200,10 @@ export default withRouter(function Login(props) {
         authServices
             .login(data)
             .then((res) => {
-                let user = res.data;
-                localStorage.setItem("studymate-token", user.token);
-                updateUser(user);
-                updateLoggedInStatus(true);
-                authServices
-                    .getUserCourses(user.token, user.id)
-                    .then((res) => {
-                        console.log({ res });
-                        let user_courses = res.data.userCourses;
-                        let sievedCourses = Object.values(
-                            user_courses.reduce((agg, curr) => {
-                                agg[curr.courseId] = curr;
-                                return agg;
-                            }, {})
-                        );
-                        console.log("user seived courses", sievedCourses.length);
-                        updateUserCourses(sievedCourses);
-                        updateLoader(false);
-                        setTimeout(() => {
-                            if (route.search) {
-                                const rest = route.search.split('=')[1];
-                                props.history.push(rest);
-                            }
-                            else {
-                                props.history.push("/dashboard");
-                            }
-                            
-                        }, 500);
-                    })
-                    .catch((err) => {
-                        console.log({ err });
-                        updateLoader(false);
-                        showError("An error occured. Please try again");
-                    });
+                successLoginAction(res);
             })
             .catch(function (err) {
-                console.log({ err });
-                updateLoader(false);
-                handleError(err);
+                failedLoginAction(err);
             });
     };
 
@@ -215,16 +222,16 @@ export default withRouter(function Login(props) {
     const googleResponse = (e) => {
         console.log(e);
         let data = {
-            idToken: e.accessToken,
+            idToken: e.tokenId,
             role: 0,
         };
         authServices
             .googleLogin(data)
             .then((res) => {
-                console.log(res);
+                successLoginAction(res);
             })
             .catch((err) => {
-                console.log({ err });
+                failedLoginAction(err);
             });
     };
     const onFailure = (error) => {
@@ -335,7 +342,7 @@ export default withRouter(function Login(props) {
                                     onSuccess={googleResponse}
                                     onFailure={onFailure}
                                     render={(renderProps) => (
-                                        <button onClick={renderProps.onClick} disabled="disabled" className="gg"></button>
+                                        <button onClick={renderProps.onClick} className="gg"></button>
                                     )}
                                 />
                             </div>

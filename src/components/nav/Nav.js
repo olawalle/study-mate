@@ -11,7 +11,7 @@ import caret from "../../assets/images/down-arrow.svg";
 import search from "../../assets/images/search.svg";
 import { withRouter } from "react-router-dom";
 import { userContext } from "../../store/UserContext";
-import { appUrl } from "../../services/urls";
+import { appUrl, imgUrl } from "../../services/urls";
 
 export default withRouter(function Nav(props) {
   const context = useContext(userContext);
@@ -52,7 +52,16 @@ export default withRouter(function Nav(props) {
     if (to === "edit") props.history.push("/edit-profile");
     if (to === "logout") logout();
     setshow_nav(false);
-  };
+    };
+
+    const userImage = () => {
+        if (context.user.image) {
+            console.log("image", context.user.image)
+            if (context.user.image.indexOf('http') >= 0) return context.user.image;
+            return `${imgUrl}${context.user.image}`;
+        }
+        
+    } 
 
   return (
     <div className="nav">
@@ -88,14 +97,12 @@ export default withRouter(function Nav(props) {
             <div
               className="avatar"
               style={{
-                backgroundImage: `url("${appUrl}${
-                  context.user.image && context.user.image.replace("\\", "/")
-                }")`,
+                  backgroundImage: `url("${userImage() && userImage().replace("\\", "/")}")`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }}
             >
-              {!context.user.image && <img src={userIcon} height="30" alt="" />}
+              {!userImage() && <img src={userIcon} height="30" alt="" />}
             </div>
             {fullname}
             <img
