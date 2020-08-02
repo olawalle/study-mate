@@ -1,16 +1,16 @@
 /* BASIC SETUP */
 .page-wrapper {
-    width: 100%;
-    height: auto;
-    @import url("https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css");
+  width: 100%;
+  height: auto;
+  @import url("https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css");
 
-    .nav {
-        position: sticky;
-        top: 0;
-        left: 0;
-        width: 100%;
-        box-shadow: none !important;
-    }
+  .nav {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: none !important;
+  }
 }
 
 // @media screen and (min-width: 768px) {
@@ -1287,8 +1287,13 @@
 }
 
 .container__ {
-  margin-left: 80px;
-  margin-right: 80px;
+  margin-left: 180px;
+  margin-right: 180px;
+
+  @media screen and (max-width: 1600px) and (min-width: 1400px) {
+    margin-left: 120px;
+    margin-left: 120px;
+  }
 }
 
 @media screen and (max-width: 600px) {
