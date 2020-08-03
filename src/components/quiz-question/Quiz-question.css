@@ -347,6 +347,9 @@
     padding: 15px;
     height: calc(100vh + 12px);
   }
+  .quiz-quuestion .custom-img {
+    width: 100% !important;
+  }
   .quiz-quuestion .close {
     cursor: pointer;
     right: 15px;

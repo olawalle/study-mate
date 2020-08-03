@@ -405,7 +405,13 @@
 
 .page-wrapper .hero__section .hero__left {
   max-width: 500px;
-  padding-top: 3em;
+  padding-top: 5vh;
+}
+
+@media screen and (min-width: 1300px) {
+  .page-wrapper .hero__section .hero__left {
+    padding-top: 15vh;
+  }
 }
 
 @media screen and (max-width: 600px) {
@@ -1241,9 +1247,9 @@
   margin-right: 180px;
 }
 
-@media screen and (max-width: 1600px) and (min-width: 1400px) {
+@media screen and (max-width: 1500px) and (min-width: 1400px) {
   .container__ {
-    margin-left: 120px;
+    margin-right: 120px;
     margin-left: 120px;
   }
 }

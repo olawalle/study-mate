@@ -34,8 +34,8 @@ export default withRouter(function Courses(props) {
   const [usertests, setusertests] = useState(null);
   const [name, setname] = useState("");
   const [testId, settestId] = useState(testId_);
-    const [level, setlevel] = useState(null);
-    const ucs = userCourses.length;
+  const [level, setlevel] = useState(null);
+  const ucs = userCourses.length;
   const [levels, setLevels] = useState([
     "Beginner",
     "Intermediate",

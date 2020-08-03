@@ -442,7 +442,10 @@
 
 .page-wrapper .hero__section .hero__left {
   max-width: 500px;
-  padding-top: 3em;
+  padding-top: 5vh;
+  @media screen and (min-width: 1300px) {
+    padding-top: 15vh;
+  }
 }
 
 @media screen and (max-width: 600px) {
@@ -1290,8 +1293,8 @@
   margin-left: 180px;
   margin-right: 180px;
 
-  @media screen and (max-width: 1600px) and (min-width: 1400px) {
-    margin-left: 120px;
+  @media screen and (max-width: 1500px) and (min-width: 1400px) {
+    margin-right: 120px;
     margin-left: 120px;
   }
 }

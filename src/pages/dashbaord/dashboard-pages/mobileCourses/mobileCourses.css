@@ -8,8 +8,9 @@
 }
 
 .mobile-courses .courses-wrap .courses .flex-grid-thirds .course {
-  font-size: 18px !important;
+  font-size: 14px !important;
   margin: 7px 7px !important;
+  text-transform: lowercase !important;
 }
 
 .mobile-courses .courses-wrap .tw-btn {
