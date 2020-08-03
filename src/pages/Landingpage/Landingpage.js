@@ -147,7 +147,10 @@ const LandingPage = ({ history }) => {
                 {/* <div className="curved__caption">
                   #No 1 platform for learning
                 </div> */}
-                <h1>The Study Mate You Need</h1>
+                <h1>
+                  The Study Mate <br />
+                  You Need
+                </h1>
                 <div className="caption__content light">
                   <span className="light">
                     Parents want to give their ward the best education possible.
