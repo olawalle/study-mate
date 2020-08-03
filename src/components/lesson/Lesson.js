@@ -27,6 +27,7 @@ export default withRouter(function Lesson({
     const { selectedSubject, user } = context;
     const videoLevel = props.name;
     let modalWidth = window.innerWidth > 1024 ? 96 : 100;
+    const [userVideo, setUserVideo] = useState([]);
 
     useEffect(() => {
         let data = [];
@@ -44,15 +45,18 @@ export default withRouter(function Lesson({
                 });
             });
         setVideos(data);
+        setUserVideo(props.uservideos);
     }, []);
     const [open, setopen] = useState(false);
     const [showStreak, setshowStreak] = useState(false);
     const [url, seturl] = useState("");
     const [videos, setVideos] = useState([]);
-    const [userVideo, setUserVideo] = useState([]);
+   
     const [render, setRender] = useState(false);
     const [initVideo, setInitVideo] = useState(false);
     const [activeVideo, setactiveVideo] = useState(null);
+
+    console.log('user vids', props.uservideos)
 
     const oncontextmenu = (e) => e.preventDefault();
     const duration = videos.reduce((agg, vid) => {

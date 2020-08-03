@@ -299,11 +299,18 @@ export default withRouter(function Subject({ history }) {
     return [];
   };
 
-  const getUserVideos = (data) => {
-    if (data && data.length) {
-      return data[0].userVideos;
-    }
-    return [];
+    const getUserVideos = (usertests, id) => {
+        console.log('uts', usertests, id)
+        if (usertests && usertests.length) {
+            const data = usertests.find((ut) => ut.testId === id)
+            console.log('data', data)
+            if (data) {
+                return data.userVideos;
+            }
+        }
+            
+    
+        return [];
   };
 
   const totalScore = (tests) => {
@@ -522,13 +529,7 @@ export default withRouter(function Subject({ history }) {
                                     )
                                   : []
                               }
-                              uservideos={getUserVideos(
-                                usertests &&
-                                  usertests.length &&
-                                  usertests.filter(
-                                    (ut) => ut.testId === test.id
-                                  )
-                              )}
+                              uservideos={getUserVideos(usertests, test.id)}
                               key={"video" + video.id + "" + i}
                               usercourseid={usercourseid}
                               video={video}
