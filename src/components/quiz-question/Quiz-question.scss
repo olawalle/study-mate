@@ -341,8 +341,8 @@
     left: 0;
     padding: 15px;
     height: calc(100vh + 12px);
-    .custom-img{
-        width: 100% !important;
+    .custom-img {
+      width: 100% !important;
     }
     .close {
       cursor: pointer;
@@ -380,7 +380,7 @@
 
       .content {
         width: 100%;
-        height: auto;
+        height: 100%;
         padding-top: 10px;
 
         .questions {
