@@ -381,7 +381,7 @@
   }
   .quiz-quuestion .upper .content {
     width: 100%;
-    height: auto;
+    height: 100%;
     padding-top: 10px;
   }
   .quiz-quuestion .upper .content .questions {
