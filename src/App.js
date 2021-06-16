@@ -81,41 +81,69 @@ export default function App() {
     // !token && history.push("/login");
 
     // preload images to reduce weird image load lag after components mount
-    const imagesToBePreloaded = [
-      play,
-      Learn,
-      Progress,
-      Profile,
-      userIcon,
-      logo,
-      edit,
-      logoutIcon,
-      caret,
-      students,
-      editIcon,
-      coins,
-      trophy,
-      Badge1,
-      Badge2,
-      Medal,
-      dots,
-      facebook,
-      google,
-      twitter,
-      quizPic,
-      flex,
-      flex2,
-      flex3,
-      logo2,
-      bg1,
-      bg2,
-      student,
-      teacher,
-    ];
-    imagesToBePreloaded.forEach((image) => {
-      new Image().src = image;
-    });
+      document.addEventListener("DOMContentLoaded", lazyLoad);
+      return () => document.removeEventListener("DOMContentLoaded", lazyLoad);
   }, []);
+
+    const imagesToBePreloaded = [
+        play,
+        Learn,
+        Progress,
+        Profile,
+        userIcon,
+        logo,
+        edit,
+        logoutIcon,
+        caret,
+        students,
+        editIcon,
+        coins,
+        trophy,
+        Badge1,
+        Badge2,
+        Medal,
+        dots,
+        facebook,
+        google,
+        twitter,
+        quizPic,
+        flex,
+        flex2,
+        flex3,
+        logo2,
+        bg1,
+        bg2,
+        student,
+        teacher,
+    ];
+    const imageDOM = imagesToBePreloaded.map((image) => {
+        let img = new Image();
+        img.src = image;
+        img.classList.add('lazy');
+        img.setAttribute('loading', 'lazy');
+        return img;
+    });
+
+    const lazyLoad = () => {
+        if ("IntersectionObserver" in window) {
+            let lazyImageObserver = new IntersectionObserver(function (entries, observer) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        let lazyImage = entry.target;
+                        lazyImage.src = lazyImage.src;
+                        lazyImage.srcset = lazyImage.srcset;
+                        lazyImage.classList.remove("lazy");
+                        lazyImageObserver.unobserve(lazyImage);
+                    }
+                });
+            });
+            imageDOM.forEach(function (lazyImage) {
+                lazyImageObserver.observe(lazyImage);
+            });
+        } else {
+            // Possibly fall back to event handlers here
+        }
+    }
 
   const redirectPath = `/login?redirect=${route.pathname}`;
   return (
