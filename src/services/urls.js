@@ -1,8 +1,8 @@
 // contral file to hold all endpoint urls
 //export const appUrl = "https://fierce-shore-33740.herokuapp.com/https://infomall-001-site1.etempurl.com/";
 export const appUrl =
-  "https://api.studymate.com/";
-export const imgUrl = "https://api.studymate.com/";
+  "https://api.studymate.ng/";
+export const imgUrl = "https://api.studymate.ng/";
 export const audioUrl = "https://content-qc.studymate.ng/";
 export const videoUrl = "http://content-qc.studymate.ng/";
 export const baseUrl = `${appUrl}api/`;
